@@ -66,7 +66,8 @@ if [ -d $PATH_SEQUENCES ]
 then
     echo "$PATH_SEQUENCES folder already exist."
 else
-    echo "$PATH_SEUQENCES doesn't exist."
+    echo "$PATH_SEQUENCES doesn't exist."
+    exit
 fi
 
 # Second argument define the folder for database.
@@ -140,18 +141,32 @@ fi
 # 2 We can add other sequences in the database from fasta files
 # maybe all genome in database.
 
-# Third argument to define the path to all sequences from other database
-PATH_OTHER_SEQUENCES=$3
-echo "Adding reference to Kraken 2 library"
-for fasta_file in $PATH_SEQUENCES/*.fna
-do
-    kraken2-build --add-to-library $fasta_file --db $DBNAME
-done
+# Before adding the sequences to the library, check if the database is not already created hash.k2d + opts.k2d + taxo.k2d .
+if [ -f $DBNAME/hash.k2d ] && [ -f $DBNAME/opts.k2d ] && [ -f $DBNAME/taxo.k2d ]
+then
+    echo "Data Base are already exists."
+    echo "All jobs are done in this session !"
+else
+    echo "Let's create database"
+    # Third argument to define the path to all sequences from other database
+    PATH_OTHER_SEQUENCES=$3
+    echo "Adding reference to Kraken 2 library"
+    for fasta_file in $PATH_SEQUENCES/*.fna
+    do
+        kraken2-build --add-to-library $fasta_file --db $DBNAME
+    done
 
-# 3 Once library is finalized we need to build the database.
-# parameters --threads to reduce build time.
-echo "Running build program to build database with Kraken 2"
-kraken2-build --build --db $DBNAME --threads $threads
+    # 3 Once library is finalized we need to build the database.
+    # parameters --threads to reduce build time.
+    echo "Running build program to build database with Kraken 2"
+    kraken2-build --build --db $DBNAME --threads $threads
+fi
+
+# mkdir FDA_ARGOS_output_data
+# for output_database in $DBNAME/*k2d
+# do
+# mv $DBNAME/output_database $OUTPUT_K2D_DB/output_database
+# done
 
 # 3.1 For remove intermediate file from the database directory
 #kraken2-build --clean
