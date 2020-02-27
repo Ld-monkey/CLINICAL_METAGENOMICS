@@ -85,37 +85,41 @@ with open(os.path.join(INPUT_FOLDER, REPORT_FILE)) as report_files:
     LINE = report_files.readline()
     while LINE:
         # File is read until a LINE contains "Viruses" or "Bacteria"
-        if switchVir!=1:
-            if len(re.findall(SELECTED_TAXON, LINE))>=1: ## From this LINE, all taxon ID are registered in the 'SUBSET' list
-                switchVir=1
-                hashed=re.split(r'\t',LINE)
-                if(hashed[2]!='0'):
-                    member=[hashed[4],hashed[5].lstrip()[:-1]]
+        if switchVir != 1:
+            # From this line, all taxon ID are registered in the 'SUBSET' list.
+            # Si la longueur de la liste stockant mes exprésions regulière du taxon selectionné sur la line du fichier est supérieur a 1.
+            if len(re.findall(SELECTED_TAXON, LINE)) >= 1:
+                switchVir = 1
+                hashed = re.split(r'\t', LINE)
+                if (hashed[2] != '0'):
+                    member = [hashed[4], hashed[5].lstrip()[:-1]]
                     SUBSET.append(hashed[4])
                     outList.append(member)
-        else: ## All taxon ID are registered until a LINE which contains one of the 'UNSELECTED_TAXON' words
+        ## All taxon ID are registered until a LINE which contains one of the 'UNSELECTED_TAXON' words
+        else:
             if any(stopNode in LINE for stopNode in UNSELECTED_TAXON):
                 break
-            hashed=re.split(r'\t',LINE)
-            if(hashed[2]!='0'):
-                member=[hashed[4],hashed[5].lstrip()[:-1]]
+            hashed = re.split(r'\t',LINE)
+            if(hashed[2] != '0'):
+                member = [hashed[4],hashed[5].lstrip()[:-1]]
                 SUBSET.append(hashed[4])
                 outList.append(member)
-        LINE=report_files.readline()
+        LINE = report_files.readline()
 
 print("Generation of the list of species of interest : Done\n")
 print("Generation of the new ReadsList : Proceeding...\n")
 
-#==== Recover all read names matching with the list of taxon ID ====#
-outputFile=open(os.path.join(INPUT_FOLDER, OUTPUT_FOLDER, REPORT_FILE)+"ReadsList.txt",'w')
-with open(os.path.join(INPUT_FOLDER, SAMPLE_ID)+".output.txt") as clseqFile:
-    LINE=clseqFile.readline()
+# Recover all read names matching with the list of taxon ID.
+OUTPUT_FILE = open(os.path.join(INPUT_FOLDER, OUTPUT_FOLDER, REPORT_FILE) + "ReadsList.txt", 'w')
+
+with open(os.path.join(INPUT_FOLDER, SAMPLE_ID)+".output.txt") as clseq_file:
+    LINE = clseq_file.readline()
     while LINE:
-        TaxID=re.split("\t",LINE)[2]
-        ReadName=re.split("\t",LINE)[1]
+        TaxID = re.split("\t",LINE)[2]
+        ReadName = re.split("\t",LINE)[1]
         if TaxID in SUBSET:
-            outputFile.write(ReadName+"\n")
-        LINE=clseqFile.readline()
-outputFile.close()
+            OUTPUT_FILE.write(ReadName+"\n")
+        LINE = clseq_file.readline()
+OUTPUT_FILE.close()
 
 print("Generation of the ReadsList : Done\n")
