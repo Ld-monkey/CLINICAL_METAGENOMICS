@@ -18,33 +18,46 @@ echo "SGE O WORKDIR: $SGE_O_WORKDIR"
 echo "SGE TASK ID: $SGE_TASK_ID"
 echo "NSLOTS: $NSLOTS"
 
-#qsub launchV3GetIntFasta.sh {folder} {Bacteria/Viruses}
+#e.g : $qsub launchV3GetIntFasta.sh {folder} {Bacteria/Viruses}
 
+# Activate conda environnment.
 source activate EnvAntL
+
+# Folder with all .report.txt file from classification of reads.
 folderInput=$1
+
+# Data base ?
 kingdomSearched=$2
+
+# list of report.txt file.
 report=$(ls $folderInput | grep -i .report.txt)
+
+# Create 2 environnmentals variables for using next bash program like RecoverReads.sh .
 export folderInput
 export kingdomSearched
 
-# parallel '
-#   mkdir -p ${folderInput}/${kingdomSearched}
-#   clseqs1=$(echo {} | sed "s/report.txt/clseqs_1.fastq/")
-#   clseqs2=$(echo {} | sed "s/report.txt/clseqs_2.fastq/")
-#   outputFile=$(echo {} | sed "s/report.txt/interesting.fasta/")
-#   ./GetIntFasta3.py ${folderInput} {} ${kingdomSearched}
-#   ./RecoverReads.sh ${folderInput}/${kingdomSearched}/{}ReadsList.txt ${folderInput}/${clseqs1} ${folderInput}/${clseqs2} ${folderInput}/${kingdomSearched}/${outputFile}
-#   rm ${folderInput}/${kingdomSearched}/{}ReadsList.txt
-#   '  ::: ${report}
-
+# For each .report.txt file we
 for file in ${report}
 do
-  mkdir -p ${folderInput}/${kingdomSearched}
-  clseqs1=$(echo $file | sed "s/report.txt/clseqs_1.fastq/")
-  clseqs2=$(echo $file | sed "s/report.txt/clseqs_2.fastq/")
-  outputFile=$(echo $file | sed "s/report.txt/interesting.fasta/")
-  ./GetIntFasta3.py ${folderInput} $file ${kingdomSearched}
-  ./RecoverReads.sh ${folderInput}/${kingdomSearched}/${file}ReadsList.txt ${folderInput}/${clseqs1} ${folderInput}/${clseqs2} ${folderInput}/${kingdomSearched}/${outputFile}
-  rm ${folderInput}/${kingdomSearched}/${file}ReadsList.txt
+    # Create folder for output result.
+    mkdir -p ${folderInput}/${kingdomSearched}
+
+    # I think he transforms $file.report.txt en $file.clsesq_x.fastq.
+    clseqs1=$(echo $file | sed "s/report.txt/clseqs_1.fastq/")
+    clseqs2=$(echo $file | sed "s/report.txt/clseqs_2.fastq/")
+
+    #.
+    outputFile=$(echo $file | sed "s/report.txt/interesting.fasta/")
+
+    # Retrieve the taxonomic IDs of interest in the “report” file, then the reading names associated with these IDs in the “output” file in a temporary file (ReadsList.txt)
+    ./GetIntFasta3.py ${folderInput} $file ${kingdomSearched}
+
+    # recover reads.
+    ./RecoverReads.sh ${folderInput}/${kingdomSearched}/${file}ReadsList.txt ${folderInput}/${clseqs1} ${folderInput}/${clseqs2} ${folderInput}/${kingdomSearched}/${outputFile}
+
+    # Clean the output file of previously python program.
+    rm ${folderInput}/${kingdomSearched}/${file}ReadsList.txt
 done
+
+# Deactivate conda environnment.
 source deactivate
