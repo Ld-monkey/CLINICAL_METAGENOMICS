@@ -34,18 +34,18 @@ DATA_BASE_METAPHLAN=/data2/home/masalm/Antoine/DB/MetaPhlAn/mpa_v20_m200_bis.fna
 # Folder containing samples of sequences.
 PATH_FOLDER_INPUT=$1
 
-# Get all interesting files *.interesting.fasta .
-ALL_INTEREST_FASTA_FILES=$(ls | grep -i interesting)
-
 # Check if Viruses folder exists.
-if [ -d Viruses ]
+if [ -d ${PATH_FOLDER_INPUT}/Viruses ]
 then
     echo "Folder Viruses exists."
 
     # Move in the folder/Viruses.
     cd ${PATH_FOLDER_INPUT}/Viruses
 
-    # For each sample align sequence on database.
+    # Get all interesting files *.interesting.fasta .
+    ALL_INTEREST_FASTA_FILES=$(ls | grep -i interesting)
+
+    # For each sample align sequence on database (here RefSeq)
     for interestingFile in ${ALL_INTEREST_FASTA_FILES};
     do
         # Display file ? and in parallel <
@@ -62,7 +62,7 @@ then
         # > output = ${interestingFile%%.*}.blasttemp.txt
         cat $interestingFile | parallel --block 1M --recstart '>' --pipe blastn -task megablast -evalue 10e-10 -db $DATA_BASE_REFSEQ -num_threads 1 -outfmt \"7 qseqid sseqid sstart send evalue bitscore slen staxids\" -max_target_seqs 1 -max_hsps 1 > ${interestingFile%%.*}.blasttemp.txt
 
-        # Replace all "processed" in d.
+        # Replace all "processed" to d.
         sed "/\processed\b/d" ${interestingFile%%.*}.blasttemp.txt > ${interestingFile%%.*}.blasttemp2.txt
 
         # tac : concatenate and write files in reverse ?
@@ -82,25 +82,38 @@ else
 fi
 
 # Check if bacteria folder exists.
-if [ -d Bacteria ]
+if [ -d ${PATH_FOLDER_INPUT}/Bacteria ]
 then
     echo "Folder Bacteria exists."
 
     # Move in the Bacteria folder.
     cd ${PATH_FOLDER_INPUT}/Bacteria
 
+    # Get all interesting files *.interesting.fasta .
+    ALL_INTEREST_FASTA_FILES=$(ls | grep -i interesting)
+
     # For each sample align sequence on database.
     for interestingFile in ${ALL_INTEREST_FASTA_FILES};
     do
+        # test
+        echo "interestingFile : $interestingFile"
+        echo "interestingFile%%.* : ${interestingFile%%.*}"
+        
         # Run the blast program.
-        cat $interestingFile | parallel --block 50M --recstart '>' --pipe blastn -task megablast -evalue 10e-10 -db $DATA_BASE_METAPHLAN -num_threads 1 -outfmt \"7 qseqid sseqid sstart send evalue bitscore slen staxids\" -max_target_seqs 1 -max_hsps 1 > ${interestingFile%%.*}.blasttemp.txt    sed "/\processed\b/d" ${interestingFile%%.*}.blasttemp.txt > ${interestingFile%%.*}.blasttemp2.txt
+        cat $interestingFile | parallel --block 50M --recstart '>' --pipe blastn -task megablast -evalue 10e-10 -db $DATA_BASE_METAPHLAN -num_threads 1 -outfmt \"7 qseqid sseqid sstart send evalue bitscore slen staxids\" -max_target_seqs 1 -max_hsps 1 > ${interestingFile%%.*}.blasttemp.txt
+
+        # Replace all "processed" in d.
+        sed "/\processed\b/d" ${interestingFile%%.*}.blasttemp.txt > ${interestingFile%%.*}.blasttemp2.txt
 
         # Concatenate and wirte files in reverse ?
         tac ${interestingFile%%.*}.blasttemp2.txt | sed '/0 hits/I,+3 d' |tac > ${interestingFile%%.*}.blast.txt
 
         if [ -s "${interestingFile%%.*}.blast.txt" ]
         then
+            echo "The ${interestingFile%%.*}.blast.txt exists."
+            echo "Remove basttemp.txt and blasttemp2.txt"
             rm ${interestingFile%%.*}.blasttemp.txt ${interestingFile%%.*}.blasttemp2.txt
+            echo "Remove done."
         else
             echo "${interestingFile%%.*}.blast.txt not generated. Available storage space could be the reason !"
         fi
