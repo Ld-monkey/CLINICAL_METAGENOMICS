@@ -17,7 +17,8 @@ echo "SGE O WORKDIR: $SGE_O_WORKDIR"
 echo "SGE TASK ID: $SGE_TASK_ID"
 echo "NSLOTS: $NSLOTS"
 
-#qsub launchBlast.sh {folder}
+# qsub launchBlast.sh {folder} {basename of output folder}
+# e.g $qsub launchBlast.sh myfolder blast_metaplan_output
 
 # Activate conda environment.
 source activate EnvAntL
@@ -33,6 +34,22 @@ DATA_BASE_METAPHLAN=/data2/home/masalm/Antoine/DB/MetaPhlAn/mpa_v20_m200_bis.fna
 
 # Folder containing samples of sequences.
 PATH_FOLDER_INPUT=$1
+
+# Name of output folder and will contain all *.blast.txt files.
+BASENAME_OUTPUT_FOLDER=$2
+
+# Move all *.blast files in specific folder.
+move_output_blast_to_folder () {
+    # Create a folder to put all *.blast.txt files.
+    mkdir $BASENAME_OUTPUT_FOLDER
+
+    # Move all *.blast.txt to specific folder.
+    for blast_files in *.blast.txt
+    do
+        mv $blast_files $BASENAME_OUTPUT_FOLDER
+        echo "$blast_files is moved in $BASENAME_OUTPUT_FOLDER folder"
+    done    
+}
 
 # Check if Viruses folder exists.
 if [ -d ${PATH_FOLDER_INPUT}/Viruses ]
@@ -73,6 +90,12 @@ then
         then
             # Remove blast temporary files.
             rm ${interestingFile%%.*}.blasttemp.txt ${interestingFile%%.*}.blasttemp2.txt
+            echo "Move all blast files in $BASENAME_OUTPUT_FOLDER=$2"
+
+            # Call a function to move all blast files in folder.
+            move_output_blast_to_folder
+
+            echo "Move done"           
         else
             echo "${interestingFile%%.*}.blast.txt not generated. Available storage space could be the reason !"
         fi
@@ -112,8 +135,15 @@ then
         then
             echo "The ${interestingFile%%.*}.blast.txt exists."
             echo "Remove basttemp.txt and blasttemp2.txt"
+
             rm ${interestingFile%%.*}.blasttemp.txt ${interestingFile%%.*}.blasttemp2.txt
             echo "Remove done."
+            echo "Move all blast files in $BASENAME_OUTPUT_FOLDER=$2"
+
+            # Call a function to move all blast files in folder.
+            move_output_blast_to_folder
+
+            echo "Move done"
         else
             echo "${interestingFile%%.*}.blast.txt not generated. Available storage space could be the reason !"
         fi
