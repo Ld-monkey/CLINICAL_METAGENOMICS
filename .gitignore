@@ -1,3 +1,5 @@
-# ignore the folder output_reads_RefSeq
+# Ignore the folder output_reads_RefSeq.
 output_reads_RefSeq
  
+# Ignore the classification list of ncbi database.
+*.seq

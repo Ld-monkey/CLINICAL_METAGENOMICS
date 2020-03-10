@@ -1,8 +1,8 @@
 #!/bin/bash
 #$ -N BlastOnlyVir
 #$ -cwd
-#$ -o outBlast.out
-#$ -e errBlast.err
+#$ -o outcustomblast.out
+#$ -e errcustomblast.err
 #$ -q short.q
 #$ -l h_rt=47:20:00
 #$ -pe thread 40
@@ -17,8 +17,8 @@ echo "SGE O WORKDIR: $SGE_O_WORKDIR"
 echo "SGE TASK ID: $SGE_TASK_ID"
 echo "NSLOTS: $NSLOTS"
 
-# qsub launchBlast.sh {folder} {basename of output folder}
-# e.g $qsub launchBlast.sh myfolder blast_metaplan_output
+# qsub launch_custom_blast.sh {path folder with reads} {path of database} {name of folder for output results blast}
+# e.g $qsub launch_custom_blast.sh output_preprocess_reads_clean_FDA_refseq_human_viral /data1/scratch/masalm/LUDOVIC/METAGENOMICS/ALL_RAW_FILES_GENOMES_FDA_ARGOS-2020-02-04/MAKEBLAST_makeblast_database_fda_argos/makeblast_database_fda_argos FDA_ARGOS_BLAST
 
 # Activate conda environment.
 source activate EnvAntL
@@ -29,16 +29,17 @@ module load blastplus/2.2.31
 # Folder containing samples of sequences.
 PATH_FOLDER_INPUT=$1
 
-# Name of output folder and will contain all *.blast.txt files.
-BASENAME_OUTPUT_FOLDER=$2
-
 # Path to the custom database.
-CUSTOM_DATA_BASE=$3
+CUSTOM_DATA_BASE=$2
+
+# Name of output folder and will contain all *.blast.txt files.
+BASENAME_OUTPUT_FOLDER=$3
 
 # Move all *.blast files in specific folder.
 move_output_blast_to_folder () {
     # Create a folder to put all *.blast.txt files.
     mkdir $BASENAME_OUTPUT_FOLDER
+    echo "Create $BASE_OUTPUT_FOLDER"
 
     # Move all *.blast.txt to specific folder.
     for blast_files in *.blast.txt
