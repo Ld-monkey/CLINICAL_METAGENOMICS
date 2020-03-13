@@ -3,3 +3,6 @@ output_reads_RefSeq
  
 # Ignore the classification list of ncbi database.
 *.seq
+
+# Specific files
+cat_outMetaTest.out

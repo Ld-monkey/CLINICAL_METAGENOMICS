@@ -6,8 +6,8 @@ taxonomy at the genus level are gathered in the file "conserved.txt" (output).
 # coding: utf-8
 
 import re
-import argparse
 import os
+import argparse
 from ete3 import NCBITaxa
 
 def arguments():
@@ -79,20 +79,19 @@ if __name__ == "__main__":
                                   +"/"
                                   +BASENAME_NOT_CONSERVED_SEQ,
                                   "w")
-
     # List of genus level.
     SAME_GENUS_LEVEL = list()
 
     # Compares genus attribution from BLAST and Kraken
     with open(INPUT_FILE_BLAST) as blast_file:
-        
         # Display messages.
+        print("##########{}##########".format(INPUT_FILE_BLAST))
         print("Opened file {}".format(INPUT_FILE_BLAST))
 
         # Reading line.
         LINE = blast_file.readline()
 
-        # test
+        # Test print first line.
         print("Line : {}".format(LINE))
 
         # Browse the lines of blast file.
@@ -103,14 +102,19 @@ if __name__ == "__main__":
             # Variable that stores Blast taxon ID.
             BLAST_TAXON_ID = ''
 
+            # Query: NB552188:4:H353CBGXC:4:22605:9229:16747 1:N:0:10
             # Flag to get line of interest in the blast file.
             FLAG_QUERY_LINE = len(re.findall("Query: ", LINE))
 
             # Check if Query motif is find in the line.
             if FLAG_QUERY_LINE == 1:
 
-                # Save Kraken taxon ID in 'KRAKEN_TAXONOMIC_ID'
+                # e.g kraken:taxid|1747 -> 1747.
+                # Save Kraken taxon ID in 'KRAKEN_TAXONOMIC_ID'.
                 KRAKEN_TAXONOMIC_ID = re.split("taxid\\|", LINE)[1].strip('\n')
+
+                # Test KRAKEN_TAXONOMIC_ID
+                print("KRAKEN_TAXONOMIC_ID : {}".format(KRAKEN_TAXONOMIC_ID))
 
                 # MATE ??
                 IS_MATE = '0'
@@ -118,17 +122,32 @@ if __name__ == "__main__":
                 # Which mate is read comming from ?
                 IS_MATE = re.split(":", re.split(" ", LINE)[3])[0]
 
+                # Test for IS_MATE variable.
+                print("IS_MATE : {}".format(IS_MATE))
+
                 # WTF !! Reading 4 times new lines.
                 LINE = blast_file.readline()
+                print("First jump {}".format(LINE))
                 LINE = blast_file.readline()
+                print("Second jump {}".format(LINE))
                 LINE = blast_file.readline()
+                print("Third jump {}".format(LINE))
                 LINE = blast_file.readline()
+                print("Foor jump {}".format(LINE))
 
-                # What type of trick ?
+                # Split in a list the 4th line.
+                # NB552188:4:H353CBGXC:4:22605:9229:16747 ...
+                # ['NB552188:4:H353CBGXC:4:22605:9229:16747', ...]
                 TRICK = re.split('\t', '\t'.join(LINE.split()))
 
-                # Save blast taxon ID in 'BLAST_TAXON_ID'.
+                # Test Trick variable.
+                print("TRICK : {}".format(TRICK))
+
+                # Save blast taxon ID in 'BLAST_TAXON_ID' at the end list of trick.
                 BLAST_TAXON_ID = TRICK[len(TRICK)-1].strip('\n')
+
+                # Test BLAST_TAXON_ID variable.
+                print("BLAST_TAXON_ID : {}".format(BLAST_TAXON_ID))
 
                 # Handles Blast database missing taxon information (N/A).
                 if BLAST_TAXON_ID != "N/A":
@@ -151,6 +170,9 @@ if __name__ == "__main__":
                         # Find the lineage list with the Kraken taxonomic ID.
                         LINEAGE_KRAKEN = NCBI_TAXA.get_lineage(KRAKEN_TAXONOMIC_ID)
 
+                        # Test Lineage_kraken variable.
+                        print("LINEAGE : {}".format(LINEAGE_KRAKEN))
+
                         # Check if lineage list is empty based on the fact
                         # that empty sequences are false.
                         if not LINEAGE_KRAKEN:
@@ -160,19 +182,34 @@ if __name__ == "__main__":
                         # Get the rank of kraken lineage.
                         RANKS_KRAKEN = NCBI_TAXA.get_rank(LINEAGE_KRAKEN)
 
+                        # Test RANKS_KRAKEN variable.
+                        print("RANKS_KRAKEN : {}".format(RANKS_KRAKEN))
+
                         # Variable for the genus level of KRAKEN.
                         GENUS_KRAKEN = -1
                         GENUS_KRAKEN = [k for k, v in RANKS_KRAKEN.items() if v == 'genus']
 
+                        # Test GENUS_KRAKEN.
+                        print("GENUS_KRAKEN : {}".format(GENUS_KRAKEN))
+
                         # Find the lineage list with the blast taxonomic ID.
                         LINEAGE_BLAST = NCBI_TAXA.get_lineage(BLAST_TAXON_ID)
+
+                        # Test Lineage blast variable.
+                        print("LINEAGE_BLAST : {}".format(LINEAGE_BLAST))
 
                         # Get the rank of blast lineage.
                         RANKS_BLAST = NCBI_TAXA.get_rank(LINEAGE_BLAST)
 
+                        # Test ranks blast.
+                        print("RANKS_BLAST {}".format(RANKS_BLAST))
+
                         # Variable for the genus level of blast.
                         GENUS_BLAST = -2
                         GENUS_BLAST = [k for k, v in RANKS_BLAST.items() if v == 'genus']
+
+                        # Test GENUS_BLAST variable.
+                        print("GENUS_BLAST : {}".format(GENUS_BLAST))
 
                         # Check if genus level are the same for Kraken and Blast.
                         if GENUS_KRAKEN == GENUS_BLAST:

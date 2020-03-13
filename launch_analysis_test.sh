@@ -243,6 +243,8 @@ then
         echo "$interest_blast"
         basename_=$(basename "$interest_blast" .blast.txt)
         echo "Basename : $basename_"
+
+        # Output files is conserved and not_conserved ID of taxa from blast.txt .
         python sort_blasted_seq.py -i ${COMPLETE_BLAST_PATH}/$interest_blast \
                -o ${basename_}conserved.txt \
                -n /data2/home/masalm/.etetoolkit/taxa.sqlite
