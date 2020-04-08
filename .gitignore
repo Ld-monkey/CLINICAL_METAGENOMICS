@@ -1,8 +1,12 @@
-# Ignore the folder output_reads_RefSeq.
-output_reads_RefSeq
- 
-# Ignore the classification list of ncbi database.
-*.seq
+# Ignore all databases, reads, sequences folder because it's too big.
+data/databases/*
+data/reads/*
+data/raw_sequences/*
 
-# Specific files
-cat_outMetaTest.out
+# Ignore results from blasts
+results/blasts/*
+results/reads_outputs/*
+
+# Ignore to big logs.
+results/log_outputs/outMetaTest.out
+
