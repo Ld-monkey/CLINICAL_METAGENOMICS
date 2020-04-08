@@ -1,0 +1,60 @@
+JOB NAME: BlastOnlyVir
+JOB ID: 19099
+QUEUE: short.q
+HOSTNAME: NODE04
+SGE O WORKDIR: /data1/scratch/masalm/LUDOVIC/METAGENOMICS
+SGE TASK ID: undefined
+NSLOTS: 40
+Folder Viruses doesn't exists.
+Folder Bacteria exists.
+interestingFile : 10-SIA-PLA-ADN_S10_.interesting.fasta
+interestingFile%%.* : 10-SIA-PLA-ADN_S10_
+The 10-SIA-PLA-ADN_S10_.blast.txt exists.
+Remove basttemp.txt and blasttemp2.txt
+Remove done.
+Move all blast files in FDA_ARGOS_BLAST=/data1/scratch/masalm/LUDOVIC/METAGENOMICS/ALL_RAW_FILES_GENOMES_FDA_ARGOS-2020-02-04/MAKEBLAST_makeblast_database_fda_argos/makeblast_database_fda_argos
+Create 
+10-SIA-PLA-ADN_S10_.blast.txt is moved in FDA_ARGOS_BLAST folder
+Move done
+interestingFile : 1-MAR-LBA-ADN_S1_.interesting.fasta
+interestingFile%%.* : 1-MAR-LBA-ADN_S1_
+The 1-MAR-LBA-ADN_S1_.blast.txt exists.
+Remove basttemp.txt and blasttemp2.txt
+Remove done.
+Move all blast files in FDA_ARGOS_BLAST=/data1/scratch/masalm/LUDOVIC/METAGENOMICS/ALL_RAW_FILES_GENOMES_FDA_ARGOS-2020-02-04/MAKEBLAST_makeblast_database_fda_argos/makeblast_database_fda_argos
+Create 
+1-MAR-LBA-ADN_S1_.blast.txt is moved in FDA_ARGOS_BLAST folder
+Move done
+interestingFile : 2-SCH-LBA-ADN_S2_.interesting.fasta
+interestingFile%%.* : 2-SCH-LBA-ADN_S2_
+The 2-SCH-LBA-ADN_S2_.blast.txt exists.
+Remove basttemp.txt and blasttemp2.txt
+Remove done.
+Move all blast files in FDA_ARGOS_BLAST=/data1/scratch/masalm/LUDOVIC/METAGENOMICS/ALL_RAW_FILES_GENOMES_FDA_ARGOS-2020-02-04/MAKEBLAST_makeblast_database_fda_argos/makeblast_database_fda_argos
+Create 
+2-SCH-LBA-ADN_S2_.blast.txt is moved in FDA_ARGOS_BLAST folder
+Move done
+interestingFile : 3-DAS-LBA-ADN_S3_.interesting.fasta
+interestingFile%%.* : 3-DAS-LBA-ADN_S3_
+The 3-DAS-LBA-ADN_S3_.blast.txt exists.
+Remove basttemp.txt and blasttemp2.txt
+Remove done.
+Move all blast files in FDA_ARGOS_BLAST=/data1/scratch/masalm/LUDOVIC/METAGENOMICS/ALL_RAW_FILES_GENOMES_FDA_ARGOS-2020-02-04/MAKEBLAST_makeblast_database_fda_argos/makeblast_database_fda_argos
+Create 
+3-DAS-LBA-ADN_S3_.blast.txt is moved in FDA_ARGOS_BLAST folder
+Move done
+interestingFile : 4-PAV-LBA-ADN_S4_.interesting.fasta
+interestingFile%%.* : 4-PAV-LBA-ADN_S4_
+The 4-PAV-LBA-ADN_S4_.blast.txt exists.
+Remove basttemp.txt and blasttemp2.txt
+Remove done.
+Move all blast files in FDA_ARGOS_BLAST=/data1/scratch/masalm/LUDOVIC/METAGENOMICS/ALL_RAW_FILES_GENOMES_FDA_ARGOS-2020-02-04/MAKEBLAST_makeblast_database_fda_argos/makeblast_database_fda_argos
+Create 
+4-PAV-LBA-ADN_S4_.blast.txt is moved in FDA_ARGOS_BLAST folder
+Move done
+JOB NAME: BlastOnlyVir
+JOB ID: 19107
+QUEUE: short.q
+HOSTNAME: NODE06
+SGE O WORKDIR: /data1/scratch/masalm/LUDOVIC/METAGENOMICS
+SGE TASK ID: undefined

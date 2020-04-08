@@ -1,0 +1,36 @@
+JOB NAME: BlastOnlyVir
+JOB ID: 19111
+QUEUE: short.q
+HOSTNAME: NODE04
+SGE O WORKDIR: /data1/scratch/masalm/LUDOVIC/METAGENOMICS
+SGE TASK ID: undefined
+NSLOTS: 40
+Folder Viruses doesn't exists.
+Create folder output_preprocess_reads_clean_FDA_refseq_human_viral/Bacteria/16S_REFSEQ_BLAST
+Create done.
+Folder Bacteria exists.
+interestingFile : 10-SIA-PLA-ADN_S10_.interesting.fasta
+interestingFile%%.* : 10-SIA-PLA-ADN_S10_
+The 10-SIA-PLA-ADN_S10_.blast.txt exists.
+Remove basttemp.txt and blasttemp2.txt
+Remove done.
+interestingFile : 1-MAR-LBA-ADN_S1_.interesting.fasta
+interestingFile%%.* : 1-MAR-LBA-ADN_S1_
+The 1-MAR-LBA-ADN_S1_.blast.txt exists.
+Remove basttemp.txt and blasttemp2.txt
+Remove done.
+interestingFile : 2-SCH-LBA-ADN_S2_.interesting.fasta
+interestingFile%%.* : 2-SCH-LBA-ADN_S2_
+The 2-SCH-LBA-ADN_S2_.blast.txt exists.
+Remove basttemp.txt and blasttemp2.txt
+Remove done.
+interestingFile : 3-DAS-LBA-ADN_S3_.interesting.fasta
+interestingFile%%.* : 3-DAS-LBA-ADN_S3_
+The 3-DAS-LBA-ADN_S3_.blast.txt exists.
+Remove basttemp.txt and blasttemp2.txt
+Remove done.
+interestingFile : 4-PAV-LBA-ADN_S4_.interesting.fasta
+interestingFile%%.* : 4-PAV-LBA-ADN_S4_
+The 4-PAV-LBA-ADN_S4_.blast.txt exists.
+Remove basttemp.txt and blasttemp2.txt
+Remove done.

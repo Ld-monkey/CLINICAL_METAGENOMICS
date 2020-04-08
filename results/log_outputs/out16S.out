@@ -1,0 +1,9 @@
+JOB NAME: BlastOnlyVir
+JOB ID: 19100
+QUEUE: short.q
+HOSTNAME: NODE02
+SGE O WORKDIR: /data1/scratch/masalm/LUDOVIC/METAGENOMICS
+SGE TASK ID: undefined
+NSLOTS: 10
+Download database and all fasta files with the accession list.
+File exist

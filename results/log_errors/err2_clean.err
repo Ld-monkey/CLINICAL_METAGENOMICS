@@ -1,0 +1,1286 @@
+FDA_database_kraken2.sh: line 145: [: « ] » manquant
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_000626615.2_ASM62661v3_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_000783435.2_ASM78343v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_000783445.2_ASM78344v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_000783455.2_ASM78345v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_000783465.2_ASM78346v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_000783515.2_ASM78351v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_000783535.2_ASM78353v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_000783555.1_ASM78355v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_000783575.2_ASM78357v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_000783595.2_ASM78359v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_000783615.1_ASM78361v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_000783635.1_ASM78363v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_000783675.2_ASM78367v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_000783695.1_ASM78369v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_000783715.2_ASM78371v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_000783735.2_ASM78373v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_000783755.2_ASM78375v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_000783775.2_ASM78377v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_000783795.2_ASM78379v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_000783815.2_ASM78381v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_000783835.2_ASM78383v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_000783855.2_ASM78385v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_000783875.2_ASM78387v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_000783895.2_ASM78389v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_000783915.2_ASM78391v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_000783935.2_ASM78393v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_000783955.2_ASM78395v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_000783975.2_ASM78397v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_000783995.2_ASM78399v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_000784015.2_ASM78401v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001018635.2_ASM101863v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001018645.2_ASM101864v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001018655.2_ASM101865v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001018685.2_ASM101868v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001018715.2_ASM101871v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001018725.2_ASM101872v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001018735.2_ASM101873v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001018775.2_ASM101877v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001018795.2_ASM101879v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001018805.1_ASM101880v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001018835.2_ASM101883v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001018845.2_ASM101884v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001018875.2_ASM101887v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001018885.2_ASM101888v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001018905.2_ASM101890v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001018915.2_ASM101891v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001018955.2_ASM101895v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001018965.2_ASM101896v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001018975.2_ASM101897v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001019015.2_ASM101901v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001019035.2_ASM101903v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001019045.2_ASM101904v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001019055.2_ASM101905v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001019065.2_ASM101906v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001019115.2_ASM101911v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001019125.2_ASM101912v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001019135.2_ASM101913v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001019175.2_ASM101917v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001019195.2_ASM101919v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001019205.2_ASM101920v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001019215.2_ASM101921v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001019255.2_ASM101925v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001019275.2_ASM101927v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001019295.2_ASM101929v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001019305.2_ASM101930v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001019335.2_ASM101933v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001019355.2_ASM101935v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001019375.2_ASM101937v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001019395.2_ASM101939v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001019415.2_ASM101941v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001019435.2_ASM101943v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001019455.2_ASM101945v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001019475.2_ASM101947v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001019485.2_ASM101948v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001019495.2_ASM101949v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001019535.2_ASM101953v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001019555.1_ASM101955v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001019565.2_ASM101956v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001019575.2_ASM101957v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001188025.2_ASM118802v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001188035.2_ASM118803v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001188045.1_ASM118804v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001188055.2_ASM118805v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001188105.2_ASM118810v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001188125.2_ASM118812v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001188135.2_ASM118813v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001188155.2_ASM118815v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001188185.2_ASM118818v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001471275.2_ASM147127v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001471285.1_ASM147128v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001471295.2_ASM147129v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001471305.2_ASM147130v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001471355.1_ASM147135v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001471365.2_ASM147136v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001471395.2_ASM147139v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001471415.2_ASM147141v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001471435.1_ASM147143v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001471455.2_ASM147145v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001471465.2_ASM147146v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001471485.2_ASM147148v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001471515.2_ASM147151v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001471535.2_ASM147153v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001471555.2_ASM147155v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001471575.2_ASM147157v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001471585.2_ASM147158v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001471615.2_ASM147161v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001471625.1_ASM147162v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001471655.2_ASM147165v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001471675.2_ASM147167v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001471695.2_ASM147169v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001471715.2_ASM147171v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001471735.2_ASM147173v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001471755.2_ASM147175v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001471775.2_ASM147177v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001471795.2_ASM147179v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001471815.2_ASM147181v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001471835.2_ASM147183v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001471855.2_ASM147185v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001473265.2_ASM147326v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001525525.2_ASM152552v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001525545.2_ASM152554v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001525585.2_ASM152558v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001525595.2_ASM152559v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001525625.2_ASM152562v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001534855.2_ASM153485v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001558255.2_ASM155825v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001558275.2_ASM155827v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001558295.2_ASM155829v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001558355.2_ASM155835v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001558375.2_ASM155837v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001558395.1_ASM155839v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001558415.2_ASM155841v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001558435.2_ASM155843v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001558475.2_ASM155847v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001558495.2_ASM155849v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001558515.2_ASM155851v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001558735.2_ASM155873v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001558755.2_ASM155875v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001558775.1_ASM155877v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001558795.2_ASM155879v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001558815.2_ASM155881v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001558855.2_ASM155885v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001558875.2_ASM155887v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001558895.2_ASM155889v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001558915.1_ASM155891v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001558935.2_ASM155893v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001559035.2_ASM155903v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001559055.1_ASM155905v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001559075.2_ASM155907v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001559115.2_ASM155911v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001559135.2_ASM155913v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001559175.2_ASM155917v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001559195.1_ASM155919v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001559215.2_ASM155921v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001559235.2_ASM155923v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001559255.2_ASM155925v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001563715.2_ASM156371v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_001593585.2_ASM159358v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002073215.2_ASM207321v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002073235.2_ASM207323v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002073255.2_ASM207325v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002073275.2_ASM207327v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002073295.2_ASM207329v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002073315.2_ASM207331v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002073335.2_ASM207333v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002073355.2_ASM207335v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002073375.2_ASM207337v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002073395.2_ASM207339v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002073415.2_ASM207341v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002073435.2_ASM207343v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002073455.2_ASM207345v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002073475.2_ASM207347v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002073495.2_ASM207349v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002073515.1_ASM207351v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002073535.2_ASM207353v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002073555.2_ASM207355v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002073575.2_ASM207357v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002073595.2_ASM207359v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002073615.2_ASM207361v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002073635.2_ASM207363v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002073655.2_ASM207365v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002073675.2_ASM207367v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002073695.2_ASM207369v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002073715.2_ASM207371v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002073735.2_ASM207373v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002073755.2_ASM207375v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002073775.2_ASM207377v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002073795.1_ASM207379v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002073815.2_ASM207381v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002073835.2_ASM207383v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002082235.2_ASM208223v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002082245.2_ASM208224v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002082275.2_ASM208227v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002082895.2_ASM208289v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002082905.2_ASM208290v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002082945.2_ASM208294v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002082955.2_ASM208295v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002082985.1_ASM208298v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002082995.1_ASM208299v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002083025.2_ASM208302v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002083055.2_ASM208305v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002083085.2_ASM208308v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002083095.2_ASM208309v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002083125.2_ASM208312v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002083135.2_ASM208313v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002083165.2_ASM208316v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002083175.2_ASM208317v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002083205.2_ASM208320v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002083215.2_ASM208321v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002083245.2_ASM208324v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002083265.2_ASM208326v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002083285.2_ASM208328v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002206145.2_ASM220614v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002206155.2_ASM220615v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002206165.1_ASM220616v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002206175.2_ASM220617v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002206225.1_ASM220622v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002206235.1_ASM220623v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002206245.1_ASM220624v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002206285.2_ASM220628v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002206305.2_ASM220630v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002206315.1_ASM220631v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002206325.1_ASM220632v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002206365.1_ASM220636v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002206385.2_ASM220638v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002206395.1_ASM220639v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002206405.2_ASM220640v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002206445.1_ASM220644v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002206465.1_ASM220646v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002206485.1_ASM220648v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002206495.1_ASM220649v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002206525.1_ASM220652v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002206545.2_ASM220654v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002206565.1_ASM220656v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002206575.2_ASM220657v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002208665.2_ASM220866v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002208685.2_ASM220868v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002208705.2_ASM220870v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002208725.2_ASM220872v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002208745.2_ASM220874v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002208765.2_ASM220876v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002208785.1_ASM220878v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002208805.2_ASM220880v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002208825.2_ASM220882v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002208845.2_ASM220884v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002208865.2_ASM220886v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002208885.2_ASM220888v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002208905.1_ASM220890v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002208925.2_ASM220892v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002208945.1_ASM220894v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002208965.1_ASM220896v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002208985.1_ASM220898v3_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002209005.1_ASM220900v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002209025.1_ASM220902v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002209045.1_ASM220904v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002209065.1_ASM220906v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002209085.2_ASM220908v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002209105.2_ASM220910v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002209125.2_ASM220912v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002209145.2_ASM220914v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002209165.2_ASM220916v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002209185.2_ASM220918v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002209205.2_ASM220920v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002209225.1_ASM220922v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002209245.2_ASM220924v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002209265.1_ASM220926v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002277995.2_ASM227799v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002278015.2_ASM227801v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002289235.2_ASM228923v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002313145.2_ASM231314v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002313155.2_ASM231315v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002313185.2_ASM231318v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002386165.1_ASM238616v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002386185.1_ASM238618v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002386205.1_ASM238620v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002386225.2_ASM238622v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002386245.1_ASM238624v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002386265.1_ASM238626v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002386285.1_ASM238628v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002386305.1_ASM238630v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002386325.1_ASM238632v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002386345.1_ASM238634v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002386365.1_ASM238636v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002386385.1_ASM238638v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002393245.1_ASM239324v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002393265.1_ASM239326v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002393365.1_ASM239336v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002393385.1_ASM239338v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002393405.1_ASM239340v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002393425.1_ASM239342v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002393445.1_ASM239344v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002393465.1_ASM239346v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002393485.1_ASM239348v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002393505.1_ASM239350v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002407165.1_ASM240716v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002407525.2_ASM240752v3_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002554225.1_ASM255422v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002554275.1_ASM255427v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002554295.1_ASM255429v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002554315.1_ASM255431v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002554325.1_ASM255432v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002554355.1_ASM255435v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002554365.1_ASM255436v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002554395.1_ASM255439v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002554415.1_ASM255441v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002554425.1_ASM255442v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002554435.1_ASM255443v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002554475.1_ASM255447v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002554485.1_ASM255448v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002554515.1_ASM255451v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002554535.1_ASM255453v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002554625.2_ASM255462v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002554635.1_ASM255463v2_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002554645.1_ASM255464v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002554675.1_ASM255467v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002557625.1_ASM255762v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002557645.1_ASM255764v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002587105.1_ASM258710v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002587165.1_ASM258716v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002587225.1_ASM258722v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002587885.1_ASM258788v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002588125.1_ASM258812v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002588135.1_ASM258813v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002588205.1_ASM258820v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002588215.1_ASM258821v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002588255.1_ASM258825v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002588265.1_ASM258826v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002588345.1_ASM258834v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002588355.1_ASM258835v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002588365.1_ASM258836v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002588385.1_ASM258838v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002588485.1_ASM258848v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002588535.1_ASM258853v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002588555.1_ASM258855v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002588845.1_ASM258884v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002589795.1_ASM258979v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002591075.1_ASM259107v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002591095.1_ASM259109v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002591115.1_ASM259111v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002591135.1_ASM259113v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002591155.1_ASM259115v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002591175.1_ASM259117v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002591195.1_ASM259119v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002591215.1_ASM259121v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002591235.1_ASM259123v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002591255.1_ASM259125v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002591275.1_ASM259127v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002591295.1_ASM259129v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002591785.1_ASM259178v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002634895.1_ASM263489v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002635135.1_ASM263513v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002635365.1_ASM263536v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002635725.1_ASM263572v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002636095.1_ASM263609v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002636215.1_ASM263621v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002636375.1_ASM263637v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002636515.1_ASM263651v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002754815.1_ASM275481v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002891025.1_ASM289102v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002891055.1_ASM289105v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002891075.1_ASM289107v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002891095.1_ASM289109v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002891115.1_ASM289111v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002891135.1_ASM289113v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002891155.1_ASM289115v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002891175.1_ASM289117v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002891195.1_ASM289119v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002891215.1_ASM289121v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002891235.1_ASM289123v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002891255.1_ASM289125v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002891275.1_ASM289127v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002943995.1_ASM294399v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002944935.1_ASM294493v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002944995.1_ASM294499v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002951115.1_ASM295111v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002951195.1_ASM295119v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002951295.1_ASM295129v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002951395.1_ASM295139v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002951455.1_ASM295145v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002951475.1_ASM295147v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002951635.1_ASM295163v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002953295.1_ASM295329v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002953335.1_ASM295333v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002953355.1_ASM295335v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002953375.1_ASM295337v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002953395.1_ASM295339v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002953515.1_ASM295351v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002953535.1_ASM295353v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002953975.1_ASM295397v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002954055.1_ASM295405v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002954105.1_ASM295410v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002983625.1_ASM298362v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002983645.1_ASM298364v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002983665.1_ASM298366v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002983685.1_ASM298368v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002983705.1_ASM298370v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002983725.1_ASM298372v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002983785.1_ASM298378v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002983865.1_ASM298386v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002983965.1_ASM298396v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002984035.1_ASM298403v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002984125.1_ASM298412v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002984195.1_ASM298419v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002984285.1_ASM298428v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002984395.1_ASM298439v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002984485.1_ASM298448v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_002984565.1_ASM298456v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003019925.1_ASM301992v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003019945.1_ASM301994v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003019965.1_ASM301996v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003020025.1_ASM302002v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003020185.1_ASM302018v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003030425.1_ASM303042v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003050665.1_ASM305066v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003546885.1_ASM354688v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003546905.1_ASM354690v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003613595.1_ASM361359v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003614815.1_ASM361481v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003614835.1_ASM361483v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003699975.1_ASM369997v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003711125.1_ASM371112v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003797205.1_ASM379720v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003797295.1_ASM379729v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003797385.1_ASM379738v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003797955.1_ASM379795v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003797995.1_ASM379799v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003798025.1_ASM379802v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003798065.1_ASM379806v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003798085.1_ASM379808v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003798205.1_ASM379820v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003798225.1_ASM379822v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003798245.1_ASM379824v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003798265.1_ASM379826v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003798285.1_ASM379828v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003798305.1_ASM379830v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003798325.1_ASM379832v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003798345.1_ASM379834v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003798365.1_ASM379836v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003798385.1_ASM379838v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003798405.1_ASM379840v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003798425.1_ASM379842v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003798445.1_ASM379844v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003798465.1_ASM379846v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812065.1_ASM381206v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812085.1_ASM381208v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812105.1_ASM381210v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812125.1_ASM381212v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812145.1_ASM381214v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812165.1_ASM381216v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812185.1_ASM381218v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812205.1_ASM381220v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812225.1_ASM381222v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812245.1_ASM381224v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812305.1_ASM381230v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812325.1_ASM381232v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812345.1_ASM381234v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812365.1_ASM381236v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812385.1_ASM381238v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812405.1_ASM381240v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812425.1_ASM381242v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812445.1_ASM381244v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812465.1_ASM381246v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812505.1_ASM381250v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812525.1_ASM381252v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812545.1_ASM381254v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812565.1_ASM381256v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812585.1_ASM381258v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812605.1_ASM381260v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812625.1_ASM381262v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812645.1_ASM381264v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812665.1_ASM381266v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812685.1_ASM381268v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812705.1_ASM381270v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812725.1_ASM381272v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812745.1_ASM381274v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812765.1_ASM381276v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812785.1_ASM381278v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812805.1_ASM381280v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812825.1_ASM381282v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812845.1_ASM381284v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812865.1_ASM381286v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812885.1_ASM381288v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812905.1_ASM381290v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812925.1_ASM381292v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812945.1_ASM381294v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003812985.1_ASM381298v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003813005.1_ASM381300v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003813025.1_ASM381302v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003813045.1_ASM381304v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003813065.1_ASM381306v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003813085.1_ASM381308v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003827915.1_ASM382791v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003852635.1_ASM385263v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003854935.1_ASM385493v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003855115.1_ASM385511v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003855135.1_ASM385513v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003933015.1_ASM393301v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003933025.1_ASM393302v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003933035.1_ASM393303v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003933045.1_ASM393304v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003937665.1_ASM393766v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003937705.1_ASM393770v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003937715.1_ASM393771v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003937725.1_ASM393772v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003937765.1_ASM393776v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003937785.1_ASM393778v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003938635.1_ASM393863v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003938685.1_ASM393868v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003938695.1_ASM393869v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003938705.1_ASM393870v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003938725.1_ASM393872v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003938745.1_ASM393874v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003938785.1_ASM393878v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003938795.1_ASM393879v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003938805.1_ASM393880v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003938815.1_ASM393881v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003938865.1_ASM393886v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003938885.1_ASM393888v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003938895.1_ASM393889v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003938905.1_ASM393890v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003938925.1_ASM393892v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003938945.1_ASM393894v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003938985.1_ASM393898v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003938995.1_ASM393899v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003940465.1_ASM394046v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003940475.1_ASM394047v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003940705.1_ASM394070v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003940725.1_ASM394072v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003955775.1_ASM395577v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003955795.1_ASM395579v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003955815.1_ASM395581v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003955985.1_ASM395598v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003956005.1_ASM395600v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_003956025.1_ASM395602v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_006364035.1_ASM636403v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_006364235.1_ASM636423v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_006364295.1_ASM636429v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_006364355.1_ASM636435v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_006364495.1_ASM636449v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_006364635.1_ASM636463v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_006364655.1_ASM636465v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_006364675.1_ASM636467v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_006364695.1_ASM636469v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_006364735.1_ASM636473v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_006364755.1_ASM636475v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_006364775.1_ASM636477v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_006364795.1_ASM636479v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_006364815.1_ASM636481v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_006365335.1_ASM636533v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_006370445.1_ASM637044v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_006370475.1_ASM637047v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_006370485.1_ASM637048v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_006370495.1_ASM637049v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_007273495.1_ASM727349v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_007273515.1_ASM727351v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_008693365.1_ASM869336v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_008693385.1_ASM869338v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_008693405.1_ASM869340v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_008693425.1_ASM869342v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_008693445.1_ASM869344v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_008693465.1_ASM869346v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_008693485.1_ASM869348v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_008693505.1_ASM869350v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_008693525.1_ASM869352v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_008693545.1_ASM869354v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_008693565.1_ASM869356v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_008693585.1_ASM869358v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_008693605.1_ASM869360v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_008693625.1_ASM869362v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_008693645.1_ASM869364v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_008693665.1_ASM869366v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_008693685.1_ASM869368v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_008693705.1_ASM869370v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_008693725.1_ASM869372v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_008693745.1_ASM869374v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_008693765.1_ASM869376v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_008693785.1_ASM869378v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_008693805.1_ASM869380v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_008693825.1_ASM869382v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_008693845.1_ASM869384v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_008693865.1_ASM869386v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_008693885.1_ASM869388v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_008693905.1_ASM869390v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_008693925.1_ASM869392v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_008693945.1_ASM869394v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_008693965.1_ASM869396v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_008693985.1_ASM869398v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_008694005.1_ASM869400v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009729895.1_ASM972989v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009729915.1_ASM972991v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009729935.1_ASM972993v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009729955.1_ASM972995v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009729975.1_ASM972997v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009729995.1_ASM972999v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009730015.1_ASM973001v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009730035.1_ASM973003v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009730055.1_ASM973005v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009730075.1_ASM973007v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009730095.1_ASM973009v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009730115.1_ASM973011v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009730135.1_ASM973013v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009730155.1_ASM973015v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009730175.1_ASM973017v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009730195.1_ASM973019v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009730215.1_ASM973021v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009730235.1_ASM973023v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009730255.1_ASM973025v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009730275.1_ASM973027v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009730295.1_ASM973029v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009730315.1_ASM973031v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009730335.1_ASM973033v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009730355.1_ASM973035v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009730375.1_ASM973037v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009730395.1_ASM973039v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009730415.1_ASM973041v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009730435.1_ASM973043v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009730455.1_ASM973045v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009730475.1_ASM973047v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009730495.1_ASM973049v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009730515.1_ASM973051v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009730535.1_ASM973053v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009730555.1_ASM973055v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009730575.1_ASM973057v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009734165.1_ASM973416v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009806595.1_ASM980659v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009806615.1_ASM980661v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009806635.1_ASM980663v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009806655.1_ASM980665v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009806675.1_ASM980667v1_genomic.fna" to library (database_clean)
+Masking low-complexity regions of new file... done.
+Added "FDA_ARGOS_all_ncbi_genomes-2020-02-04/GCF_009806695.1_ASM980669v1_genomic.fna" to library (database_clean)
+Found 1916/1916 targets, searched through 655222384 accession IDs, search complete.
+Taxonomy parsed and converted.
+CHT created with 9 bits reserved for taxid.
+Completed processing of 1916 sequences, 2703723988 bp
+Writing data to disk...  complete.
+Loading database information... done.
+31402503 sequences (7933.41 Mbp) processed in 1279.606s (1472.4 Kseq/m, 371.99 Mbp/m).
+  16512 sequences classified (0.05%)
+  31385991 sequences unclassified (99.95%)
+Loading database information... done.
+6182037 sequences (1510.28 Mbp) processed in 89.822s (4129.5 Kseq/m, 1008.85 Mbp/m).
+  439059 sequences classified (7.10%)
+  5742978 sequences unclassified (92.90%)
+Loading database information... done.
+6285108 sequences (1589.06 Mbp) processed in 366.802s (1028.1 Kseq/m, 259.93 Mbp/m).
+  3399 sequences classified (0.05%)
+  6281709 sequences unclassified (99.95%)
+Loading database information... done.
+26951973 sequences (7038.39 Mbp) processed in 1011.707s (1598.4 Kseq/m, 417.42 Mbp/m).
+  19365991 sequences classified (71.85%)
+  7585982 sequences unclassified (28.15%)
+Loading database information... done.
+22499701 sequences (5399.62 Mbp) processed in 582.199s (2318.8 Kseq/m, 556.47 Mbp/m).
+  66611 sequences classified (0.30%)
+  22433090 sequences unclassified (99.70%)
