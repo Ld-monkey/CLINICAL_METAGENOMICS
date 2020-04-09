@@ -3,7 +3,7 @@ data/databases/*
 data/reads/*
 data/raw_sequences/*
 
-# Ignore results from blasts.
+# Ignore blasts and reads results.
 results/blasts/*
 results/reads_outputs/*
 
