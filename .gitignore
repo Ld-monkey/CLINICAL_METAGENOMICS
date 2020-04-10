@@ -9,4 +9,3 @@ results/reads_outputs/*
 
 # Ignore to big logs.
 results/log_outputs/outMetaTest.out
-
