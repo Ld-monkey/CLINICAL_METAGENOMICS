@@ -16,7 +16,7 @@ Le thème peut etre facilement installé avec pip3 :
 pip3 install sphinx-rtd-theme
 ```
 
-Pour etre intégrer au projet sphinx, vous devez ajouter les lignes suivantes dans le fichier conf.py :
+Pour intégrer le thème au projet sphinx, vous devez ajouter les lignes suivantes dans le fichier conf.py :
 
 ```python
 import sphinx_rtd_theme
