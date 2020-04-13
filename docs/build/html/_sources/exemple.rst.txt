@@ -1,0 +1,53 @@
+Exemple rst file
+================
+
+.. code-block:: python
+
+    print("hello world")
+
+.. code-block:: sh
+
+   #!/bin/bash
+   echo "hello"
+   echo "World"
+   
+
+**Exemple de texte en gras**
+
+*Exemple de texte en italique*
+
+*****************
+Titre de page
+*****************
+
+Titre de niveau 1
+*****************
+
+Titre de niveau 2
+=================
+
+\$
+
+\*
+
+Liste classique
+
+   * ligne 1
+   * ligne 2
+   * ligne 3
+
+
+Introduction au notes de bas de page
+
+Nota bene [#f1]_
+
+
+.. seealso::
+   Ceci est une boite "voir aussi".
+
+.. warning::
+   Ceci est une boite warning.
+
+.. rubric:: Footnotes
+
+.. [#f1] Nota bene 1

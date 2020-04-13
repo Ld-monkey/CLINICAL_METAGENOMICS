@@ -1,0 +1,306 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="fr" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="fr" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Classifier les séquences &mdash; Documentation CLINICAL METAGENOMICS 0.0.1</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="prev" title="La documentation : Clinical Metagenomics" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> CLINICAL METAGENOMICS
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Classifier les séquences</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#localisation">Localisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#les-parametres-d-entres">Les paramètres d’entrés</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exemple-d-execution">Exemple d’execution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#les-fichiers-de-sorties">Les fichiers de sorties</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#le-code-complet">Le code complet</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CLINICAL METAGENOMICS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Classifier les séquences</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/bash/classify_set_sequences.sh.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="classifier-les-sequences">
+<h1>Classifier les séquences<a class="headerlink" href="#classifier-les-sequences" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Le programme shell qui permet d’executer la classification d’organismes s’appelle :</p>
+<div class="admonition hint">
+<p class="admonition-title">Indication</p>
+<p>classify_set_sequences.sh</p>
+</div>
+<div class="section" id="localisation">
+<h2>Localisation<a class="headerlink" href="#localisation" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>└── src
+ ├── bash
+ │   ├── classify_set_sequences.sh
+</pre></div>
+</div>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Détermine les organismes présent dans un échantillon ou reads. L’échantillon possède la totalité des séquences nucléotidique avec un format fastq.</p>
+<div class="admonition warning">
+<p class="admonition-title">Avertissement</p>
+<p>Les séquences par paires doivent s’appeler *R1*.fastq</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>* L’étoile indique que n’importe quelle chaine de caractère peut se positionner avant ou après.</p>
+</div>
+</div>
+<div class="section" id="les-parametres-d-entres">
+<h2>Les paramètres d’entrés<a class="headerlink" href="#les-parametres-d-entres" title="Lien permanent vers ce titre">¶</a></h2>
+</div>
+<div class="section" id="exemple-d-execution">
+<h2>Exemple d’execution<a class="headerlink" href="#exemple-d-execution" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>classify_set_sequences.sh all_reads_from_sample output_database_FDA_ARGOS <span class="m">1</span> output_result
+</pre></div>
+</div>
+</div>
+<div class="section" id="les-fichiers-de-sorties">
+<h2>Les fichiers de sorties<a class="headerlink" href="#les-fichiers-de-sorties" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Les fichiers de sorties sont les suivants : *.clseqs_*.fastq, *.unclseq_*.fq, *.output.txt, *.report.txt .</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>*.clseqs.fastq : Tous les reads classés.</p></li>
+<li><p>*.unclseqs.fastq : Tous les reads non-classés.</p></li>
+<li><p>*.output.txt : ?.</p></li>
+<li><p>*.report.txt : La phylogénie des organismes qui sont classés avec succès.</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="le-code-complet">
+<h2>Le code complet<a class="headerlink" href="#le-code-complet" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="c1"># First argument take the path of metagenomic read.</span>
+<span class="nv">PATH_ALL_READS</span><span class="o">=</span><span class="nv">$1</span>
+
+<span class="c1"># Seconde argument take the path of database containt hash.k2d + opts.k2d + taxo.k2d .</span>
+<span class="nv">DBNAME</span><span class="o">=</span><span class="nv">$2</span>
+
+<span class="c1"># Thirds argument is the number of cpu.</span>
+<span class="nv">THREAD</span><span class="o">=</span><span class="nv">$3</span>
+
+<span class="c1"># 4th argument the folder of output kraken 2 taxonomy.</span>
+<span class="nv">FOLDER_OUTPUT</span><span class="o">=</span><span class="nv">$4</span>
+
+<span class="c1"># Check if all sequences are unziped.</span>
+<span class="nv">sequences_unzip</span><span class="o">=</span><span class="k">$(</span>ls <span class="nv">$PATH_ALL_READS</span>/*.gz <span class="m">2</span>&gt; /dev/null <span class="p">|</span> wc -l<span class="k">)</span>
+<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$sequences_unzip</span><span class="s2">&quot;</span> !<span class="o">=</span> <span class="m">0</span> <span class="o">]</span>
+<span class="k">then</span>
+    <span class="nb">echo</span> <span class="s2">&quot;Unzip all sequences files&quot;</span>
+    gunzip <span class="nv">$PATH_ALL_READS</span>/*.gz
+    <span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$PATH_ALL_READS</span><span class="s2"> Unzip done !&quot;</span>
+<span class="k">else</span>
+    <span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$PATH_ALL_READS</span><span class="s2"> files are already decompressed&quot;</span>
+<span class="k">fi</span>
+
+<span class="c1"># Check if the folder for output kraken 2 results exists.</span>
+<span class="k">if</span> <span class="o">[</span> -d <span class="nv">$FOLDER_OUTPUT</span> <span class="o">]</span>
+<span class="k">then</span>
+    <span class="nb">echo</span> <span class="s2">&quot;</span><span class="nv">$FOLDER_OUTPUT</span><span class="s2"> folder already exits.&quot;</span>
+<span class="k">else</span>
+    mkdir <span class="nv">$FOLDER_OUTPUT</span>
+    <span class="nb">echo</span> <span class="s2">&quot;Create folder </span><span class="nv">$FOLDER_OUTPUT</span><span class="s2"> &quot;</span>
+<span class="k">fi</span>
+
+<span class="c1"># After created database we can classify a set of sequences with kraken2.</span>
+<span class="c1"># change with --paired + --output parameters</span>
+<span class="nb">echo</span> <span class="s2">&quot;Run classify a set of sequences with kraken 2&quot;</span>
+<span class="k">for</span> all_sequences in <span class="nv">$PATH_ALL_READS</span>/*R1*.fastq
+<span class="k">do</span>
+    <span class="nv">prefix</span><span class="o">=</span><span class="k">$(</span>basename <span class="s2">&quot;</span><span class="nv">$all_sequences</span><span class="s2">&quot;</span> <span class="p">|</span> awk -F <span class="s2">&quot;R1&quot;</span> <span class="s1">&#39;{print $1}&#39;</span><span class="k">)</span>
+    <span class="nv">suffix</span><span class="o">=</span><span class="k">$(</span>basename <span class="s2">&quot;</span><span class="nv">$all_sequences</span><span class="s2">&quot;</span> <span class="p">|</span> awk -F <span class="s2">&quot;R1&quot;</span> <span class="s1">&#39;{print $2}&#39;</span><span class="k">)</span>
+    <span class="nv">paired_file</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$prefix</span><span class="s2">&quot;&quot;R2&quot;&quot;</span><span class="nv">$suffix</span><span class="s2">&quot;</span>
+    <span class="nb">echo</span> <span class="s2">&quot;In the sequence : </span><span class="nv">$all_sequences</span><span class="s2">&quot;</span>
+    <span class="nb">echo</span> <span class="s2">&quot;The prefix name file is : </span><span class="nv">$prefix</span><span class="s2">&quot;</span>
+    <span class="nb">echo</span> <span class="s2">&quot;The suffix name file is : </span><span class="nv">$suffix</span><span class="s2">&quot;</span>
+    <span class="nb">echo</span> <span class="s2">&quot;So the name of his paired file is : </span><span class="nv">$paired_file</span><span class="s2">&quot;</span>
+    kraken2 --db <span class="nv">$DBNAME</span> --threads <span class="nv">$THREAD</span> --paired --report <span class="nv">$FOLDER_OUTPUT</span>/<span class="nv">$prefix</span>.report.txt --classified-out <span class="nv">$FOLDER_OUTPUT</span>/<span class="nv">$prefix</span>.clseqs#.fastq --unclassified-out <span class="nv">$FOLDER_OUTPUT</span>/<span class="nv">$prefix</span>.unclseq#.fq --output <span class="nv">$FOLDER_OUTPUT</span>/<span class="nv">$prefix</span>.output.txt <span class="nv">$all_sequences</span> <span class="nv">$PATH_ALL_READS</span>/<span class="nv">$paired_file</span>
+<span class="k">done</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="La documentation : Clinical Metagenomics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Zygnematophyce
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
