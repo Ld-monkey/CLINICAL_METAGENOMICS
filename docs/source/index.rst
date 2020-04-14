@@ -17,6 +17,7 @@ Dans cette documentation vous trouvez la description, l'utilisation, les paramè
    :maxdepth: 1
    :caption: Contents:
 
+   bash/FDA_RefSeq_Human_Viral.sh
    bash/classify_set_sequences.sh
 
 Indices and tables

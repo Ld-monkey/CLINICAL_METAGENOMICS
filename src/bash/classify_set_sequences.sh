@@ -8,19 +8,64 @@
 # *.unclseqs.fastq : all unclassified reads
 # *.output.txt : ??
 # *.report.txt : all claffication of organism classified.
-# e.g classify_set_sequences.sh all_reads_from_sample output_database_FDA_ARGOS 1 output_result
+# e.g ./classify_set_sequences.sh -path_reads all_reads_from_sample \
+#    -path_db database_FDA_ARGOS -path_output output_result -threads 1
 
-# First argument take the path of metagenomic read.
-PATH_ALL_READS=$1
+PROGRAM=classify_set_sequences.sh
+VERSION=1.0
 
-# Seconde argument take the path of database containt hash.k2d + opts.k2d + taxo.k2d .
-DBNAME=$2
+DESCRIPTION=$(cat << __DESCRIPTION__
 
-# Thirds argument is the number of cpu.
-THREAD=$3
+__DESCRIPTION__
+           )
 
-# 4th argument the folder of output kraken 2 taxonomy.
-FOLDER_OUTPUT=$4
+OPTIONS=$(cat << __OPTIONS__
+
+## OPTIONS ##
+    -path_reads      (Input)  The path of metagenomic read.                                                *FILE: sequences.fastq
+    -path_db         (Input)  The path of database containt hash.k2d + opts.k2d + taxo.k2d .               *DIR: input_database
+    -path_output     (output) The folder of output kraken 2 download_taxonomy_database.sh                  *DIR: output_database
+    -threads         (Input)  The number of threads to classify faster.                                    *INT: 1
+__OPTIONS__
+       )
+
+# default options if they are not defined:
+path_output=output_result_from_kraken2
+threads=1
+
+USAGE ()
+{
+    cat << __USAGE__
+$PROGRAM version $VERSION:
+$DESCRIPTION
+$OPTIONS
+
+__USAGE__
+}
+
+BAD_OPTION ()
+{
+    echo
+    echo "Unknown option "$1" found on command-line"
+    echo "It may be a good idea to read the usage:"
+    echo "white $PROGRAM -h to be helped :"
+    echo "example : ./classify_set_sequences.sh -path_reads all_reads_from_sample -path_db database_FDA_ARGOS -path_output output_result -threads 1"
+    echo -e $USAGE
+
+    exit 1
+}
+
+# Check options
+while [ -n "$1" ]; do
+    case $1 in
+        -h)                    USAGE      ; exit 0 ;;
+        -path_reads)           PATH_ALL_READS=$2    ; shift 2; continue ;;
+  	    -path_db)              DBNAME=$2            ; shift 2; continue ;;
+        -path_output)          FOLDER_OUTPUT=$2     ; shift 2; continue ;;
+    	  -threads)              THREAD=$2            ; shift 2; continue ;;
+        *)       BAD_OPTION $1;;
+    esac
+done
 
 # Check if all sequences are unziped.
 sequences_unzip=$(ls $PATH_ALL_READS/*.gz 2> /dev/null | wc -l)

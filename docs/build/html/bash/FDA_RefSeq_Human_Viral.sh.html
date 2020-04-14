@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Classifier les séquences &mdash; Documentation CLINICAL METAGENOMICS 0.0.1</title>
+  <title>Créer les bases de données personnalisées avec Kraken 2 &mdash; Documentation CLINICAL METAGENOMICS 0.0.1</title>
   
 
   
@@ -36,7 +36,8 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Recherche" href="../search.html" />
-    <link rel="prev" title="Créer les bases de données personnalisées avec Kraken 2" href="FDA_RefSeq_Human_Viral.sh.html" /> 
+    <link rel="next" title="Classifier les séquences" href="classify_set_sequences.sh.html" />
+    <link rel="prev" title="La documentation : Clinical Metagenomics" href="../index.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -82,8 +83,7 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="FDA_RefSeq_Human_Viral.sh.html">Créer les bases de données personnalisées avec Kraken 2</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Classifier les séquences</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Créer les bases de données personnalisées avec Kraken 2</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#localisation">Localisation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#description">Description</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#les-parametres-d-entres">Les paramètres d’entrés</a></li>
@@ -91,6 +91,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#les-fichiers-de-sorties">Les fichiers de sorties</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="classify_set_sequences.sh.html">Classifier les séquences</a></li>
 </ul>
 
             
@@ -136,13 +137,13 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>Classifier les séquences</li>
+      <li>Créer les bases de données personnalisées avec Kraken 2</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/bash/classify_set_sequences.sh.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/bash/FDA_RefSeq_Human_Viral.sh.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -155,61 +156,44 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="classifier-les-sequences">
-<h1>Classifier les séquences<a class="headerlink" href="#classifier-les-sequences" title="Lien permanent vers ce titre">¶</a></h1>
-<p>Le programme shell qui permet d’executer la classification d’organismes s’appelle :</p>
+  <div class="section" id="creer-les-bases-de-donnees-personnalisees-avec-kraken-2">
+<h1>Créer les bases de données personnalisées avec Kraken 2<a class="headerlink" href="#creer-les-bases-de-donnees-personnalisees-avec-kraken-2" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Le programme shell qui permet de créer une base de données personnalisées est :</p>
 <div class="admonition hint">
 <p class="admonition-title">Indication</p>
-<p>classify_set_sequences.sh</p>
+<p>FDA_RefSeq_Human_Viral.sh</p>
 </div>
 <div class="section" id="localisation">
 <h2>Localisation<a class="headerlink" href="#localisation" title="Lien permanent vers ce titre">¶</a></h2>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>└── src
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>└── src
  ├── bash
- │   ├── classify_set_sequences.sh
+ │   ├── FDA_RefSeq_Human_Viral.sh
 </pre></div>
 </div>
 </div>
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Détermine les organismes présent dans un échantillon ou reads. L’échantillon possède la totalité des séquences nucléotidique avec un format fastq.</p>
-<div class="admonition warning">
-<p class="admonition-title">Avertissement</p>
-<p>Les séquences par paires doivent s’appeler *R1*.fastq</p>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>* L’étoile indique que n’importe quelle chaine de caractère peut se positionner avant ou après.</p>
-</div>
+<p>Créer une base de donnée personnalisée avec l’outil Kraken 2. Nous pouvons ajouter des séquences spécifiques ou encore ajouter ultérieurement des séquences dans la base de donnée.</p>
 </div>
 <div class="section" id="les-parametres-d-entres">
 <h2>Les paramètres d’entrés<a class="headerlink" href="#les-parametres-d-entres" title="Lien permanent vers ce titre">¶</a></h2>
 <blockquote>
 <div><ul class="simple">
 <li><dl class="field-list simple">
-<dt class="field-odd">-path_reads</dt>
+<dt class="field-odd">-ref</dt>
 <dd class="field-odd"><p></p></dd>
 </dl>
 </li>
 </ul>
-<p>(Input)  Le chemin du dossier l’échantillon contenant les reads.                 *FILE: sequences.fastq</p>
+<p>(Input) Le chemin du fichier contenant les séquences au format .fna</p>
 <ul class="simple">
 <li><dl class="field-list simple">
-<dt class="field-odd">-path_db</dt>
+<dt class="field-odd">-database</dt>
 <dd class="field-odd"><p></p></dd>
 </dl>
 </li>
 </ul>
-<p>(Input)  Le chemin du dossier qui contient la base de donnée.
-*DIR: input_database avec hash.k2d + opts.k2d + taxo.k2d.</p>
-<ul class="simple">
-<li><dl class="field-list simple">
-<dt class="field-odd">-path_output</dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-</li>
-</ul>
-<p>(Output) Le nom du dossier de sortie.                                            *DIR: output_database</p>
+<p>(Input) Le chemin de la base de donnée pour la créer ou l’actualiser.</p>
 <ul class="simple">
 <li><dl class="field-list simple">
 <dt class="field-odd">-threads</dt>
@@ -217,24 +201,23 @@
 </dl>
 </li>
 </ul>
-<p>(Input)  Le nombre de puissance (threads) pour classer plus vite.                *INT: e.g 1</p>
+<p>(Input) Le nombre de puissance (threads) pour créer la base de donnée plus rapidement.</p>
 </div></blockquote>
 </div>
 <div class="section" id="exemple-d-execution">
 <h2>Exemple d’execution<a class="headerlink" href="#exemple-d-execution" title="Lien permanent vers ce titre">¶</a></h2>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>classify_set_sequences.sh -path_reads all_reads_from_sample -path_db database_FDA_ARGOS -path_output output_result -threads <span class="m">1</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>FDA_RefSeq_Human_Viral.sh -ref /path/FDA_ARGOS -database /output_FDA_ARGOS -thread <span class="m">1</span>
 </pre></div>
 </div>
 </div>
 <div class="section" id="les-fichiers-de-sorties">
 <h2>Les fichiers de sorties<a class="headerlink" href="#les-fichiers-de-sorties" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Les fichiers de sorties sont les suivants : *.clseqs_*.fastq, *.unclseq_*.fq, *.output.txt, *.report.txt .</p>
+<p>Les fichiers de sorties sont les suivants : hash.k2d, opts.k2d, taxo.k2d.</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>*.clseqs.fastq : Tous les reads classés.</p></li>
-<li><p>*.unclseqs.fastq : Tous les reads non-classés.</p></li>
-<li><p>*.output.txt : ?.</p></li>
-<li><p>*.report.txt : La phylogénie des organismes qui sont classés avec succès.</p></li>
+<li><p>hash.k2d: contient le minimiseur pour les mappages de taxons</p></li>
+<li><p>opts.k2d: contient des informations sur les options utilisées pour créer la base de données</p></li>
+<li><p>taxo.k2d: contient les informations de taxonomie utilisées pour créer la base de données</p></li>
 </ul>
 </div></blockquote>
 </div>
@@ -248,8 +231,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="classify_set_sequences.sh.html" class="btn btn-neutral float-right" title="Classifier les séquences" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-        <a href="FDA_RefSeq_Human_Viral.sh.html" class="btn btn-neutral float-left" title="Créer les bases de données personnalisées avec Kraken 2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="La documentation : Clinical Metagenomics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
