@@ -21,7 +21,7 @@ Description
 
 Automatise la création de plusieurs bases de données différentes et execute la classification de reads.
 
-Les bases de données créer dans ce scritp sont les suivants :
+Les bases de données créées dans ce script sont les suivantes :
 
    * FDA-ARGOS database
    * FDA-ARGOS + RefSeqHuman + Virus database
