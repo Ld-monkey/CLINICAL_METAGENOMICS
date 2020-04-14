@@ -17,8 +17,10 @@ echo "SGE O WORKDIR: $SGE_O_WORKDIR"
 echo "SGE TASK ID: $SGE_TASK_ID"
 echo "NSLOTS: $NSLOTS"
 
-# qsub create_16S_database.sh {accession_list_file.seq} {output_name_fastq}
-# e.g qsub create_16S_database.sh accession_list_16S_ncbi.seq 16S_output_database.fastq
+
+# Just a bash script to create in cluster way a database from accesssion list on NCBI.
+# qsub cluster_create_16S_database.sh {accession_list_file.seq} {output_name_fastq}
+# e.g qsub cluster_create_16S_database.sh accession_list_16S_ncbi.seq 16S_output_database.fastq
 
 # Activate conda environment.
 source activate EnvLudF
@@ -35,7 +37,7 @@ then
     echo "The file $NAME_OUTPUT_FASTQ already exists."
 else
     # Run the program to recover all sequence of database (16S) to one fastq.
-    python get_database_from_accession_list.py -id $ACCESSION_LIST_FILE -o $NAME_OUTPUT_FASTQ
+    python ../python/get_database_from_accession_list.py -id $ACCESSION_LIST_FILE -o $NAME_OUTPUT_FASTQ
 fi
 
 # Deactivate conda.

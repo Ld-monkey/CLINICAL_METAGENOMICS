@@ -15,10 +15,17 @@ Dans cette documentation vous trouvez la description, l'utilisation, les paramè
 
 .. toctree::
    :maxdepth: 1
-   :caption: Contents:
-
+   :caption: Shell scripts:
+   
    bash/FDA_RefSeq_Human_Viral.sh
    bash/classify_set_sequences.sh
+
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Cluster
+      
+   cluster/cluster_create_16S_database.sh
 
 Indices and tables
 ==================
