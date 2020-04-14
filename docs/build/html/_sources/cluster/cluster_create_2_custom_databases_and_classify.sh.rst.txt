@@ -43,7 +43,7 @@ Pour comprendre les scripts du preprocess et de dust aller à la rebrique suivan
    Le module kraken 2 doit être chargé.
 
 .. note::
-   L'extention des echantillons sont transformés automatiquement en format .fastq .
+   L'extention des échantillons sont transformés automatiquement en format .fastq .
 
 Les paramètres d'entrés
 ***********************
