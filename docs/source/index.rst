@@ -26,6 +26,7 @@ Dans cette documentation vous trouvez la description, l'utilisation, les paramè
    :caption: Cluster
       
    cluster/cluster_create_16S_database.sh
+   cluster/cluster_create_2_custom_databases_and_classify.sh
 
 Indices and tables
 ==================
