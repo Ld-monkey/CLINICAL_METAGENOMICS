@@ -10,7 +10,7 @@ Le programme shell qui permet de créer une base de données personnalisées est
 Localisation
 ************
 
-.. code-block::
+.. code-block:: sh
 
    └── src
     ├── bash
