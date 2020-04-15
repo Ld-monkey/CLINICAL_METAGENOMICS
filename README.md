@@ -1,4 +1,5 @@
 # CLINICAL METAGENOMICS
+[![Documentation Status](https://readthedocs.org/projects/clinical-metagenomics/badge/?version=latest)](https://clinical-metagenomics.readthedocs.io/fr/latest/?badge=latest)
 
 ## Introduction
 
@@ -15,6 +16,12 @@ Le thème peut etre facilement installé avec pip3 :
 ```bash
 pip3 install sphinx-rtd-theme
 ```
+
+## Documentation
+
+La documentation se trouve dans le lien suivant :
+
+* https://clinical-metagenomics.readthedocs.io/fr/latest/
 
 ## Objectifs
 
