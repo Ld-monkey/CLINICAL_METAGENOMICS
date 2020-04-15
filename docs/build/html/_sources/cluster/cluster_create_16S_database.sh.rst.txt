@@ -1,7 +1,7 @@
 Création d'un base de donnée 16S avec le cluster
 ================================================
 
-Le programme destiné au cluster pour créer un base de donnée 16S est :
+Le programme destiné au cluster pour créer une base de donnée 16S est :
 
 .. hint::
    cluster_create_16S_database.sh
@@ -9,7 +9,7 @@ Le programme destiné au cluster pour créer un base de donnée 16S est :
 Localisation
 ************
 
-.. code-block::
+.. code-block:: sh
 
    └── src
     ├── cluster
