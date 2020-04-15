@@ -1,36 +1,68 @@
 #!/bin/bash
-#$ -N BlastOnlyVir
-#$ -cwd
-#$ -o outdatabaseblast.out
-#$ -e errdatabaseblast.err
-#$ -q short.q
-#$ -l h_rt=47:20:00
-#$ -pe thread 40
-#$ -l h_vmem=2.75G
-#$ -M your@email.com
 
-echo "JOB NAME: $JOB_NAME"
-echo "JOB ID: $JOB_ID"
-echo "QUEUE: $QUEUE"
-echo "HOSTNAME: $HOSTNAME"
-echo "SGE O WORKDIR: $SGE_O_WORKDIR"
-echo "SGE TASK ID: $SGE_TASK_ID"
-echo "NSLOTS: $NSLOTS"
+# With all the raw sequences download with ncbi or with the python
+# script get_database_from_accession_list.py we create a single file
+# which brings together all the sequences in fna format.
+# Then we use the dustmasker software to remove sequences of low complexity.
+# Finally we create a database that can be used by blast software with makeblastdb.
 
-# qsub create_blast_database.sh
-# e.g qsub create_blast_database.sh test_database_blast/ output_multi_fasta database_test
+# e.g create_blast_database_without_low_complexity.sh \
+#    -path_seqs test_database_blast/ \
+#    -output_fasta output_multi_fasta \
+#    -name_db database_test
 
-# Path of all raw fasta files.
-PATH_RAW_FASTA_FILE=$1
+PROGRAM=create_blast_database_without_low_complexity.sh
+VERSION=1.0
 
-# Name of the output multi-fasta file.
-BASENAME_OUTPUT_MULTI_FASTA=$2
+DESCRIPTION=$(cat << __DESCRIPTION__
 
-# Name of the database output. (i don't know if is necessary)
-NAME_DATABASE=$3
+__DESCRIPTION__
+           )
 
-# Activate module in the cluster.
-module load blastplus/2.2.31
+OPTIONS=$(cat << __OPTIONS__
+
+## OPTIONS ##
+    -path_seqs       (Input)  The path of all sequences to create database.                                *DIR: all_sequences
+    -output_fasta    (Output) The output file containt all sequences.                                      *FILE: output_sequences
+    -name_db         (Input/Output)  The name of database.                                                 *DIR: 16S_database
+__OPTIONS__
+       )
+
+# default options if they are not defined:
+name_db=database_output
+
+USAGE ()
+{
+    cat << __USAGE__
+$PROGRAM version $VERSION:
+$DESCRIPTION
+$OPTIONS
+
+__USAGE__
+}
+
+BAD_OPTION ()
+{
+    echo
+    echo "Unknown option "$1" found on command-line"
+    echo "It may be a good idea to read the usage:"
+    echo "white $PROGRAM -h to be helped :"
+    echo "e.g create_blast_database_without_low_complexity.sh -path_seqs test_database_blast/ -output_fasta output_multi_fasta -name_db database_test"
+    echo -e $USAGE
+
+    exit 1
+}
+
+# Check options
+while [ -n "$1" ]; do
+    case $1 in
+        -h)                    USAGE      ; exit 0 ;;
+        -path_seqs)            PATH_RAW_FASTA_FILE=$2         ; shift 2; continue ;;
+  	    -output_fasta)         BASENAME_OUTPUT_MULTI_FASTA=$2 ; shift 2; continue ;;
+        -name_db)              NAME_DATABASE=$2               ; shift 2; continue ;;
+        *)       BAD_OPTION $1;;
+    esac
+done
 
 # Check if the multiple fasta file is already created.
 if [ -s $PATH_RAW_FASTA_FILE$BASENAME_OUTPUT_MULTI_FASTA.fa ]

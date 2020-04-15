@@ -28,7 +28,7 @@ OPTIONS=$(cat << __OPTIONS__
 ## OPTIONS ##
     -ref      (Input) folder path of other sequences file fna                                              *FILE: sequences.fna
     -database (Input) folder path to create or view the database                                           *DIR: database
-    -threads  (Input) the number of threads to build the database faster                                   *INT: 6
+    -threads  (Input) the number of threads to build the datab ase faster                                   *INT: 6
 __OPTIONS__
        )
 
