@@ -9,7 +9,7 @@ Le programme destiné au cluster pour créer plusieurs bases de données est :
 Localisation
 ************
 
-.. code-block::
+.. code-block:: sh
 
 
    └── src
