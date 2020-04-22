@@ -1,39 +1,61 @@
 #!/bin/bash
-#$ -N BlastOnlyVir
-#$ -cwd
-#$ -o outBlast.out
-#$ -e errBlast.err
-#$ -q short.q
-#$ -l h_rt=47:20:00
-#$ -pe thread 40
-#$ -l h_vmem=2.75G
-#$ -M your@email.com
 
-echo "JOB NAME: $JOB_NAME"
-echo "JOB ID: $JOB_ID"
-echo "QUEUE: $QUEUE"
-echo "HOSTNAME: $HOSTNAME"
-echo "SGE O WORKDIR: $SGE_O_WORKDIR"
-echo "SGE TASK ID: $SGE_TASK_ID"
-echo "NSLOTS: $NSLOTS"
+# From a set of reads and depend of the database gived in argument
+# allow to align the sequences with the blast algorithms. 
+# e.g $launch_blast_analyse.sh -path_reads sample_reads \
+# -path_db FDA_ARGOS_db -path_result blast_metaplan_output
 
-# qsub launchBlast.sh {folder} {basename of output folder}
-# e.g $qsub launchBlast.sh myfolder blast_metaplan_output
+PROGRAM=launch_blast_analyse.sh
+VERSION=1.0
 
-# Activate conda environment.
-source activate EnvAntL
+DESCRIPTION=$(cat << __DESCRIPTION__
 
-# Load the module in the cluster. 
-module load blastplus/2.2.31
+__DESCRIPTION__
+           )
 
-# Folder containing samples of sequences.
-PATH_FOLDER_INPUT=$1
+OPTIONS=$(cat << __OPTIONS__
 
-# Name of output folder and will contain all *.blast.txt files.
-BASENAME_OUTPUT_FOLDER=$2
+## OPTIONS ##
+    -path_reads      (Input) folder path of other sequences file fna                                        *DIR: sequences*.fna
+    -path_db         (Input)  The path of blast database.                                                   *DIR: input_database
+    -path_results    (Output) folder path for blast results                                                 *DIR: blast_result
+__OPTIONS__
+       )
 
-# Path to the custom database.
-CUSTOM_DATA_BASE=$3
+# default options:
+
+USAGE ()
+{
+    cat << __USAGE__
+$PROGRAM version $VERSION:
+$DESCRIPTION
+$OPTIONS
+
+__USAGE__
+}
+
+BAD_OPTION ()
+{
+    echo
+    echo "Unknown option "$1" found on command-line"
+    echo "It may be a good idea to read the usage:"
+    echo "white $PROGRAM -h to be helped :"
+    echo "example : launch_blast_analyse.sh -path_reads sample_reads -path_db FDA_ARGOS_db -path_result blast_metaplan_output"
+    echo -e $USAGE
+
+    exit 1
+}
+
+# Check options
+while [ -n "$1" ]; do
+    case $1 in
+        -h)                    USAGE      ; exit 0 ;;
+        -path_reads)          PATH_FOLDER_INPUT=$2      ; shift 2; continue ;;
+  	    -path_db)             CUSTOM_DATA_BASE=$2       ; shift 2; continue ;;
+    	  -path_results)        BASENAME_OUTPUT_FOLDER=$2 ; shift 2; continue ;;
+        *)       BAD_OPTION $1;;
+    esac
+done
 
 # Move all *.blast files in specific folder.
 move_output_blast_to_folder () {
@@ -155,6 +177,3 @@ then
 else
     echo "Folder Bacteria doesn't exists."
 fi
-
-# Deactivate conda.
-source deactivate
