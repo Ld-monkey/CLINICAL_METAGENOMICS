@@ -1,0 +1,13 @@
+Télécharger la taxonomie de kraken 2
+====================================
+
+Le programme shell permet de télécharger la taxonomie de kraken 2.
+
+.. hint::
+   cluster_download_taxonomy_kraken_database.sh
+
+.. code-block:: sh
+
+    └── src
+    ├── cluster
+    │   ├── cluster_download_taxonomy_kraken_database.sh
