@@ -1,29 +1,54 @@
 #!/bin/bash
-#$ -N PreprocessKraken
-#$ -cwd
-#$ -o outPp.out
-#$ -e errPp.err
-#$ -q short.q
-#$ -l h_rt=47:20:00
-#$ -pe thread 10
-#$ -l h_vmem=11G
-#$ -M your@email.com
 
-echo "JOB NAME: $JOB_NAME"
-echo "JOB ID: $JOB_ID"
-echo "QUEUE: $QUEUE"
-echo "HOSTNAME: $HOSTNAME"
-echo "SGE O WORKDIR: $SGE_O_WORKDIR"
-echo "SGE TASK ID: $SGE_TASK_ID"
-echo "NSLOTS: $NSLOTS"
+# Shell cluster script to launch preprocess on sequences or reads.
+# This action removes poor quality and duplicates reads.
+# e.g ./launch_preprocess.sh -path_reads all_reads_from_sample
 
-# Example : qsub launchPreprocess.sh {folder}
+PROGRAM=launch_preprocess.sh
+VERSION=1.0
 
-# Activate a specific environnment with BBMAP program (clumpishy.sh) and Trimmomatic.
-source activate EnvAntL
+DESCRIPTION=$(cat << __DESCRIPTION__
 
-# the path of folder where sequence are (reads).
-FOLDER_INPUT=$1
+__DESCRIPTION__
+           )
+
+OPTIONS=$(cat << __OPTIONS__
+
+## OPTIONS ##
+    -path_reads      (Input)  The path of metagenomic reads folder.                                                *DIR: reads_sample
+__OPTIONS__
+       )
+
+USAGE ()
+{
+    cat << __USAGE__
+$PROGRAM version $VERSION:
+$DESCRIPTION
+$OPTIONS
+
+__USAGE__
+}
+
+BAD_OPTION ()
+{
+    echo
+    echo "Unknown option "$1" found on command-line"
+    echo "It may be a good idea to read the usage:"
+    echo "white $PROGRAM -h to be helped :"
+    echo "example : ./launch_preprocess.sh -path_reads all_reads_from_sample"
+    echo -e $USAGE
+
+    exit 1
+}
+
+# Check options
+while [ -n "$1" ]; do
+    case $1 in
+        -h)                    USAGE      ; exit 0 ;;
+        -path_reads)           FOLDER_INPUT=$2    ; shift 2; continue ;;
+        *)       BAD_OPTION $1;;
+    esac
+done
 
 # Move to the folder of sequence.
 cd ${FOLDER_INPUT}
