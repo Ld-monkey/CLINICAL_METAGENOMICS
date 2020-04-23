@@ -1,0 +1,19 @@
+name: metagenomic_env
+channels:
+  - defaults
+  - bioconda
+  - biocore
+  - etetoolkit
+  - anaconda
+  - conda-forge
+dependencies:
+  - python
+  - kraken2 
+  - trimmomatic
+  - seqtk
+  - bbmap
+  - blast-plus
+  - ete3
+  - jinja2
+  - matplotlib
+
