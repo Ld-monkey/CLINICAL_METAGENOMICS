@@ -21,6 +21,7 @@ Dans cette documentation vous trouvez la description, l'utilisation, les paramè
    bash/classify_set_sequences.sh
    bash/create_blast_database_without_low_complexity.sh
    bash/launch_blast_analyse.sh
+   bash/launch_preprocess.sh
 
 .. toctree::
    :maxdepth: 1
@@ -29,6 +30,7 @@ Dans cette documentation vous trouvez la description, l'utilisation, les paramè
    cluster/cluster_create_16S_database.sh
    cluster/cluster_create_2_custom_databases_and_classify.sh
    cluster/cluster_launch_blast.sh
+   cluster/cluster_launch_preprocess.sh
 
 Indices and tables
 ==================
