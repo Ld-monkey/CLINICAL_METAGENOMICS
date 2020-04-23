@@ -5,7 +5,7 @@
 
 ## Configuration 
 
-## Environnement conda :
+### Environnement conda :
 Pour créer un environnement conda a partir du fichier yaml (conda_threader.yml) :
 
 ```bash
