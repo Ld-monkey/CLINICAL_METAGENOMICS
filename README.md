@@ -5,11 +5,34 @@
 
 ## Configuration 
 
-### Environnement conda
+## Environnement conda :
+Pour créer un environnement conda a partir du fichier yaml (conda_threader.yml) :
+
+```bash
+conda env create -f metagenomic_env.yml
+```
+
+Pour activer l'environnement conda :
+
+```bash
+conda active metagenomic_env
+```
+
+Pour désactiver l'environnement conda :
+
+```bash
+conda deactivate
+```
+
+Pour supprimer l'environnement :
+
+```
+conda env remove -n metagenomic_env
+```
 
 ### Automatisation avec snake
 
-### Configuraiton de la documentation
+### Configuration de la documentation
 La documentation utilise [sphinx](https://www.sphinx-doc.org/en/master/) et le thème "sphinx-rtd-theme" que l'on peut retrouver sur https://github.com/readthedocs/sphinx_rtd_theme.
 
 Le thème peut etre facilement installé avec pip3 :
