@@ -1,0 +1,287 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="fr" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="fr" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Créer les bases de données personnalisées avec Kraken 2 &mdash; Documentation CLINICAL METAGENOMICS 0.0.1</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="Classifier les séquences" href="classify_set_sequences.sh.html" />
+    <link rel="prev" title="La documentation : Clinical Metagenomics" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> CLINICAL METAGENOMICS
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Shell scripts:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Créer les bases de données personnalisées avec Kraken 2</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#localisation">Localisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#description">Description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#les-parametres-d-entres">Les paramètres d’entrés</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exemple-d-execution">Exemple d’execution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#les-fichiers-de-sorties">Les fichiers de sorties</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="classify_set_sequences.sh.html">Classifier les séquences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_blast_database_without_low_complexity.sh.html">Création d’une base de donnée pour blast sans les séquences de faibles compléxités</a></li>
+<li class="toctree-l1"><a class="reference internal" href="launch_blast_analyse.sh.html">Analyse des séquences ou reads avec l’algorithme de Blast</a></li>
+<li class="toctree-l1"><a class="reference internal" href="launch_preprocess.sh.html">Lancer le préprocess ou nettoyage des séquences ou reads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="recover_reads.sh.html">Récupérer les reads d’intérêts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Cluster</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_create_16S_database.sh.html">Création d’un base de donnée 16S avec le cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_create_2_custom_databases_and_classify.sh.html">Création de plusieurs bases de données et classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_launch_blast.sh.html">Alignement des séquences ou reads avec l’algorithme de blast</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_launch_preprocess.sh.html">Nettoyage des séquences ou reads avec l’action de preprocess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_launch_get_id_and_reads.sh.html">Récupérer l’ID taxonomique et les reads d’intérêts</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CLINICAL METAGENOMICS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Créer les bases de données personnalisées avec Kraken 2</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/bash/create_kraken_database.sh.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="creer-les-bases-de-donnees-personnalisees-avec-kraken-2">
+<h1>Créer les bases de données personnalisées avec Kraken 2<a class="headerlink" href="#creer-les-bases-de-donnees-personnalisees-avec-kraken-2" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Le programme shell qui permet de créer une base de données kraken 2 personnalisées est :</p>
+<div class="admonition hint">
+<p class="admonition-title">Indication</p>
+<p>create_kraken_database.sh</p>
+</div>
+<div class="section" id="localisation">
+<h2>Localisation<a class="headerlink" href="#localisation" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>└── src
+ ├── bash
+ │   ├── create_kraken_database.sh
+</pre></div>
+</div>
+</div>
+<div class="section" id="description">
+<h2>Description<a class="headerlink" href="#description" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Créer une base de donnée personnalisée avec l’outil Kraken 2. Nous pouvons ajouter des séquences spécifiques ou encore ajouter ultérieurement des séquences dans la base de donnée.</p>
+</div>
+<div class="section" id="les-parametres-d-entres">
+<h2>Les paramètres d’entrés<a class="headerlink" href="#les-parametres-d-entres" title="Lien permanent vers ce titre">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="field-list simple">
+<dt class="field-odd">-ref</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</li>
+</ul>
+<p>(Input) Le chemin du fichier contenant les séquences au format .fna</p>
+<ul class="simple">
+<li><dl class="field-list simple">
+<dt class="field-odd">-database</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</li>
+</ul>
+<p>(Input) Le chemin de la base de donnée pour la créer ou l’actualiser.</p>
+<ul class="simple">
+<li><dl class="field-list simple">
+<dt class="field-odd">-threads</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</li>
+</ul>
+<p>(Input) Le nombre de puissance (threads) pour créer la base de donnée plus rapidement.</p>
+</div></blockquote>
+</div>
+<div class="section" id="exemple-d-execution">
+<h2>Exemple d’execution<a class="headerlink" href="#exemple-d-execution" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>create_kraken_database.sh -ref /path/FDA_ARGOS -database /output_FDA_ARGOS -thread <span class="m">1</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="les-fichiers-de-sorties">
+<h2>Les fichiers de sorties<a class="headerlink" href="#les-fichiers-de-sorties" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Les fichiers de sorties sont les suivants : hash.k2d, opts.k2d, taxo.k2d.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>hash.k2d: contient le minimiseur pour les mappages de taxons.</p></li>
+<li><p>opts.k2d: contient des informations sur les options utilisées pour créer la base de données.</p></li>
+<li><p>taxo.k2d: contient les informations de taxonomie utilisées pour créer la base de données.</p></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="classify_set_sequences.sh.html" class="btn btn-neutral float-right" title="Classifier les séquences" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="La documentation : Clinical Metagenomics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Zygnematophyce
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

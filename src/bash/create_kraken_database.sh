@@ -2,16 +2,15 @@
 
 # Create kraken 2 databases (we don't want to download any database !)
 # --> 3 outputs files : hash.k2d, opts.k2d, taxo.k2d.
-# hash.k2d: Contains the minimizer to taxon mappings
-# opts.k2d: Contains information about the options used to build the database
-# taxo.k2d: Contains taxonomy information used to build the database
+# hash.k2d: Contains the minimizer to taxon mappings.
+# opts.k2d: Contains information about the options used to build the database.
+# taxo.k2d: Contains taxonomy information used to build the database.
 
-# We don't want to create standard database because we have a custom
-# FDA-ARGOS database.
+# We don't want to create standard database because we create a custom database.
+# e.g create_kraken_database.sh -ref ../../data/FDA_ARGOS \
+#    -database /output_FDA_ARGOS -thread 1
 
-# e.g FDA_RefSeq_Human_Viral.sh -ref /path/FDA_ARGOS -database /output_FDA_ARGOS -thread 1
-
-PROGRAM=FDA_database_kraken2.sh
+PROGRAM=create_kraken_database.sh
 VERSION=1.0
 
 DESCRIPTION=$(cat << __DESCRIPTION__
@@ -47,7 +46,7 @@ BAD_OPTION ()
     echo "Unknown option "$1" found on command-line"
     echo "It may be a good idea to read the usage:"
     echo "white $PROGRAM -h to be helped :"
-    echo "example : ./FDA_database_kraken2.sh -ref test -database database -threads 1"
+    echo "example : ./create_kraken_database.sh -ref test -database database -threads 1"
     echo -e $USAGE
 
     exit 1

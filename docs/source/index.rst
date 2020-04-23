@@ -17,7 +17,7 @@ Dans cette documentation vous trouvez la description, l'utilisation, les paramè
    :maxdepth: 1
    :caption: Shell scripts:
    
-   bash/FDA_RefSeq_Human_Viral.sh
+   bash/create_kraken_database.sh
    bash/classify_set_sequences.sh
    bash/create_blast_database_without_low_complexity.sh
    bash/launch_blast_analyse.sh

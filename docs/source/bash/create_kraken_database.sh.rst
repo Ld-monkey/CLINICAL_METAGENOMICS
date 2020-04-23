@@ -1,10 +1,10 @@
 Créer les bases de données personnalisées avec Kraken 2
 =======================================================
 
-Le programme shell qui permet de créer une base de données personnalisées est :
+Le programme shell qui permet de créer une base de données kraken 2 personnalisées est :
 
 .. hint::
-   FDA_RefSeq_Human_Viral.sh
+   create_kraken_database.sh
 
 
 Localisation
@@ -14,7 +14,7 @@ Localisation
 
    └── src
     ├── bash
-    │   ├── FDA_RefSeq_Human_Viral.sh
+    │   ├── create_kraken_database.sh
 
 Description
 ***********
@@ -41,13 +41,13 @@ Exemple d'execution
 
 .. code-block:: sh
 
-   FDA_RefSeq_Human_Viral.sh -ref /path/FDA_ARGOS -database /output_FDA_ARGOS -thread 1
+   create_kraken_database.sh -ref /path/FDA_ARGOS -database /output_FDA_ARGOS -thread 1
 
 Les fichiers de sorties
 ***********************
 
 Les fichiers de sorties sont les suivants : hash.k2d, opts.k2d, taxo.k2d.
 
-   * hash.k2d: contient le minimiseur pour les mappages de taxons
-   * opts.k2d: contient des informations sur les options utilisées pour créer la base de données
-   * taxo.k2d: contient les informations de taxonomie utilisées pour créer la base de données
+   * hash.k2d: contient le minimiseur pour les mappages de taxons.
+   * opts.k2d: contient des informations sur les options utilisées pour créer la base de données.
+   * taxo.k2d: contient les informations de taxonomie utilisées pour créer la base de données.
