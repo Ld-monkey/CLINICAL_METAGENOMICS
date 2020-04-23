@@ -41,7 +41,7 @@ FOLDER_VIRUSES=$1Viruses
 # Export the variable path folder of Viruse in current terminal.
 #export FOLDER_VIRUSES
 
-# Into FOLDER_INPUT_SAMPLE there must be a Viruses folder.
+# Into FOLDER_INPUT_SAMPLE there must be a Bacteria folder.
 FOLDER_BACTERIA=$1Bacteria
 
 # Export the variable path folder of Bacteria in current terminal.
