@@ -86,7 +86,6 @@ else
     mkdir ${PATH_RAW_FASTA_FILE}DUSTMASKER_$NAME_DATABASE
     echo "Create DUSTMASKER_$NAME_DATABASE done."
 fi
-
 # Check if in the folder dustmasker there is dustmasker.asnb.
 if [ -s ${PATH_RAW_FASTA_FILE}DUSTMASKER_$NAME_DATABASE/dustmasker.asnb ]
 then

@@ -18,6 +18,13 @@ echo "SGE O WORKDIR: $SGE_O_WORKDIR"
 echo "SGE TASK ID: $SGE_TASK_ID"
 echo "NSLOTS: $NSLOTS"
 
+
+# Pour chaque échantillon et pour chaque read aligné, compare les identifiants
+# taxonomiques Blast et Kraken et ne conserve que ceux qui sont du même genre.
+# Compte le nombre de reads pour chaque espèce. Dessine la carte de couverture
+# des Viruses, récupère les noms des espèces pour remplacer les ID taxonomiques.
+
+
 # qsub launch_analysis_test.sh {folder_input_sample} {basename_result_of_blast}
 # e.g $qsub launch_analysis_test.sh output_preprocess_reads_clean_FDA_refseq_human_viral/ METAPHLAN_BLAST_TEST
 
