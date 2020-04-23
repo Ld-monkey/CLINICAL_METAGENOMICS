@@ -54,11 +54,15 @@ do
     # Retrieve taxonomic IDs of interest in the “report” file, then
     # write names associated with these IDs in the “output” file in a
     # temporary file (ReadsList.txt).
-    ./GetIntFasta3.py ${PATH_INPUT_FOLDER} $file ${TAXON}
+    python ../python/get_id_taxo_from_report.py ${PATH_INPUT_FOLDER} $file ${TAXON}
 
     # Gets reads in "clseqs" files from names, and transforms them into fasta
     # format.
-    ./RecoverReads.sh ${PATH_INPUT_FOLDER}/${TAXON}/${file}ReadsList.txt ${PATH_INPUT_FOLDER}/${clseqs1} ${PATH_INPUT_FOLDER}/${clseqs2} ${PATH_INPUT_FOLDER}/${TAXON}/${output_interest_fasta}
+    bash ../bash/RecoverReads.sh \
+         -reads_list ${PATH_INPUT_FOLDER}/${TAXON}/${file}ReadsList.txt \
+         -clseqs_1 ${PATH_INPUT_FOLDER}/${clseqs1} \
+         -clseqs_2 ${PATH_INPUT_FOLDER}/${clseqs2} \
+         -output ${PATH_INPUT_FOLDER}/${TAXON}/${output_interest_fasta}
 
     # Clean the output *ReadsList.txt of previously python program.
     rm ${PATH_INPUT_FOLDER}/${TAXON}/${file}ReadsList.txt

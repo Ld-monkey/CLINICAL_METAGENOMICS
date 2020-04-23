@@ -2,23 +2,13 @@
 #coding: utf-8
 
 """
-@author :
+@author : Zygnematophyce
 Feb. 2020
 Metagenomic
 
-GetIntFasta3 is a module to retrieve the taxonomic IDs of interest
-in the “report” file, then the reading names associated with these IDs
-in the “output” file in a temporary file (ReadsList.txt).
-"""
-
-"""
-Problème : il selectionne les espèces en fonction du 2eme indices
-de la ligne. Et si ce 2ème indices est différent de 2 alors c'est une
-espèces. Alors cela peut amener a un problème qui est le suivant.
-Pour une quelconque raison un peu récupérer un le genre car le
-2ème parameteres est différents de 0 mais par contre sont 3 ème parameteres
-indique un genre. En revanche le 2 ème parameteres s'applique pour la plupart
-des espèces mais qui on en plus des S1 S en 3 ème position.
+get_id_taxo_from_report.py (obsolete GetIntFasta3 name) is a module to retrieve
+the taxonomic IDs of interest in the “report” file, then the reading names
+associated with these IDs in the “output” file in a temporary file (ReadsList.txt).
 """
 
 import re

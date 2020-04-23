@@ -9,10 +9,6 @@
 # We don't want to create standard database because we have a custom
 # FDA-ARGOS database.
 
-# First argument define folder with sequences.
-# Second argument define the folder for database.
-# Third argument define the number of thread.
-
 # e.g FDA_RefSeq_Human_Viral.sh -ref /path/FDA_ARGOS -database /output_FDA_ARGOS -thread 1
 
 PROGRAM=FDA_database_kraken2.sh
@@ -33,7 +29,7 @@ __OPTIONS__
        )
 
 # default options:
-threads=1
+threads=1f
 
 USAGE ()
 {

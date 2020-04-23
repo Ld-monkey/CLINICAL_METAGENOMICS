@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Gets reads in "clseqs" files from names, and transforms them into fasta format.
 
 # active conda environment.
@@ -6,20 +8,62 @@ source activate EnvAntL
 # Export PATH variable in current shell to find specifics programs.
 export PATH=/data2/home/alarme/miniconda3/bin:$PATH
 
-# The ReadsList.txt file containt all parameters to find sequences of interest.
-READS_LIST=$1
-
-# The classified sequences in first paired sequences named *clseqs_1.fastq .
-CLASSIFIED_SEQUENCE_FASTQ1=$2
-
-# The classified sequences in second paired sequences named clseqs_2.fastq .
-CLASSIFIED_SEQUENCE_FASTQ2=$3
-
-# The output name of the sequence of interest named *.interesting.fasta .
-OUTPUT_INTEREST_FASTA=$4
-
 # The temp file folder.
 TMPDIR=/data2/home/masalm/tempfiles
+
+PROGRAM=recover_reads.sh
+VERSION=1.0
+
+DESCRIPTION=$(cat << __DESCRIPTION__
+
+__DESCRIPTION__
+           )
+
+OPTIONS=$(cat << __OPTIONS__
+
+## OPTIONS ##
+    -reads_list   (Input) The ReadsList.txt file containt all parameters to find sequences of interest.    *FILE: ReadsList.txt
+    -clseqs_1     (Input) The classified sequences in first paired sequences named *clseqs_1.fastq .       *FILE: *clseqs_1.fastq
+    -clseqs_2     (Input) The classified sequences in second paired sequences named *clseqs_2.fastq .      *FILE: *clseqs_2.fastq
+    -output       (Output) The output name of the sequence of interest named *.interesting.fasta .         *STRING: result_example
+__OPTIONS__
+       )
+
+# default options:
+
+USAGE ()
+{
+    cat << __USAGE__
+$PROGRAM version $VERSION:
+$DESCRIPTION
+$OPTIONS
+
+__USAGE__
+}
+
+BAD_OPTION ()
+{
+    echo
+    echo "Unknown option "$1" found on command-line"
+    echo "It may be a good idea to read the usage:"
+    echo "white $PROGRAM -h to be helped :"
+    echo "example : -reads_list ReadsList.txt -clseqs_1 clseqs_1.fastq -clseqs_2 clseqs_2.fastq -output output_interest_fasta"
+    echo -e $USAGE
+
+    exit 1
+}
+
+# Check options
+while [ -n "$1" ]; do
+    case $1 in
+        -h)                    USAGE      ; exit 0 ;;
+        -reads_list)           READS_LIST=$2                    ; shift 2; continue ;;
+  	    -clseqs_1)             CLASSIFIED_SEQUENCE_FASTQ1=$2    ; shift 2; continue ;;
+    	  -clseqs_2)             CLASSIFIED_SEQUENCE_FASTQ2=$2    ; shift 2; continue ;;
+        -output)               OUTPUT_INTEREST_FASTA=$2         ; shift 2; continue ;;
+        *)       BAD_OPTION $1;;
+    esac
+done
 
 # -s : True if FILE exists and has a size greater than zero.
 if [[ -s $READS_LIST && -s $CLASSIFIED_SEQUENCE_FASTQ1 && -s $CLASSIFIED_SEQUENCE_FASTQ2 ]]
