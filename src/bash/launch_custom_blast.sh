@@ -154,6 +154,7 @@ then
             echo "${interestingFile%%.*}.blast.txt not generated. Available storage space could be the reason !"
         fi
     done
+
 else
     echo "Folder Bacteria doesn't exists."
 fi

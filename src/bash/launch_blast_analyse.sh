@@ -133,6 +133,15 @@ fi
 # Check if bacteria folder exists.
 if [ -d ${PATH_FOLDER_INPUT}/Bacteria ]
 then
+    # Check if the output folder database exists.
+    if [ -d ${PATH_FOLDER_INPUT}/Bacteria/$NAME_OUTPUT_DATABASE ]
+    then
+        echo "The $NAME_OUTPUT_DATABASE already exists."
+    else
+        echo "Create folder ${PATH_FOLDER_INPUT}/Bacteria/$NAME_OUTPUT_DATABASE"
+        mkdir ${PATH_FOLDER_INPUT}/Bacteria/$NAME_OUTPUT_DATABASE
+        echo "Create done."
+    fi
     echo "Folder Bacteria exists."
 
     # Move in the Bacteria folder.
@@ -156,6 +165,7 @@ then
 
         # Concatenate and wirte files in reverse ?
         tac ${interestingFile%%.*}.blasttemp2.txt | sed '/0 hits/I,+3 d' |tac > ${interestingFile%%.*}.blast.txt
+
 
         if [ -s "${interestingFile%%.*}.blast.txt" ]
         then
