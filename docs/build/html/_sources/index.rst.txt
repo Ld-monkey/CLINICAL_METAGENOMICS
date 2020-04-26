@@ -32,7 +32,14 @@ Dans cette documentation vous trouvez la description, l'utilisation, les paramè
    cluster/cluster_create_2_custom_databases_and_classify.sh
    cluster/cluster_launch_blast.sh
    cluster/cluster_launch_preprocess.sh
-   cluster/cluster_launch_get_id_and_reads.sh.rst
+   cluster/cluster_launch_get_id_and_reads.sh
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Environnement Conda
+
+   conda/conda_environnement
+   
 
 Indices and tables
 ==================

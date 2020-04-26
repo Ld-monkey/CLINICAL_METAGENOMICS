@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Alignement des séquences ou reads avec l’algorithme de blast &mdash; Documentation CLINICAL METAGENOMICS 0.0.1</title>
+  <title>Environnement Conda &mdash; Documentation CLINICAL METAGENOMICS 0.0.1</title>
   
 
   
@@ -36,8 +36,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Recherche" href="../search.html" />
-    <link rel="next" title="Nettoyage des séquences ou reads avec l’action de preprocess" href="cluster_launch_preprocess.sh.html" />
-    <link rel="prev" title="Création de plusieurs bases de données et classification" href="cluster_create_2_custom_databases_and_classify.sh.html" /> 
+    <link rel="prev" title="Récupérer l’ID taxonomique et les reads d’intérêts" href="../cluster/cluster_launch_get_id_and_reads.sh.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -91,19 +90,16 @@
 <li class="toctree-l1"><a class="reference internal" href="../bash/recover_reads.sh.html">Récupérer les reads d’intérêts</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Cluster</span></p>
-<ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="cluster_create_16S_database.sh.html">Création d’un base de donnée 16S avec le cluster</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cluster_create_2_custom_databases_and_classify.sh.html">Création de plusieurs bases de données et classification</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Alignement des séquences ou reads avec l’algorithme de blast</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#description">Description</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="cluster_launch_preprocess.sh.html">Nettoyage des séquences ou reads avec l’action de preprocess</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cluster_launch_get_id_and_reads.sh.html">Récupérer l’ID taxonomique et les reads d’intérêts</a></li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_create_16S_database.sh.html">Création d’un base de donnée 16S avec le cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_create_2_custom_databases_and_classify.sh.html">Création de plusieurs bases de données et classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_launch_blast.sh.html">Alignement des séquences ou reads avec l’algorithme de blast</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_launch_preprocess.sh.html">Nettoyage des séquences ou reads avec l’action de preprocess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_launch_get_id_and_reads.sh.html">Récupérer l’ID taxonomique et les reads d’intérêts</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Environnement Conda</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../conda/conda_environnement.html">Environnement Conda</a></li>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Environnement Conda</a></li>
 </ul>
 
             
@@ -149,13 +145,13 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>Alignement des séquences ou reads avec l’algorithme de blast</li>
+      <li>Environnement Conda</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
-            <a href="../_sources/cluster/cluster_launch_blast.sh.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/conda/conda_environnement.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -168,25 +164,23 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="alignement-des-sequences-ou-reads-avec-l-algorithme-de-blast">
-<h1>Alignement des séquences ou reads avec l’algorithme de blast<a class="headerlink" href="#alignement-des-sequences-ou-reads-avec-l-algorithme-de-blast" title="Lien permanent vers ce titre">¶</a></h1>
-<p>Le programme destiné au cluster aide l’analyse des séquences ou reads avec une base de donnée et l’algorithme de blast.</p>
-<div class="admonition hint">
-<p class="admonition-title">Indication</p>
-<p>cluster_launch_blast.sh</p>
-</div>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>└── src
- ├── cluster
- │   └── cluster_launch_blast.sh
+  <div class="section" id="environnement-conda">
+<h1>Environnement Conda<a class="headerlink" href="#environnement-conda" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Pour créer un environnement conda a partir du fichier yaml (conda_threader.yml) :</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>conda env create -f metagenomic_env.yml
 </pre></div>
 </div>
-<div class="section" id="description">
-<h2>Description<a class="headerlink" href="#description" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Le script shell adapté au cluster pour automatiser l’analyse par blast.</p>
-<div class="admonition warning">
-<p class="admonition-title">Avertissement</p>
-<p>A besoin de l’environnement conda EnvAntL et du module bastplus pour fonctionner correctement.</p>
+<p>Pour activer l’environnement conda :</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>conda active metagenomic_env
+</pre></div>
 </div>
+<p>Pour désactiver l’environnement conda :</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>conda deactivate
+</pre></div>
+</div>
+<p>Pour supprimer l’environnement :</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>conda env remove -n metagenomic_env
+</pre></div>
 </div>
 </div>
 
@@ -198,10 +192,8 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="cluster_launch_preprocess.sh.html" class="btn btn-neutral float-right" title="Nettoyage des séquences ou reads avec l’action de preprocess" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-      
-        <a href="cluster_create_2_custom_databases_and_classify.sh.html" class="btn btn-neutral float-left" title="Création de plusieurs bases de données et classification" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../cluster/cluster_launch_get_id_and_reads.sh.html" class="btn btn-neutral float-left" title="Récupérer l’ID taxonomique et les reads d’intérêts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
