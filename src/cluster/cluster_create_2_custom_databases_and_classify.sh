@@ -1,5 +1,4 @@
 #!/bin/bash
-
 #$ -S /bin/bash
 #$ -N build_fda_database
 #$ -cwd
@@ -28,22 +27,25 @@ echo "NSLOTS: $NSLOTS"
 # Enable conda environment
 conda active metagenomic_env
 
+# Thread variable.
+THREAD=7
+
 # Variable of path of sample paired reads
 SAMPLE_READS=../../data/reads/PAIRED_SAMPLES_ADN
 
-# Build FDA-ARGOS database.
+# Build FDA-ARGOS database with low complexity sequences.
 echo "Build FDA-ARGOS database"
 bash ../bash/create_kraken_database.sh \
      -ref ../../data/raw_sequences/ALL_RAW_FILES_GENOMES_FDA_ARGOS-2020-02-04 \
      -database ../../data/databases/fda_argos_kraken_db_with_low_complexity \
-     -threads 5
+     -threads $THREAD
 
 # Build FDA-ARGOS + RefSeqHuman + Virus in one database.
 echo "Build FDA database + RefSeqHuman + Virus database"
 bash  ../bash/create_kraken_database.sh \
-      -ref ALL_RAW_FILES_GENOMES_FDA_ARGOS-2020-02-04 \
+      -ref  \
       -database database_fda_refseq_human_viral \
-      -threads 30
+      -threads $THREAD
 
 # Change fq extention to fastq.
 fq_extention=$(ls SAMPLE_READS/*.fq 2> /dev/null | wc -l)
@@ -57,45 +59,47 @@ else
     echo "All files are already in fastq format."
 fi
 
-# Classify reads for FDA-ARGOS database.
-echo "Classify reads for FDA-ARGOS database."
-bash classify_set_sequences.sh \
-     /data1/scratch/masalm/Valid_Mg_Groute/190710-Nextseq-bact/FASTQ \
-     database_clean \
-     30 \
-     output_reads_clean_FDA
+# Maybe create Readme with information to understand who are cleaned.
 
-# Classify reads for FDA database + RefSeqHuman + Virus.
+# Classify sample reads for FDA-ARGOS database.
+echo "Classify reads for FDA-ARGOS database."
+bash ../bash/classify_set_sequences.sh \
+     -path_reads ../../data/reads/PAIRED_SAMPLES_ADN \
+     -path_db ../../data/databases/fda_argos_kraken_db_with_low_complexity\
+     -path_output ../../results/reads_outputs/classify_fda_argos_with_low_complexity \
+     -threads $THREAD 
+
+# Classify reads for FDA + RefSeqHuman + Virus databases.
 echo "Classify set of sequences for FDA database + RefSeqHuman + Virus"
 bash classify_set_sequences.sh \
-     /data1/scratch/masalm/Valid_Mg_Groute/190710-Nextseq-bact/FASTQ \
-     database_fda_refseq_human_viral \
-     30 \
-     output_reads_clean_FDA_refseq_human_viral
-
-# Classify reads with RefSeq db.
+     -path_reads ../../data/reads/PAIRED_SAMPLES_ADN \
+     -path_db database_fda_refseq_human_viral \
+     -path_output ../../results/classify_fda_refseq_human_viral_with_low_complexity \
+     -threads $THREAD
+     
+# Classify reads with RefSeq database.
 echo "Classify set of sequences for RefSeq"
 bash classify_set_sequences.sh \
-     /data1/scratch/masalm/LUDOVIC/METAGENOMICS/PAIRED_SAMPLES_ADN \
-     /data2/fdb/kraken \
-     30 \
-     output_prepocess_reads_RefSeq
+     -path_reads ../../data/reads/PAIRED_SAMPLES_ADN \
+     -path_db ../../data/databases/kraken \
+     -path_output ../../results/classify_refseq_with_low_complexity \
+     -threads $THREAD
 
-# Classify reads with prepocess + dust FDA-ARGOS db.
+# Classify reads with FDA-ARGOS database without low complexity sequences.
 echo "Classify set of sequences for FDA Dust"
 bash classify_set_sequences.sh \
-     /data1/scratch/masalm/LUDOVIC/METAGENOMICS/PAIRED_SAMPLES_ADN \
-     DB_FDA_ARGOS_NO_LOW_COMPLEXITY \
-     30 \
-     output_prepocess_reads_clean_FDA
+     -path_reads ../../data/reads/PAIRED_SAMPLES_ADN \
+     -path_db ../../data/DB_FDA_ARGOS_NO_LOW_COMPLEXITY \
+     -path_output ../../results/classify_fda_without_low_complexity \
+     -threads $THREAD
 
 # Classify reads with preprocess FDA-ARGOS + RefSeqHuman + Virus db.
 echo "Classify set of sequences for preprocess FDA database + RefSeqHuman + Virus"
 bash classify_set_sequences.sh \
-     /data1/scratch/masalm/LUDOVIC/METAGENOMICS/PAIRED_SAMPLES_ADN \
-     database_fda_refseq_human_viral \
-     30 \
-     output_preprocess_reads_clean_FDA_refseq_human_viral
+     -path_reads ../../data/reads/PAIRED_SAMPLES_ADN \
+     -path_db ../../data/databases/database_fda_refseq_human_viral \
+     -path_output ../../results/classify_FDA_refseq_human_viral_with_low_complexity \
+     -threads $THREAD
 
-# Purge kraken 2 module.
-module unload kraken
+# Disable conda environment
+conda deactivate

@@ -39,6 +39,10 @@ Dans cette documentation vous trouvez la description, l'utilisation, les paramè
    :caption: Environnement Conda
 
    conda/conda_environnement
+
+.. toctree::
+   :maxdepth: 1
+   :caption: SnakeMake
    
 
 Indices and tables

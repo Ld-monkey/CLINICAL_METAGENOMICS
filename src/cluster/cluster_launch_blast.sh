@@ -21,11 +21,21 @@ echo "NSLOTS: $NSLOTS"
 # e.g $qsub ../bash/launch_blast_analyse.sh -path_reads sample_reads \
 # -path_db FDA_ARGOS_db -path_result blast_metaplan_output
 
-# Activate conda environment.
-source activate EnvAntL
+# Enable conda environment
+conda active metagenomic_env
 
-# Load the module in the cluster. 
-module load blastplus/2.2.31
+# Run multiple blast analyses.
+# FDA ARGOS Refseq Human Viral reads blast on FDA ARGOS blast database.
+bash ../bash/launch_blast_analyse.sh \
+     -path_reads ../../results/reads_outputs/output_reads_clean_FDA_refseq_human_viral \
+     -path_db ../../data/raw_sequences/ALL_RAW_FILES_GENOMES_FDA_ARGOS-2020-02-04/MAKEBLAST_makeblast_database_fda_argos \
+     -path_results ../../results/blasts/FDA_ARGOS_BLAST
+
+# FDA ARGOS Refseq Human Viral reads blast on 16S RefSeq blast database.
+bash  ../bash/launch_blast_analyse.sh \
+      -path_reads ../../results/reads_outputs/output_reads_clean_FDA_refseq_human_viral \
+      -path_db ../../data/databases/16S_DATABASE_REFSEQ/MAKEBLAST_16S \
+      -path_results ../../results/blasts/16S_REFSEQ_BLAST
 
 # run blast analyse.
 bash ../bash/launch_blast_analyse.sh \
@@ -33,5 +43,5 @@ bash ../bash/launch_blast_analyse.sh \
      -path_db ../../data/databases/database_fda_refseq_human_viral \
      -path_result ../../results/blast_metaplan_output
 
-# Deactivate conda.
-source deactivate
+# Disable conda environment
+conda deactivate

@@ -41,4 +41,4 @@ else
 fi
 
 # Deactivate conda.
-conda deactivate EnvLudF
+conda deactivate metagenomic_env

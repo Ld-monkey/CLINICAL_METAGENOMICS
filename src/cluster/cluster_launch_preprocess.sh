@@ -23,11 +23,11 @@ echo "NSLOTS: $NSLOTS"
 # and qualitative sorting.
 # e.g $qsub cluster_launch_preprocess.sh -path_reads {folder_with_reads}
 
-# Activate a specific environnment with BBMAP program (clumpishy.sh) and Trimmomatic.
-source activate EnvAntL
+# Enable conda environment
+conda active metagenomic_env
 
 # Run script.
 bash ../bash/launch_preprocess.sh -path_reads all_reads_from_sample
 
-# Deactivate conda environnment.
-source deactivate
+# Disable conda environment
+conda deactivate

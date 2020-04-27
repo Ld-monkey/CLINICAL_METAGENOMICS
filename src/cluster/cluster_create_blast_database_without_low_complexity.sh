@@ -25,8 +25,8 @@ echo "NSLOTS: $NSLOTS"
 #    -output_fasta output_multi_fasta \
 #    -name_db database_test
 
-# Activate module.
-module load blastplus/2.2.31
+# Enable conda environment
+conda active metagenomic_env
 
-# Deactivate module.
-module unload blastplus/2.2.31
+# Disable conda environment
+conda deactive

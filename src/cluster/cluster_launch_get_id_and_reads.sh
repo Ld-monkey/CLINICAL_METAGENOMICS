@@ -20,8 +20,8 @@ echo "NSLOTS: $NSLOTS"
 
 #e.g : $qsub launchV3GetIntFasta.sh {folder} {Bacteria/Viruses}
 
-# Activate conda environnment.
-source activate EnvAntL
+# Enable conda environment
+conda active metagenomic_env
 
 # The path folder with all .report.txt file from classification of reads.
 PATH_INPUT_FOLDER=$1
@@ -68,5 +68,5 @@ do
     rm ${PATH_INPUT_FOLDER}/${TAXON}/${file}ReadsList.txt
 done
 
-# Deactivate conda environnment.
-source deactivate
+# Disable conda environment
+conda deactivate
