@@ -25,28 +25,28 @@ echo "NSLOTS: $NSLOTS"
 # * RefSeq already exists.
 # And classified reads from somes databases.
 
-# Load kraken 2 to create database.
-module load kraken
+# Enable conda environment
+conda active metagenomic_env
 
-# Maybe add this sofware in conda enviroment
-# PATH of dustmasker + segmasker softwares to mask low-complexity region.
-PATH=$PATH:/data2/apps/blastplus/2.2.31/bin
+# Variable of path of sample paired reads
+SAMPLE_READS=../../data/reads/PAIRED_SAMPLES_ADN
 
 # Build FDA-ARGOS database.
 echo "Build FDA-ARGOS database"
-bash FDA_database_kraken2.sh -ref FDA_ARGOS_all_ncbi_genomes-2020-02-04 \
-     -database database_clean -threads 30
+bash ../bash/create_kraken_database.sh \
+     -ref ../../data/raw_sequences/ALL_RAW_FILES_GENOMES_FDA_ARGOS-2020-02-04 \
+     -database ../../data/databases/fda_argos_kraken_db_with_low_complexity \
+     -threads 5
 
 # Build FDA-ARGOS + RefSeqHuman + Virus in one database.
 echo "Build FDA database + RefSeqHuman + Virus database"
-bash FDA_RefSeq_Human_Viral.sh -ref ALL_RAW_FILES_GENOMES_FDA_ARGOS-2020-02-04 \
-     -database database_fda_refseq_human_viral -threads 30
-
-# Preprocess on reads.????
-#bash lauchPreprocess.sh {folder_reads_preprocess}
+bash  ../bash/create_kraken_database.sh \
+      -ref ALL_RAW_FILES_GENOMES_FDA_ARGOS-2020-02-04 \
+      -database database_fda_refseq_human_viral \
+      -threads 30
 
 # Change fq extention to fastq.
-fq_extention=$(ls /data1/scratch/masalm/LUDOVIC/METAGENOMICS/PAIRED_SAMPLES_ADN/*.fq 2> /dev/null | wc -l)
+fq_extention=$(ls SAMPLE_READS/*.fq 2> /dev/null | wc -l)
 if [ "$fq_extention" != 0 ]
 then
     echo "Change .fq extention to .fastq"

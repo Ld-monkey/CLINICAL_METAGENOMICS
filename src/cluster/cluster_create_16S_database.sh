@@ -23,7 +23,7 @@ echo "NSLOTS: $NSLOTS"
 # e.g qsub cluster_create_16S_database.sh accession_list_16S_ncbi.seq 16S_output_database.fastq
 
 # Activate conda environment.
-source activate EnvLudF
+conda activate metagenomic_env
 
 # The path of accession list file.
 ACCESSION_LIST_FILE=$1
@@ -41,4 +41,4 @@ else
 fi
 
 # Deactivate conda.
-source deactivate EnvLudF
+conda deactivate EnvLudF

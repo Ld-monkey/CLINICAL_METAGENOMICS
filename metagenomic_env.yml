@@ -12,7 +12,7 @@ dependencies:
   - trimmomatic
   - seqtk
   - bbmap
-  - blast-plus
+  - blast-plus=2.2.31
   - ete3
   - jinja2
   - matplotlib
