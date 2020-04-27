@@ -18,34 +18,10 @@ echo "SGE O WORKDIR: $SGE_O_WORKDIR"
 echo "SGE TASK ID: $SGE_TASK_ID"
 echo "NSLOTS: $NSLOTS"
 
-# A shell script to create 2 databases :
-# * FDA-ARGOS database
-# * FDA-ARGOS + RefSeqHuman + Virus database
-# * RefSeq already exists.
-# And classified reads from somes databases.
+# A shell script to classify reads from somes databases.
 
 # Enable conda environment
 conda active metagenomic_env
-
-# Thread variable.
-THREAD=7
-
-# Variable of path of sample paired reads
-SAMPLE_READS=../../data/reads/PAIRED_SAMPLES_ADN
-
-# Build FDA-ARGOS database with low complexity sequences.
-echo "Build FDA-ARGOS database"
-bash ../bash/create_kraken_database.sh \
-     -ref ../../data/raw_sequences/ALL_RAW_FILES_GENOMES_FDA_ARGOS-2020-02-04 \
-     -database ../../data/databases/fda_argos_kraken_db_with_low_complexity \
-     -threads $THREAD
-
-# Build FDA-ARGOS + RefSeqHuman + Virus in one database.
-echo "Build FDA database + RefSeqHuman + Virus database"
-bash  ../bash/create_kraken_database.sh \
-      -ref  \
-      -database database_fda_refseq_human_viral \
-      -threads $THREAD
 
 # Change fq extention to fastq.
 fq_extention=$(ls SAMPLE_READS/*.fq 2> /dev/null | wc -l)
