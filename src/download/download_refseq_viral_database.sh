@@ -1,13 +1,13 @@
 #!/bin/bash
 
 # Path variable to data folder.
-PATH_DATA=../../data/data/raw_sequences
+PATH_DATA=../../data/raw_sequences
 BASENAME_DB=viral_sequences_from_refseq
 
 # Enable conda environment
 conda active metagenomic_env
 
-echo "Download all viral sequences from RefSeq Database."
+echo "Download all viral sequences from RefSeq database."
 
 # Create specific folder.
 mkdir $PATH_DATA/$BASENAME_DB
