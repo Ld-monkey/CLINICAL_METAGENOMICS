@@ -3,9 +3,9 @@
 
 ## Introduction
 
-## Configuration 
+## Configurations
 
-### Environnement conda :
+### Environnement conda :metal:
 Pour créer un environnement conda a partir du fichier yaml (conda_threader.yml) :
 
 ```bash
@@ -24,15 +24,24 @@ Pour désactiver l'environnement conda :
 conda deactivate
 ```
 
-Pour supprimer l'environnement :
+Pour supprimer l'environnement conda :
 
 ```
 conda env remove -n metagenomic_env
 ```
 
-### Automatisation avec snake
+Pour actualiser les modifications dans l'environnement conda :
+
+```bash
+conda env update --name metagenomic_env --file metagenomic_env.yml 
+```
+
+### Automatisation avec SnakeMake :rocket:
+
+Le système de management de workflows [Snakemake](https://snakemake.readthedocs.io/en/stable/) est un outil qui permet des analyses de données reproductibles et adaptatives.
 
 ### Configuration de la documentation
+
 La documentation utilise [sphinx](https://www.sphinx-doc.org/en/master/) et le thème "sphinx-rtd-theme" que l'on peut retrouver sur https://github.com/readthedocs/sphinx_rtd_theme.
 
 Le thème peut etre facilement installé avec pip3 :
