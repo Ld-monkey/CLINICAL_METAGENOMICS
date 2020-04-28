@@ -5,7 +5,7 @@ PATH_DATA=../../data/raw_sequences
 BASENAME_DB=bacterial_sequences_from_refseq
 
 # Enable conda environment
-conda active metagenomic_env
+conda activate metagenomic_env
 
 echo "Download all bacterial sequences from RefSeq database."
 

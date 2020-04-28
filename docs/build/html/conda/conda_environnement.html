@@ -166,7 +166,20 @@
             
   <div class="section" id="environnement-conda">
 <h1>Environnement Conda<a class="headerlink" href="#environnement-conda" title="Lien permanent vers ce titre">¶</a></h1>
-<p>Pour créer un environnement conda a partir du fichier yaml (conda_threader.yml) :</p>
+<div class="admonition warning">
+<p class="admonition-title">Avertissement</p>
+<p>Si le message d’erreur apparait CommandNotFoundError: Your shell has not been properly configured to use “conda activate”.
+To initialize your shell, run
+$ conda init &lt;SHELL_NAME&gt;</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Pour résoudre le problème sur les distributions Linux executer le code suivant dans un terminal ce qui va exporter les variables de conda dans votre shell (~/.bashrc). Ensuite ouvrir une nouvelle fenêtre shell.</p>
+</div>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> -e <span class="s2">&quot;export -f conda\nexport -f __conda_activate\nexport -f __conda_reactivate\nexport -f __conda_hashr\nexport -f __add_sys_prefix_to_path&quot;</span> &gt;&gt; ~/.bashrc
+</pre></div>
+</div>
+<p>Pour créer un environnement conda a partir du fichier yaml (metagenomic_env.yml) :</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>conda env create -f metagenomic_env.yml
 </pre></div>
 </div>
