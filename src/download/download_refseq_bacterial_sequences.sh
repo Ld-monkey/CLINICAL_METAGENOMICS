@@ -2,7 +2,12 @@
 
 # Path variable to data folder.
 PATH_DATA=../../data/raw_sequences
-BASENAME_DB=bacterial_sequences_from_refseq
+
+# Add current time of database creation.
+DATE=$(date +_%d_%m_%Y)
+
+# Full name of blast database.
+BASENAME_DB=bacterial_sequences_from_refseq$DATE
 
 # Enable conda environment
 conda activate metagenomic_env
@@ -17,7 +22,7 @@ gunzip $PATH_DATA/$BASENAME_DB/*gz
 echo "Unzipped done !"
 
 # List all archives.
-archives_gbff=${ls $PATH_DATA/$BASENAME_DB/*.gbff.gz}
+archives_gbff=$(ls $PATH_DATA/$BASENAME_DB/*.gbff.gz)
 echo "Unzipped done !"
 
 # Recover specific part of file.
