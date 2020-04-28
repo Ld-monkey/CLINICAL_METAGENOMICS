@@ -35,12 +35,8 @@ cat $PATH_DATA/$BASENAME_DB/*genomic.gbff.fa >> $PATH_DATA/$BASENAME_DB/all_geno
 echo "Viral sequence done !"
 
 # Add all .map to one map file completed.
-cat $PATH_DATA/$BASENAME_DB/*genomic.gbff.map >> $PATH_DATA/$BASENAME_DB/map.complete
-echo "Map file done !"
+cat $PATH_DATA/$BASENAME_DB/*genomic.gbff.map >> $PATH_DATA/$BASENAME_DB/viral_map.complete
+echo "Viral map file done !"
 
-# Remove all olds extentions .fa and .map files.
-rm $PATH_DATA/$BASENAME_DB/*genomic.gbff.fa $PATH_DATA/$BASENAME_DB/*genomic.gbff.map
-echo "Remove old file done !"
-
-# Disable conda environment
+# Disable conda environment.
 conda deactivate

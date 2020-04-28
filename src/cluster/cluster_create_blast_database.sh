@@ -20,12 +20,19 @@ echo "NSLOTS: $NSLOTS"
 # Enable conda environment
 conda active metagenomic_env
 
-# Create viral sequences from Refseq database to blast database.
-makeblastdb -in viral.genomic.fasta \
+# Create viral blast database from Refseq viral sequences.
+makeblastdb -in ../../data/raw_sequences/viral_sequences_from_refseq/all_genomic_viral_sequences.fasta \
             -parse_seqids \
             -dbtype nucl \
-            -title RefSeqViral \
-            -taxid_map map.complete
+            -title BlastViralDatabase \
+            -taxid_map ../../data/raw_sequences/viral_sequences_from_refseq/viral_map.complete
+
+# Create bacteria blast database from Refseq bacterial sequences.
+makeblastdb -in ../../data/raw_sequences/bacteria_sequences_from_refseq/all_genomic_viral_sequences.fasta \
+            -parse_seqids \
+            -dbtype nucl \
+            -title BlastBacteriaDatabase \
+            -taxid_map ../../data/raw_sequences/bacteria_sequences_from_refseq/bacteria_map.complete
 
 # Disable conda environment
 conda deactivate

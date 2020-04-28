@@ -7,24 +7,32 @@ BASENAME_DB=bacterial_sequences_from_refseq
 # Enable conda environment
 conda active metagenomic_env
 
-
 echo "Download all bacterial sequences from RefSeq database."
 
 # Create specific folder.
-mkdir $PATH_DATA/$BASENAME_DB
+mkdir -p -v $PATH_DATA/$BASENAME_DB
 
+# Unzip archive.
+gunzip $PATH_DATA/$BASENAME_DB/*gz
+echo "Unzipped done !"
 
-gunzip *gz
+# List all archives.
+archives_gbff=${ls $PATH_DATA/$BASENAME_DB/*.gbff.gz}
+echo "Unzipped done !"
 
-#change directory
-
-gbff=${ls *gbff}
-for gbffFile in ${gbff};
+# Recover specific part of file.
+for file in ${archives_gbff};
 do
-    ./makemap.pl $fungigbffFile
+    ./makemap.pl $file
 done
-cat *gbff.fa >> bacteria.genomic.fa
-cat *gbff.map >> map.complete
-rm *gbff.fa *gbff.map *gbff
-makeblastdb -in bacteria.genomic.fasta -parse_seqids -dbtype nucl -title RefSeqBacteria -taxid_map map.complete
+
+# Add all .fa sequences to one fasta file.
+cat $PATH_DATA/$BASENAME_DB/*.gbff.fa >> $PATH_DATA/$BASENAME_DB/all_genomic_bacterial_sequences.fasta
+echo "Bacteria sequence done !"
+
+# Add all .map to one map file completed.
+cat $PATH_DATA/$BASENAME_DB/*.gbff.map >> $PATH_DATA/$BASENAME_DB/bacterial_map.complete
+echo "Bacterial map file done !"
+
+# Disable conda environment.
 conda deactivate
