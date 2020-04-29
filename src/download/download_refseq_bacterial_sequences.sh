@@ -20,7 +20,7 @@ echo "Download all bacterial sequences from RefSeq database."
 mkdir -p -v $PATH_DATA/$BASENAME_DB
 
 # Unzip archive and keep the original zip.
-tar -xvf $PATH_DATA/$BASENAME_DB/*.tar
+tar -xvf $PATH_DATA/$BASENAME_DB/*.tar --directory $PATH_DATA/$BASENAME_DB/
 echo "Unzipped done !"
 
 # Unzip archive.
