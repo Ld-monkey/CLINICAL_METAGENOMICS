@@ -11,6 +11,7 @@ PATH_DATA=../../data/raw_sequences
 # Add current time of database creation.
 DATE=$(date +_%d_%m_%Y)
 
+# Full name of raw sequence folder.
 BASENAME_DB=viral_sequences_from_refseq$DATE
 
 # Enable conda environment
@@ -19,7 +20,7 @@ conda activate metagenomic_env
 echo "Download all viral sequences from RefSeq database."
 
 # Create specific folder.
-mkdir $PATH_DATA/$BASENAME_DB
+mkdir -p -v $PATH_DATA/$BASENAME_DB
 
 # Link to download the all viral sequence from refseq database.
 wget ftp://ftp.ncbi.nlm.nih.gov/refseq/release/viral/*genomic.gbff.gz \
@@ -27,7 +28,7 @@ wget ftp://ftp.ncbi.nlm.nih.gov/refseq/release/viral/*genomic.gbff.gz \
 echo "Download done !"
 
 # Unzip archive.
-gunzip $PATH_DATA/$BASENAME_DB/*genomic.gbff.gz
+gunzip --keep $PATH_DATA/$BASENAME_DB/*genomic.gbff.gz
 echo "Unzipped done !"
 
 # List all archives.
