@@ -34,6 +34,13 @@ Dans cette documentation vous trouvez la description, l'utilisation, les paramè
    cluster/cluster_launch_preprocess.sh
    cluster/cluster_launch_get_id_and_reads.sh
 
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Télécharger les bases de données automatiquement
+
+   download/download_refseq_species_sequences.sh
+
 .. toctree::
    :maxdepth: 1
    :caption: Environnement Conda
