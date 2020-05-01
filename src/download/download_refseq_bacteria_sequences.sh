@@ -16,16 +16,16 @@ conda activate metagenomic_env
 
 echo "Download all bacterial sequences from RefSeq database."
 
-# # Create specific folder.
-# mkdir -p -v $PATH_DATA/$BASENAME_DB
+# Create specific folder.
+mkdir -p -v $PATH_DATA/$BASENAME_DB
 
-# # Unzip archive and keep the original zip.
-# tar -xvf $PATH_DATA/$BASENAME_DB/*.tar --directory $PATH_DATA/$BASENAME_DB/
-# echo "Unzipped done !"
+# Unzip archive and keep the original zip.
+tar -xvf $PATH_DATA/$BASENAME_DB/*.tar --directory $PATH_DATA/$BASENAME_DB/
+echo "Unzipped done !"
 
-# Unzip archive.
-# gunzip --keep $PATH_DATA/$BASENAME_DB/*genomic.gbff.gz
-# echo "Unzipped done !"
+Unzip archive.
+gunzip --keep $PATH_DATA/$BASENAME_DB/*genomic.gbff.gz
+echo "Unzipped done !"
 
 # List all archives.
 archives_gbff=$(ls $PATH_DATA/$BASENAME_DB/*genomic.gbff)
@@ -45,9 +45,9 @@ echo "Bacteria sequence done !"
 cat $PATH_DATA/$BASENAME_DB/*.gbff.map >> $PATH_DATA/$BASENAME_DB/bacteria_map.complete
 echo "Bacteria map file done !"
 
-rm $PATH_DATA/$BASENAME_DB/*.gbff \
-   $PATH_DATA/$BASENAME_DB/*gbff.map \
-   $PATH_DATA/$BASENAME_DB/*gbff.gz
+rm -v $PATH_DATA/$BASENAME_DB/*.gbff
+rm -v $PATH_DATA/$BASENAME_DB/*gbff.map
+rm -v $PATH_DATA/$BASENAME_DB/*gbff.gz
 
 # Disable conda environment.
 conda deactivate
