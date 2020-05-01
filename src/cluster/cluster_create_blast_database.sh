@@ -18,21 +18,36 @@ echo "SGE TASK ID: $SGE_TASK_ID"
 echo "NSLOTS: $NSLOTS"
 
 # Enable conda environment
-conda active metagenomic_env
+conda activate metagenomic_env
 
-# Create viral blast database from Refseq viral sequences.
-makeblastdb -in ../../data/raw_sequences/viral_sequences_from_refseq/all_genomic_viral_sequences.fasta \
+DATE=$(date +%d_%m_%Y)
+PATH_DATABASE=../../data/databases/
+NAME_VIRAL_FOLDER=blast_viral_db_${DATE}_with_low_complexity
+NAME_BACTERIA_FOLDER=blast_bacteria_db_${DATE}_with_low_complexity
+
+# Create folder for viral and bacteria blast databases.
+mkdir -p $PATH_DATABASE$NAME_VIRAL_FOLDER
+mkdir -p $PATH_DATABASE$NAME_BACTERIA_FOLDER
+
+# Create viral blast database from Refseq viral sequences without remove low complexity (with low complexity).
+makeblastdb -in ../../data/raw_sequences/viral_sequences_from_refseq_28_04_2020/all_genomic_viral_sequences.fasta \
             -parse_seqids \
             -dbtype nucl \
             -title BlastViralDatabase \
-            -taxid_map ../../data/raw_sequences/viral_sequences_from_refseq/viral_map.complete
+            -taxid_map ../../data/raw_sequences/viral_sequences_from_refseq_28_04_2020/viral_map.complete \
+            -out $PATH_DATABASE$NAME_VIRAL_FOLDER/$NAME_VIRAL_FOLDER
 
-# Create bacteria blast database from Refseq bacterial sequences.
-makeblastdb -in ../../data/raw_sequences/bacteria_sequences_from_refseq/all_genomic_viral_sequences.fasta \
+echo "$NAME_VIRAL_FOLDER is created"
+
+# Create bacteria blast database from Refseq bacterial sequences without remove low complexity (with low complexity).
+makeblastdb -in ../../data/raw_sequences/bacteria_sequences_from_refseq_01_05_2020/all_genomic_bacteria_sequences.fasta \
             -parse_seqids \
             -dbtype nucl \
             -title BlastBacteriaDatabase \
-            -taxid_map ../../data/raw_sequences/bacteria_sequences_from_refseq/bacteria_map.complete
+            -taxid_map ../../data/raw_sequences/bacteria_sequences_from_refseq_01_05_2020/bacteria_map.complete \
+            -out $PATH_DATABASE$NAME_BACTERIA_FOLDER/$NAME_BACTERIA_FOLDER
+
+echo "$NAME_BACTERIA_FOLDER is created"
 
 # Disable conda environment
 conda deactivate
