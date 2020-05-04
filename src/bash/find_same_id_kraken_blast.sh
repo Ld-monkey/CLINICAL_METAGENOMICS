@@ -22,33 +22,234 @@ echo "NSLOTS: $NSLOTS"
 # taxonomiques Blast et Kraken et ne conserve que ceux qui sont du même genre.
 # Compte le nombre de reads pour chaque espèce. Dessine la carte de couverture
 # des Viruses, récupère les noms des espèces pour remplacer les ID taxonomiques.
+# e.g ./find_same_id_kraken_blast.sh \
+# -path_taxo output_preprocess_reads_clean_FDA_refseq_human_viral \
+# -path_blast METAPHLAN_BLAST_TEST
 
-# qsub launch_analysis.sh {folder_input_sample} {basename_result_of_blast}
-# e.g $launch_analysis.sh output_preprocess_reads_clean_FDA_refseq_human_viral/ METAPHLAN_BLAST_TEST
+PROGRAM=find_same_id_kraken_blast.sh
+VERSION=1.0
 
-# Activate conda environment.
-source activate EnvAntL
+DESCRIPTION=$(cat << __DESCRIPTION__
 
-# The path of folder with Bacteria or Viruses or (Fongi) folders.
-FOLDER_INPUT_SAMPLE=$1
+__DESCRIPTION__
+           )
+
+OPTIONS=$(cat << __OPTIONS__
+
+## OPTIONS ##
+    -path_taxo       (Input)  The path of folder with Bacteria or Viruses or (Fongi) folders               *DIR: input_bacteria_folder
+    -path_blast      (Input)  The folder of the blast results containing .blast.txt                        *DIR: input_results_blast
+__OPTIONS__
+       )
+
+# default options if they are not defined:
+
+USAGE ()
+{
+    cat << __USAGE__
+$PROGRAM version $VERSION:
+$DESCRIPTION
+$OPTIONS
+
+__USAGE__
+}
+
+BAD_OPTION ()
+{
+    echo
+    echo "Unknown option "$1" found on command-line"
+    echo "It may be a good idea to read the usage:"
+    echo "white $PROGRAM -h to be helped :"
+    echo "example : ./find_same_id_kraken_blast.sh"
+    echo -e $USAGE
+
+    exit 1
+}
+
+# Check options
+while [ -n "$1" ]; do
+    case $1 in
+        -h)                    USAGE      ; exit 0 ;;
+  	    -path_taxo)           FOLDER_TAXO=$2   ; shift 2; continue ;;
+        -path_blast)          BLAST_FOLDER=$2     ; shift 2; continue ;;
+        *)       BAD_OPTION $1;;
+    esac
+done
+
+FOLDER_VIRUSES=$FOLDER_TAXO/Viruses
+FOLDER_BACTERIA=$FOLDER_TAXO/Bacteria
 
 # Export the variable of path folder in current terminal.
-export FOLDER_INPUT_SAMPLE
-
-# Into FOLDER_INPUT_SAMPLE there must be a Viruses folder.
-FOLDER_VIRUSES=$1Viruses
-
-# Export the variable path folder of Viruse in current terminal.
-#export FOLDER_VIRUSES
-
-# Into FOLDER_INPUT_SAMPLE there must be a Bacteria folder.
-FOLDER_BACTERIA=$1Bacteria
-
-# Export the variable path folder of Bacteria in current terminal.
+export FOLDER_TAXO
+export FOLDER_VIRUSES
 export FOLDER_BACTERIA
 
-# Name of the results blast folder containing .blast.txt .
-NAME_BLAST_FOLDER=$2
+# Begin a parallel task for Bacteria.
+if [ -d $FOLDER_BACTERIA ]
+then
+
+    # Check if blast folder exists.
+    if [ -d $BLAST_FOLDER ]
+    then
+        echo "$BLAST_FOLDER exists."
+    else
+        echo "Error : $BLAST_FOLDER doesn't exists."
+        exit
+    fi
+
+    echo "Path : $BLAST_FOLDER"
+
+    # Get all blast files (*.blast) for bacteria.
+    BLAST_FILES=$(ls $BLAST_FOLDER | grep -i blast)
+    echo "Blast files for Bacteria are : $BLAST_FILES"
+
+    # Classified sequences change blast.txt to clseqs_*.fastq .
+    clseqs1=$(echo $BLAST_FILES | sed "s/blast.txt/clseqs_1.fastq/g")
+    clseqs2=$(echo $BLAST_FILES | sed "s/blast.txt/clseqs_2.fastq/g")
+
+    echo "clseqs1 : $clseqs1"
+    echo "clseqs2 : $clseqs2"
+
+    # Conserved variable change blast.txt to conserved.txt .
+    conserved=$(echo $BLAST_FILES | sed "s/blast.txt/conserved.txt/g")
+
+    echo "conserved : $conserved"
+
+    # Counting variable change blast.txt to counting.txt .
+    counting=$(echo $BLAST_FILES | sed "s/blast.txt/countbis.txt/g")
+
+    echo "counting : $counting"
+
+    # Change variable blast.txt to temps*.txt .
+    temp1=$(echo $BLAST_FILES | sed "s/blast.txt/temp1.txt/g")
+    temp2=$(echo $BLAST_FILES | sed "s/blast.txt/temp2.txt/g")
+    temp3=$(echo $BLAST_FILES | sed "s/blast.txt/temp3.txt/g")
+
+    echo "temp1 : $temp1"
+    echo "temp2 : $temp2"
+    echo "temp3 : $temp3"
+
+    # Change name variable *.blast.txt to *fasta
+    basename_fasta=$(echo $BLAST_FILES | sed "s/.blast.txt/fasta/g")
+
+    # For each sample create folder with result.
+    for folder_to_create in $basename_fasta
+    do
+        echo "Create $BLAST_FOLDER/$folder_to_create directory."
+        mkdir -p ${BLAST_FOLDER}/$folder_to_create
+        echo "Create $BLAST_FOLDER/$folder_to_create done."
+    done
+
+    # 3 parameters :
+    # -i : The blast file input e.g *.blast.txt .
+    # -o : The output file for e.g *_conserved.txt .
+    # -n : The localization of NCBI taxa database.
+    echo "run sort_blasted_seq.py"
+    echo "BLAST_FOLDER : $BLAST_FOLDER"
+    for interest_blast in $BLAST_FILES/*blast.txt
+    do
+        echo "File used in sort_blasted_seq.py is : ${BLAST_FOLDER}/$interest_blast "
+        echo "$interest_blast"
+        basename_=$(basename "$interest_blast" .blast.txt)
+        echo "Basename : $basename_"
+
+        # Output files is conserved and not_conserved ID of taxa from blast.txt .
+        python ../python/sort_blasted_seq.py \
+               -i ${BLAST_FOLDER}/$interest_blast \
+               -o ${basename_}conserved.txt 
+#              -n /data2/home/masalm/.etetoolkit/taxa.sqlite
+    done
+    echo "sort_blasted_seq.py Done"
+
+    # Part of the code that I really don't understand.
+    cat ${FOLDER_TAXO}/${conserved} | awk -v pathF="${BLAST_FOLDER}/${basename_fasta}" \
+                                          -F "[\t]" '\''$10~/^1/ {print $1" "$8 > pathF"/map1.fa" ; print $1 > pathF"/1.fa" }'\'
+    cat ${BLAST_FOLDER}/${conserved} | awk -v pathF="${BLAST_FOLDER}/${basename_fasta}" \
+                                           -F"[\t]" '\''$10~/^2/ {print $1" "$8 > pathF"/map2.fa" ; print $1 > pathF"/2.fa"}'\'
+
+    # They is no -clseqs_2 parameter ???
+    # I don't understand again.
+    bash recover_reads.sh \
+         -reads_list ${folderInput}/${clseqs1} empty.txt \
+         -clseqs_1 ${BLAST_FOLDER}/${basename_fasta}/1.fa \
+         -output ${BLAST_FOLDER}/${basename_fasta}/1.fasta
+
+    bash recover_reads.sh \
+         -reads_list ${folderInput}/${clseqs2} empty.txt \
+         -clseqs_1 ${BLAST_FOLDER}/${basename_fasta}/2.fa \
+         -output ${BLAST_FOLDER}/${basename_fasta}/2.fasta
+
+    # I don't know WTF.
+    cat ${BLAST_FOLDER}/${basename_fasta}/1.fasta | paste - - | cut -c2- | sort > ${BLAST_FOLDER}/${basename_fasta}/sorted1.fasta
+    cat ${BLAST_FOLDER}/${basename_fasta}/2.fasta | paste - - | cut -c2- | sort > ${BLAST_FOLDER}/${basename_fasta}/sorted2.fasta
+
+    # Sort map1 and map2 and get sorted1 and sorted2.fa
+    sort ${BLAST_FOLDER}/${basename_fasta}/map1.fa \
+         --output ${BLAST_FOLDER}/${basename_fasta}/sorted1.fa
+    sort ${BLAST_FOLDER}/${basename_fasta}/map2.fa \
+         --output ${BLAST_FOLDER}/${basename_fasta}/sorted2.fa
+
+    # Join something.
+    join -11 -21 ${BLAST_FOLDER}/${basename_fasta}/sorted1.fasta ${BLAST_FOLDER}/${basename_fasta}/sorted1.fa > ${BLAST_FOLDER}/${basename_fasta}/1.fasta
+    join -11 -21 ${BLAST_FOLDER}/${basename_fasta}/sorted2.fasta ${BLAST_FOLDER}/${basename_fasta}/sorted2.fa > ${BLAST_FOLDER}/${basename_fasta}/2.fasta
+
+    #
+    cat ${BLAST_FOLDER}/${basename_fasta}/1.fasta |awk -v pathF="${BLAST_FOLDER}/${basename_fasta}" '\''{print ">"$1" "$2" "$3"\n"$4 > pathF"/"$5".fasta"}'\'
+    cat ${BLAST_FOLDER}/${basename_fasta}/2.fasta |awk -v pathF="${BLAST_FOLDER}/${basename_fasta}" '\''{print ">"$1" "$2" "$3"\n"$4 >> pathF"/"$5".fasta"}'\'
+
+    # Remove
+    rm ${BLAST_FOLDER}/${basename_fasta}/1.fasta \
+       ${BLAST_FOLDER}/${basename_fasta}/2.fasta \
+       ${BLAST_FOLDER}/${basename_fasta}/1.fa \
+       ${BLAST_FOLDER}/${basename_fasta}/2.fa
+
+    rm ${BLAST_FOLDER}/${basename_fasta}/map1.fa \
+       ${BLAST_FOLDER}/${basename_fasta}/map2.fa \
+       ${BLAST_FOLDER}/${basename_fasta}/sorted1.fa \
+       ${BLAST_FOLDER}/${basename_fasta}/sorted2.fa
+
+    rm ${BLAST_FOLDER}/${basename_fasta}/sorted1.fasta \
+       ${BLAST_FOLDER}/${basename_fasta}/sorted2.fasta
+
+    # WTF men !
+    find ${BLAST_FOLDER}/${basename_fasta} -type f |
+        while read f; do
+            i=0
+            while read line; do
+                i=$((i+1))
+                [ $i -eq 10 ] && continue 2
+            done < "$f"
+            printf %s\\n "$f"
+        done |
+        xargs rm -f
+
+    #
+    sort -n ${BLAST_FOLDER}/${conserved} -k8,8 > ${BLAST_FOLDER}/{}sorted.txt
+
+    #
+    rm ${BLAST_FOLDER}/${conserved}
+
+    #
+    mv ${BLAST_FOLDER}/{}sorted.txt ${BLAST_FOLDER}/${conserved}
+
+    #
+    cut -f8 ${BLAST_FOLDER}/${conserved} | uniq -c | sort -k2,2 -g > ${BLAST_FOLDER}/${temp1}
+    cut -f2,8 ${BLAST_FOLDER}/${conserved} | sort -k1 | uniq | cut -f2 | sort -g | uniq -c > ${BLAST_FOLDER}/${temp2}
+
+    #
+    join -1 2 -2 2 ${BLAST_FOLDER}/${temp1} ${BLAST_FOLDER}/${temp2} |sort -k1,1b > ${BLAST_FOLDER}/${temp3}
+    join -1 1 -2 1 ${BLAST_FOLDER}/${temp3} /data2/home/masalm/Antoine/DB/MetaPhlAn/totalCountofGenes.txt | sort -k2,2 -gr > ${BLAST_FOLDER}/${counting}
+
+    #
+    python ../python/get_names.py ${BLAST_FOLDER}/${counting}
+
+    #
+    rm ${BLAST_FOLDER}/${counting}
+    rm ${BLAST_FOLDER}/${temp1} ${BLAST_FOLDER}/${temp2} ${BLAST_FOLDER}/${temp3}
+else
+    echo "Bacteria directory doesn't exists."
+fi
+
 
 # begin a parallel task for virus
 if [ -d $FOLDER_VIRUSES ]
@@ -68,7 +269,7 @@ then
     conserved=$(echo {} | sed "s/blast.txt/conserved.txt/")
 
     echo "conserved : $conserved"
-    
+
     # same operation counting variable change blast.txt to countbis.txt .
     counting=$(echo {} | sed "s/blast.txt/countbis.txt/")
 
@@ -180,120 +381,5 @@ else
     echo "Viruses directory doesn't exists."
 fi
 
-# Begin a parallel task for Bacteria.
-if [ -d $FOLDER_BACTERIA ]
-then
-    if [ -d ${FOLDER_BACTERIA}/$NAME_BLAST_FOLDER ]
-    then
-        echo "${FOLDER_BACTERIA}$NAME_BLAST_FOLDER exists."
-    else
-        echo "Error : ${FOLDER_BACTERIA}$NAME_BLAST_FOLDER doesn't exists."
-        exit
-    fi
-
-    # The complete path of blast folder.
-    COMPLETE_BLAST_PATH=${FOLDER_BACTERIA}/$NAME_BLAST_FOLDER
-    echo "Path : $COMPLETE_BLAST_PATH"
-
-    # Get all interresting blast file *. blast for bacteria.
-    blast=$(ls $COMPLETE_BLAST_PATH | grep -i blast)
-    echo "blast files for Bacteria are : $blast"
-
-    # Classified sequences change blast.txt to clseqs_*.fastq .
-    clseqs1=$(echo $blast | sed "s/blast.txt/clseqs_1.fastq/g")
-    clseqs2=$(echo $blast | sed "s/blast.txt/clseqs_2.fastq/g")
-
-    echo "clseqs1 : $clseqs1"
-    echo "clseqs2 : $clseqs2"
-
-    # Conserved variable change blast.txt to conserved.txt .
-    conserved=$(echo $blast | sed "s/blast.txt/conserved.txt/g")
-
-    echo "conserved : $conserved"
-
-    # Counting variable change blast.txt to counting.txt .
-    counting=$(echo $blast | sed "s/blast.txt/countbis.txt/g")
-
-    echo "counting : $counting"
-
-    # Change variable blast.txt to temps*.txt .
-    temp1=$(echo $blast | sed "s/blast.txt/temp1.txt/g")
-    temp2=$(echo $blast | sed "s/blast.txt/temp2.txt/g")
-    temp3=$(echo $blast | sed "s/blast.txt/temp3.txt/g")
-
-    echo "temp1 : $temp1"
-    echo "temp2 : $temp2"
-    echo "temp3 : $temp3"
-
-    # Create basename_fasta variable.
-    basename_fasta=$(echo $blast | sed "s/.blast.txt/fasta/g")
-
-    # Create folder all basename_fast in blast directory.
-    for folder_to_create in $basename_fasta
-    do
-        echo "Create $COMPLETE_BLAST_PATH/$folder_to_create directory."
-        mkdir -p ${COMPLETE_BLAST_PATH}/$folder_to_create
-        echo "Create $COMPLETE_BLAST_PATH/$folder_to_create done."
-    done
-
-    # 3 parameters :
-    # -i : The blast file input e.g *.blast.txt .
-    # -o : The output file for e.g *_conserved.txt .
-    # -n : The localization of NCBI taxa database.
-    echo "run sort_blasted_seq.py"
-    echo "COMPLETE_BLAST_PATH : $COMPLETE_BLAST_PATH"
-    for interest_blast in $blast
-    do
-        echo "File used in sort_blasted_seq.py is : ${COMPLETE_BLAST_PATH}/$interest_blast "
-        echo "$interest_blast"
-        basename_=$(basename "$interest_blast" .blast.txt)
-        echo "Basename : $basename_"
-
-        # Output files is conserved and not_conserved ID of taxa from blast.txt .
-        python sort_blasted_seq.py -i ${COMPLETE_BLAST_PATH}/$interest_blast \
-               -o ${basename_}conserved.txt \
-               -n /data2/home/masalm/.etetoolkit/taxa.sqlite
-    done
-    echo "sort_blasted_seq.py Done"
-
-    #cat ${COMPLETE_BLAST_PATH}/${conserved} |awk -v pathF="${COMPLETE_BLAST_PATH}/${basename_fasta}" -F"[\t]" '\''$10~/^1/ {print $1" "$8 > pathF"/map1.fa" ; print $1 > pathF"/1.fa" }'\'
-    #cat ${COMPLETE_BLAST_PATH}/${conserved} |awk -v pathF="${COMPLETE_BLAST_PATH}/${basename_fasta}" -F"[\t]" '\''$10~/^2/ {print $1" "$8 > pathF"/map2.fa" ; print $1 > pathF"/2.fa"}'\'
-    #./RecoverReads.sh ${COMPLETE_BLAST_PATH}/${basename_fasta}/1.fa ${folderInput}/${clseqs1} empty.txt ${COMPLETE_BLAST_PATH}/${basename_fasta}/1.fasta
-    #./RecoverReads.sh ${COMPLETE_BLAST_PATH}/${basename_fasta}/2.fa ${folderInput}/${clseqs2} empty.txt ${COMPLETE_BLAST_PATH}/${basename_fasta}/2.fasta
-    #cat ${COMPLETE_BLAST_PATH}/${basename_fasta}/1.fasta | paste - - | cut -c2- |sort > ${COMPLETE_BLAST_PATH}/${basename_fasta}/sorted1.fasta
-    #cat ${COMPLETE_BLAST_PATH}/${basename_fasta}/2.fasta | paste - - | cut -c2- |sort > ${COMPLETE_BLAST_PATH}/${basename_fasta}/sorted2.fasta
-    #sort ${COMPLETE_BLAST_PATH}/${basename_fasta}/map1.fa > ${COMPLETE_BLAST_PATH}/${basename_fasta}/sorted1.fa
-    #sort ${COMPLETE_BLAST_PATH}/${basename_fasta}/map2.fa > ${COMPLETE_BLAST_PATH}/${basename_fasta}/sorted2.fa
-    #join -11 -21 ${COMPLETE_BLAST_PATH}/${basename_fasta}/sorted1.fasta ${COMPLETE_BLAST_PATH}/${basename_fasta}/sorted1.fa > ${COMPLETE_BLAST_PATH}/${basename_fasta}/1.fasta
-    #join -11 -21 ${COMPLETE_BLAST_PATH}/${basename_fasta}/sorted2.fasta ${COMPLETE_BLAST_PATH}/${basename_fasta}/sorted2.fa > ${COMPLETE_BLAST_PATH}/${basename_fasta}/2.fasta
-    #cat ${COMPLETE_BLAST_PATH}/${basename_fasta}/1.fasta |awk -v pathF="${COMPLETE_BLAST_PATH}/${basename_fasta}" '\''{print ">"$1" "$2" "$3"\n"$4 > pathF"/"$5".fasta"}'\'
-    #cat ${COMPLETE_BLAST_PATH}/${basename_fasta}/2.fasta |awk -v pathF="${COMPLETE_BLAST_PATH}/${basename_fasta}" '\''{print ">"$1" "$2" "$3"\n"$4 >> pathF"/"$5".fasta"}'\'
-    #rm ${COMPLETE_BLAST_PATH}/${basename_fasta}/1.fasta ${COMPLETE_BLAST_PATH}/${basename_fasta}/2.fasta ${COMPLETE_BLAST_PATH}/${basename_fasta}/1.fa ${COMPLETE_BLAST_PATH}/${basename_fasta}/2.fa
-    #rm ${COMPLETE_BLAST_PATH}/${basename_fasta}/map1.fa ${COMPLETE_BLAST_PATH}/${basename_fasta}/map2.fa ${COMPLETE_BLAST_PATH}/${basename_fasta}/sorted1.fa ${COMPLETE_BLAST_PATH}/${basename_fasta}/sorted2.fa
-    #rm ${COMPLETE_BLAST_PATH}/${basename_fasta}/sorted1.fasta ${COMPLETE_BLAST_PATH}/${basename_fasta}/sorted2.fasta
-    #find ${COMPLETE_BLAST_PATH}/${basename_fasta} -type f |
-    #    while read f; do
-    #        i=0
-    #        while read line; do
-    #            i=$((i+1))
-    #            [ $i -eq 10 ] && continue 2
-    #        done < "$f"
-    #        printf %s\\n "$f"
-    #    done |
-    #    xargs rm -f
-    #sort -n ${COMPLETE_BLAST_PATH}/${conserved} -k8,8 > ${COMPLETE_BLAST_PATH}/{}sorted.txt
-    #rm ${COMPLETE_BLAST_PATH}/${conserved}
-    #mv ${COMPLETE_BLAST_PATH}/{}sorted.txt ${COMPLETE_BLAST_PATH}/${conserved}
-    #cut -f8 ${COMPLETE_BLAST_PATH}/${conserved} | uniq -c |sort -k2,2 -g > ${COMPLETE_BLAST_PATH}/${temp1}
-    #cut -f2,8 ${COMPLETE_BLAST_PATH}/${conserved} | sort -k1 | uniq | cut -f2 | sort -g | uniq -c > ${COMPLETE_BLAST_PATH}/${temp2}
-    #join -1 2 -2 2 ${COMPLETE_BLAST_PATH}/${temp1} ${COMPLETE_BLAST_PATH}/${temp2} |sort -k1,1b > ${COMPLETE_BLAST_PATH}/${temp3}
-    #join -1 1 -2 1 ${COMPLETE_BLAST_PATH}/${temp3} /data2/home/masalm/Antoine/DB/MetaPhlAn/totalCountofGenes.txt | sort -k2,2 -gr > ${COMPLETE_BLAST_PATH}/${counting}
-    #./getNames.py ${COMPLETE_BLAST_PATH}/${counting}
-    #rm ${COMPLETE_BLAST_PATH}/${counting}
-    #rm ${COMPLETE_BLAST_PATH}/${temp1} ${COMPLETE_BLAST_PATH}/${temp2} ${COMPLETE_BLAST_PATH}/${temp3}
-else
-    echo "Bacteria directory doesn't exists."
-fi
-
 # Deactivate conda environment.
-source deactivate
+conda deactivate

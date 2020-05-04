@@ -3,7 +3,7 @@
 # Gets reads in "clseqs" files from names, and transforms them into fasta format.
 
 # active conda environment.
-source activate EnvAntL
+conda activate metagenomic_env
 
 # Export PATH variable in current shell to find specifics programs.
 export PATH=/data2/home/alarme/miniconda3/bin:$PATH
@@ -47,7 +47,7 @@ BAD_OPTION ()
     echo "Unknown option "$1" found on command-line"
     echo "It may be a good idea to read the usage:"
     echo "white $PROGRAM -h to be helped :"
-    echo "example : -reads_list ReadsList.txt -clseqs_1 clseqs_1.fastq -clseqs_2 clseqs_2.fastq -output output_interest_fasta"
+    echo "example : -reads_list ReadsList.txt -clseqs_1 clseqs_1.fastq -clseqs_2 clseqs_2.fastq -output output_interest_fasta.fasta"
     echo -e $USAGE
 
     exit 1
