@@ -195,19 +195,20 @@ then
     cat ${BLAST_FOLDER}/${basename_fasta}/1.fasta | paste - - | cut -c2- | sort > ${BLAST_FOLDER}/${basename_fasta}/sorted1.fasta
     cat ${BLAST_FOLDER}/${basename_fasta}/2.fasta | paste - - | cut -c2- | sort > ${BLAST_FOLDER}/${basename_fasta}/sorted2.fasta
 
-    # Sort map1 and map2 and get sorted1 and sorted2.fa
+    # Sort map1 and map2 and get outputs sorted1.fa and sorted2.fa
+    # before joining else join command bug.
     sort ${BLAST_FOLDER}/${basename_fasta}/map1.fa \
          --output ${BLAST_FOLDER}/${basename_fasta}/sorted1.fa
     sort ${BLAST_FOLDER}/${basename_fasta}/map2.fa \
          --output ${BLAST_FOLDER}/${basename_fasta}/sorted2.fa
 
     # Join something.
-    join -11 -21 ${BLAST_FOLDER}/${basename_fasta}/sorted1.fasta ${BLAST_FOLDER}/${basename_fasta}/sorted1.fa > ${BLAST_FOLDER}/${basename_fasta}/1.fasta
-    join -11 -21 ${BLAST_FOLDER}/${basename_fasta}/sorted2.fasta ${BLAST_FOLDER}/${basename_fasta}/sorted2.fa > ${BLAST_FOLDER}/${basename_fasta}/2.fasta
+    join -1 1 -2 1 ${BLAST_FOLDER}/${basename_fasta}/sorted1.fasta ${BLAST_FOLDER}/${basename_fasta}/sorted1.fa > ${BLAST_FOLDER}/${basename_fasta}/1.fasta
+    join -1 1 -2 1 ${BLAST_FOLDER}/${basename_fasta}/sorted2.fasta ${BLAST_FOLDER}/${basename_fasta}/sorted2.fa > ${BLAST_FOLDER}/${basename_fasta}/2.fasta
 
     #
-    cat ${BLAST_FOLDER}/${basename_fasta}/1.fasta |awk -v pathF="${BLAST_FOLDER}/${basename_fasta}" '\''{print ">"$1" "$2" "$3"\n"$4 > pathF"/"$5".fasta"}'\'
-    cat ${BLAST_FOLDER}/${basename_fasta}/2.fasta |awk -v pathF="${BLAST_FOLDER}/${basename_fasta}" '\''{print ">"$1" "$2" "$3"\n"$4 >> pathF"/"$5".fasta"}'\'
+    cat ${BLAST_FOLDER}/${basename_fasta}/1.fasta | awk -v pathF="${BLAST_FOLDER}/${basename_fasta}" '\''{print ">"$1" "$2" "$3"\n"$4 > pathF"/"$5".fasta"}'\'
+    cat ${BLAST_FOLDER}/${basename_fasta}/2.fasta | awk -v pathF="${BLAST_FOLDER}/${basename_fasta}" '\''{print ">"$1" "$2" "$3"\n"$4 >> pathF"/"$5".fasta"}'\'
 
     # Remove
     rm ${BLAST_FOLDER}/${basename_fasta}/1.fasta \
@@ -236,7 +237,8 @@ then
         xargs rm -f
 
     #
-    sort -n ${BLAST_FOLDER}/${conserved} -k8,8 > ${BLAST_FOLDER}/{}sorted.txt
+    sort -n ${BLAST_FOLDER}/${conserved} -k8,8 \
+         --output ${BLAST_FOLDER}/{}sorted.txt
 
     #
     rm ${BLAST_FOLDER}/${conserved}
@@ -249,7 +251,7 @@ then
     cut -f2,8 ${BLAST_FOLDER}/${conserved} | sort -k1 | uniq | cut -f2 | sort -g | uniq -c > ${BLAST_FOLDER}/${temp2}
 
     #
-    join -1 2 -2 2 ${BLAST_FOLDER}/${temp1} ${BLAST_FOLDER}/${temp2} |sort -k1,1b > ${BLAST_FOLDER}/${temp3}
+    join -1 2 -2 2 ${BLAST_FOLDER}/${temp1} ${BLAST_FOLDER}/${temp2} | sort -k1,1b > ${BLAST_FOLDER}/${temp3}
     join -1 1 -2 1 ${BLAST_FOLDER}/${temp3} /data2/home/masalm/Antoine/DB/MetaPhlAn/totalCountofGenes.txt | sort -k2,2 -gr > ${BLAST_FOLDER}/${counting}
 
     #
