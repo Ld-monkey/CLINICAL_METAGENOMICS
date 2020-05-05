@@ -40,6 +40,7 @@ Dans cette documentation vous trouvez la description, l'utilisation, les paramè
    :caption: Télécharger les bases de données automatiquement
 
    download/download_refseq_species_sequences.sh
+   download/download_ete3_ncbi_taxonomy_database.sh
 
 .. toctree::
    :maxdepth: 1

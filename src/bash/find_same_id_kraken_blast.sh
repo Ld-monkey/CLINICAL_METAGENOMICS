@@ -25,6 +25,7 @@ echo "NSLOTS: $NSLOTS"
 # e.g ./find_same_id_kraken_blast.sh \
 # -path_taxo output_preprocess_reads_clean_FDA_refseq_human_viral \
 # -path_blast METAPHLAN_BLAST_TEST
+# -path_ncbi ../../data/databases/ete3_ncbi_taxanomy_database_05_05_2020
 
 PROGRAM=find_same_id_kraken_blast.sh
 VERSION=1.0
@@ -92,10 +93,6 @@ if [ -d $PATH_NCBI_TAXA ]; then
     echo "$PATH_NCBI_TAXA is loaded"
 else
     echo "No ncbi taxonomy database folder is found."
-    echo "Automatic download with download_ncbi_taxa_db.py"
-    echo "The path of database is now $default_path_ncbi"
-    mkdir $default_path_ncbi
-    python ../download/download_nbci_taxa_db.py $default_path_ncbi
     PATH_NCBI_TAXA=$default_path_ncbi
 fi
 
@@ -172,7 +169,7 @@ then
         python ../python/sort_blasted_seq.py \
                -i ${BLAST_FOLDER}/$interest_blast \
                -o ${basename_}conserved.txt \
-               -n ${PATH_NCBI_TAXA}.taxa.sqlite
+               -n ${PATH_NCBI_TAXA}/taxa.sqlite
     done
     echo "sort_blasted_seq.py Done"
 
