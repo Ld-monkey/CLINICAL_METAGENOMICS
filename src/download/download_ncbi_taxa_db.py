@@ -26,7 +26,7 @@ if __name__ == "__main__":
         os.mkdir(PATH_NCBI_DB)
         print("Folder {} is created".format(PATH_NCBI_DB))
 
-    ncbi = NCBITaxa(dbfile=PATH_NCBI_DB)
+    ncbi = NCBITaxa(dbfile=PATH_NCBI_DB+"taxa.sqlite")
     try:
         version = ncbi._NCBITaxa__get_db_version()
     except Exception:
