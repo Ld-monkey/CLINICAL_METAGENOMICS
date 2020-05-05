@@ -39,10 +39,12 @@ OPTIONS=$(cat << __OPTIONS__
 ## OPTIONS ##
     -path_taxo       (Input)  The path of folder with Bacteria or Viruses or (Fongi) folders               *DIR: input_bacteria_folder
     -path_blast      (Input)  The folder of the blast results containing .blast.txt                        *DIR: input_results_blast
+    -path_ncbi       (Input)  The folder of ncbi taxonomy containing .taxa.sqlite                          *DIR: input_blast_taxa_db                
 __OPTIONS__
        )
 
 # default options if they are not defined:
+default_path_ncbi=../../data/NCBITaxa/
 
 USAGE ()
 {
@@ -71,7 +73,8 @@ while [ -n "$1" ]; do
     case $1 in
         -h)                    USAGE      ; exit 0 ;;
   	    -path_taxo)           FOLDER_TAXO=$2   ; shift 2; continue ;;
-        -path_blast)          BLAST_FOLDER=$2     ; shift 2; continue ;;
+        -path_blast)          BLAST_FOLDER=$2  ; shift 2; continue ;;
+        -path_ncbi)           PATH_NCBI_TAXA=$2; shift 2; continue ;;         
         *)       BAD_OPTION $1;;
     esac
 done
@@ -83,6 +86,18 @@ FOLDER_BACTERIA=$FOLDER_TAXO/Bacteria
 export FOLDER_TAXO
 export FOLDER_VIRUSES
 export FOLDER_BACTERIA
+
+# Check if ncbi taxonomy database exists.
+if [ -d $PATH_NCBI_TAXA ]; then
+    echo "$PATH_NCBI_TAXA is loaded"
+else
+    echo "No ncbi taxonomy database folder is found."
+    echo "Automatic download with download_ncbi_taxa_db.py"
+    echo "The path of database is now $default_path_ncbi"
+    mkdir $default_path_ncbi
+    python ../download/download_nbci_taxa_db.py $default_path_ncbi
+    PATH_NCBI_TAXA=$default_path_ncbi
+fi
 
 # Begin a parallel task for Bacteria.
 if [ -d $FOLDER_BACTERIA ]
@@ -156,8 +171,8 @@ then
         # Output files is conserved and not_conserved ID of taxa from blast.txt .
         python ../python/sort_blasted_seq.py \
                -i ${BLAST_FOLDER}/$interest_blast \
-               -o ${basename_}conserved.txt 
-#              -n /data2/home/masalm/.etetoolkit/taxa.sqlite
+               -o ${basename_}conserved.txt \
+               -n ${PATH_NCBI_TAXA}.taxa.sqlite
     done
     echo "sort_blasted_seq.py Done"
 
