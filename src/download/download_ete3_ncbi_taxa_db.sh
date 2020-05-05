@@ -7,7 +7,7 @@ conda activate metagenomic_env
 DATE=$(date +_%d_%m_%Y)
 
 # All paths
-PATH_NCBI_TAXA=../../data/ete3_ncbi_taxanomy_database$DATE/
+PATH_NCBI_TAXA=../../data/databases/ete3_ncbi_taxanomy_database$DATE/
 DEFAULT_ETE3_TAXA=~/.etetoolkit/*
 
 mkdir -p -v $PATH_NCBI_TAXA
