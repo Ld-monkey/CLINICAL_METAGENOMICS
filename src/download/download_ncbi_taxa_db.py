@@ -12,8 +12,10 @@ e.g download_ncbi_taxa_db.py ../../data/NCBITaxa/
 """
 
 import sys
+import os
 from ete3 import NCBITaxa
-     
+
+
 if __name__ == "__main__":
     print("Download NCBI taxonmy database")
 
