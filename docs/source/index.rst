@@ -23,6 +23,13 @@ Dans cette documentation vous trouvez la description, l'utilisation, les paramè
    bash/launch_blast_analyse.sh
    bash/launch_preprocess.sh
    bash/recover_reads.sh
+   bash/find_same_id_kraken_blast_bacteria.sh
+
+
+   :maxdepth: 1
+   :caption: Python scripts:
+
+   python/sort_blasted_seq.py
 
 .. toctree::
    :maxdepth: 1
