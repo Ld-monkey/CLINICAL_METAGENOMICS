@@ -3,7 +3,7 @@ Comparer les identifiants taxonomiques entre Kraken et Blast
 
 Le programme shell qui permet de récupérer les identifiant du même genre s'appelle :
 
-.. hint:
+.. hint::
    find_same_id_kraken_blast_bacteria.sh
 
 Localisation
