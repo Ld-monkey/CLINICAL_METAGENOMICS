@@ -25,7 +25,7 @@ Dans cette documentation vous trouvez la description, l'utilisation, les paramè
    bash/recover_reads.sh
    bash/find_same_id_kraken_blast_bacteria.sh
 
-
+.. toctree::
    :maxdepth: 1
    :caption: Python scripts:
 
@@ -40,7 +40,6 @@ Dans cette documentation vous trouvez la description, l'utilisation, les paramè
    cluster/cluster_launch_blast.sh
    cluster/cluster_launch_preprocess.sh
    cluster/cluster_launch_get_id_and_reads.sh
-
 
 .. toctree::
    :maxdepth: 1
