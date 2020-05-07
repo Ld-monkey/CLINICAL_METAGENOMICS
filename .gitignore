@@ -6,6 +6,7 @@ data/raw_sequences/*
 # Ignore blasts and reads results.
 results/blasts/*
 results/reads_outputs/*
+results/test/*
 
 # Ignore to big logs.
 results/log_outputs/outMetaTest.out

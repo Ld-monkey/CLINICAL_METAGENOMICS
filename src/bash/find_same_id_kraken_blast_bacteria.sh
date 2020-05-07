@@ -22,15 +22,11 @@ echo "NSLOTS: $NSLOTS"
 # taxonomiques Blast et Kraken et ne conserve que ceux qui sont du même genre.
 # Compte le nombre de reads pour chaque espèce. Dessine la carte de couverture
 # des Viruses, récupère les noms des espèces pour remplacer les ID taxonomiques.
-# e.g ./find_same_id_kraken_blast_bacteria.sh \
-# -path_taxo output_preprocess_reads_clean_FDA_refseq_human_viral \
-# -path_blast METAPHLAN_BLAST_TEST
-# -path_ncbi ../../data/databases/ete3_ncbi_taxanomy_database_05_05_2020
-
-# ./find_same_id_kraken_blast_bacteria.sh \
-# -path_taxo ../../results/test/output_preprocess_reads_clean_FDA_refseq_human_viral_results_bacteria \
-# -path_blast ../../results/test/output_preprocess_reads_clean_FDA_refseq_human_viral_results_bacteria/METAPHLAN_BLAST \
-# -path_ncbi ../../data/databases/ete3_ncbi_taxanomy_database_05_05_2020
+# e.g :
+# bash find_same_id_kraken_blast_bacteria.sh \
+#      -path_taxo ../../results/test/bacteria_reads_clean_fda_refseq_human_viral_07_05_2020/ \
+#      -path_blast ../../results/test/bacteria_metaphlan_blast_clean_fda_refseq_human_viral_07_05_2020/ \
+#      -path_ncbi ../../data/databases/ete3_ncbi_taxanomy_database_05_05_2020/
 
 PROGRAM=find_same_id_kraken_blast_bacteria.sh
 VERSION=1.0
@@ -45,12 +41,12 @@ OPTIONS=$(cat << __OPTIONS__
 ## OPTIONS ##
     -path_taxo       (Input)  The path of folder with Bacteria or Viruses or (Fongi) folders               *DIR: input_bacteria_folder
     -path_blast      (Input)  The folder of the blast results containing .blast.txt                        *DIR: input_results_blast
-    -path_ncbi       (Input)  The folder of ncbi taxonomy containing .taxa.sqlite                          *DIR: input_blast_taxa_db                
+    -path_ncbi       (Input)  The folder of ncbi taxonomy containing .taxa.sqlite                          *DIR: input_blast_taxa_db
 __OPTIONS__
        )
 
 # default options if they are not defined:
-default_path_ncbi=../../data/NCBITaxa/
+default_path_ncbi=~/.etetoolkit/
 
 USAGE ()
 {
@@ -68,7 +64,7 @@ BAD_OPTION ()
     echo "Unknown option "$1" found on command-line"
     echo "It may be a good idea to read the usage:"
     echo "white $PROGRAM -h to be helped :"
-    echo "example : ./find_same_id_kraken_blast.sh"
+    echo "example : find_same_id_kraken_blast_bacteria.sh -path_taxo ../../results/test/bacteria_reads_clean_fda_refseq_human_viral_07_05_2020/ -path_blast ../../results/test/bacteria_metaphlan_blast_clean_fda_refseq_human_viral_07_05_2020/ -path_ncbi ../../data/databases/ete3_ncbi_taxanomy_database_05_05_2020"
     echo -e $USAGE
 
     exit 1
@@ -95,7 +91,7 @@ export FOLDER_BACTERIA
 
 # Check if ncbi taxonomy database exists.
 if [ -d $PATH_NCBI_TAXA ]; then
-    echo "$PATH_NCBI_TAXA is loaded"
+    echo "NCBI taxonomy db $PATH_NCBI_TAXA is loaded"
 else
     echo "No ncbi taxonomy database folder is found."
     PATH_NCBI_TAXA=$default_path_ncbi
@@ -104,7 +100,7 @@ fi
 # Check if blast folder exists.
 if [ -d $BLAST_FOLDER ]
 then
-    echo "$BLAST_FOLDER exists."
+    echo "Blast folder $BLAST_FOLDER exists."
 else
     echo "Error : $BLAST_FOLDER doesn't exists."
     exit
@@ -115,17 +111,18 @@ if [ -d $FOLDER_BACTERIA ]
 then
 
     echo "Path : $BLAST_FOLDER"
+    echo "####################Check Done !######################"
 
     # Get all blast files (*.blast) for bacteria.
     BLAST_FILES=$(ls $BLAST_FOLDER | grep -i blast)
-    echo "Blast files for Bacteria are : $BLAST_FILES"
+    echo -e "Blast files for Bacteria are : \n$BLAST_FILES"
 
     # Classified sequences change blast.txt to clseqs_*.fastq .
-    clseqs1=$(echo $BLAST_FILES | sed "s/blast.txt/clseqs_1.fastq/g")
-    clseqs2=$(echo $BLAST_FILES | sed "s/blast.txt/clseqs_2.fastq/g")
+    # clseqs1=$(echo $BLAST_FILES | sed "s/blast.txt/clseqs_1.fastq/g")
+    # clseqs2=$(echo $BLAST_FILES | sed "s/blast.txt/clseqs_2.fastq/g")
 
-    echo "clseqs1 : $clseqs1"
-    echo "clseqs2 : $clseqs2"
+    # echo "clseqs1 : $clseqs1"
+    # echo "clseqs2 : $clseqs2"
 
     # # Conserved variable change blast.txt to conserved.txt .
     # conserved=$(echo $BLAST_FILES | sed "s/blast.txt/conserved.txt/g")
@@ -146,91 +143,93 @@ then
     # echo "temp2 : $temp2"
     # echo "temp3 : $temp3"
 
-    # # Change name variable *.blast.txt to *fasta
-    # basename_fasta=$(echo $BLAST_FILES | sed "s/.blast.txt/fasta/g")
+    # Change name variable *.blast.txt to *fasta
+    NAME_BLAST_TO_FASTA=$(echo -e "\n$BLAST_FILES" | sed "s/.blast.txt/fasta/g")
 
-    # # For each sample create folder with result.
-    # for folder_to_create in $basename_fasta
-    # do
-    #     echo "Create $BLAST_FOLDER/$folder_to_create directory."
-    #     mkdir -p ${BLAST_FOLDER}/$folder_to_create
-    #     echo "Create $BLAST_FOLDER/$folder_to_create done."
-    # done
+    echo -e "NAME_BLAST_TO_FASTA : $NAME_BLAST_TO_FASTA"
 
-    # # 3 parameters :
-    # # -i : The blast file input e.g *.blast.txt .
-    # # -o : The output file for e.g *_conserved.txt .
-    # # -n : The localization of NCBI taxa database.
-    # echo "run sort_blasted_seq.py"
-    # echo "BLAST_FOLDER : $BLAST_FOLDER"
-    # for interest_blast in $BLAST_FILES/*blast.txt
-    # do
-    #     echo "File used in sort_blasted_seq.py is : ${BLAST_FOLDER}/$interest_blast "
-    #     echo "$interest_blast"
-    #     basename_=$(basename "$interest_blast" .blast.txt)
-    #     echo "Basename : $basename_"
+    echo "####################Create blast folders!######################"
+    # For each sample create folder with result.
+    for CREATE_BLAST_FOLDERS in $NAME_BLAST_TO_FASTA
+    do
+        echo "Create $BLAST_FOLDER/$CREATE_BLAST_FOLDERS directory."
+        mkdir -p ${BLAST_FOLDER}/$CREATE_BLAST_FOLDERS
+        echo "Create $BLAST_FOLDER/$CREATE_BLAST_FOLDERS done."
+    done
 
-    #     # Output files is conserved and not_conserved ID of taxa from blast.txt .
-    #     python ../python/sort_blasted_seq.py \
-    #            -i ${BLAST_FOLDER}/$interest_blast \
-    #            -o ${basename_}conserved.txt \
-    #            -n ${PATH_NCBI_TAXA}/taxa.sqlite
-    # done
-    # echo "sort_blasted_seq.py Done"
+    echo "####################run sort_blasted_seq.py!###################"
+    for EACH_BLAST_FILE in $BLAST_FILES
+    do
+        echo "For $EACH_BLAST_FILE in ${BLAST_FOLDER} folder."
+        BASENAME_FILE=$(basename "$EACH_BLAST_FILE" .blast.txt)
+        echo "Basename : $BASENAME_FILE"
+
+
+        # 3 parameters :
+        # -i : The blast file input e.g *.blast.txt .
+        # -o : The output file for e.g *_conserved.txt 
+        # -n : The localization of NCBI taxa database.
+        # Output files is conserved and not_conserved ID of taxa from blast.txt .
+        python ../python/sort_blasted_seq.py \
+               -i ${BLAST_FOLDER}$EACH_BLAST_FILE \
+               -o ${BASENAME_FILE}conserved.txt \
+               -n ${PATH_NCBI_TAXA}taxa.sqlite
+    done
+    echo "sort_blasted_seq.py Done"
 
     # # Part of the code that I really don't understand.
-    # cat ${FOLDER_TAXO}/${conserved} | awk -v pathF="${BLAST_FOLDER}/${basename_fasta}" \
+    # cat ${FOLDER_TAXO}/${conserved} | awk -v pathF="${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}" \
     #                                       -F "[\t]" '\''$10~/^1/ {print $1" "$8 > pathF"/map1.fa" ; print $1 > pathF"/1.fa" }'\'
-    # cat ${BLAST_FOLDER}/${conserved} | awk -v pathF="${BLAST_FOLDER}/${basename_fasta}" \
+    # cat ${BLAST_FOLDER}/${conserved} | awk -v pathF="${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}" \
     #                                        -F"[\t]" '\''$10~/^2/ {print $1" "$8 > pathF"/map2.fa" ; print $1 > pathF"/2.fa"}'\'
 
     # # They is no -clseqs_2 parameter ???
     # # I don't understand again.
     # bash recover_reads.sh \
     #      -reads_list ${folderInput}/${clseqs1} empty.txt \
-    #      -clseqs_1 ${BLAST_FOLDER}/${basename_fasta}/1.fa \
-    #      -output ${BLAST_FOLDER}/${basename_fasta}/1.fasta
+    #      -clseqs_1 ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/1.fa \
+    #      -output ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/1.fasta
 
     # bash recover_reads.sh \
     #      -reads_list ${folderInput}/${clseqs2} empty.txt \
-    #      -clseqs_1 ${BLAST_FOLDER}/${basename_fasta}/2.fa \
-    #      -output ${BLAST_FOLDER}/${basename_fasta}/2.fasta
+    #      -clseqs_1 ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/2.fa \
+    #      -output ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/2.fasta
 
     # # I don't know WTF.
-    # cat ${BLAST_FOLDER}/${basename_fasta}/1.fasta | paste - - | cut -c2- | sort > ${BLAST_FOLDER}/${basename_fasta}/sorted1.fasta
-    # cat ${BLAST_FOLDER}/${basename_fasta}/2.fasta | paste - - | cut -c2- | sort > ${BLAST_FOLDER}/${basename_fasta}/sorted2.fasta
+    # cat ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/1.fasta | paste - - | cut -c2- | sort > ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted1.fasta
+    # cat ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/2.fasta | paste - - | cut -c2- | sort > ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted2.fasta
 
     # # Sort map1 and map2 and get outputs sorted1.fa and sorted2.fa
     # # before joining else join command bug.
-    # sort ${BLAST_FOLDER}/${basename_fasta}/map1.fa \
-    #      --output ${BLAST_FOLDER}/${basename_fasta}/sorted1.fa
-    # sort ${BLAST_FOLDER}/${basename_fasta}/map2.fa \
-    #      --output ${BLAST_FOLDER}/${basename_fasta}/sorted2.fa
+    # sort ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/map1.fa \
+    #      --output ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted1.fa
+    # sort ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/map2.fa \
+    #      --output ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted2.fa
 
     # # Join something.
-    # join -1 1 -2 1 ${BLAST_FOLDER}/${basename_fasta}/sorted1.fasta ${BLAST_FOLDER}/${basename_fasta}/sorted1.fa > ${BLAST_FOLDER}/${basename_fasta}/1.fasta
-    # join -1 1 -2 1 ${BLAST_FOLDER}/${basename_fasta}/sorted2.fasta ${BLAST_FOLDER}/${basename_fasta}/sorted2.fa > ${BLAST_FOLDER}/${basename_fasta}/2.fasta
+    # join -1 1 -2 1 ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted1.fasta ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted1.fa > ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/1.fasta
+    # join -1 1 -2 1 ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted2.fasta ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted2.fa > ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/2.fasta
 
     # #
-    # cat ${BLAST_FOLDER}/${basename_fasta}/1.fasta | awk -v pathF="${BLAST_FOLDER}/${basename_fasta}" '\''{print ">"$1" "$2" "$3"\n"$4 > pathF"/"$5".fasta"}'\'
-    # cat ${BLAST_FOLDER}/${basename_fasta}/2.fasta | awk -v pathF="${BLAST_FOLDER}/${basename_fasta}" '\''{print ">"$1" "$2" "$3"\n"$4 >> pathF"/"$5".fasta"}'\'
+    # cat ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/1.fasta | awk -v pathF="${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}" '\''{print ">"$1" "$2" "$3"\n"$4 > pathF"/"$5".fasta"}'\'
+    # cat ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/2.fasta | awk -v pathF="${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}" '\''{print ">"$1" "$2" "$3"\n"$4 >> pathF"/"$5".fasta"}'\'
 
     # # Remove
-    # rm ${BLAST_FOLDER}/${basename_fasta}/1.fasta \
-    #    ${BLAST_FOLDER}/${basename_fasta}/2.fasta \
-    #    ${BLAST_FOLDER}/${basename_fasta}/1.fa \
-    #    ${BLAST_FOLDER}/${basename_fasta}/2.fa
+    # rm ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/1.fasta \
+    #    ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/2.fasta \
+    #    ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/1.fa \
+    #    ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/2.fa
 
-    # rm ${BLAST_FOLDER}/${basename_fasta}/map1.fa \
-    #    ${BLAST_FOLDER}/${basename_fasta}/map2.fa \
-    #    ${BLAST_FOLDER}/${basename_fasta}/sorted1.fa \
-    #    ${BLAST_FOLDER}/${basename_fasta}/sorted2.fa
+    # rm ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/map1.fa \
+    #    ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/map2.fa \
+    #    ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted1.fa \
+    #    ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted2.fa
 
-    # rm ${BLAST_FOLDER}/${basename_fasta}/sorted1.fasta \
-    #    ${BLAST_FOLDER}/${basename_fasta}/sorted2.fasta
+    # rm ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted1.fasta \
+    #    ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted2.fasta
 
     # # WTF men !
-    # find ${BLAST_FOLDER}/${basename_fasta} -type f |
+    # find ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA} -type f |
     #     while read f; do
     #         i=0
     #         while read line; do
