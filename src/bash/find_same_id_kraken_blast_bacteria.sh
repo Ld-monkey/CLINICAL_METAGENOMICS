@@ -117,32 +117,6 @@ then
     BLAST_FILES=$(ls $BLAST_FOLDER | grep -i blast)
     echo -e "Blast files for Bacteria are : \n$BLAST_FILES"
 
-    # Classified sequences change blast.txt to clseqs_*.fastq .
-    # clseqs1=$(echo $BLAST_FILES | sed "s/blast.txt/clseqs_1.fastq/g")
-    # clseqs2=$(echo $BLAST_FILES | sed "s/blast.txt/clseqs_2.fastq/g")
-
-    # echo "clseqs1 : $clseqs1"
-    # echo "clseqs2 : $clseqs2"
-
-    # # Conserved variable change blast.txt to conserved.txt .
-    # conserved=$(echo $BLAST_FILES | sed "s/blast.txt/conserved.txt/g")
-
-    # echo "conserved : $conserved"
-
-    # # Counting variable change blast.txt to counting.txt .
-    # counting=$(echo $BLAST_FILES | sed "s/blast.txt/countbis.txt/g")
-
-    # echo "counting : $counting"
-
-    # # Change variable blast.txt to temps*.txt .
-    # temp1=$(echo $BLAST_FILES | sed "s/blast.txt/temp1.txt/g")
-    # temp2=$(echo $BLAST_FILES | sed "s/blast.txt/temp2.txt/g")
-    # temp3=$(echo $BLAST_FILES | sed "s/blast.txt/temp3.txt/g")
-
-    # echo "temp1 : $temp1"
-    # echo "temp2 : $temp2"
-    # echo "temp3 : $temp3"
-
     # Change name variable *.blast.txt to *fasta
     NAME_BLAST_TO_FASTA=$(echo -e "\n$BLAST_FILES" | sed "s/.blast.txt/fasta/g")
 
@@ -164,31 +138,42 @@ then
         BASENAME_FILE=$(basename "$EACH_BLAST_FILE" .blast.txt)
         echo "Basename : $BASENAME_FILE"
 
-
         # 3 parameters :
         # -i : The blast file input e.g *.blast.txt .
-        # -o : The output file for e.g *_conserved.txt 
+        # -o : The output file for e.g *_conserved.txt
         # -n : The localization of NCBI taxa database.
         # Output files is conserved and not_conserved ID of taxa from blast.txt .
-        python ../python/sort_blasted_seq.py \
-               -i ${BLAST_FOLDER}$EACH_BLAST_FILE \
-               -o ${BASENAME_FILE}conserved.txt \
-               -n ${PATH_NCBI_TAXA}taxa.sqlite
+        # python ../python/sort_blasted_seq.py \
+        #        -i ${BLAST_FOLDER}$EACH_BLAST_FILE \
+        #        -o ${BASENAME_FILE}conserved.txt \
+        #        -n ${PATH_NCBI_TAXA}taxa.sqlite
     done
     echo "sort_blasted_seq.py Done"
 
-    # # Part of the code that I really don't understand.
-    # cat ${FOLDER_TAXO}/${conserved} | awk -v pathF="${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}" \
-    #                                       -F "[\t]" '\''$10~/^1/ {print $1" "$8 > pathF"/map1.fa" ; print $1 > pathF"/1.fa" }'\'
-    # cat ${BLAST_FOLDER}/${conserved} | awk -v pathF="${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}" \
-    #                                        -F"[\t]" '\''$10~/^2/ {print $1" "$8 > pathF"/map2.fa" ; print $1 > pathF"/2.fa"}'\'
+    echo "#################### Conserved sequences !###################"
+    # Change name variable *.blast.txt to *conserved.txt .
+    NAME_BLAST_TO_CONSERVED=$(echo -e "\n$BLAST_FILES" | sed "s/.blast.txt/conserved.txt/g")
+    echo "conserved : $NAME_BLAST_TO_CONSERVED"
+ 
+    # From conserved file extract some data like ...
+    echo "#############################################################"
+    for file in $NAME_BLAST_TO_FASTA
+    do
+        echo $(echo "$file" | sed "s/_fasta/_conserved.txt/g")
+        open_file=${BLAST_FOLDER}${file}/$(echo "$file" | sed "s/_fasta/_conserved.txt/g")
+        awk -F "\t" -v path=${BLAST_FOLDER}$file '{print $1" "$8 > path"/map1.fa" ; print $1 > path"/1.fa"} END {print "Done !"}' $open_file
+        echo "map1.fa and 1.fa were created !"
+    done
 
-    # # They is no -clseqs_2 parameter ???
-    # # I don't understand again.
-    # bash recover_reads.sh \
-    #      -reads_list ${folderInput}/${clseqs1} empty.txt \
-    #      -clseqs_1 ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/1.fa \
-    #      -output ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/1.fasta
+    # cat ${BLAST_FOLDER}/${NAME_BLAST_TO_CONSERVED} | awk -v pathF="${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}" \
+        #                                        -F"[\t]" '\''$10~/^2/ {print $1" "$8 > pathF"/map2.fa" ; print $1 > pathF"/2.fa"}'\'
+
+    # They is no -clseqs_2 parameter ???
+    # I don't understand again.
+    bash recover_reads.sh \
+         -reads_list ${folderInput}/${clseqs1} empty.txt \
+         -clseqs_1 ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/1.fa \
+         -output ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/1.fasta
 
     # bash recover_reads.sh \
     #      -reads_list ${folderInput}/${clseqs2} empty.txt \
@@ -241,18 +226,18 @@ then
     #     xargs rm -f
 
     # #
-    # sort -n ${BLAST_FOLDER}/${conserved} -k8,8 \
+    # sort -n ${BLAST_FOLDER}/${NAME_BLAST_TO_CONSERVED} -k8,8 \
     #      --output ${BLAST_FOLDER}/{}sorted.txt
 
     # #
-    # rm ${BLAST_FOLDER}/${conserved}
+    # rm ${BLAST_FOLDER}/${NAME_BLAST_TO_CONSERVED}
 
     # #
-    # mv ${BLAST_FOLDER}/{}sorted.txt ${BLAST_FOLDER}/${conserved}
+    # mv ${BLAST_FOLDER}/{}sorted.txt ${BLAST_FOLDER}/${NAME_BLAST_TO_CONSERVED}
 
     # #
-    # cut -f8 ${BLAST_FOLDER}/${conserved} | uniq -c | sort -k2,2 -g > ${BLAST_FOLDER}/${temp1}
-    # cut -f2,8 ${BLAST_FOLDER}/${conserved} | sort -k1 | uniq | cut -f2 | sort -g | uniq -c > ${BLAST_FOLDER}/${temp2}
+    # cut -f8 ${BLAST_FOLDER}/${NAME_BLAST_TO_CONSERVED} | uniq -c | sort -k2,2 -g > ${BLAST_FOLDER}/${temp1}
+    # cut -f2,8 ${BLAST_FOLDER}/${NAME_BLAST_TO_CONSERVED} | sort -k1 | uniq | cut -f2 | sort -g | uniq -c > ${BLAST_FOLDER}/${temp2}
 
     # #
     # join -1 2 -2 2 ${BLAST_FOLDER}/${temp1} ${BLAST_FOLDER}/${temp2} | sort -k1,1b > ${BLAST_FOLDER}/${temp3}
@@ -264,6 +249,27 @@ then
     #
     # rm ${BLAST_FOLDER}/${counting}
     # rm ${BLAST_FOLDER}/${temp1} ${BLAST_FOLDER}/${temp2} ${BLAST_FOLDER}/${temp3}
+
+    # Classified sequences change blast.txt to clseqs_*.fastq .
+    # clseqs1=$(echo $BLAST_FILES | sed "s/blast.txt/clseqs_1.fastq/g")
+    # clseqs2=$(echo $BLAST_FILES | sed "s/blast.txt/clseqs_2.fastq/g")
+
+    # echo "clseqs1 : $clseqs1"
+    # echo "clseqs2 : $clseqs2"
+
+    # # Counting variable change blast.txt to counting.txt .
+    # counting=$(echo $BLAST_FILES | sed "s/blast.txt/countbis.txt/g")
+
+    # echo "counting : $counting"
+
+    # # Change variable blast.txt to temps*.txt .
+    # temp1=$(echo $BLAST_FILES | sed "s/blast.txt/temp1.txt/g")
+    # temp2=$(echo $BLAST_FILES | sed "s/blast.txt/temp2.txt/g")
+    # temp3=$(echo $BLAST_FILES | sed "s/blast.txt/temp3.txt/g")
+
+    # echo "temp1 : $temp1"
+    # echo "temp2 : $temp2"
+    # echo "temp3 : $temp3"
 else
     echo "Bacteria directory doesn't exists."
 fi
