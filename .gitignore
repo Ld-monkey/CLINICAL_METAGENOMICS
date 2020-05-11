@@ -10,3 +10,7 @@ results/test/*
 
 # Ignore to big logs.
 results/log_outputs/outMetaTest.out
+
+# Ignore test
+results/old_tests/*
+src/old_sources/*
