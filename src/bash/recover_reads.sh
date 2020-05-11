@@ -81,10 +81,6 @@ then
     echo "The $READS_LIST exists"
     echo "The $CLASSIFIED_SEQUENCE_FASTQ1 exists"
 
-    # Tempory files
-    #temp_file=$(mktemp)
-    #temp_fasta=$(mktemp)
-    
     # Seqtk is a fast and lightweight tool for processing sequences in
     # the FASTA or FASTQ format. It seamlessly parses both FASTA and FASTQ files.
 
@@ -95,37 +91,26 @@ then
     # basename classified ==> 1-MAR-LBA-ADN_S1.temporary.fq
 
     # Convert fastq to fasta (???)
-    seqtk seq -a ${temp_file}.fq > ${temp_fasta}.fa
+    seqtk seq -a ${temp_file}.fq > $OUTPUT_INTEREST_FASTA
 
     # basename classified ==> 1-MAR-LBA-ADN_S1.final.fq
 
     # Check if Toolkit return code for a successful retunr (0).
     # $? return previous command seqtk seq -a. 
-    if [ $? -eq 0 ]; then
-
+    if [ $? -eq 0 ]
+    then
         # Remove tempory file.
-        rm $temp_file
+        rm ${temp_file}.fq
 
-        # Check if fastq1 exists.
-        if [[ -s $temp_fasta ]]
-        then
-            echo "Reads recovered for $CLASSIFIED_SEQUENCE_FASTQ1"
-        else
-            echo "Reads not recovered for $CLASSIFIED_SEQUENCE_FASTQ1"
-        fi
+        echo "Reads recovered for $CLASSIFIED_SEQUENCE_FASTQ1"
+        echo "The output is $OUTPUT_INTEREST_FASTA in .fa format"
     else
+        echo "Reads not recovered for $CLASSIFIED_SEQUENCE_FASTQ1"
         echo "FAIL for $CLASSIFIED_SEQUENCE_FASTQ1"
     fi
 
-    if [[ -s $temp_fasta ]]
-    then
-        # Rename fastq1 to *interesting.fasta.
-        mv $temp_fasta ${OUTPUT_INTEREST_FASTA}
-    else
-        echo "No reads recovered at all"
-    fi
 else
-    echo "$CLASSIFIED_SEQUENCE_FASTQ1 or/and $CLASSIFIED_SEQUENCE_FASTQ2 or/and $READS_LIST empty"
+    echo "$CLASSIFIED_SEQUENCE_FASTQ1 or/and $READS_LIST are empty"
 fi
 
 # -s : Check if ReadList.txt + *clseqs_1 + *clseqs_2 exists and has a size

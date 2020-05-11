@@ -36,11 +36,11 @@ Pour actualiser les modifications dans l'environnement conda :
 conda env update --name metagenomic_env --file metagenomic_env.yml 
 ```
 
-### Automatisation avec SnakeMake :rocket:
+### Automatisation avec SnakeMake :snake:
 
 Le système de management de workflows [Snakemake](https://snakemake.readthedocs.io/en/stable/) est un outil qui permet des analyses de données reproductibles et adaptatives.
 
-### Configuration de la documentation
+### Configuration de la documentation :book:
 
 La documentation utilise [sphinx](https://www.sphinx-doc.org/en/master/) et le thème "sphinx-rtd-theme" que l'on peut retrouver sur https://github.com/readthedocs/sphinx_rtd_theme.
 

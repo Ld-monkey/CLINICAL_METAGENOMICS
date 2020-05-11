@@ -26,6 +26,7 @@ echo "NSLOTS: $NSLOTS"
 # bash find_same_id_kraken_blast_bacteria.sh \
 #      -path_taxo ../../results/test/bacteria_reads_clean_fda_refseq_human_viral_07_05_2020/ \
 #      -path_blast ../../results/test/bacteria_metaphlan_blast_clean_fda_refseq_human_viral_07_05_2020/ \
+#      -path_clseq ../../results/test/bacteria_classified_reads_clean_fda_refseq_human_viral_07_05_2020 \
 #      -path_ncbi ../../data/databases/ete3_ncbi_taxanomy_database_05_05_2020/
 
 PROGRAM=find_same_id_kraken_blast_bacteria.sh
@@ -41,6 +42,7 @@ OPTIONS=$(cat << __OPTIONS__
 ## OPTIONS ##
     -path_taxo       (Input)  The path of folder with Bacteria or Viruses or (Fongi) folders               *DIR: input_bacteria_folder
     -path_blast      (Input)  The folder of the blast results containing .blast.txt                        *DIR: input_results_blast
+    -path_clseq      (Input)  The folder of classified sequences containing .clseqs_                       *DIR: input_classified_folder
     -path_ncbi       (Input)  The folder of ncbi taxonomy containing .taxa.sqlite                          *DIR: input_blast_taxa_db
 __OPTIONS__
        )
@@ -64,7 +66,11 @@ BAD_OPTION ()
     echo "Unknown option "$1" found on command-line"
     echo "It may be a good idea to read the usage:"
     echo "white $PROGRAM -h to be helped :"
-    echo "example : find_same_id_kraken_blast_bacteria.sh -path_taxo ../../results/test/bacteria_reads_clean_fda_refseq_human_viral_07_05_2020/ -path_blast ../../results/test/bacteria_metaphlan_blast_clean_fda_refseq_human_viral_07_05_2020/ -path_ncbi ../../data/databases/ete3_ncbi_taxanomy_database_05_05_2020"
+    echo "example : find_same_id_kraken_blast_bacteria.sh \
+                    -path_taxo ../../results/test/bacteria_reads_clean_fda_refseq_human_viral_07_05_2020/ \
+                    -path_blast ../../results/test/bacteria_metaphlan_blast_clean_fda_refseq_human_viral_07_05_2020/ \
+                    -path_clseq ../../results/test/bacteria_classified_reads_clean_fda_refseq_human_viral_07_05_2020 \
+                    -path_ncbi ../../data/databases/ete3_ncbi_taxanomy_database_05_05_2020"
     echo -e $USAGE
 
     exit 1
@@ -74,9 +80,10 @@ BAD_OPTION ()
 while [ -n "$1" ]; do
     case $1 in
         -h)                    USAGE      ; exit 0 ;;
-  	    -path_taxo)           FOLDER_TAXO=$2   ; shift 2; continue ;;
-        -path_blast)          BLAST_FOLDER=$2  ; shift 2; continue ;;
-        -path_ncbi)           PATH_NCBI_TAXA=$2; shift 2; continue ;;
+  	    -path_taxo)           FOLDER_TAXO=$2       ; shift 2; continue ;;
+        -path_blast)          BLAST_FOLDER=$2      ; shift 2; continue ;;
+        -path_clseq)          CLASSIFIED_FOLDER=$2 ; shift 2; continue ;;
+        -path_ncbi)           PATH_NCBI_TAXA=$2    ; shift 2; continue ;;
         *)       BAD_OPTION $1;;
     esac
 done
@@ -89,14 +96,6 @@ export FOLDER_TAXO
 #export FOLDER_VIRUSES
 export FOLDER_BACTERIA
 
-# Check if ncbi taxonomy database exists.
-if [ -d $PATH_NCBI_TAXA ]; then
-    echo "NCBI taxonomy db $PATH_NCBI_TAXA is loaded"
-else
-    echo "No ncbi taxonomy database folder is found."
-    PATH_NCBI_TAXA=$default_path_ncbi
-fi
-
 # Check if blast folder exists.
 if [ -d $BLAST_FOLDER ]
 then
@@ -104,6 +103,21 @@ then
 else
     echo "Error : $BLAST_FOLDER doesn't exists."
     exit
+fi
+
+# Check if classified folder exists.
+if [ -d $CLASSIFIED_FOLDER ]; then
+    echo "Classified folder $CLASSIFIED_FOLDER is loaded"
+else
+    echo "No classified folder is found."
+fi
+
+# Check if ncbi taxonomy database exists.
+if [ -d $PATH_NCBI_TAXA ]; then
+    echo "NCBI taxonomy db $PATH_NCBI_TAXA is loaded"
+else
+    echo "No ncbi taxonomy database folder is found."
+    PATH_NCBI_TAXA=$default_path_ncbi
 fi
 
 # Begin a parallel task for Bacteria.
@@ -168,17 +182,26 @@ then
     # cat ${BLAST_FOLDER}/${NAME_BLAST_TO_CONSERVED} | awk -v pathF="${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}" \
         #                                        -F"[\t]" '\''$10~/^2/ {print $1" "$8 > pathF"/map2.fa" ; print $1 > pathF"/2.fa"}'\'
 
-    # They is no -clseqs_2 parameter ???
-    # I don't understand again.
-    bash recover_reads.sh \
-         -reads_list ${folderInput}/${clseqs1} empty.txt \
-         -clseqs_1 ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/1.fa \
-         -output ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/1.fasta
 
-    # bash recover_reads.sh \
-    #      -reads_list ${folderInput}/${clseqs2} empty.txt \
-    #      -clseqs_1 ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/2.fa \
-    #      -output ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/2.fasta
+    echo "#################### Recover reads !########################"
+    for file in $BLAST_FILES
+    do
+        # Change name variable *.blast.txt to *clseqs_*.fastq .
+        CLASSIFIED_SEQ_1=$(echo "$file" | sed "s/blast.txt/clseqs_1.fastq/g")
+        CLASSIFIED_SEQ_2=$(echo "$file" | sed "s/blast.txt/clseqs_2.fastq/g")
+
+        open_file=${BLAST_FOLDER}$(echo "$file" | sed "s/.blast.txt/fasta/g")
+   
+        bash recover_reads.sh \
+             -reads_list ${open_file}/1.fa \
+             -clseqs_1 $CLASSIFIED_FOLDER${CLASSIFIED_SEQ_1}\
+             -output ${open_file}/1.fasta
+
+        # bash recover_reads.sh \
+            #      -reads_list ${folderInput}/${CLASSIFIED_SEQ_2} \
+            #      -clseqs_1 ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/2.fa \
+            #      -output ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/2.fasta
+    done
 
     # # I don't know WTF.
     # cat ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/1.fasta | paste - - | cut -c2- | sort > ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted1.fasta
@@ -249,13 +272,6 @@ then
     #
     # rm ${BLAST_FOLDER}/${counting}
     # rm ${BLAST_FOLDER}/${temp1} ${BLAST_FOLDER}/${temp2} ${BLAST_FOLDER}/${temp3}
-
-    # Classified sequences change blast.txt to clseqs_*.fastq .
-    # clseqs1=$(echo $BLAST_FILES | sed "s/blast.txt/clseqs_1.fastq/g")
-    # clseqs2=$(echo $BLAST_FILES | sed "s/blast.txt/clseqs_2.fastq/g")
-
-    # echo "clseqs1 : $clseqs1"
-    # echo "clseqs2 : $clseqs2"
 
     # # Counting variable change blast.txt to counting.txt .
     # counting=$(echo $BLAST_FILES | sed "s/blast.txt/countbis.txt/g")
