@@ -62,48 +62,34 @@ while [ -n "$1" ]; do
     esac
 done
 
-# Create folder that containing temporary file.
-TEMPORARY_DIR=../../results/temporary_file/
-
-# Check if temporary folder exists. (Ca ne sert a rien.)
-# Mieux vaut créer les fichiers dans des dossiers spécifiques puis supprimer.
-if [ -d $TEMPORARY_DIR ]
-then
-    echo " Path : $TEMPORARY_DIR"
-else
-    mkdir --verbose $TEMPORARY_DIR
-fi
-
 # Check for no paired sequences (only fastq1 is necessary).
 if [[ -s $READS_LIST && -s $CLASSIFIED_SEQUENCE_FASTQ1 ]]
 then
+    
+    # The temporary file for seqtk.
+    TEMPORARY_FILE=$(dirname $READS_LIST)_temporary.fq
+    echo " temporary file : $TEMPORARY_FILE"   
 
-    echo "The $READS_LIST exists"
-    echo "The $CLASSIFIED_SEQUENCE_FASTQ1 exists"
+    echo "First condition"
+    echo "read list $READS_LIST exists."
+    echo "classified sequences $CLASSIFIED_SEQUENCE_FASTQ1 exists".
 
     # Seqtk is a fast and lightweight tool for processing sequences in
     # the FASTA or FASTQ format. It seamlessly parses both FASTA and FASTQ files.
+    # Extract sequences with names in file name.lst (READS_LIST) one sequence name per line.
+    seqtk subseq $CLASSIFIED_SEQUENCE_FASTQ1 $READS_LIST > ${TEMPORARY_FILE}
 
-    # Extract sequences with names in file name.lst (READS_LIST)
-    # one sequence name per line.
-    seqtk subseq $CLASSIFIED_SEQUENCE_FASTQ1 $READS_LIST > ${temp_file}.fq
+    # Convert fastq to fasta.
+    seqtk seq -a $TEMPORARY_FILE > $OUTPUT_INTEREST_FASTA
 
-    # basename classified ==> 1-MAR-LBA-ADN_S1.temporary.fq
-
-    # Convert fastq to fasta (???)
-    seqtk seq -a ${temp_file}.fq > $OUTPUT_INTEREST_FASTA
-
-    # basename classified ==> 1-MAR-LBA-ADN_S1.final.fq
-
-    # Check if Toolkit return code for a successful retunr (0).
-    # $? return previous command seqtk seq -a. 
+    # Check if seqtk return (0) for a success and $? return previous command seqtk seq -a. 
     if [ $? -eq 0 ]
     then
         # Remove tempory file.
-        rm ${temp_file}.fq
+        #rm $TEMPORARY_FILE
 
-        echo "Reads recovered for $CLASSIFIED_SEQUENCE_FASTQ1"
-        echo "The output is $OUTPUT_INTEREST_FASTA in .fa format"
+        echo "Reads recovered for $CLASSIFIED_SEQUENCE_FASTQ1."
+        echo "The output is $OUTPUT_INTEREST_FASTA in .fasta format."
     else
         echo "Reads not recovered for $CLASSIFIED_SEQUENCE_FASTQ1"
         echo "FAIL for $CLASSIFIED_SEQUENCE_FASTQ1"
@@ -113,95 +99,57 @@ else
     echo "$CLASSIFIED_SEQUENCE_FASTQ1 or/and $READS_LIST are empty"
 fi
 
-# -s : Check if ReadList.txt + *clseqs_1 + *clseqs_2 exists and has a size
-# greater than zero.
+# Check if ReadList.txt + *clseqs_1 + *clseqs_2 exists and has a size greater than zero.
 if [[ -s $READS_LIST && -s $CLASSIFIED_SEQUENCE_FASTQ1 && -s $CLASSIFIED_SEQUENCE_FASTQ2 ]]
 then
+    # The temporary file for seqtk.
+    TEMPORARY_FILE=$(dirname $READS_LIST)_temporary.fq
+    echo " temporary file : $TEMPORARY_FILE"   
 
+    echo "2nd condition"
     echo "The $READS_LIST exists"
     echo "The $CLASSIFIED_SEQUENCE_FASTQ1 exists"
     echo "The $CLASSIFIED_SEQUENCE_FASTQ2 exists"
-    
-    # Tempory files in bash. (ca ne sert a rien !)
-    temp_file=$(mktemp)
-    temp_fasta=$(mktemp)
 
     # Seqtk is a fast and lightweight tool for processing sequences in
     # the FASTA or FASTQ format. It seamlessly parses both FASTA and FASTQ files.
+    # Extract sequences with names in file name.lst (READS_LIST) one sequence name per line.
+    seqtk subseq $CLASSIFIED_SEQUENCE_FASTQ1 $READS_LIST > ${TEMPORARY_FILE}
 
-    # Extract sequences with names in file name.lst (READS_LIST)
-    # one sequence name per line.
-    seqtk subseq $CLASSIFIED_SEQUENCE_FASTQ1 $READS_LIST > ${temp_file}.fq
+    # Convert fastq to fasta.
+    seqtk seq -a $TEMPORARY_FILE > $OUTPUT_INTEREST_FASTA
 
-    # Convert fastq to fasta (???)
-    seqtk seq -a ${temp_file}.fq > ${temp_fasta}.fa
+    # Check if seqtk return (0) for a success and $? return previous command seqtk seq -a. 
+    if [ $? -eq 0 ]
+    then
+        # Remove tempory file.
+        #rm $TEMPORARY_FILE
 
-    # Toolkit return code for a successful completion (0).
-    # $? return previous command seqtk seq -a.
-    if [ $? -eq 0 ]; then
-
-        # Remove the tempory files.
-        rm $temp_file
-
-        # Check if tempory fasta exists.
-        if [[ -s $temp_fasta ]]
-        then
-            echo "Reads recovered for $CLASSIFIED_SEQUENCE_FASTQ1"
-        else
-            echo "Reads not recovered for $CLASSIFIED_SEQUENCE_FASTQ1"
-        fi
+        echo "Reads recovered for $CLASSIFIED_SEQUENCE_FASTQ1."
+        echo "The output is $OUTPUT_INTEREST_FASTA in .fasta format."
     else
+        echo "Reads not recovered for $CLASSIFIED_SEQUENCE_FASTQ1"
         echo "FAIL for $CLASSIFIED_SEQUENCE_FASTQ1"
     fi
 
-    # A other tempory files in bash.
-    temp_file1=$(mktemp)
-    temp_fasta1=$(mktemp)
+    # The temporary file for seqtk.
+    TEMPORARY_FILE_2=$(dirname $READS_LIST)_temporary_2.fq
+    echo " temporary file : $TEMPORARY_FILE"   
 
     # Toolkit to transform fastq2 to fasta with tempory file.
-    seqtk subseq  $CLASSIFIED_SEQUENCE_FASTQ2 $READS_LIST >  $temp_file1
-    seqtk seq -a $temp_file1 > $temp_fasta1
+    seqtk subseq $CLASSIFIED_SEQUENCE_FASTQ1 $READS_LIST > $TEMPORARY_FILE_2
+    seqtk seq -a $TEMPORARY_FILE_2 >> $OUTPUT_INTEREST_FASTA
 
-    # Same condition that before (can be a function) but for fastq2.
-    if [ $? -eq 0 ]; then
+    # Check if seqtk return (0) for a success and $? return previous command seqtk seq -a. 
+    if [ $? -eq 0 ]
+    then
+        # Remove tempory file.
+        #rm $TEMPORARY_FILE_2
 
-        # Remove the tempory file.
-        rm $temp_file1
-
-        # Check if tempory fasta exists.
-        if [[ -s $temp_fasta1 ]]
-        then
-            echo "Reads recovered for $CLASSIFIED_SEQUENCE_FASTQ2"
-        else
-            echo "Reads not recovered for $CLASSIFIED_SEQUENCE_FASTQ2"
-        fi
+        echo "Reads recovered for $CLASSIFIED_SEQUENCE_FASTQ2."
+        echo "The output is concatenate in $OUTPUT_INTEREST_FASTA in .fasta format."
     else
-        echo "FAIL for $CLASSIFIED_SEQUENCE_FASTQ2"
-    fi
-
-    # Check if fastq1 and fastq2 exists.
-    if [[ -s $temp_fasta && -s $temp_fasta1 ]]
-    then
-        # Then concatenate fastq1 and fastq2 in output *.interesting.fasta .
-        cat $temp_fasta $temp_fasta1  >  ${OUTPUT_INTEREST_FASTA}
-
-        # And clean the tempory files after concatenate.
-        rm $temp_fasta
-        rm $temp_fasta1
-
-        # Check if only fastq2 exists.
-    elif [[ ! -s $temp_fasta && -s $temp_fasta1 ]]
-    then
-        # rename the fastq2 to *.interesting.fasta .
-        mv $temp_fasta1 ${OUTPUT_INTEREST_FASTA}
-        
-        # Check if only fastq1 exists.
-    elif [[ -s $temp_fasta && ! -s $temp_fasta1 ]]
-    then
-        # Rename the fastq1 to *.interestring.fasta.
-        mv $temp_fasta ${OUTPUT_INTEREST_FASTA}
-    elif [[ ! -s $temp_fasta && ! -s $temp_fasta1 ]]
-    then
-        echo "Non reads recovered at all"
+        echo "Reads not recovered for $CLASSIFIED_SEQUENCE_FASTQ2"
+        echo "FAIL for $CLASSIFIED_SEQUENCE_FASTQ1"
     fi
 fi

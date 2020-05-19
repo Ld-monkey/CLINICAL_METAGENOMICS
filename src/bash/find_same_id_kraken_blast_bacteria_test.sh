@@ -171,35 +171,22 @@ then
     NAME_BLAST_TO_CONSERVED=$(echo -e "\n$BLAST_FILES" | sed "s/.blast.txt/conserved.txt/g")
     echo "conserved : $NAME_BLAST_TO_CONSERVED"
  
-    # From conserved file extract some data like ...
-    
-    # Ce n'est pas du conserved qui est utilisé mais clsesq1 et clsesq2
-
+    # From conserved file extract id and create 1.fa 2.fa map1.fa and map2.fa .
     for file in $NAME_BLAST_TO_FASTA
     do
 
-        echo $file
-
-        # Change name variable *.blast.txt to *clseqs_*.fastq .
-        CLASSIFIED_SEQ_1=$(echo "$file" | sed "s/fasta/.clseqs_1.fastq/g")
-        CLASSIFIED_SEQ_2=$(echo "$file" | sed "s/fasta/.clseqs_2.fastq/g")
-
-        echo $CLASSIFIED_SEQ_1
-        echo $CLASSIFIED_SEQ_2
-
+        #echo $file
         #echo $(echo "$file" | sed "s/_fasta/_conserved.txt/g")
-        #open_file=${BLAST_FOLDER}${file}/$(echo "$file" | sed "s/_fasta/_conserved.txt/g")
+        open_file=${BLAST_FOLDER}${file}/$(echo "$file" | sed "s/_fasta/_conserved.txt/g")
+        #echo $open_file
 
-        awk -F "\t" -v path=${BLAST_FOLDER}$file '{print $1" "$8 > path"/map1.fa" ; print $1 > path"/1.fa"} END {print "Done !"}' $CLASSIFIED_FOLDER$CLASSIFIED_SEQ_1
-        echo "map1.fa and 1.fa were created !"
-        awk -F "\t" -v path=${BLAST_FOLDER}$file '{print $1" "$8 > path"/map2.fa" ; print $1 > path"/2.fa"} END {print "Done !"}' $CLASSIFIED_FOLDER$CLASSIFIED_SEQ_2
-        echo "map2.fa and 2.fa were created !"
+        #awk -F "[\t]" -v path=${BLAST_FOLDER}$file '$10~/^1/ {print $1" "$8 > path"/map1.fa" ; print $1 > path"/1.fa"}' $open_file
+        echo "map1.fa and 1.fa were created for $open_file"
+
+        #awk -F "[\t]" -v path=${BLAST_FOLDER}$file '$10~/^2/ {print $1" "$8 > path"/map2.fa" ; print $1 > path"/2.fa"}' $open_file
+        echo "map2.fa and 2.fa were created for $open_file"
     done
-
-    
-    # cat ${BLAST_FOLDER}/${NAME_BLAST_TO_CONSERVED} | awk -v pathF="${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}" \
-        #                                        -F"[\t]" '\''$10~/^2/ {print $1" "$8 > pathF"/map2.fa" ; print $1 > pathF"/2.fa"}'\'
-
+    echo "#############################################################"
 
     echo "#################### Recover reads !########################"
     for file in $BLAST_FILES
@@ -209,17 +196,24 @@ then
         CLASSIFIED_SEQ_2=$(echo "$file" | sed "s/blast.txt/clseqs_2.fastq/g")
 
         open_file=${BLAST_FOLDER}$(echo "$file" | sed "s/.blast.txt/fasta/g")
+
+        echo $open_file
    
         # bash recover_reads.sh \
         #      -reads_list ${open_file}/1.fa \
         #      -clseqs_1 $CLASSIFIED_FOLDER${CLASSIFIED_SEQ_1}\
         #      -output ${open_file}/1.fasta
 
+        echo "1.fasta is created !"
+
         # bash recover_reads.sh \
-            #      -reads_list ${folderInput}/${CLASSIFIED_SEQ_2} \
-            #      -clseqs_1 ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/2.fa \
-            #      -output ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/2.fasta
+        #      -reads_list ${open_file}/2.fa \
+        #      -clseqs_1 $CLASSIFIED_FOLDER${CLASSIFIED_SEQ_2}\
+        #      -output ${open_file}/2.fasta
+
+        echo "2.fasta is created !"
     done
+    echo "done recover reads !"
 
     # # I don't know WTF.
     # cat ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/1.fasta | paste - - | cut -c2- | sort > ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted1.fasta
