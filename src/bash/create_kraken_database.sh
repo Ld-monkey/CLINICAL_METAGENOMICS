@@ -13,6 +13,79 @@
 #     -threads $thread
 # Official documentation : https://ccb.jhu.edu/software/kraken2/index.shtml?t=manual
 
+# Function to check if the sequence folder exists.
+function check_sequence_folder {
+    if [ -d $PATH_SEQUENCES ]
+    then
+        echo "$PATH_SEQUENCES folder already exist."
+    else
+        echo "Error $PATH_SEQUENCES doesn't exist."
+        exit 1
+    fi
+}
+
+# Function to check if the database folder exists.
+function check_database_folder {
+    if [ -d $DBNAME ]
+    then
+        echo "$DBNAME folder already exits."
+    else
+        mkdir $DBNAME
+        echo "Create folder database $DBNAME "
+    fi
+}
+
+# Function to unzip sequences.
+function unzip_sequences {
+    
+    # Check if the fasta files are already decompressed.
+    unzip_files=$(ls $PATH_SEQUENCES/*.gz 2> /dev/null | wc -l)
+    if [ "$unzip_files" != "0" ]
+    then
+        echo "Unzip all files"
+        gunzip --verbose $PATH_SEQUENCES/*.gz
+        echo "$PATH_SEQUENCES Unzip done !"
+    else
+        echo "$PATH_SEQUENCES files are already decompressed"
+    fi
+}
+
+# Function to unzip taxonomy files.
+function unzip_ncbi_taxonomy {
+    
+    # Check if the taxonomy files from database are already decompressed.
+    taxonomy_unzip=$(ls $DBNAME/taxonomy/*.gz 2> /dev/null | wc -l)
+    if [ "$taxonomy_unzip" != "0" ]
+    then
+        echo "Unzip all *.gz files"
+        gunzip $DBNAME/taxonomy/*.gz
+        echo "$DBNAME Unzip *.gz done !"
+        tar zcvf $DBNAME/taxonomy/*.tar
+        echo "$DBNAME *.tar unziped"
+        rm $DBNAME/taxonomy/*.tar
+        echo "*.tar files are removed"
+    else
+        echo "$DBNAME *.gz files are already decompressed"
+    fi
+}
+
+# Function to download ncbi taxonomy if doesn't exists.
+function download_ncbi_taxonomy {
+    
+    # Check if folder with taxonomy is empty.
+    if [ ! "$(ls -A $DBNAME/taxonomy)" ]
+    then
+        echo "$DBNAME is empty!"
+        echo "Download NCBI taxonomy in $DBNAME"
+        kraken2-build --download-taxonomy --db $DBNAME --use-ftp
+        echo "Unzip all data"
+        gunzip $DBNAME/taxonmy/*.gz
+        echo "Unzip done !"
+    else
+        echo "NCBI taxonomy is already exists."
+    fi
+}
+
 # Function to check the correct -type_db parameter.
 function check_type_database {
     if [[ $TYPE_DATABASE = "archaea" ]] \
@@ -158,79 +231,42 @@ while [ -n "$1" ]; do
 done
 
 echo " ---- Create Kraken 2 Database ---- "
-echo $PATH_SEQUENCES
-echo $DBNAME
 
-# Check the correct parameter for -type_db
+# Check if folder containing sequences exists (-path_seq).
+check_sequence_folder
+
+# Check if database folder exists (-path_db).
+check_database_folder
+
+# Check the correct parameter (-type_db).
 check_type_database
 
 echo $threads
 
-# Check if the folder for sequences exists.
-if [ -d $PATH_SEQUENCES ]
+# Unzip fasta or fna files.
+unzip_sequences
+
+# First, to build a custom database we install a ncbi taxonomy.
+download_ncbi_taxonomy
+
+# Unzip all taxonomy files.
+unzip_ncbi_taxonomy
+
+# Second, download kraken 2 genomic library depending on the type of db expected.
+if [ -d $DBNAME/library/$TYPE_DATABASE ]
 then
-    echo "$PATH_SEQUENCES folder already exist."
+    echo "$DBNAME/library/$TYPE_DATABASE folder already exists."
 else
-    echo "$PATH_SEQUENCES doesn't exist."
-    exit
+    kraken2-build --download-library $TYPE_DATABASE --db $DBNAME
+
+    # Check if kraken-build return a error.
+    if [ $? -eq 0 ]; then
+        echo "Download kraken2-buil --download-library $TYPE_DATABASE in $DBNAME is done !"
+    else
+        echo "Error to download library $TYPE_DATABASE"
+        exit 1
+    fi
 fi
-
-# Check if the folder for database exists.
-if [ -d $DBNAME ]
-then
-    echo "$DBNAME folder already exits."
-else
-    mkdir $DBNAME
-    echo "Create folder database "
-fi
-
-# Check if the fasta files from database are already decompressed.
-unzip_files=$(ls $PATH_SEQUENCES/*.gz 2> /dev/null | wc -l)
-if [ "$unzip_files" != "0" ]
-then
-    echo "Unzip all files"
-    gunzip --verbose $PATH_SEQUENCES/*.gz
-    echo "$PATH_SEQUENCES Unzip done !"
-else
-    echo "$PATH_SEQUENCES Files are already decompressed"
-fi
-
-# 1) To build a custom database we need
-# install a taxonomy with NCBI taxonomy
-
-# Check if folder with taxonomy is empty.
-if [ ! "$(ls -A $DBNAME/taxonomy)" ]
-then
-    echo "$DBNAME is empty!"
-    echo "Installing NCBI taxonomy in database"
-    kraken2-build --download-taxonomy --db $DBNAME --use-ftp
-    echo "Unzip all data"
-    gunzip $DBNAME/taxonmy/*.gz
-    echo "Unzip done !"
-else
-    echo "NCBI taxonomy is already exists."
-fi
-
-# Check if the taxonomy files from database are already decompressed.
-taxonomy_unzip=$(ls $DBNAME/taxonomy/*.gz 2> /dev/null | wc -l)
-if [ "$taxonomy_unzip" != "0" ]
-then
-    echo "Unzip all files"
-    gunzip $DBNAME/taxonomy/*.gz
-    echo "$DBNAME Unzip done !"
-    tar zcvf $DBNAME/taxonomy/*.tar
-    rm $DBNAME/taxonomy/*.tar
-    echo "$DBNAME tar unziped"
-    echo "files tar removed"
-else
-    echo "$DBNAME Files are already decompressed"
-fi
-
-# 2) We can add other sequences in the database from fasta files
-# maybe all genome in database.
-
-# Download the kraken 2 taxonomy library.
-kraken2-build --download-library $TYPE_DATABASE --db $DBNAME
 
 # Before adding the sequences to the library, check if the database is not already created hash.k2d + opts.k2d + taxo.k2d .
 if [ -f $DBNAME/hash.k2d ] && [ -f $DBNAME/opts.k2d ] && [ -f $DBNAME/taxo.k2d ]
@@ -244,6 +280,7 @@ else
     is_fna_format=$(ls $PATH_SEQUENCES/*.fna 2> /dev/null | wc -l)
     is_fasta_format=$(ls $PATH_SEQUENCES/*.fasta 2> /dev/null | wc -l)
 
+    # Third, add others sequences in the database.
     if [ "$is_fna_format" != "0" ]
     then
         echo "Adding reference to Kraken 2 library"
@@ -272,5 +309,5 @@ else
     kraken2-build --build --db $DBNAME --threads $threads
 fi
 
-# 3.1) For remove intermediate file from the database directory
-#kraken2-build --clean
+# # 3.1) For remove intermediate file from the database directory
+# #kraken2-build --clean
