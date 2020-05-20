@@ -27,10 +27,10 @@ echo "NSLOTS: $NSLOTS"
 # It's not necessary to re-download the kraken taxonomy for each database.
 
 # Enable conda environment
-conda active metagenomic_env
+conda activate metagenomic_env
 
 # Thread variable.
-THREAD=7
+THREAD=6
 
 # # Build FDA-ARGOS database with low complexity sequences.
 # echo "Build FDA-ARGOS kraken database"
@@ -46,10 +46,10 @@ THREAD=7
 #       -path_seq \
 #       -path_db ../../data/databases/database_fda_refseq_human_viral \
 #       -type_db viral \
-#       -threads $THREAD
+#       -threads $thread
 
-# Build kraken database with mycocosm (fungi) coding sequences (CDS)
-echo "Build Mycocosm (fungi) kraken database."
+# build kraken database with mycocosm (fungi) coding sequences (cds)
+echo "Build mycocosm (fungi) kraken database."
 bash  ../bash/create_kraken_database.sh \
       -path_seq ../../data/raw_sequences/mycocosm_fungi_CDS_19_05_2020 \
       -path_db ../../data/databases/mycocosm_fungi_CDS_kraken_database_19_05_2020 \

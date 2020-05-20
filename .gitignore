@@ -17,3 +17,6 @@ src/old_sources/*
 
 # Ignore notes folder
 note/*
+
+# Ignore nohup files
+*.out

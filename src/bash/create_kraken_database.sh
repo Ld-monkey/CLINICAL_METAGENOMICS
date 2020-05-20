@@ -1,15 +1,16 @@
 #!/bin/bash
 
-# Create kraken 2 databases (we don't want to download any database !)
+# Create custom kraken 2 database.
 # --> 3 outputs files : hash.k2d, opts.k2d, taxo.k2d.
 # hash.k2d: Contains the minimizer to taxon mappings.
 # opts.k2d: Contains information about the options used to build the database.
 # taxo.k2d: Contains taxonomy information used to build the database.
-
-# We don't want to create standard database because we create a custom database.
-# e.g bash create_kraken_database.sh \
-#    -ref ../../data/FDA_ARGOS \
-#    -database /output_FDA_ARGOS -thread 1
+# e.g
+# ../bash/create_kraken_database.sh \
+#     -path_seq ../../data/raw_sequences/mycocosm_fungi_cds_19_05_2020 \
+#     -path_db ../../data/databases/mycocosm_fungi_cds_kraken_database_19_05_2020 \
+#     -type_db fungi \
+#     -threads $thread
 # Official documentation : https://ccb.jhu.edu/software/kraken2/index.shtml?t=manual
 
 # Function to check the correct -type_db parameter.
@@ -138,7 +139,7 @@ BAD_OPTION ()
     echo "Unknown option "$1" found on command-line"
     echo "It may be a good idea to read the usage:"
     echo "white $PROGRAM -h to be helped :"
-    echo "example : ./create_kraken_database.sh -ref test -database database -threads 1"
+    echo "example : ../bash/create_kraken_database.sh -path_seq ../../data/raw_sequences/mycocosm_fungi_cds_19_05_2020 -path_db ../../data/databases/mycocosm_fungi_cds_kraken_database_19_05_2020 -type_db fungi -threads $thread "
     echo -e $USAGE
 
     exit 1
