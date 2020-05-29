@@ -225,7 +225,7 @@ while [ -n "$1" ]; do
         -path_seq)             PATH_SEQUENCES=$2    ; shift 2; continue ;;
   	    -path_db)              DBNAME=$2            ; shift 2; continue ;;
         -type_db)              TYPE_DATABASE=$2     ; shift 2; continue ;;
-    	  -threads)              threads=$2           ; shift 2; continue ;;
+    	  -threads)              THREADS=$2           ; shift 2; continue ;;
         *)       BAD_OPTION $1;;
     esac
 done
@@ -241,7 +241,7 @@ check_database_folder
 # Check the correct parameter (-type_db).
 check_type_database
 
-echo $threads
+echo "NUMBER of THREADS : $THREADS"
 
 # Unzip fasta or fna files.
 unzip_sequences
@@ -304,9 +304,9 @@ else
     fi
 
     # 3) Once library is finalized we need to build the database.
-    # parameters --threads to reduce build time.
+    # parameters --THREADS to reduce build time.
     echo "Running build program to build database with Kraken 2"
-    kraken2-build --build --db $DBNAME --threads $threads
+    kraken2-build --build --db $DBNAME --threads $THREADS
 fi
 
 # # 3.1) For remove intermediate file from the database directory

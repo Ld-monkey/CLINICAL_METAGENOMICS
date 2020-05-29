@@ -49,10 +49,26 @@ THREAD=6
 #       -threads $thread
 
 # build kraken database with mycocosm (fungi) coding sequences (cds)
-echo "Build mycocosm (fungi) kraken database."
+# echo "Build mycocosm (fungi) kraken database."
+# bash  ../bash/create_kraken_database.sh \
+#       -path_seq ../../data/raw_sequences/mycocosm_fungi_CDS_19_05_2020 \
+#       -path_db ../../data/databases/mycocosm_fungi_CDS_kraken_database_19_05_2020 \
+#       -type_db fungi \
+#       -threads $THREAD
+# echo "Kraken 2 - Mycocosm (fungi) database done !"
+
+# echo "Build add mycocosm (fungi) kraken database."
+# bash  ../bash/create_kraken_database.sh \
+#       -path_seq ../../data/raw_sequences/mycocosm_ncbi_add_20_05_2020 \
+#       -path_db ../../data/databases/mycocosm_fungi_CDS_kraken_database_19_05_2020 \
+#       -type_db fungi \
+#       -threads $THREAD
+# echo "Kraken 2 - Mycocosm (fungi) database done !"
+
+echo "Build no add mycocosm (fungi) kraken database."
 bash  ../bash/create_kraken_database.sh \
-      -path_seq ../../data/raw_sequences/mycocosm_fungi_CDS_19_05_2020 \
-      -path_db ../../data/databases/mycocosm_fungi_CDS_kraken_database_19_05_2020 \
+      -path_seq ../../data/raw_sequences/mycocosm_fungi_ncbi_CDS_28_05_2020/fungi \
+      -path_db ../../data/databases/mycocosm_fungi_CDS_kraken_database_28_05_2020 \
       -type_db fungi \
       -threads $THREAD
 echo "Kraken 2 - Mycocosm (fungi) database done !"
