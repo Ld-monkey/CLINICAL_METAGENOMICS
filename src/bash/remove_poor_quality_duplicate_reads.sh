@@ -2,9 +2,10 @@
 
 # Shell cluster script to launch preprocess on sequences or reads.
 # This action removes poor quality and duplicates reads.
-# e.g ./launch_preprocess.sh -path_reads all_reads_from_sample
+# old name => launch_preprocess.sh
+# e.g remove_poor_quality_duplicate_reads.sh -path_reads all_reads_from_sample
 
-PROGRAM=launch_preprocess.sh
+PROGRAM=remove_poor_quality_duplicate_reads.sh
 VERSION=1.0
 
 DESCRIPTION=$(cat << __DESCRIPTION__
@@ -35,7 +36,7 @@ BAD_OPTION ()
     echo "Unknown option "$1" found on command-line"
     echo "It may be a good idea to read the usage:"
     echo "white $PROGRAM -h to be helped :"
-    echo "example : ./launch_preprocess.sh -path_reads all_reads_from_sample"
+    echo "example : remove_poor_quality_duplicate_reads.sh -path_reads all_reads_from_sample"
     echo -e $USAGE
 
     exit 1
@@ -58,7 +59,9 @@ reads_unzip=$(ls $DBNAME/taxonomy/*.gz 2> /dev/null | wc -l)
 if [ "$reads_unzip" != "0" ]
 then
     echo "Reads files are not unzipped."
-    # list all R1*fasta.gz files same like ls *R1.fasta.gz
+    gunzip *.gz
+
+    # List all R1*fasta.gz files same like ls *R1.fasta.gz.
     R1fastQgz=$(ls | grep -i R1.*\.fastq)
 else
     echo "Reads files are already zipped."
@@ -118,4 +121,3 @@ do
         rm ${dedupe1}
     fi
 done
-source deactivate
