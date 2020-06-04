@@ -1,0 +1,35 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	rm_poor_quality_and_duplicate
+	1
+
+[Thu Jun  4 19:11:50 2020]
+rule rm_poor_quality_and_duplicate:
+    jobid: 0
+
+[Thu Jun  4 19:11:50 2020]
+Error in rule rm_poor_quality_and_duplicate:
+    jobid: 0
+
+RuleException:
+URLError in line 20 of /media/disk-metagenomique/CLINICAL_METAGENOMICS/Snakefile:
+<urlopen error [Errno 2] No such file or directory: '/media/disk-metagenomique/CLINICAL_METAGENOMICS/bash src/bash/remove_poor_quality_duplicate_reads.sh -path_reads data/reads/PAIRED_SAMPLES_ADN_TEST/ -path_output results/trimmed_reads/trimmed_samples_reads_04_06_2020'>
+  File "/home/coco/miniconda3/envs/metagenomic_env/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 2189, in run_wrapper
+  File "/media/disk-metagenomique/CLINICAL_METAGENOMICS/Snakefile", line 20, in __rule_rm_poor_quality_and_duplicate
+  File "/home/coco/miniconda3/envs/metagenomic_env/lib/python3.7/urllib/request.py", line 222, in urlopen
+  File "/home/coco/miniconda3/envs/metagenomic_env/lib/python3.7/urllib/request.py", line 525, in open
+  File "/home/coco/miniconda3/envs/metagenomic_env/lib/python3.7/urllib/request.py", line 543, in _open
+  File "/home/coco/miniconda3/envs/metagenomic_env/lib/python3.7/urllib/request.py", line 503, in _call_chain
+  File "/home/coco/miniconda3/envs/metagenomic_env/lib/python3.7/urllib/request.py", line 1453, in file_open
+  File "/home/coco/miniconda3/envs/metagenomic_env/lib/python3.7/urllib/request.py", line 1492, in open_local_file
+  File "/home/coco/miniconda3/envs/metagenomic_env/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 529, in _callback
+  File "/home/coco/miniconda3/envs/metagenomic_env/lib/python3.7/concurrent/futures/thread.py", line 57, in run
+  File "/home/coco/miniconda3/envs/metagenomic_env/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 515, in cached_or_run
+  File "/home/coco/miniconda3/envs/metagenomic_env/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 2201, in run_wrapper
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /media/disk-metagenomique/CLINICAL_METAGENOMICS/.snakemake/log/2020-06-04T191150.905746.snakemake.log

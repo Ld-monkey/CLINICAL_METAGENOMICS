@@ -1,0 +1,27 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job counts:
+	count	jobs
+	1	rm_poor_quality_and_duplicate
+	1
+
+[Thu Jun  4 19:16:40 2020]
+rule rm_poor_quality_and_duplicate:
+    input: data/reads/PAIRED_SAMPLES_ADN_TEST/
+    output: results/trimmed_reads/trimmed_samples_reads_04_06_2020/
+    jobid: 0
+
+ImproperOutputException in line 4 of /media/disk-metagenomique/CLINICAL_METAGENOMICS/Snakefile:
+Outputs of incorrect type (directories when expecting files or vice versa). Output directories must be flagged with directory(). for rule rm_poor_quality_and_duplicate:
+results/trimmed_reads/trimmed_samples_reads_04_06_2020/
+  File "/home/coco/miniconda3/envs/metagenomic_env/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 544, in handle_job_success
+  File "/home/coco/miniconda3/envs/metagenomic_env/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 231, in handle_job_success
+Removing output files of failed job rm_poor_quality_and_duplicate since they might be corrupted:
+results/trimmed_reads/trimmed_samples_reads_04_06_2020/
+Skipped removing non-empty directory results/trimmed_reads/trimmed_samples_reads_04_06_2020/
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /media/disk-metagenomique/CLINICAL_METAGENOMICS/.snakemake/log/2020-06-04T191640.796649.snakemake.log

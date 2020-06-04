@@ -1,0 +1,18 @@
+Building DAG of jobs...
+Job counts:
+	count	jobs
+	1	rm_poor_quality_and_duplicate
+	1
+
+[Thu Jun  4 11:57:16 2020]
+rule rm_poor_quality_and_duplicate:
+    input: data/reads/PAIRED_SAMPLES_ADN_TEST
+    jobid: 0
+
+RuleException in line 8 of /media/disk-metagenomique/CLINICAL_METAGENOMICS/Snakefile:
+NameError: The name 'path_reads' is unknown in this context. Please make sure that you defined that variable. Also note that braces not used for variable access have to be escaped by repeating them, i.e. {{print $1}}
+  File "/home/coco/miniconda3/envs/metagenomic_env/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 115, in run_jobs
+  File "/home/coco/miniconda3/envs/metagenomic_env/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 120, in run
+  File "/home/coco/miniconda3/envs/metagenomic_env/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 131, in _run
+  File "/home/coco/miniconda3/envs/metagenomic_env/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 151, in printjob
+  File "/home/coco/miniconda3/envs/metagenomic_env/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 137, in printjob

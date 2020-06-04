@@ -311,3 +311,4 @@ fi
 
 # # 3.1) For remove intermediate file from the database directory
 # #kraken2-build --clean
+

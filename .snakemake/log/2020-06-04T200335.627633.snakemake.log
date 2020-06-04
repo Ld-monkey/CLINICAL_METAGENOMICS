@@ -1,0 +1,3 @@
+Building DAG of jobs...
+MissingRuleException:
+No rule to produce results/trimmed_reads/trimmed_samples_reads_04_06_2020 (if you use input functions make sure that they don't raise unexpected exceptions).

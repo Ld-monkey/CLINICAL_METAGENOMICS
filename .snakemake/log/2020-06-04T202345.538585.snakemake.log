@@ -1,0 +1,33 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Conda environments: ignored
+Job counts:
+	count	jobs
+	1	svg
+	1
+
+[Thu Jun  4 20:23:45 2020]
+rule svg:
+    input: results/trimmed_reads/trimmed_samples_reads_04_06_2020/
+    output: plots/quals.svg
+    jobid: 0
+
+[Thu Jun  4 20:23:50 2020]
+Error in rule svg:
+    jobid: 0
+    output: plots/quals.svg
+
+RuleException:
+CalledProcessError in line 26 of /media/disk-metagenomique/CLINICAL_METAGENOMICS/Snakefile:
+Command 'set -euo pipefail;  /home/coco/miniconda3/envs/metagenomic_env/bin/python3.7 /media/disk-metagenomique/CLINICAL_METAGENOMICS/.snakemake/scripts/tmpgqn2_rw6.plot-quals.py' returned non-zero exit status 1.
+  File "/home/coco/miniconda3/envs/metagenomic_env/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 2189, in run_wrapper
+  File "/media/disk-metagenomique/CLINICAL_METAGENOMICS/Snakefile", line 26, in __rule_svg
+  File "/home/coco/miniconda3/envs/metagenomic_env/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 529, in _callback
+  File "/home/coco/miniconda3/envs/metagenomic_env/lib/python3.7/concurrent/futures/thread.py", line 57, in run
+  File "/home/coco/miniconda3/envs/metagenomic_env/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 515, in cached_or_run
+  File "/home/coco/miniconda3/envs/metagenomic_env/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 2201, in run_wrapper
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /media/disk-metagenomique/CLINICAL_METAGENOMICS/.snakemake/log/2020-06-04T202345.538585.snakemake.log

@@ -1,0 +1,34 @@
+Building DAG of jobs...
+Using shell: /usr/bin/bash
+Provided cores: 3
+Rules claiming more threads will be scaled down.
+Job counts:
+	count	jobs
+	1	rm_poor_quality_and_duplicate
+	1
+
+[Thu Jun  4 18:01:09 2020]
+rule rm_poor_quality_and_duplicate:
+    input: data/reads/PAIRED_SAMPLES_ADN_TEST/
+    output: results/trimmed_reads/trimmed_samples_reads_04_06_2020/
+    jobid: 0
+
+[Thu Jun  4 18:01:09 2020]
+Error in rule rm_poor_quality_and_duplicate:
+    jobid: 0
+    output: results/trimmed_reads/trimmed_samples_reads_04_06_2020/
+
+RuleException:
+NameError in line 14 of /media/disk-metagenomique/CLINICAL_METAGENOMICS/Snakefile:
+The name 'input' is unknown in this context. Please make sure that you defined that variable. Also note that braces not used for variable access have to be escaped by repeating them, i.e. {{print $1}}
+  File "/home/coco/miniconda3/envs/metagenomic_env/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 2189, in run_wrapper
+  File "/media/disk-metagenomique/CLINICAL_METAGENOMICS/Snakefile", line 14, in __rule_rm_poor_quality_and_duplicate
+  File "/home/coco/miniconda3/envs/metagenomic_env/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 529, in _callback
+  File "/home/coco/miniconda3/envs/metagenomic_env/lib/python3.7/concurrent/futures/thread.py", line 57, in run
+  File "/home/coco/miniconda3/envs/metagenomic_env/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 515, in cached_or_run
+  File "/home/coco/miniconda3/envs/metagenomic_env/lib/python3.7/site-packages/snakemake/executors/__init__.py", line 2201, in run_wrapper
+Removing output files of failed job rm_poor_quality_and_duplicate since they might be corrupted:
+results/trimmed_reads/trimmed_samples_reads_04_06_2020/
+Shutting down, this might take some time.
+Exiting because a job execution failed. Look above for error message
+Complete log: /media/disk-metagenomique/CLINICAL_METAGENOMICS/.snakemake/log/2020-06-04T180109.714157.snakemake.log

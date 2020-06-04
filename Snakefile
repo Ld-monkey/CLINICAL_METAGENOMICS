@@ -1,28 +1,14 @@
 # Using snakemake file to create a metagenomic pipeline.
 
-# All path of sample reads.
-SAMPLES_READS = ["1-MAR-LBA-ADN_S1_R1_paired",
-                 "1-MAR-LBA-ADN_S1_R2_paired"]
+reads_path = ["data/reads/PAIRED_SAMPLES_ADN_TEST/"] 
 
 # Remove all poor quality and duplicate reads.
 rule rm_poor_quality_and_duplicate:
     input:
-        path_reads="data/reads/PAIRED_SAMPLES_ADN/"
+        reads=expand("{sample}", sample=reads_path)
     output:
-        "results/"
+        directory("results/trimmed_reads/trimmed_samples_reads_04_06_2020/")
     conda:
         "metagenomic_env.yml"
     shell:
-        "src/bash/remove_poor_quality_duplicate_reads.sh -path_reads {path_reads}"
-
-
-# Classify a set of sequences.
-rule classify_reads:
-    input:
-        path_reads="data/reads/PAIRED_SAMPLES_ADN/"
-    output:
-        ""
-    conda:
-        "metagenomic_env.yml"
-    shell:
-        "src/bash"
+        "bash src/bash/remove_poor_quality_duplicate_reads.sh -path_reads {input.reads} -path_output {output}"

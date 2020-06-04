@@ -3,6 +3,10 @@
 
 ## Introduction
 
+## Source
+
+Ce projet se base sur le pipeline de Antoine.L disponible sur son [gitlab](https://gitlab.com/a_laine/metagenomic-pipeline). A
+
 ## Configurations
 
 ### Environnement conda :metal:
