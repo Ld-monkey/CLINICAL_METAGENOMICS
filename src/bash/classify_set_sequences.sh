@@ -99,5 +99,12 @@ do
     echo "The prefix name file is : $prefix"
     echo "The suffix name file is : $suffix"
     echo "So the name of his paired file is : $paired_file"
-    kraken2 --db $DBNAME --threads $THREAD --paired --report $FOLDER_OUTPUT/$prefix.report.txt --classified-out $FOLDER_OUTPUT/$prefix.clseqs#.fastq --unclassified-out $FOLDER_OUTPUT/$prefix.unclseq#.fq --output $FOLDER_OUTPUT/$prefix.output.txt $all_sequences $PATH_ALL_READS/$paired_file
+    kraken2 --db $DBNAME \
+            --threads $THREAD \
+            --paired \
+            --report $FOLDER_OUTPUT/$prefix.report.txt \
+            --classified-out $FOLDER_OUTPUT/$prefix.clseqs#.fastq \
+            --unclassified-out $FOLDER_OUTPUT/$prefix.unclseq#.fq \
+            --output $FOLDER_OUTPUT/$prefix.output.txt \
+            $all_sequences $PATH_ALL_READS/$paired_file
 done
