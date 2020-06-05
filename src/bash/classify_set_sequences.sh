@@ -2,7 +2,7 @@
 
 # From a set of reads and depend of the database gived in argument
 # allow to classify the reads sequences.
-# problem : paired sequence must named *R1*.fastq (* = something before and after).
+# Note : paired sequence must named *R1*.fastq (* = something before and after).
 # output files : *.clseqs_*.fastq, *.unclseq_*.fq, *.output.txt, *.report.txt .
 # *.clseqs.fastq : all classified reads
 # *.unclseqs.fastq : all unclassified reads
@@ -87,24 +87,68 @@ else
     echo "Create folder $FOLDER_OUTPUT "
 fi
 
-# After created database we can classify a set of sequences with kraken2.
-# change with --paired + --output parameters
+# List all survivors reads files.
+ALL_SURVIVORS_READS=$(ls $PATH_ALL_READS*R1* | grep -i "_survivors_paired\|_trimmed")
+
+# Classify a set of sequences or reads with kraken2 tool.
 echo "Run classify a set of sequences with kraken 2"
-for all_sequences in $PATH_ALL_READS/*R1*.fastq
+for R1_READ in $ALL_SURVIVORS_READS
 do
-    prefix=$(basename "$all_sequences" | awk -F "R1" '{print $1}')
-    suffix=$(basename "$all_sequences" | awk -F "R1" '{print $2}')
-    paired_file="$prefix""R2""$suffix"
-    echo "In the sequence : $all_sequences"
-    echo "The prefix name file is : $prefix"
-    echo "The suffix name file is : $suffix"
-    echo "So the name of his paired file is : $paired_file"
-    kraken2 --db $DBNAME \
-            --threads $THREAD \
-            --paired \
-            --report $FOLDER_OUTPUT/$prefix.report.txt \
-            --classified-out $FOLDER_OUTPUT/$prefix.clseqs#.fastq \
-            --unclassified-out $FOLDER_OUTPUT/$prefix.unclseq#.fq \
-            --output $FOLDER_OUTPUT/$prefix.output.txt \
-            $all_sequences $PATH_ALL_READS/$paired_file
+
+    # Get prefix name for outputs.
+    prefix=$(basename "$R1_READ" | awk -F "_R1" '{print $1}')
+
+    # Create a R2 read name file to check if paired read exists.
+    R2_PAIRED_READ=$(echo ${R1_READ} | sed 's/R1/R2/')
+
+    echo "all survivors : $ALL_SURVIVORS_READS"
+    echo "R1 reads : $R1_READ"
+    echo "R2 reads : $R2_PAIRED_READ"
+    echo "db : $DBNAME"
+    echo "threads : $THREAD"
+    echo "report : $FOLDER_OUTPUT${prefix}_taxon.report.txt"
+    echo "--classified-out $FOLDER_OUTPUT$prefix.clseqs#.fastq"
+    echo "--unclassified-out $FOLDER_OUTPUT$prefix.unclseq#.fastq"
+    echo "--output $FOLDER_OUTPUT$prefix.output.txt"
+    echo "R1 input $R1_READ "
+    echo "R2 input $R2_PAIRED_READ"
+
+    # Check if paired (R2) reads exists.
+    if [ -f "${R2_PAIRED_READ}" ]
+    then
+        echo "Paired reads exists !"
+
+        echo "Run kraken 2 classification reads."
+        # --db : specific kraken 2 database.
+        # --threads : NUM switch to use multiple threads.
+        # --paired : Indicate to kraken2 that the input files provided are paired read data.
+        # --report : format is tab-delimited with one line per taxon.
+        # (see https://ccb.jhu.edu/software/kraken2/index.shtml?t=manual#sample-report-output-format)
+        # --classified-out, --unclassified-out : classified or unclassified sequences.
+        # --output : output direction ?? .
+        # input R1_paired_read file.
+        # input R2_paired_read file.
+        kraken2 --db $DBNAME \
+                --threads $THREAD \
+                --paired \
+                --report $FOLDER_OUTPUT/${prefix}_taxon.report.txt \
+                --classified-out $FOLDER_OUTPUT/$prefix.clseqs#.fastq \
+                --unclassified-out $FOLDER_OUTPUT/$prefix.unclseq#.fastq \
+                --output $FOLDER_OUTPUT/$prefix.output.txt \
+                $R1_READ $R2_PAIRED_READ
+        echo "Kraken 2 classification done !"
+    else
+        echo "Not paired reads."
+
+        echo "Run kraken 2 classification reads."
+        Run kraken 2 classification on no paired read.
+        kraken2 --db $DBNAME \
+                --threads $THREAD \
+                --report $FOLDER_OUTPUT/${prefix}_taxon.report.txt \
+                --classified-out $FOLDER_OUTPUT/$prefix.clseqs#.fastq \
+                --unclassified-out $FOLDER_OUTPUT/$prefix.unclseq#.fastq \
+                --output $FOLDER_OUTPUT/$prefix.output.txt \
+                $R1_READ
+        echo "Kraken 2 classification done !"
+    fi
 done

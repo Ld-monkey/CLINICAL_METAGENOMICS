@@ -22,7 +22,7 @@ rule remove_poor_quality_and_duplicate_reads:
     input:
         "data/reads/{folder}/"
     output:
-        "results/trimmed_reads/trimmed_{folder}_reads_04_06_2020/"
+        directory("results/trimmed_reads/trimmed_{folder}_reads_04_06_2020/")
     conda:
         "metagenomic_env.yml"
     shell:
