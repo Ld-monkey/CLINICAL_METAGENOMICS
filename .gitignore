@@ -29,7 +29,11 @@ cookies
 
 # Ignore results folder.
 results/*
+!results/plots/
 
 # All txt and csv files.
 *.csv
 *.txt
+
+# Ignore snakemake log
+.snakemake/*

@@ -30,7 +30,7 @@ conda deactivate
 
 Pour supprimer l'environnement conda :
 
-```
+```bash
 conda env remove -n metagenomic_env
 ```
 
@@ -43,6 +43,33 @@ conda env update --name metagenomic_env --file metagenomic_env.yml
 ### Automatisation avec SnakeMake :snake:
 
 Le système de management de workflows [Snakemake](https://snakemake.readthedocs.io/en/stable/) est un outil qui permet des analyses de données reproductibles et adaptatives.
+
+Pour éxecuter snakemake activer l'environnment conda :
+```bash
+conda activate metagenomic_env
+```
+
+Pour tester si le pipeline marche sans bug :
+
+```bash
+snakemake -np
+```
+
+Pour éxecuter le pipeline :
+
+```bash
+snakemake --cores 6
+```
+
+Pour créer un graphique complet du pipeline :
+
+```bash
+snakemake --dag | dot -Tsvg > results/plots/dag.svg 
+```
+
+Ce qui nous donne :
+
+![pipeline](results/plots/dag.svg)
 
 ### Configuration de la documentation :book:
 
