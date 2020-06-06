@@ -2,6 +2,7 @@
 data/databases/*
 data/reads/*
 data/raw_sequences/*
+!data/assembly/
 
 # Ignore blasts and reads results.
 results/blasts/*
@@ -33,7 +34,7 @@ results/*
 
 # All txt and csv files.
 *.csv
-*.txt
+src/download/*.txt
 
 # Ignore snakemake log
 .snakemake/*

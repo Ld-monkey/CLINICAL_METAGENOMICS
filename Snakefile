@@ -47,3 +47,6 @@ rule classify_reads_with_database:
         "-path_db {input.database} "
         "-path_output {output.reads_output} "
         "-threads {params.threads} "
+
+# Create FDA ARGOS metagenomic kraken 2 database.
+rule create_fda_argos_kraken_2_database:
