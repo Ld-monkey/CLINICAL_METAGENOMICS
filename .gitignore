@@ -2,7 +2,6 @@
 data/databases/*
 data/reads/*
 data/raw_sequences/*
-!data/assembly/
 
 # Ignore blasts and reads results.
 results/blasts/*
@@ -27,6 +26,7 @@ cookies
 
 # Ignore .xml file.
 *.xml
+!data/assembly/*.xml
 
 # Ignore results folder.
 results/*
