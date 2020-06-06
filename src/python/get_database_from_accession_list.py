@@ -59,7 +59,7 @@ def arguments():
     """ Method for define all arguments of program """
     parser = argparse.ArgumentParser(description="Get database from accession list")
     parser.add_argument("-id",
-                        help="Accession list file (.seq)",
+                        help="Accession list file (.seq|.txt)",
                         type=str)
     parser.add_argument("-o",
                         help="Basename of output fastq file.",

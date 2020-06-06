@@ -50,3 +50,13 @@ rule classify_reads_with_database:
 
 # Create FDA ARGOS metagenomic kraken 2 database.
 rule create_fda_argos_kraken_2_database:
+    input:
+        "data/assembly/assembly_fda_argos_ncbi_result.txt"
+    output:
+        "data/raw_sequences/fda_argos_raw_genomes_06_06_2020/"
+    conda:
+        "metagenomic_env.yml"
+    shell:
+        "python src/python/get_database_from_accession_list.py "
+        "-id {input} "
+        "-id {output}"
