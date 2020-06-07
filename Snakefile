@@ -11,9 +11,11 @@ rule all:
     input:
         expand("results/trimmed_reads/trimmed_{folder}_reads_04_06_2020/",
                folder=sample),
-        expand("results/reads_outputs/trimmed_classify_{folder}_with_database_fda_refseq_human_viral/",
-               folder=sample),
-        "data/raw_sequences/fda_argos_raw_genomes_assembly_06_06_2020/"
+        "data/raw_sequences/fda_argos_raw_genomes_assembly_06_06_2020/",
+        "data/databases/fda_argos_with_none_library_kraken_database_07_06_2020/",
+        expand("results/classify_reads/trimmed_classify_{folder}_with_fda_argos_none_library_database/",
+               folder=sample)
+
         
 # Remove all poor quality and duplicate reads.
 rule remove_poor_quality_and_duplicate_reads:
@@ -28,23 +30,6 @@ rule remove_poor_quality_and_duplicate_reads:
         "-path_reads {input} "
         "-path_output {output}"
 
-# Classify reads on databases.
-rule classify_reads_with_database:
-    input:
-        read="results/trimmed_reads/trimmed_{folder}_reads_04_06_2020/",
-        database="data/raw_sequences/fda_argos_raw_genomes_assembly_06_06_2020/"
-    output:
-        reads_output=directory("results/reads_outputs/trimmed_classify_{folder}_with_database_fda_refseq_human_viral/")
-    params:
-        threads = 7
-    conda:
-        "metagenomic_env.yml"
-    shell:
-        "bash src/bash/classify_set_sequences.sh "
-        "-path_reads {input.read} "
-        "-path_db {input.database} "
-        "-path_output {output.reads_output} "
-        "-threads {params.threads} "
 
 # Download all assembly FDA ARGOS database.
 rule download_fda_argos_database:
@@ -59,4 +44,40 @@ rule download_fda_argos_database:
         "-assembly_xml {input.xml} "
         "-path_output {output}"
 
+
 # Create FDA ARGOS metagenomic kraken 2 database.
+rule create_fda_argos_database:
+    input:
+        "data/raw_sequences/fda_argos_raw_genomes_assembly_06_06_2020/"
+    output:
+        directory("data/databases/fda_argos_with_none_library_kraken_database_07_06_2020/")
+    params:
+        type_database = "none",
+        threads = 7
+    conda:
+        "metagenomic_env.yml"
+    shell:
+        "bash src/bash/create_kraken_database.sh "
+        "-path_seq {input} "
+        "-path_db {output} "
+        "-type_db {params.type_database} "
+        "-threads {params.threads}"
+
+
+# Classify reads with database.
+rule classify_reads_with_database:
+    input:
+        read="results/trimmed_reads/trimmed_{folder}_reads_04_06_2020/",
+        database="data/databases/fda_argos_with_none_library_kraken_database_07_06_2020/"
+    output:
+        reads_output=directory("results/classify_reads/trimmed_classify_{folder}_with_fda_argos_none_library_database/")
+    params:
+        threads = 7
+    conda:
+        "metagenomic_env.yml"
+    shell:
+        "bash src/bash/classify_set_sequences.sh "
+        "-path_reads {input.read} "
+        "-path_db {input.database} "
+        "-path_output {output.reads_output} "
+        "-threads {params.threads}"

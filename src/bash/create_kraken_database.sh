@@ -101,7 +101,8 @@ function check_type_database {
            ||  [[ $TYPE_DATABASE = "env_nr" ]] \
            ||  [[ $TYPE_DATABASE = "env_nt" ]] \
            ||  [[ $TYPE_DATABASE = "UniVec" ]] \
-           ||  [[ $TYPE_DATABASE = "UniVec_Core" ]]
+           ||  [[ $TYPE_DATABASE = "UniVec_Core" ]] \
+           ||  [[ $TYPE_DATABASE = "none" ]]
     then
         echo "From https://ccb.jhu.edu/software/kraken2/index.shtml?t=manual#custom-databases"
         echo "Correct parameter -type_db $TYPE_DATABASE"
@@ -149,6 +150,9 @@ function check_type_database {
             UniVec_Core)
                 echo "*   UniVec_Core: A subset of UniVec chosen to minimize false positive hits to the vector database"
                 ;;
+            none)
+                echo "*   none : The parameter that prevent the download and installation of one or more reference libraries"
+                ;;
         esac
     else
         echo "Take care about official documentation in https://ccb.jhu.edu/software/kraken2/index.shtml?t=manual#custom-databases"
@@ -168,6 +172,7 @@ function check_type_database {
            *   env_nt: NCBI non-redundant nucleotide database with sequences from large environmental sequencing projects
            *   UniVec: NCBI-supplied database of vector, adapter, linker, and primer sequences that may be contaminating sequencing projects and/or assemblies
            *   UniVec_Core: A subset of UniVec chosen to minimize false positive hits to the vector database
+           *   none : The parameter that prevent the download and installation of one or more reference libraries
             "
         echo "Error in -type parameter"
 
@@ -186,10 +191,10 @@ __DESCRIPTION__
 OPTIONS=$(cat << __OPTIONS__
 
 ## OPTIONS ##
-    -path_seq  (Input) Folder path of other sequences in fna or fasta files                                 *DIR: sequences
-    -path_db   (Input) Folder path to create or view the database                                           *DIR: database
-    -type_db   (Input) Which reference librairie for db (choices: viral, fungi, bacteria) see offical doc   *STR: fungi
-    -threads   (Input) The number of threads to build the datab ase faster                                  *INT: 6
+    -path_seq  (Input) Folder path of other sequences in fna or fasta files.                                *DIR: sequences/
+    -path_db   (Output) Folder path to create or view the database.                                         *DIR: database/
+    -type_db   (Input) Which reference librairie for db (choices: viral, fungi, bacteria) see offical doc.  *STR: fungi
+    -threads   (Input) The number of threads to build the database faster.                                  *INT: 6
 __OPTIONS__
        )
 
@@ -222,10 +227,10 @@ BAD_OPTION ()
 while [ -n "$1" ]; do
     case $1 in
         -h)                    USAGE      ; exit 0 ;;
-        -path_seq)             PATH_SEQUENCES=$2    ; shift 2; continue ;;
-  	    -path_db)              DBNAME=$2            ; shift 2; continue ;;
-        -type_db)              TYPE_DATABASE=$2     ; shift 2; continue ;;
-    	  -threads)              THREADS=$2           ; shift 2; continue ;;
+        -path_seq)             PATH_SEQUENCES=$2   ; shift 2; continue ;;
+	      -path_db)              DBNAME=$2           ; shift 2; continue ;;
+        -type_db)              TYPE_DATABASE=$2    ; shift 2; continue ;;
+    	  -threads)              THREADS=$2          ; shift 2; continue ;;
         *)       BAD_OPTION $1;;
     esac
 done
@@ -246,26 +251,32 @@ echo "NUMBER of THREADS : $THREADS"
 # Unzip fasta or fna files.
 unzip_sequences
 
-# First, to build a custom database we install a ncbi taxonomy.
+# First, to build a custom database we download a ncbi taxonomy.
 download_ncbi_taxonomy
 
 # Unzip all taxonomy files.
 unzip_ncbi_taxonomy
 
 # Second, download kraken 2 genomic library depending on the type of db expected.
-if [ -d $DBNAME/library/$TYPE_DATABASE ]
+if [[ $TYPE_DATABASE != "none" ]]
 then
-    echo "$DBNAME/library/$TYPE_DATABASE folder already exists."
-else
-    kraken2-build --download-library $TYPE_DATABASE --db $DBNAME
-
-    # Check if kraken-build return a error.
-    if [ $? -eq 0 ]; then
-        echo "Download kraken2-buil --download-library $TYPE_DATABASE in $DBNAME is done !"
+    if [ -d $DBNAME/library/$TYPE_DATABASE ]
+    then
+        echo "$DBNAME/library/$TYPE_DATABASE folder already exists."
     else
-        echo "Error to download library $TYPE_DATABASE"
-        exit 1
+        kraken2-build --download-library $TYPE_DATABASE --db $DBNAME
+
+        # Check if kraken-build return a error.
+        if [ $? -eq 0 ]; then
+            echo "Download kraken2-buil --download-library $TYPE_DATABASE in $DBNAME is done !"
+        else
+            echo "Error to download library $TYPE_DATABASE"
+            exit 1
+        fi
     fi
+else
+    echo "Option type database: none."
+    echo "No preconceived genomic library of kraken 2 will be downloaded"
 fi
 
 # Before adding the sequences to the library, check if the database is not already created hash.k2d + opts.k2d + taxo.k2d .
@@ -309,6 +320,5 @@ else
     kraken2-build --build --db $DBNAME --threads $THREADS
 fi
 
-# # 3.1) For remove intermediate file from the database directory
-# #kraken2-build --clean
-
+# 3.1) For remove intermediate file from the database directory
+#kraken2-build --clean
