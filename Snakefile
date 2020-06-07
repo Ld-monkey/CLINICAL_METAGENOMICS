@@ -1,11 +1,8 @@
-import os
 # Using snakemake file to create a metagenomic pipeline.
+import os
 
 reads_path = ["data/reads/PAIRED_SAMPLES_ADN_TEST/"]
 
-database = ["database_fda_refseq_human_viral"]
-
-#print(reads_path)
 sample = []
 for read in reads_path:
     sample.append(os.path.basename(os.path.dirname(read)))
@@ -15,7 +12,8 @@ rule all:
         expand("results/trimmed_reads/trimmed_{folder}_reads_04_06_2020/",
                folder=sample),
         expand("results/reads_outputs/trimmed_classify_{folder}_with_database_fda_refseq_human_viral/",
-               folder=sample)
+               folder=sample),
+        "data/raw_sequences/fda_argos_raw_genomes_assembly_06_06_2020/"
         
 # Remove all poor quality and duplicate reads.
 rule remove_poor_quality_and_duplicate_reads:
@@ -34,7 +32,7 @@ rule remove_poor_quality_and_duplicate_reads:
 rule classify_reads_with_database:
     input:
         read="results/trimmed_reads/trimmed_{folder}_reads_04_06_2020/",
-        database=expand("data/databases/{db}/", db = database)
+        database="data/raw_sequences/fda_argos_raw_genomes_assembly_06_06_2020/"
     output:
         reads_output=directory("results/reads_outputs/trimmed_classify_{folder}_with_database_fda_refseq_human_viral/")
     params:
@@ -48,15 +46,17 @@ rule classify_reads_with_database:
         "-path_output {output.reads_output} "
         "-threads {params.threads} "
 
-# Create FDA ARGOS metagenomic kraken 2 database.
-rule create_fda_argos_kraken_2_database:
+# Download all assembly FDA ARGOS database.
+rule download_fda_argos_database:
     input:
-        "data/assembly/assembly_fda_argos_ncbi_result.txt"
+        xml="data/assembly/assembly_fda_argos_ncbi_result.xml"
     output:
-        "data/raw_sequences/fda_argos_raw_genomes_06_06_2020/"
+        directory("data/raw_sequences/fda_argos_raw_genomes_assembly_06_06_2020/")
     conda:
         "metagenomic_env.yml"
     shell:
-        "python src/python/get_database_from_accession_list.py "
-        "-id {input} "
-        "-id {output}"
+        "bash src/download/download_fda_argos_assembly.sh "
+        "-assembly_xml {input.xml} "
+        "-path_output {output}"
+
+# Create FDA ARGOS metagenomic kraken 2 database.
