@@ -9,10 +9,10 @@ for read in reads_path:
 
 rule all:
     input:
-        expand("results/trimmed_reads/trimmed_{folder}_reads_04_06_2020/",
-               folder=sample),
-        "data/raw_sequences/fda_argos_raw_genomes_assembly_06_06_2020/",
-        "data/databases/fda_argos_with_none_library_kraken_database_07_06_2020/",
+        # expand("results/trimmed_reads/trimmed_{folder}_reads_04_06_2020/",
+        #        folder=sample),
+        # "data/raw_sequences/fda_argos_raw_genomes_assembly_06_06_2020/",
+        # "data/databases/fda_argos_with_none_library_kraken_database_07_06_2020/",
         expand("results/classify_reads/trimmed_classify_{folder}_with_fda_argos_none_library_database/",
                folder=sample)
 
