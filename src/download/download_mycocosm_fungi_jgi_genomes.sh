@@ -29,9 +29,3 @@ echo "Adding done !"
 
 # Disable conda environment.
 conda deactivate
-
-
-
-
-
-

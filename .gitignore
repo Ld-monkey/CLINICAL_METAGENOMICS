@@ -38,3 +38,7 @@ src/download/*.txt
 
 # Ignore snakemake log
 .snakemake/*
+
+# Ignore password and username of jgi genome.
+src/download/username
+src/download/password
