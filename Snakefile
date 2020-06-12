@@ -15,8 +15,9 @@ rule all:
         # "data/raw_sequences/fda_argos_raw_genomes_assembly_06_06_2020/",
         # "data/databases/fda_argos_with_none_library_kraken_database_07_06_2020/",
         expand("results/classify_reads/trimmed_classify_{folder}_with_fda_argos_none_library_database/",
-               folder=sample)
-        
+               folder=sample),
+        "data/databases/mycocosm_with_fungi_library_kraken_database_07_06_2020/"
+
 # Remove all poor quality and duplicate reads.
 rule remove_poor_quality_and_duplicate_reads:
     input:
@@ -63,6 +64,7 @@ rule create_fda_argos_database:
         "-type_db {params.type_database} "
         "-threads {params.threads}"
 
+
 # Download all genomes mycocosm aka fungi.
 # Be careful about username and password files that contain privates informations.
 # You must create you own jgi account and put informations in respective files.
@@ -71,15 +73,13 @@ rule download_all_genomes_mycocosm_fungi_database:
         username="src/download/username",
         password="src/download/password"
     output:
-        cookie="src/download/cookies",
-        xml="src/download/fungi_files.xml",
-        csv="src/download/all_organisms.csv",
+        "src/download/all_organisms.csv",
         raw_sequence=directory("data/raw_sequences/mycocosm_fungi_ncbi_CDS_07_06_2020/")
     conda:
         "metagenomic_env.yml"
     shell:
-        "username=$(cat {input.username});"
-        "password=$(cat {input.password});"
+        "username=$(cat {input.username} );"
+        "password=$(cat {input.password} );"
         "python src/download/download_jgi_genomes.py "
         "-u $username "
         "-p $password "
@@ -90,17 +90,17 @@ rule download_all_genomes_mycocosm_fungi_database:
 # of kraken 2 to create a custom database.
 rule add_correct_kraken_id_mycocosm:
     input:
-        csv="src/download/all_organisms.csv"
+        "data/raw_sequences/mycocosm_fungi_ncbi_CDS_07_06_2020/"
     output:
-        output_csv="src/download/output_fungi_csv.csv",
         mycocosm_cds=directory("data/raw_sequences/mycocosm_fungi_ncbi_CDS_07_06_2020/")
+    params:
+        csv="src/download/all_organisms.csv"
     conda:
         "metagenomic_env.yml"
     shell:
         "python src/python/jgi_id_to_ncbi_id_taxonomy.py "
-        "-csv {input.csv} "
+        "-csv {params.csv} "
         "-path_sequence {output.mycocosm_cds}"
-
 
 # Create mycocosm metagenomic kraken 2 database.
 rule create_mycocosm_database:
