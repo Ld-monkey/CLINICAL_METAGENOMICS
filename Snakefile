@@ -24,7 +24,11 @@ rule all:
         #       folder=sample),
         #"data/databases/mycocosm_with_fungi_library_kraken_database_07_06_2020/",
         #"results/blast_results/blast_PAIRED_SAMPLES_ADN_TEST/"
-        expand("results/blast_results/blast_result_{folder_blast}/", folder_blast=all_database)
+        #expand("results/blast_results/blast_result_{folder_blast}/", folder_blast=all_database)
+        #"results/final_results/"
+        #expand("results/final_results/{folder_a}/", folder_a=all_database)
+        expand("results/html_final/{folder_a}/",
+               folder_a=all_database)
 
 # Remove all poor quality and duplicate reads.
 rule remove_poor_quality_and_duplicate_reads:
@@ -147,28 +151,28 @@ rule classify_reads_with_database:
         "-path_output {output.reads_output} "
         "-threads {params.threads}"
 
-
-# Create a blast database.    
+# Create a blast database
 rule create_blast_database_without_low_complexity:
     input:
-        raw_sequences="data/raw_sequences/fda_argos_raw_genomes_assembly_06_06_2020/",
-        name_database=expand("{folder}_blast_database", folder=sample)
+        raw_sequences=expand("data/raw_sequences/{folder_raw}/", folder_raw=all_raw_sequences)
     output:
-        output_folder="data/raw_sequences/fda_argos_raw_genomes_assembly_06_06_2020/"
+        output_folder=expand("data/raw_sequences/{folder_output}/", folder_output=all_raw_sequences)
+    params:
+        name_database=expand("{folder}_blast_database", folder=sample)
     conda:
         "metagenomic_env.yml"
     shell:
         "bash src/bash/create_blast_database_without_low_complexity.sh"
         "-path_seqs {input.raw_sequences} "
-        "-output_fasta {output.output_folder} "
-        "-name_db {input_database}"
+        "-output_fasta {output.output_folder}/makeblast/ "
+        "-name_db {params.name_database}"
 
 
 # run blast analyse.
 rule run_mega_blast:
     input:
         read=expand("results/classify_reads/trimmed_classify_{folder}_with_fda_argos_none_library_database/", folder=sample),
-        blast_database=expand("data/raw_sequences/{blast_db}/", blast_db=all_raw_sequences)
+        raw_sequences=expand("data/raw_sequences/{folder_output}/", folder_output=all_raw_sequences)
     output:
         blast_result=expand("results/blast_results/blast_result_{folder_blast}/", folder_blast=all_database) 
     conda:
@@ -176,6 +180,38 @@ rule run_mega_blast:
     shell:
         "bash src/bash/launch_blast_analyse.sh "
         "-path_reads {input.read} "
-        "-path_db {input.blast_database} "
+        "-path_db {input.blast_database}/makeblast/ "
         "-path_results {output.blast_result}"
 
+
+# run recovers same id from kraken and blast classification.
+rule recovers_same_id_from_kraken_and_blast:
+    input:
+        reads_output=expand("results/classify_reads/trimmed_classify_{folder}_with_fda_argos_none_library_database/", folder=sample),
+        blast_result=expand("results/blast_results/blast_result_{folder_blast}/", folder_blast=all_database)
+    output:
+        expand("results/final_results/{folder_a}/", folder_a=all_database)
+    params:
+        ncbi="data/databases/ete3_ncbi_taxanomy_database_05_05_2020/"
+    conda:
+        "metagenomic_env.yml"
+    shell:
+        "bash find_same_id_kraken_blast_bacteria_test.sh "
+        "-path_taxo {input.reads_output} "
+        "-path_blast {input.blast_result} "
+        "-path_clseq {input.reads_output} "
+        "-path_ncbi {params.ncbi}"
+
+# create plot for analyse.
+rule create_plot_analyse:
+    input:
+        folder_plot=expand("results/final_results/{folder_a}/",
+                           folder_a=all_database)
+    output:
+        folder_html=expand("results/html_final/{folder_a}/",
+                           folder_a=all_database)
+    conda:
+        "metagenomic_env.yml"
+    shell:
+        "python src/python/create_depth_plot.py "
+        "{input.folder_plot}"
