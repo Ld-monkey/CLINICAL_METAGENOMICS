@@ -4,6 +4,10 @@ import os
 reads_path = ["data/reads/PAIRED_SAMPLES_ADN_TEST/"]
 all_database = ["fda_argos_with_none_library_kraken_database_07_06_2020",
                 "mycocosm_with_fungi_library_kraken_database_07_06_2020"]
+
+all_raw_sequences = ["fda_argos_raw_genomes_assembly_06_06_2020",
+                     "mycocosm_fungi_ncbi_CDS_07_06_2020"]
+
 sample = []
 for read in reads_path:
     sample.append(os.path.basename(os.path.dirname(read)))
@@ -14,13 +18,17 @@ rule all:
         #        folder=sample),
         # "data/raw_sequences/fda_argos_raw_genomes_assembly_06_06_2020/",
         # "data/databases/fda_argos_with_none_library_kraken_database_07_06_2020/",
-        expand("results/classify_reads/trimmed_classify_{folder}_with_fda_argos_none_library_database/",
-               folder=sample),
-        "data/databases/mycocosm_with_fungi_library_kraken_database_07_06_2020/"
+        #expand("results/classify_reads/trimmed_classify_{folder}_with_fda_argos_none_library_database/",
+        #       folder=sample),
+        #expand("data/reads/{folder}/",
+        #       folder=sample),
+        #"data/databases/mycocosm_with_fungi_library_kraken_database_07_06_2020/",
+        #"results/blast_results/blast_PAIRED_SAMPLES_ADN_TEST/"
+        expand("results/blast_results/blast_result_{folder_blast}/", folder_blast=all_database)
 
 # Remove all poor quality and duplicate reads.
 rule remove_poor_quality_and_duplicate_reads:
-    input:
+    input: 
         "data/reads/{folder}/"
     output:
         directory("results/trimmed_reads/trimmed_{folder}_reads_04_06_2020/")
@@ -125,7 +133,7 @@ rule create_mycocosm_database:
 rule classify_reads_with_database:
     input:
         read="results/trimmed_reads/trimmed_{folder}_reads_04_06_2020/",
-        database="data/databases/fda_argos_with_none_library_kraken_database_07_06_2020/"
+        database=expand("data/databases/{database}/", database=all_database)
     output:
         reads_output=directory("results/classify_reads/trimmed_classify_{folder}_with_fda_argos_none_library_database/")
     params:
@@ -138,3 +146,36 @@ rule classify_reads_with_database:
         "-path_db {input.database} "
         "-path_output {output.reads_output} "
         "-threads {params.threads}"
+
+
+# Create a blast database.    
+rule create_blast_database_without_low_complexity:
+    input:
+        raw_sequences="data/raw_sequences/fda_argos_raw_genomes_assembly_06_06_2020/",
+        name_database=expand("{folder}_blast_database", folder=sample)
+    output:
+        output_folder="data/raw_sequences/fda_argos_raw_genomes_assembly_06_06_2020/"
+    conda:
+        "metagenomic_env.yml"
+    shell:
+        "bash src/bash/create_blast_database_without_low_complexity.sh"
+        "-path_seqs {input.raw_sequences} "
+        "-output_fasta {output.output_folder} "
+        "-name_db {input_database}"
+
+
+# run blast analyse.
+rule run_mega_blast:
+    input:
+        read=expand("results/classify_reads/trimmed_classify_{folder}_with_fda_argos_none_library_database/", folder=sample),
+        blast_database=expand("data/raw_sequences/{blast_db}/", blast_db=all_raw_sequences)
+    output:
+        blast_result=expand("results/blast_results/blast_result_{folder_blast}/", folder_blast=all_database) 
+    conda:
+        "metagenomic_env.yml"
+    shell:
+        "bash src/bash/launch_blast_analyse.sh "
+        "-path_reads {input.read} "
+        "-path_db {input.blast_database} "
+        "-path_results {output.blast_result}"
+
