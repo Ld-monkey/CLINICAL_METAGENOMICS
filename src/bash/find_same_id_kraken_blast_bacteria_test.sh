@@ -29,7 +29,24 @@ echo "NSLOTS: $NSLOTS"
 #      -path_clseq ../../results/test/bacteria_classified_reads_clean_fda_refseq_human_viral_07_05_2020 \
 #      -path_ncbi ../../data/databases/ete3_ncbi_taxanomy_database_05_05_2020/
 
-conda activate metagenomic_env
+# Function to remove all intermediate files
+function remove_all_intermediate_files {
+
+    # Remove #.fasta and #.fa files.
+    rm ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/1.fasta \
+       ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/2.fasta \
+       ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/1.fasta \
+       ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/2.fasta
+
+    # Remove map#.fa and sorted#.fa.
+    rm ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/map1.fasta \
+       ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/map2.fasta \
+       ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted1.fasta \
+       ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted2.fasta
+
+    # Finally remove the folder.
+    rm ${BLAST_FOLDER}/${NAME_BLAST_TO_CONSERVED}
+}
 
 PROGRAM=find_same_id_kraken_blast_bacteria.sh
 VERSION=1.0
@@ -215,38 +232,53 @@ then
     done
     echo "done recover reads !"
 
-    # # I don't know WTF.
-    # cat ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/1.fasta | paste - - | cut -c2- | sort > ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted1.fasta
-    # cat ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/2.fasta | paste - - | cut -c2- | sort > ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted2.fasta
+    # Create the fasta sorted files.
+    # paste : delete the line break between the characteristic line
+    # and the nucleotide lines.
+    # cut : remove '>' in fasta file.
+    # e.g :
+    # >NB552188:4:H353CBGXC:1:22211:5250:17917 1:N:0:1 kraken:taxid|573
+    # CAGGAAAAGGCGCTCCCGCAGCCAAGCACATCTATTTTCATTTACCCTCGCCAAAATTTTTTGCC
+    # to :
+    #>NB552188:4:H353CBGXC:1:22211:5250:17917 1:N:0:1 kraken:taxid|573       CAGG...
+    cat ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/1.fasta \
+        | paste - - \
+        |cut -c2- \
+        |sort > ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted1.fasta
 
-    # # Sort map1 and map2 and get outputs sorted1.fa and sorted2.fa
-    # # before joining else join command bug.
-    # sort ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/map1.fa \
-    #      --output ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted1.fa
-    # sort ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/map2.fa \
-    #      --output ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted2.fa
+    cat ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/2.fasta \
+        | paste - - \
+        | cut -c2- \
+        | sort > ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted2.fasta
 
-    # # Join something.
-    # join -1 1 -2 1 ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted1.fasta ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted1.fa > ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/1.fasta
-    # join -1 1 -2 1 ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted2.fasta ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted2.fa > ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/2.fasta
+    # BECAREFUL : CREATE BOTH TIME sorted#.fasta. 
+    # Sort map1 and map2 and get outputs sorted1.fa and sorted2.fa
+    # before joining else join command bug.
+    sort ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/map1.fa \
+         --output ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted1.fa
 
-    # #
-    # cat ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/1.fasta | awk -v pathF="${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}" '\''{print ">"$1" "$2" "$3"\n"$4 > pathF"/"$5".fasta"}'\'
-    # cat ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/2.fasta | awk -v pathF="${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}" '\''{print ">"$1" "$2" "$3"\n"$4 >> pathF"/"$5".fasta"}'\'
+    sort ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/map2.fa \
+         --output ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted2.fa
 
-    # # Remove
-    # rm ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/1.fasta \
-    #    ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/2.fasta \
-    #    ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/1.fa \
-    #    ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/2.fa
+    # Join the same sorted#.fasta file to create again the 1.fasta WHY ?
+    # Result of this step :
+    # before :
+    # >NB552188:4:H353CBGXC:1:22211:5250:17917 1:N:0:1 kraken:taxid|573       CAGGA....A
+    # after :
+    # >NB552188:4:H353CBGXC:1:22211:5250:17917 1:N:0:1 kraken:taxid|573 CAGGA....A 1:N:0:1 kraken:taxid|573 CAGGA...A
+    # Create both time output #.fa WHY ?
+    join -1 1 -2 1 ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted1.fasta \
+         ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted1.fa \
+         > ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/1.fasta
 
-    # rm ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/map1.fa \
-    #    ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/map2.fa \
-    #    ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted1.fa \
-    #    ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted2.fa
+    join -1 1 -2 1 ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted2.fasta \
+         ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted2.fa \
+         > ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/2.fasta
 
-    # rm ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted1.fasta \
-    #    ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/sorted2.fasta
+    # ??? Maybe create new .fasta with ??? nucleotide sequence ??
+    # e.g : awk -F "[\t]" -v path=${BLAST_FOLDER}$file '$10~/^1/ {print $1" "$8 > path"/map1.fa" ; print $1 > path"/1.fa"}' $open_file
+    awk -v path=${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA} '{print ">"$1" "$2" "$3"\n"$4 > pathF"/"$5".fasta"}' ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/1.fasta
+    awk -v path=${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA} '{print ">"$1" "$2" "$3"\n"$4 > pathF"/"$5".fasta"}' ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/2.fasta
 
     # # WTF men !
     # find ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA} -type f |
@@ -264,11 +296,8 @@ then
     # sort -n ${BLAST_FOLDER}/${NAME_BLAST_TO_CONSERVED} -k8,8 \
     #      --output ${BLAST_FOLDER}/{}sorted.txt
 
-    # #
-    # rm ${BLAST_FOLDER}/${NAME_BLAST_TO_CONSERVED}
-
-    # #
-    # mv ${BLAST_FOLDER}/{}sorted.txt ${BLAST_FOLDER}/${NAME_BLAST_TO_CONSERVED}
+    #
+    mv ${BLAST_FOLDER}/{}sorted.txt ${BLAST_FOLDER}/${NAME_BLAST_TO_CONSERVED}
 
     # #
     # cut -f8 ${BLAST_FOLDER}/${NAME_BLAST_TO_CONSERVED} | uniq -c | sort -k2,2 -g > ${BLAST_FOLDER}/${temp1}
@@ -298,9 +327,9 @@ then
     # echo "temp1 : $temp1"
     # echo "temp2 : $temp2"
     # echo "temp3 : $temp3"
+
+    # Remove intermediate files.
+    remove_all_intermediate_files
 else
     echo "Bacteria directory doesn't exists."
 fi
-
-# Deactivate conda environment.
-conda deactivate
