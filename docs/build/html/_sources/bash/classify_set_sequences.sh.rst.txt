@@ -62,3 +62,4 @@ Les fichiers de sorties sont les suivants : \*.clseqs\_\*.fastq, \*.unclseq_*.fq
    * \*.unclseqs.fastq : Tous les reads non-classés.
    * \*.output.txt : ?.
    * \*.report.txt : La phylogénie des organismes qui sont classés avec succès.
+   
