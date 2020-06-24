@@ -281,18 +281,28 @@ then
     awk -v path=${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA} '{print ">"$1" "$2" "$3"\n"$4 > pathF"/"$5".fasta"}' ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/2.fasta
 
     # # WTF men !
-    # find ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA} -type f |
-    #     while read f; do
-    #         i=0
-    #         while read line; do
-    #             i=$((i+1))
-    #             [ $i -eq 10 ] && continue 2
-    #         done < "$f"
-    #         printf %s\\n "$f"
-    #     done |
-    #     xargs rm -f
+    find ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA} -type f |
+        while read f; do
+            i=0
+            while read line; do
+                i=$((i+1))
+                [ $i -eq 10 ] && continue 2
+            done < "$f"
+            printf %s\\n "$f"
+        done |
+        xargs rm -f
+ 
+    find bacteria_metaphlan_blast_clean_fda_refseq_human_viral_07_05_2020 -type f |
+        while read f; do
+            i=0
+            while read line; do
+                i=$((i+1))
+                [ $i -eq 10 ] && continue 2
+            done < "$f"
+            printf %s "$f"
+        done
 
-    # #
+    # 
     # sort -n ${BLAST_FOLDER}/${NAME_BLAST_TO_CONSERVED} -k8,8 \
     #      --output ${BLAST_FOLDER}/{}sorted.txt
 
