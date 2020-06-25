@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Création d’un base de donnée 16S avec le cluster &mdash; Documentation CLINICAL METAGENOMICS 0.0.1</title>
+  <title>Création d’une base de données 16S avec le cluster &mdash; Documentation CLINICAL METAGENOMICS 0.0.1</title>
   
 
   
@@ -37,7 +37,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Recherche" href="../search.html" />
     <link rel="next" title="Création de plusieurs bases de données et classification" href="cluster_create_2_custom_databases_and_classify.sh.html" />
-    <link rel="prev" title="Récupérer les reads d’intérêts" href="../bash/recover_reads.sh.html" /> 
+    <link rel="prev" title="Récupérer les identifiants taxonomiques du même genre taxonomique entre Kraken et Blast" href="../python/sort_blasted_seq.py.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -85,32 +85,38 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../bash/create_kraken_database.sh.html">Créer les bases de données personnalisées avec Kraken 2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../bash/classify_set_sequences.sh.html">Classifier les séquences</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../bash/create_blast_database_without_low_complexity.sh.html">Création d’une base de donnée pour blast sans les séquences de faibles compléxités</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bash/create_blast_database_without_low_complexity.sh.html">Création d’une base de données pour blast sans les séquences de faibles complexités</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../bash/launch_blast_analyse.sh.html">Analyse des séquences ou reads avec l’algorithme de Blast</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../bash/launch_preprocess.sh.html">Lancer le préprocess ou nettoyage des séquences ou reads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bash/launch_preprocess.sh.html">Lancer le pre-process ou pré-traitement (nettoyage des reads)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../bash/recover_reads.sh.html">Récupérer les reads d’intérêts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bash/find_same_id_kraken_blast_bacteria.sh.html">Comparer les identifiants taxonomiques entre Kraken et Blast</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python scripts:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python/sort_blasted_seq.py.html">Récupérer les identifiants taxonomiques du même genre taxonomique entre Kraken et Blast</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Cluster</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Création d’un base de donnée 16S avec le cluster</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Création d’une base de données 16S avec le cluster</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#localisation">Localisation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#description">Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#les-parametres-d-entres">Les paramètres d’entrés</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#les-parametres-d-entree">Les paramètres d’entrée</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#le-fichier-de-sortie">Le fichier de sortie</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="cluster_create_2_custom_databases_and_classify.sh.html">Création de plusieurs bases de données et classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cluster_launch_blast.sh.html">Alignement des séquences ou reads avec l’algorithme de blast</a></li>
-<li class="toctree-l1"><a class="reference internal" href="cluster_launch_preprocess.sh.html">Nettoyage des séquences ou reads avec l’action de preprocess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cluster_launch_preprocess.sh.html">Nettoyage des séquences ou reads avec l’action de pré-traitement</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cluster_launch_get_id_and_reads.sh.html">Récupérer l’ID taxonomique et les reads d’intérêts</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Télécharger les bases de données automatiquement</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../download/download_refseq_species_sequences.sh.html">Télécharger les séquences des espèces virales et bactériennes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../download/download_ete3_ncbi_taxonomy_database.sh.html">Télécharger la taxonomie de ncbi avec ete3toolkit</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Environnement Conda</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../conda/conda_environnement.html">Environnement Conda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conda/conda_environnement.html">Environnement conda</a></li>
 </ul>
 
             
@@ -156,7 +162,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>Création d’un base de donnée 16S avec le cluster</li>
+      <li>Création d’une base de données 16S avec le cluster</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -175,9 +181,9 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="creation-d-un-base-de-donnee-16s-avec-le-cluster">
-<h1>Création d’un base de donnée 16S avec le cluster<a class="headerlink" href="#creation-d-un-base-de-donnee-16s-avec-le-cluster" title="Lien permanent vers ce titre">¶</a></h1>
-<p>Le programme destiné au cluster pour créer une base de donnée 16S est :</p>
+  <div class="section" id="creation-dune-base-de-donnees-16s-avec-le-cluster">
+<h1>Création d’une base de données 16S avec le cluster<a class="headerlink" href="#creation-dune-base-de-donnees-16s-avec-le-cluster" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Le programme destiné au cluster pour créer une base de données 16S est :</p>
 <div class="admonition hint">
 <p class="admonition-title">Indication</p>
 <p>cluster_create_16S_database.sh</p>
@@ -192,18 +198,18 @@
 </div>
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Automatise la création d’une base de donnée 16S sur un cluster. Il récupère toutes les séquences et les stocke dans le format .fastq .</p>
+<p>Automatise la création d’une base de données 16S sur un cluster. Il récupère toutes les séquences et les stocke dans le format fastq.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Le script ne fait que appeler le programme python get_database_from_accession_list.py. L’avantage du script shell est qu’il est adapté à l’utilisation dans un cluster. Pour plus d’information sur le programme python voir <a class="reference external" href="https://github.com/Zygnematophyce/FASTQ_FROM_ACCESSION_LIST">https://github.com/Zygnematophyce/FASTQ_FROM_ACCESSION_LIST</a> .</p>
+<p>Le script ne fait qu’appeler le programme python get_database_from_accession_list.py. L’avantage du script Shell est qu’il est adapté à l’utilisation dans un cluster. Pour plus d’information sur le programme python voir <a class="reference external" href="https://github.com/Zygnematophyce/FASTQ_FROM_ACCESSION_LIST">https://github.com/Zygnematophyce/FASTQ_FROM_ACCESSION_LIST</a> .</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Avertissement</p>
 <p>Utilise un environnement conda.</p>
 </div>
 </div>
-<div class="section" id="les-parametres-d-entres">
-<h2>Les paramètres d’entrés<a class="headerlink" href="#les-parametres-d-entres" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="les-parametres-d-entree">
+<h2>Les paramètres d’entrée<a class="headerlink" href="#les-parametres-d-entree" title="Lien permanent vers ce titre">¶</a></h2>
 <blockquote>
 <div><ul class="simple">
 <li><dl class="field-list simple">
@@ -228,7 +234,7 @@
 </div>
 <div class="section" id="le-fichier-de-sortie">
 <h2>Le fichier de sortie<a class="headerlink" href="#le-fichier-de-sortie" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Le programme sort l’ensemble des séquences d’intérets dans le format .fastq.</p>
+<p>Le programme sort l’ensemble des séquences d’intérêts dans le format .fastq.</p>
 </div>
 </div>
 
@@ -243,7 +249,7 @@
         <a href="cluster_create_2_custom_databases_and_classify.sh.html" class="btn btn-neutral float-right" title="Création de plusieurs bases de données et classification" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../bash/recover_reads.sh.html" class="btn btn-neutral float-left" title="Récupérer les reads d’intérêts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../python/sort_blasted_seq.py.html" class="btn btn-neutral float-left" title="Récupérer les identifiants taxonomiques du même genre taxonomique entre Kraken et Blast" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

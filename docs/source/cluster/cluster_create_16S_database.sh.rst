@@ -26,7 +26,7 @@ Automatise la création d'une base de données 16S sur un cluster. Il récupère
 .. warning::
    Utilise un environnement conda.
 
-Les paramètres d'entrés
+Les paramètres d'entrée
 ***********************
 
    * :ACCESSION_LIST_FILE:

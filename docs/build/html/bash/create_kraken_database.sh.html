@@ -37,7 +37,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Recherche" href="../search.html" />
     <link rel="next" title="Classifier les séquences" href="classify_set_sequences.sh.html" />
-    <link rel="prev" title="La documentation : Clinical Metagenomics" href="../index.html" /> 
+    <link rel="prev" title="Documentation" href="../index.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -86,32 +86,38 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Créer les bases de données personnalisées avec Kraken 2</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#localisation">Localisation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#description">Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#les-parametres-d-entres">Les paramètres d’entrés</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#exemple-d-execution">Exemple d’execution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#les-parametres-d-entree">Les paramètres d’entrée</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exemple-d-execution">Exemple d’exécution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#les-fichiers-de-sorties">Les fichiers de sorties</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="classify_set_sequences.sh.html">Classifier les séquences</a></li>
-<li class="toctree-l1"><a class="reference internal" href="create_blast_database_without_low_complexity.sh.html">Création d’une base de donnée pour blast sans les séquences de faibles compléxités</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_blast_database_without_low_complexity.sh.html">Création d’une base de données pour blast sans les séquences de faibles complexités</a></li>
 <li class="toctree-l1"><a class="reference internal" href="launch_blast_analyse.sh.html">Analyse des séquences ou reads avec l’algorithme de Blast</a></li>
-<li class="toctree-l1"><a class="reference internal" href="launch_preprocess.sh.html">Lancer le préprocess ou nettoyage des séquences ou reads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="launch_preprocess.sh.html">Lancer le pre-process ou pré-traitement (nettoyage des reads)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="recover_reads.sh.html">Récupérer les reads d’intérêts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="find_same_id_kraken_blast_bacteria.sh.html">Comparer les identifiants taxonomiques entre Kraken et Blast</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python scripts:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python/sort_blasted_seq.py.html">Récupérer les identifiants taxonomiques du même genre taxonomique entre Kraken et Blast</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Cluster</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_create_16S_database.sh.html">Création d’un base de donnée 16S avec le cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_create_16S_database.sh.html">Création d’une base de données 16S avec le cluster</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_create_2_custom_databases_and_classify.sh.html">Création de plusieurs bases de données et classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_launch_blast.sh.html">Alignement des séquences ou reads avec l’algorithme de blast</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_launch_preprocess.sh.html">Nettoyage des séquences ou reads avec l’action de preprocess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_launch_preprocess.sh.html">Nettoyage des séquences ou reads avec l’action de pré-traitement</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_launch_get_id_and_reads.sh.html">Récupérer l’ID taxonomique et les reads d’intérêts</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Télécharger les bases de données automatiquement</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../download/download_refseq_species_sequences.sh.html">Télécharger les séquences des espèces virales et bactériennes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../download/download_ete3_ncbi_taxonomy_database.sh.html">Télécharger la taxonomie de ncbi avec ete3toolkit</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Environnement Conda</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../conda/conda_environnement.html">Environnement Conda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conda/conda_environnement.html">Environnement conda</a></li>
 </ul>
 
             
@@ -178,7 +184,7 @@
             
   <div class="section" id="creer-les-bases-de-donnees-personnalisees-avec-kraken-2">
 <h1>Créer les bases de données personnalisées avec Kraken 2<a class="headerlink" href="#creer-les-bases-de-donnees-personnalisees-avec-kraken-2" title="Lien permanent vers ce titre">¶</a></h1>
-<p>Le programme shell qui permet de créer une base de données kraken 2 personnalisées est :</p>
+<p>Le programme Shell qui permet de créer une base de données kraken 2 personnalisées est :</p>
 <div class="admonition hint">
 <p class="admonition-title">Indication</p>
 <p>create_kraken_database.sh</p>
@@ -193,10 +199,10 @@
 </div>
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Créer une base de donnée personnalisée avec l’outil Kraken 2. Nous pouvons ajouter des séquences spécifiques ou encore ajouter ultérieurement des séquences dans la base de donnée.</p>
+<p>Créer une base de données personnalisée avec l’outil Kraken 2. Nous pouvons ajouter des séquences spécifiques ou encore ajouter ultérieurement des séquences dans la base de données.</p>
 </div>
-<div class="section" id="les-parametres-d-entres">
-<h2>Les paramètres d’entrés<a class="headerlink" href="#les-parametres-d-entres" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="les-parametres-d-entree">
+<h2>Les paramètres d’entrée<a class="headerlink" href="#les-parametres-d-entree" title="Lien permanent vers ce titre">¶</a></h2>
 <blockquote>
 <div><ul class="simple">
 <li><dl class="field-list simple">
@@ -205,7 +211,7 @@
 </dl>
 </li>
 </ul>
-<p>(Input) Le chemin du fichier contenant les séquences au format .fna</p>
+<p>(Input) Le chemin du fichier contenant les séquences au format. fna</p>
 <ul class="simple">
 <li><dl class="field-list simple">
 <dt class="field-odd">-database</dt>
@@ -213,7 +219,7 @@
 </dl>
 </li>
 </ul>
-<p>(Input) Le chemin de la base de donnée pour la créer ou l’actualiser.</p>
+<p>(Input) Le chemin de la base de données pour la créer ou l’actualiser.</p>
 <ul class="simple">
 <li><dl class="field-list simple">
 <dt class="field-odd">-threads</dt>
@@ -221,11 +227,11 @@
 </dl>
 </li>
 </ul>
-<p>(Input) Le nombre de puissance (threads) pour créer la base de donnée plus rapidement.</p>
+<p>(Input) Le nombre de puissance (threads) pour créer la base de données plus rapidement.</p>
 </div></blockquote>
 </div>
 <div class="section" id="exemple-d-execution">
-<h2>Exemple d’execution<a class="headerlink" href="#exemple-d-execution" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>Exemple d’exécution<a class="headerlink" href="#exemple-d-execution" title="Lien permanent vers ce titre">¶</a></h2>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>create_kraken_database.sh -ref /path/FDA_ARGOS -database /output_FDA_ARGOS -thread <span class="m">1</span>
 </pre></div>
 </div>
@@ -254,7 +260,7 @@
         <a href="classify_set_sequences.sh.html" class="btn btn-neutral float-right" title="Classifier les séquences" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../index.html" class="btn btn-neutral float-left" title="La documentation : Clinical Metagenomics" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="../index.html" class="btn btn-neutral float-left" title="Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

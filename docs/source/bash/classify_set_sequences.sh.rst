@@ -26,7 +26,7 @@ Détermine les organismes présents dans un échantillon ou reads. L'échantillo
 .. note::
    \* L'étoile indique que n'importe quelle chaine de caractère peut se positionner avant ou après.
 
-Les paramètres d'entrés
+Les paramètres d'entrée
 ***********************
 
    * :-path_reads:

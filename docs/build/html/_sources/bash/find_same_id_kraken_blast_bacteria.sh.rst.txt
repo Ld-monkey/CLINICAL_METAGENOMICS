@@ -1,9 +1,9 @@
-Comparer les identifiants taxonomiques entre Kraken et Blast
+﻿Comparer les identifiants taxonomiques entre Kraken et Blast
 ============================================================
 
-Le programme shell qui permet de récupérer les identifiant du même genre s'appelle :
+Le programme Shell qui permet de récupérer les identifiant du même genre s'appelle :
 
-.. hint:
+.. hint::
    find_same_id_kraken_blast_bacteria.sh
 
 Localisation
@@ -18,34 +18,34 @@ Localisation
 Description
 ***********
 
-Pour chaque échantillons et pour chaque reads alignés le programme :
+Pour chaque échantillon et pour chaque reads alignés le programme :
 
-   #. compare les identifiants taxonomiques Blast et Kraken et ne conserve que ceux qui sont du même genre,
-   #. compte le nombre de reads pour chaque espèce,
-   #. dessine la carte de couverture des viruses,
-   #. et récupère les noms des espèces pour remplacer les ID taxonomiques.
+   #. Compare les identifiants taxonomiques Blast et Kraken et ne conserve que ceux qui sont du même genre,
+   #. Compte le nombre de reads pour chaque espèce,
+   #. Dessine la carte de couverture des virus,
+   #. Et récupère les noms des espèces pour remplacer les ID taxonomiques.
 
 
 .. warning::
    Il peut être important d'utiliser l'environnement conda "metagenomic_env" pour le bon déroulement des scripts.
 
 .. warning::
-   Le programme dépend de plusieurs sous programme qui sont :
+   Le programme dépend de plusieurs sous-programmes qui sont :
    sort_blasted_seq.py
 
 .. note::
-   Les programmes python se trouvent dans le dossier src/python/ .
+   Les programmes python se trouvent dans le dossier src/python/.
 
-Les paramètres d'entrés
+Les paramètres d'entrée
 ***********************
 
   * :-path_taxo:
 
-    (Input)  The path of folder with Bacteria or Viruses or (Fongi) folders          \*DIR: input_bacteria_folder
+    (Input) The path of folder with Bacteria or Viruses or (Fongi) folders          \*DIR: input_bacteria_folder
 
   * :-path_blast:
 
-    (Input)  The folder of the blast results containing .blast.txt.                  \*DIR: input_results_blast
+    (Input) The folder of the blast results containing.blast.txt.                  \*DIR: input_results_blast
 
   * :-path_ncbi:
 
@@ -53,9 +53,9 @@ Les paramètres d'entrés
 
 .. note::
 
-   A noter que si le paramètre -path_ncbi n'est pas précisé le programme va par défault choisir le chemin suivant: ~/.etetoolkit/ pour trouver la base de données taxa.sqlite. Si aucune base de donnée n'est retrouvée c'est peut-être parce que la base de donnée taxonomique de ncbi n'a pas été télécharger. Nous pouvons télécharger cette base de donnée grace au programme download_ete3_ncbi_taxa_db.sh (dans le dossier src/download/).
+   A noter que si le paramètre -path_ncbi n'est pas précisé le programme va par défaut choisir le chemin suivant : ~/.etetoolkit/ pour trouver la base de données taxa.sqlite. Si aucune base de données n'est retrouvée c'est peut-être parce que la base de données taxonomique de ncbi n'a pas été télécharger. Nous pouvons télécharger cette base de données grâce au programme download_ete3_ncbi_taxa_db.sh (dans le dossier src/download/).
 
-Exemple d'execution
+Exemple d'exécution
 *******************
 
 .. code-block:: sh
@@ -69,14 +69,14 @@ Les fichiers de sorties pour la comparaison d'identifiants taxonomiques
 ***********************************************************************
 
 .. note::
-   Dans le dossier ou se trouve les résultats des blasts, un dossier pour chaque fichier blast sera créés. Ce dossier comprend les identifiants taxonomiques qui sont conservés. Les identifiants taxonomiques qui sont conservées entre Blast et Kraken sont les identifiants du même genre.
+   Dans le dossier où se trouve les résultats des blasts, un dossier pour chaque fichier blast sera créés. Ce dossier comprend les identifiants taxonomiques qui sont conservés. Les identifiants taxonomiques qui sont conservées entre Blast et Kraken sont les identifiants du même genre.
 
 Les fichiers de sortie sont :
 
    * \*_conserved.txt : Les identifiants taxonomiques conservés.
    * \*_notconserved.txt : Les identifiants taxonomiques qui ne sont pas conservés.
 
-Exemple d'un fichier avec des identifiants conversés :
+Exemple d'un fichier avec des identifiants conservés :
 ------------------------------------------------------
 
 .. code-block:: sh

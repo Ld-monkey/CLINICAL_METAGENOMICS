@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Recherche" href="../search.html" />
-    <link rel="next" title="Environnement Conda" href="../conda/conda_environnement.html" />
+    <link rel="next" title="Télécharger la taxonomie de ncbi avec ete3toolkit" href="download_ete3_ncbi_taxonomy_database.sh.html" />
     <link rel="prev" title="Récupérer l’ID taxonomique et les reads d’intérêts" href="../cluster/cluster_launch_get_id_and_reads.sh.html" /> 
 </head>
 
@@ -85,17 +85,22 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../bash/create_kraken_database.sh.html">Créer les bases de données personnalisées avec Kraken 2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../bash/classify_set_sequences.sh.html">Classifier les séquences</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../bash/create_blast_database_without_low_complexity.sh.html">Création d’une base de donnée pour blast sans les séquences de faibles compléxités</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bash/create_blast_database_without_low_complexity.sh.html">Création d’une base de données pour blast sans les séquences de faibles complexités</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../bash/launch_blast_analyse.sh.html">Analyse des séquences ou reads avec l’algorithme de Blast</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../bash/launch_preprocess.sh.html">Lancer le préprocess ou nettoyage des séquences ou reads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bash/launch_preprocess.sh.html">Lancer le pre-process ou pré-traitement (nettoyage des reads)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../bash/recover_reads.sh.html">Récupérer les reads d’intérêts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bash/find_same_id_kraken_blast_bacteria.sh.html">Comparer les identifiants taxonomiques entre Kraken et Blast</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python scripts:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python/sort_blasted_seq.py.html">Récupérer les identifiants taxonomiques du même genre taxonomique entre Kraken et Blast</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Cluster</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_create_16S_database.sh.html">Création d’un base de donnée 16S avec le cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_create_16S_database.sh.html">Création d’une base de données 16S avec le cluster</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_create_2_custom_databases_and_classify.sh.html">Création de plusieurs bases de données et classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_launch_blast.sh.html">Alignement des séquences ou reads avec l’algorithme de blast</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_launch_preprocess.sh.html">Nettoyage des séquences ou reads avec l’action de preprocess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_launch_preprocess.sh.html">Nettoyage des séquences ou reads avec l’action de pré-traitement</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_launch_get_id_and_reads.sh.html">Récupérer l’ID taxonomique et les reads d’intérêts</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Télécharger les bases de données automatiquement</span></p>
@@ -103,15 +108,16 @@
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Télécharger les séquences des espèces virales et bactériennes</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#les-bases-de-donnees">Les bases de données</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#localisation">Localisation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#exemple-d-execution">Exemple d’execution</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#les-fichiers-d-entrees">Les fichiers d’entrées</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exemple-d-execution">Exemple d’exécution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#les-fichiers-d-entree">Les fichiers d’entrée</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#les-fichiers-de-sorties">Les fichiers de sorties</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="download_ete3_ncbi_taxonomy_database.sh.html">Télécharger la taxonomie de ncbi avec ete3toolkit</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Environnement Conda</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../conda/conda_environnement.html">Environnement Conda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conda/conda_environnement.html">Environnement conda</a></li>
 </ul>
 
             
@@ -178,7 +184,7 @@
             
   <div class="section" id="telecharger-les-sequences-des-especes-virales-et-bacteriennes">
 <h1>Télécharger les séquences des espèces virales et bactériennes<a class="headerlink" href="#telecharger-les-sequences-des-especes-virales-et-bacteriennes" title="Lien permanent vers ce titre">¶</a></h1>
-<p>Dans ce projet nous avons créé des scripts en bash qui automatise le téléchargement des bases de données. Ces bases de données sont spécifiques à notre études.</p>
+<p>Dans ce projet nous avons créé des scripts en Bash qui automatise le téléchargement des bases de données. Ces bases de données sont spécifiques à notre étude.</p>
 <p>Les scripts qui permettent d’automatiser le téléchargement et le traitement des données sont :</p>
 <div class="admonition hint">
 <p class="admonition-title">Indication</p>
@@ -195,7 +201,7 @@
 <blockquote>
 <div><ul class="simple">
 <li><p>Les séquences nucléotidiques de toutes les espèces virales de refseq.</p></li>
-<li><p>Les séquences nucléotidiques de toutles les espèces bactériennes de refseq.</p></li>
+<li><p>Les séquences nucléotidiques de tous les espèces bactériennes de refseq.</p></li>
 </ul>
 </div></blockquote>
 </div>
@@ -226,7 +232,7 @@
 </div>
 </div>
 <div class="section" id="exemple-d-execution">
-<h2>Exemple d’execution<a class="headerlink" href="#exemple-d-execution" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>Exemple d’exécution<a class="headerlink" href="#exemple-d-execution" title="Lien permanent vers ce titre">¶</a></h2>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>./download_refseq_viral_sequences.sh
 </pre></div>
 </div>
@@ -234,12 +240,12 @@
 </pre></div>
 </div>
 </div>
-<div class="section" id="les-fichiers-d-entrees">
-<h2>Les fichiers d’entrées<a class="headerlink" href="#les-fichiers-d-entrees" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="section" id="les-fichiers-d-entree">
+<h2>Les fichiers d’entrée<a class="headerlink" href="#les-fichiers-d-entree" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Les fichiers d’entrées sont les suivants :</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>*.gbff.gz : Le format génomics de genbank dans ncbi.</p></li>
+<li><p>*.gbff.gz : Le format génomiques de genbank dans ncbi.</p></li>
 </ul>
 </div></blockquote>
 </div>
@@ -265,7 +271,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../conda/conda_environnement.html" class="btn btn-neutral float-right" title="Environnement Conda" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="download_ete3_ncbi_taxonomy_database.sh.html" class="btn btn-neutral float-right" title="Télécharger la taxonomie de ncbi avec ete3toolkit" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../cluster/cluster_launch_get_id_and_reads.sh.html" class="btn btn-neutral float-left" title="Récupérer l’ID taxonomique et les reads d’intérêts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

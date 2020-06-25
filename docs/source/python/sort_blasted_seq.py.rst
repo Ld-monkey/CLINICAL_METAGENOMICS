@@ -4,7 +4,7 @@
 
 Recover sequence with conserved classification between Kraken2 and BLAST. This program allow to separate the sequences : those which have a similar taxonomy at the genus level are gathered in the file "conserved.txt" (output).
 
-Les paramètres d'entrés
+Les paramètres d'entrée
 ***********************
 
 Les 3 paramètres sont :

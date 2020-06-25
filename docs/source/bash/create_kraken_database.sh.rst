@@ -21,7 +21,7 @@ Description
 
 Créer une base de données personnalisée avec l'outil Kraken 2. Nous pouvons ajouter des séquences spécifiques ou encore ajouter ultérieurement des séquences dans la base de données.
 
-Les paramètres d'entrés
+Les paramètres d'entrée
 ***********************
 
    * :-ref:

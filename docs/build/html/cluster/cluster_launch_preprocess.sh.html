@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Nettoyage des séquences ou reads avec l’action de preprocess &mdash; Documentation CLINICAL METAGENOMICS 0.0.1</title>
+  <title>Nettoyage des séquences ou reads avec l’action de pré-traitement &mdash; Documentation CLINICAL METAGENOMICS 0.0.1</title>
   
 
   
@@ -85,26 +85,32 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../bash/create_kraken_database.sh.html">Créer les bases de données personnalisées avec Kraken 2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../bash/classify_set_sequences.sh.html">Classifier les séquences</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../bash/create_blast_database_without_low_complexity.sh.html">Création d’une base de donnée pour blast sans les séquences de faibles compléxités</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bash/create_blast_database_without_low_complexity.sh.html">Création d’une base de données pour blast sans les séquences de faibles complexités</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../bash/launch_blast_analyse.sh.html">Analyse des séquences ou reads avec l’algorithme de Blast</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../bash/launch_preprocess.sh.html">Lancer le préprocess ou nettoyage des séquences ou reads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bash/launch_preprocess.sh.html">Lancer le pre-process ou pré-traitement (nettoyage des reads)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../bash/recover_reads.sh.html">Récupérer les reads d’intérêts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bash/find_same_id_kraken_blast_bacteria.sh.html">Comparer les identifiants taxonomiques entre Kraken et Blast</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python scripts:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python/sort_blasted_seq.py.html">Récupérer les identifiants taxonomiques du même genre taxonomique entre Kraken et Blast</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Cluster</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="cluster_create_16S_database.sh.html">Création d’un base de donnée 16S avec le cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cluster_create_16S_database.sh.html">Création d’une base de données 16S avec le cluster</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cluster_create_2_custom_databases_and_classify.sh.html">Création de plusieurs bases de données et classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cluster_launch_blast.sh.html">Alignement des séquences ou reads avec l’algorithme de blast</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Nettoyage des séquences ou reads avec l’action de preprocess</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Nettoyage des séquences ou reads avec l’action de pré-traitement</a></li>
 <li class="toctree-l1"><a class="reference internal" href="cluster_launch_get_id_and_reads.sh.html">Récupérer l’ID taxonomique et les reads d’intérêts</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Télécharger les bases de données automatiquement</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../download/download_refseq_species_sequences.sh.html">Télécharger les séquences des espèces virales et bactériennes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../download/download_ete3_ncbi_taxonomy_database.sh.html">Télécharger la taxonomie de ncbi avec ete3toolkit</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Environnement Conda</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../conda/conda_environnement.html">Environnement Conda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conda/conda_environnement.html">Environnement conda</a></li>
 </ul>
 
             
@@ -150,7 +156,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>Nettoyage des séquences ou reads avec l’action de preprocess</li>
+      <li>Nettoyage des séquences ou reads avec l’action de pré-traitement</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -169,8 +175,8 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="nettoyage-des-sequences-ou-reads-avec-l-action-de-preprocess">
-<h1>Nettoyage des séquences ou reads avec l’action de preprocess<a class="headerlink" href="#nettoyage-des-sequences-ou-reads-avec-l-action-de-preprocess" title="Lien permanent vers ce titre">¶</a></h1>
+  <div class="section" id="nettoyage-des-sequences-ou-reads-avec-l-action-de-pre-traitement">
+<h1>Nettoyage des séquences ou reads avec l’action de pré-traitement<a class="headerlink" href="#nettoyage-des-sequences-ou-reads-avec-l-action-de-pre-traitement" title="Lien permanent vers ce titre">¶</a></h1>
 <p>Le programme destiné au cluster aide à automatiser le nettoyage des séquences ou reads en supprimant les duplicatas et les reads de mauvaises qualités.</p>
 <div class="admonition hint">
 <p class="admonition-title">Indication</p>
@@ -178,7 +184,7 @@
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Avertissement</p>
-<p>A besoin de l’environnement conda EnvAntL pour fonctionner correctement.</p>
+<p>A besoin de l’environnement conda metagenomic_env pour fonctionner correctement.</p>
 </div>
 </div>
 

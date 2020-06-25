@@ -36,8 +36,8 @@
   <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Recherche" href="../search.html" />
-    <link rel="next" title="Lancer le préprocess ou nettoyage des séquences ou reads" href="launch_preprocess.sh.html" />
-    <link rel="prev" title="Création d’une base de donnée pour blast sans les séquences de faibles compléxités" href="create_blast_database_without_low_complexity.sh.html" /> 
+    <link rel="next" title="Lancer le pre-process ou pré-traitement (nettoyage des reads)" href="launch_preprocess.sh.html" />
+    <link rel="prev" title="Création d’une base de données pour blast sans les séquences de faibles complexités" href="create_blast_database_without_low_complexity.sh.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -85,33 +85,39 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="create_kraken_database.sh.html">Créer les bases de données personnalisées avec Kraken 2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="classify_set_sequences.sh.html">Classifier les séquences</a></li>
-<li class="toctree-l1"><a class="reference internal" href="create_blast_database_without_low_complexity.sh.html">Création d’une base de donnée pour blast sans les séquences de faibles compléxités</a></li>
+<li class="toctree-l1"><a class="reference internal" href="create_blast_database_without_low_complexity.sh.html">Création d’une base de données pour blast sans les séquences de faibles complexités</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Analyse des séquences ou reads avec l’algorithme de Blast</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#localisation">Localisation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#description">Description</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#exemple-d-execution">Exemple d’execution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exemple-d-execution">Exemple d’exécution</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#les-parametres-d-entres">Les paramètres d’entrés</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#les-fichiers-de-sorties">Les fichiers de sorties</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="launch_preprocess.sh.html">Lancer le préprocess ou nettoyage des séquences ou reads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="launch_preprocess.sh.html">Lancer le pre-process ou pré-traitement (nettoyage des reads)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="recover_reads.sh.html">Récupérer les reads d’intérêts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="find_same_id_kraken_blast_bacteria.sh.html">Comparer les identifiants taxonomiques entre Kraken et Blast</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python scripts:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python/sort_blasted_seq.py.html">Récupérer les identifiants taxonomiques du même genre taxonomique entre Kraken et Blast</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Cluster</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_create_16S_database.sh.html">Création d’un base de donnée 16S avec le cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_create_16S_database.sh.html">Création d’une base de données 16S avec le cluster</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_create_2_custom_databases_and_classify.sh.html">Création de plusieurs bases de données et classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_launch_blast.sh.html">Alignement des séquences ou reads avec l’algorithme de blast</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_launch_preprocess.sh.html">Nettoyage des séquences ou reads avec l’action de preprocess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_launch_preprocess.sh.html">Nettoyage des séquences ou reads avec l’action de pré-traitement</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_launch_get_id_and_reads.sh.html">Récupérer l’ID taxonomique et les reads d’intérêts</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Télécharger les bases de données automatiquement</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../download/download_refseq_species_sequences.sh.html">Télécharger les séquences des espèces virales et bactériennes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../download/download_ete3_ncbi_taxonomy_database.sh.html">Télécharger la taxonomie de ncbi avec ete3toolkit</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Environnement Conda</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../conda/conda_environnement.html">Environnement Conda</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../conda/conda_environnement.html">Environnement conda</a></li>
 </ul>
 
             
@@ -178,10 +184,10 @@
             
   <div class="section" id="analyse-des-sequences-ou-reads-avec-l-algorithme-de-blast">
 <h1>Analyse des séquences ou reads avec l’algorithme de Blast<a class="headerlink" href="#analyse-des-sequences-ou-reads-avec-l-algorithme-de-blast" title="Lien permanent vers ce titre">¶</a></h1>
-<p>Le programme shell permet de réaliser un alignement de séquences avec l’algorithme de blast. Les séquences ou reads sont alignés sur une base de donnée.</p>
+<p>Le programme Shell permet de réaliser un alignement de séquences avec l’algorithme de blast. Les séquences ou reads sont alignés sur une base de données.</p>
 <div class="admonition warning">
 <p class="admonition-title">Avertissement</p>
-<p>Il faut créer une base de donnée spécifique pour l’analyse avec l’algorithme de blast.</p>
+<p>Il faut créer une base de données spécifique pour l’analyse avec l’algorithme de blast.</p>
 </div>
 <div class="admonition hint">
 <p class="admonition-title">Indication</p>
@@ -197,14 +203,14 @@
 </div>
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Lien permanent vers ce titre">¶</a></h2>
-<p>A partir d’un jeu de séquences ou reads et dépendant de la base de donnée donnée en argument le script permet de réaliser un alignement de séquence avec l’algorihtme de blast.</p>
+<p>A partir d’un jeu de séquences ou reads et dépendant de la base de données en argument le script permet de réaliser un alignement de séquence avec l’algorithme de blast.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Pour plus d’information sur les paramètres utilisés avec blastn aller sur le lien suivant : <a class="reference external" href="http://nebc.nerc.ac.uk/bioinformatics/documentation/blast+/user_manual.pdf">http://nebc.nerc.ac.uk/bioinformatics/documentation/blast+/user_manual.pdf</a></p>
 </div>
 </div>
 <div class="section" id="exemple-d-execution">
-<h2>Exemple d’execution<a class="headerlink" href="#exemple-d-execution" title="Lien permanent vers ce titre">¶</a></h2>
+<h2>Exemple d’exécution<a class="headerlink" href="#exemple-d-execution" title="Lien permanent vers ce titre">¶</a></h2>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>launch_blast_analyse.sh -path_reads sample_reads -path_db FDA_ARGOS_db -path_result blast_metaplan_output
 </pre></div>
 </div>
@@ -229,7 +235,7 @@
 </dl>
 </li>
 </ul>
-<p>(Input) Le chemin du dossier avec la base de donnée spécifique a l’algorithme de blast.</p>
+<p>(Input) Le chemin du dossier avec la base de données spécifique à l’algorithme de blast.</p>
 <ul class="simple">
 <li><dl class="field-list simple">
 <dt class="field-odd">-path_results</dt>
@@ -237,14 +243,14 @@
 </dl>
 </li>
 </ul>
-<p>(Output) Le chemin du dossier de sortie pour les résultats.*DIR: blast_result</p>
+<p>(Output) Le chemin du dossier de sortie pour les résultats. <a href="#id1"><span class="problematic" id="id2">*</span></a>DIR: blast_result</p>
 </div></blockquote>
 </div>
 <div class="section" id="les-fichiers-de-sorties">
 <h2>Les fichiers de sorties<a class="headerlink" href="#les-fichiers-de-sorties" title="Lien permanent vers ce titre">¶</a></h2>
 <blockquote>
 <div><ul class="simple">
-<li><p>Les fichiers avec l’extention *.blast.txt résultat de l’algorithme de blast.</p></li>
+<li><p>Les fichiers avec l’extension *.blast.txt résultat de l’algorithme de blast.</p></li>
 </ul>
 </div></blockquote>
 </div>
@@ -258,10 +264,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="launch_preprocess.sh.html" class="btn btn-neutral float-right" title="Lancer le préprocess ou nettoyage des séquences ou reads" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="launch_preprocess.sh.html" class="btn btn-neutral float-right" title="Lancer le pre-process ou pré-traitement (nettoyage des reads)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="create_blast_database_without_low_complexity.sh.html" class="btn btn-neutral float-left" title="Création d’une base de donnée pour blast sans les séquences de faibles compléxités" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="create_blast_database_without_low_complexity.sh.html" class="btn btn-neutral float-left" title="Création d’une base de données pour blast sans les séquences de faibles complexités" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

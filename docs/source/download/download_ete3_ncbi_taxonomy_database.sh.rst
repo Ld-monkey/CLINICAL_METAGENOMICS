@@ -44,7 +44,7 @@ Localisation
    A noter que les scripts génèrent automatiquement un dossier avec la date.
 
 
-Exemple d'execution
+Exemple d'exécution
 *******************
 
 .. code-block:: sh

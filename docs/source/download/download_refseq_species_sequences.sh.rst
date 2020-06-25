@@ -59,8 +59,8 @@ Exemple d'exécution
 
    ./download_refseq_bacterial_sequences.sh
 
-Les fichiers d'entrées
-**********************
+Les fichiers d'entrée
+*********************
 
 Les fichiers d'entrées sont les suivants :
 

@@ -36,7 +36,7 @@ Pour chaque échantillon et pour chaque reads alignés le programme :
 .. note::
    Les programmes python se trouvent dans le dossier src/python/.
 
-Les paramètres d'entrés
+Les paramètres d'entrée
 ***********************
 
   * :-path_taxo:
@@ -76,7 +76,7 @@ Les fichiers de sortie sont :
    * \*_conserved.txt : Les identifiants taxonomiques conservés.
    * \*_notconserved.txt : Les identifiants taxonomiques qui ne sont pas conservés.
 
-Exemple d'un fichier avec des identifiants conversés :
+Exemple d'un fichier avec des identifiants conservés :
 ------------------------------------------------------
 
 .. code-block:: sh

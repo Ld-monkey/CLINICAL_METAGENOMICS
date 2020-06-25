@@ -1,7 +1,7 @@
-Créer les bases de données personnalisées avec Kraken 2
+﻿Créer les bases de données personnalisées avec Kraken 2
 =======================================================
 
-Le programme shell qui permet de créer une base de données kraken 2 personnalisées est :
+Le programme Shell qui permet de créer une base de données kraken 2 personnalisées est :
 
 .. hint::
    create_kraken_database.sh
@@ -19,24 +19,24 @@ Localisation
 Description
 ***********
 
-Créer une base de donnée personnalisée avec l'outil Kraken 2. Nous pouvons ajouter des séquences spécifiques ou encore ajouter ultérieurement des séquences dans la base de donnée.
+Créer une base de données personnalisée avec l'outil Kraken 2. Nous pouvons ajouter des séquences spécifiques ou encore ajouter ultérieurement des séquences dans la base de données.
 
-Les paramètres d'entrés
+Les paramètres d'entrée
 ***********************
 
    * :-ref:
 
-   (Input) Le chemin du fichier contenant les séquences au format .fna
+   (Input) Le chemin du fichier contenant les séquences au format. fna
    
    * :-database:
 
-   (Input) Le chemin de la base de donnée pour la créer ou l'actualiser.
+   (Input) Le chemin de la base de données pour la créer ou l'actualiser.
    
    * :-threads:
 
-   (Input) Le nombre de puissance (threads) pour créer la base de donnée plus rapidement.
+   (Input) Le nombre de puissance (threads) pour créer la base de données plus rapidement.
 
-Exemple d'execution
+Exemple d'exécution
 *******************
 
 .. code-block:: sh
