@@ -36,12 +36,12 @@ Exemple d'exécution
 
    launch_blast_analyse.sh -path_reads sample_reads -path_db FDA_ARGOS_db -path_result blast_metaplan_output
 
-Les paramètres d'entrés
+Les paramètres d'entrée
 ***********************
 
   * :-path_reads:
 
-   (Input) Le chemin du dossier avec toutes les séquences ou reads. *DIR: sequences*.fna
+   (Input) Le chemin du dossier avec toutes les séquences ou reads. \*DIR: sequences*.fna
 
   * :-path_db:
 
@@ -49,7 +49,7 @@ Les paramètres d'entrés
 
   * :-path_results:
 
-  (Output) Le chemin du dossier de sortie pour les résultats. *DIR: blast_result
+  (Output) Le chemin du dossier de sortie pour les résultats. \*DIR: blast_result
 
 Les fichiers de sorties
 ***********************

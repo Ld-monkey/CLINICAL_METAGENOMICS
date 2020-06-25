@@ -46,7 +46,7 @@ Pour comprendre les scripts du pré-traitement et de dust aller à la rebrique s
 .. note::
    L'extension des échantillons sont transformés automatiquement en format .fastq .
 
-Les paramètres d'entrés
+Les paramètres d'entrée
 ***********************
 
 .. note::
