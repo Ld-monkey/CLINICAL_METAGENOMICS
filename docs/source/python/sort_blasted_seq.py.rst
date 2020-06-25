@@ -1,5 +1,6 @@
-Récupérer les identifiants taxonomiques du même genre entre Kraken et Blast
-===========================================================================
+﻿Récupérer les identifiants taxonomiques du même genre taxonomique entre Kraken et Blast
+========================================================================================
+
 
 Recover sequence with conserved classification between Kraken2 and BLAST. This program allow to separate the sequences : those which have a similar taxonomy at the genus level are gathered in the file "conserved.txt" (output).
 
@@ -12,7 +13,7 @@ Les 3 paramètres sont :
    * -o : The output file for e.g \*_conserved.txt 
    * -n : The localization of NCBI taxa database.
 
-Exemple d'execution
+Exemple d'exécution
 *******************
 
 .. code-block:: sh

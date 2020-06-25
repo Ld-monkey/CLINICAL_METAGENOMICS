@@ -1,7 +1,7 @@
-Télécharger les séquences des espèces virales et bactériennes
+﻿Télécharger les séquences des espèces virales et bactériennes
 =============================================================
 
-Dans ce projet nous avons créé des scripts en bash qui automatise le téléchargement des bases de données. Ces bases de données sont spécifiques à notre études.
+Dans ce projet nous avons créé des scripts en Bash qui automatise le téléchargement des bases de données. Ces bases de données sont spécifiques à notre étude.
 
 
 Les scripts qui permettent d'automatiser le téléchargement et le traitement des données sont :
@@ -19,7 +19,7 @@ Les bases de données
 Les bases de données sont :
 
    * Les séquences nucléotidiques de toutes les espèces virales de refseq.
-   * Les séquences nucléotidiques de toutles les espèces bactériennes de refseq.
+   * Les séquences nucléotidiques de tous les espèces bactériennes de refseq.
 
 Localisation
 ************
@@ -47,7 +47,7 @@ Localisation
    A noter que les scripts génèrent automatiquement un dossier avec la date.
 
 
-Exemple d'execution
+Exemple d'exécution
 *******************
 
 .. code-block:: sh
@@ -64,7 +64,7 @@ Les fichiers d'entrées
 
 Les fichiers d'entrées sont les suivants :
 
-   * \*.gbff.gz : Le format génomics de genbank dans ncbi.
+   * \*.gbff.gz : Le format génomiques de genbank dans ncbi.
 
 Les fichiers de sorties
 ***********************

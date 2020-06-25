@@ -1,7 +1,7 @@
-Classifier les séquences
+﻿Classifier les séquences
 ========================
 
-Le programme shell qui permet d'executer la classification d'organismes s'appelle :
+Le programme Shell qui permet d'exécuter la classification d'organismes s'appelle :
 
 .. hint::
    classify_set_sequences.sh
@@ -18,7 +18,7 @@ Localisation
 Description
 ***********
 
-Détermine les organismes présent dans un échantillon ou reads. L'échantillon possède la totalité des séquences nucléotidique avec un format fastq.
+Détermine les organismes présents dans un échantillon ou reads. L'échantillon possède la totalité des séquences nucléotidique avec un format fastq.
 
 .. warning::
    Les séquences par paires doivent s'appeler \*R1\*.fastq
@@ -31,7 +31,7 @@ Les paramètres d'entrés
 
    * :-path_reads:
 
-   (Input)  Le chemin du dossier l'échantillon contenant les reads.                 \*FILE: sequences.fastq
+   (Input) Le chemin du dossier l'échantillon contenant les reads.                 \*FILE: sequences.fastq
 
    * :-path_db:
 
@@ -44,9 +44,9 @@ Les paramètres d'entrés
    
    * :-threads:
 
-   (Input)  Le nombre de puissance (threads) pour classer plus vite.                \*INT: e.g 1
+   (Input) Le nombre de puissance (threads) pour classer plus vite.                \*INT: e.g 1
 
-Exemple d'execution
+Example execution
 *******************
 
 .. code-block:: sh
