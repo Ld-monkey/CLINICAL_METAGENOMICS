@@ -1,3 +1,0 @@
-TypeError in line 8 of /media/disk-metagenomique/CLINICAL_METAGENOMICS/Snakefile:
-unhashable type: 'list'
-  File "/media/disk-metagenomique/CLINICAL_METAGENOMICS/Snakefile", line 8, in <module>
