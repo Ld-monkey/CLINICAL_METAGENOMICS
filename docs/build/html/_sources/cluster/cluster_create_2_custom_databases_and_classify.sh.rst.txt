@@ -1,5 +1,6 @@
-Création de plusieurs bases de données et classification
+﻿Création de plusieurs bases de données et classification
 ========================================================
+
 
 Le programme destiné au cluster pour créer plusieurs bases de données est :
 
@@ -19,7 +20,7 @@ Localisation
 Description
 ***********
 
-Automatise la création de plusieurs bases de données différentes et execute la classification de reads.
+Automatise la création de plusieurs bases de données différentes et exécute la classification de reads.
 
 Les bases de données créées dans ce script sont les suivantes :
 
@@ -34,16 +35,16 @@ La classification des reads se fait sur les bases de données suivantes :
    * FDA-ARGOS avec prepocess et dust,
    * FDA-ARGOS + RefSeqHuman + Virus preprocess.
 
-Pour comprendre les scripts du preprocess et de dust aller à la rebrique suivante : .
+Pour comprendre les scripts du pré-traitement et de dust aller à la rebrique suivante : .
 
 .. warning::
-   La variable PATH est incompatible avec d'autre environnement. Trouver un moyen avec un environnement conda.
+   A besoin de l'environnement conda metagenomic_env pour fonctionner correctement.
 
 .. note::
    Le module kraken 2 doit être chargé.
 
 .. note::
-   L'extention des échantillons sont transformés automatiquement en format .fastq .
+   L'extension des échantillons sont transformés automatiquement en format .fastq .
 
 Les paramètres d'entrés
 ***********************
@@ -54,4 +55,4 @@ Les paramètres d'entrés
 Le fichier de sortie
 ********************
 
-Le programme sort les fichiers des bases de données créées et les classifications sur l'échantillon pour chaque bases de données.
+Le programme sort les fichiers des bases de données créées et les classifications sur l'échantillon pour chaque base de données.

@@ -1,12 +1,12 @@
-Télécharger la taxonomie de ncbi avec ete3toolkit
+﻿Télécharger la taxonomie de ncbi avec ete3toolkit
 =================================================
 
-Le script shell suivant permet d'automatiser le téléchargement de la taxonomie nécessaire pour la librairie python ete3.
+Le script Shell suivant permet d'automatiser le téléchargement de la taxonomie nécessaire pour la librairie python ete3.
 
 .. hint::
    download_ete3_ncbi_taxa_db.sh
 
-Cette base de donnée taxonomique peut-être importante dans certain programme. En autre le chemin de cette base de données est un paramètre (-path_ncbi) du programme shell find_same_id_kraken_blast.sh .
+Cette base de données taxonomique peut-être importante dans certain programme. En autre le chemin de cette base de données est un paramètre (-path_ncbi) du programme Shell find_same_id_kraken_blast.sh .
 
 .. warning::
    Il peut être important d'utiliser l'environnement conda "metagenomic_env" pour le bon déroulement des scripts.
@@ -32,7 +32,7 @@ Localisation
 
 
 .. note::
-   Le programme va stocker la base de donnée dans le répertoire suivant :
+   Le programme va stocker la base de données dans le répertoire suivant :
 
 .. code-block:: sh
 
@@ -44,7 +44,7 @@ Localisation
    A noter que les scripts génèrent automatiquement un dossier avec la date.
 
 
-Exemple d'execution
+Exemple d'exécution
 *******************
 
 .. code-block:: sh

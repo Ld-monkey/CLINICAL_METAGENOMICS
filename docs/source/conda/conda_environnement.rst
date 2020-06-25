@@ -1,4 +1,4 @@
-Environnement Conda
+﻿Environnement conda
 ===================
 
 .. warning::
@@ -7,13 +7,13 @@ Environnement Conda
    \$ conda init <SHELL_NAME>
 
 .. note::
-   Pour résoudre le problème sur les distributions Linux executer le code suivant dans un terminal ce qui va exporter les variables de conda dans votre shell (~/.bashrc). Ensuite ouvrir une nouvelle fenêtre shell.
+   Pour résoudre le problème sur les distributions Linux exécuter le code suivant dans un terminal ce qui va exporter les variables de conda dans votre Shell (~/.bashrc). Ensuite ouvrir une nouvelle fenêtre Shell.
 
 .. code-block:: sh
 
    echo -e "export -f conda\nexport -f __conda_activate\nexport -f __conda_reactivate\nexport -f __conda_hashr\nexport -f __add_sys_prefix_to_path" >> ~/.bashrc
 
-Pour créer un environnement conda a partir du fichier yaml (metagenomic_env.yml) :
+Pour créer un environnement conda à partir du fichier yaml (metagenomic_env.yml) :
 
 .. code-block:: sh
 

@@ -1,7 +1,7 @@
-Création d'une base de donnée pour blast sans les séquences de faibles compléxités
-==================================================================================
+﻿Création d'une base de données pour blast sans les séquences de faibles complexités
+===================================================================================
 
-Le programme shell qui permet de créer un base de donnée spécific au analyse d'alignement de blast.
+Le programme Shell qui permet de créer une base de données spécifique à l’analyse d'alignement de blast.
 
 .. hint::
    create_blast_database_without_low_complexity.sh
@@ -18,30 +18,30 @@ Localisation
 Description
 ***********
 
-Création d'une base de donnée qui peut être utilisée par le logiciel d'alignement de séquences blast avec makeblastdb.
+Création d'une base de données qui peut être utilisée par le logiciel d'alignement de séquences blast avec makeblastdb.
 
 .. warning:
-   Le logiciel dustmasker est utilisé pour supprimer les séquences de faibles complexités au sein de la base de donnée. 
+   Le logiciel Dustmasker est utilisé pour supprimer les séquences de faibles complexités au sein de la base de données. 
 
 .. note::
-   Les séquences brutes téléchargées avec ncbi ou avec le script python get_database_from_accession_list.py. Le script d'automatise la création d'un seul fichier qui rassemble toutes les séquences au format .fna .
+   Les séquences brutes téléchargées avec ncbi ou avec le script python get_database_from_accession_list.py. Le script d'automatise la création d'un seul fichier qui rassemble toutes les séquences au format. fna.
 
-Les paramètres d'entrés
+Les paramètres d'entrée
 ***********************
 
    * :-path_seqs:
 
-   (Input) Le chemin du dossier contenant toutes les séquences pour permettre la création d'une base de donnée.*DIR: all_sequences
+   (Input) Le chemin du dossier contenant toutes les séquences pour permettre la création d'une base de données. \*DIR : all_sequences
 
-   * :-output_fasta:
+   * :-output_fasta: 
 
-   (Output) Le nom du fichier de sortie qui contient toutes les séquences.*FILE: output_sequences
+   (Output) Le nom du fichier de sortie qui contient toutes les séquences. \*FILE : output_sequences
 
    * :-name_db:
 
-   (Input/Output) Le nom de la database.*DIR: 16S_database
+   (Input/Output) Le nom de la base de données.*DIR: 16S_database
 
-Exemple d'execution
+Exemple d'exécution
 *******************
 
 .. code-block:: sh
@@ -51,8 +51,8 @@ Exemple d'execution
 Les fichiers de sorties
 ***********************
 
-   * Le dossier DUSTMASKER_* va être créé s'il n'est pas encore créé dans la base de donnée. Ce dossier contient le ficher dustmasker.asnb qui permet d'enlever les séquences à faibles complexités.
+   * Le dossier DUSTMASKER_* va être créé s'il n'est pas encore créé dans la base de données. Ce dossier contient le ficher dustmasker.asnb qui permet d'enlever les séquences à faibles complexités.
 
-   * Le dossier MAKEBLAST_* va créer la base de donnée.
+   * Le dossier MAKEBLAST_* va créer la base de données.
 
-   * Le fichier README.txt contient un récapitulatif de notre base de donnée.
+   * Le fichier README.txt contient un récapitulatif de notre base de données.

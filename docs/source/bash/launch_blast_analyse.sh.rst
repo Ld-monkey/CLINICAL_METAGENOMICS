@@ -1,10 +1,10 @@
-Analyse des séquences ou reads avec l'algorithme de Blast
+﻿Analyse des séquences ou reads avec l'algorithme de Blast
 =========================================================
 
-Le programme shell permet de réaliser un alignement de séquences avec l'algorithme de blast. Les séquences ou reads sont alignés sur une base de donnée.
+Le programme Shell permet de réaliser un alignement de séquences avec l'algorithme de blast. Les séquences ou reads sont alignés sur une base de données.
 
 .. warning::
-   Il faut créer une base de donnée spécifique pour l'analyse avec l'algorithme de blast.
+   Il faut créer une base de données spécifique pour l'analyse avec l'algorithme de blast.
 
 .. hint::
    launch_blast_analyse.sh
@@ -21,7 +21,7 @@ Localisation
 Description
 ***********
 
-A partir d'un jeu de séquences ou reads et dépendant de la base de donnée donnée en argument le script permet de réaliser un alignement de séquence avec l'algorihtme de blast.
+A partir d'un jeu de séquences ou reads et dépendant de la base de données en argument le script permet de réaliser un alignement de séquence avec l'algorithme de blast.
 
 .. warning:
    Le logiciel blastn est utilisé.
@@ -29,7 +29,7 @@ A partir d'un jeu de séquences ou reads et dépendant de la base de donnée don
 .. note::
    Pour plus d'information sur les paramètres utilisés avec blastn aller sur le lien suivant : http://nebc.nerc.ac.uk/bioinformatics/documentation/blast+/user_manual.pdf
 
-Exemple d'execution
+Exemple d'exécution
 *******************
 
 .. code-block:: sh
@@ -45,13 +45,13 @@ Les paramètres d'entrés
 
   * :-path_db:
 
-  (Input) Le chemin du dossier avec la base de donnée spécifique a l'algorithme de blast.
+  (Input) Le chemin du dossier avec la base de données spécifique à l'algorithme de blast.
 
   * :-path_results:
 
-  (Output) Le chemin du dossier de sortie pour les résultats.*DIR: blast_result
+  (Output) Le chemin du dossier de sortie pour les résultats. *DIR: blast_result
 
 Les fichiers de sorties
 ***********************
 
-   * Les fichiers avec l'extention \*.blast.txt résultat de l'algorithme de blast.
+   * Les fichiers avec l'extension \*.blast.txt résultat de l'algorithme de blast.

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Environnement Conda &mdash; Documentation CLINICAL METAGENOMICS 0.0.1</title>
+  <title>Environnement conda &mdash; Documentation CLINICAL METAGENOMICS 0.0.1</title>
   
 
   
@@ -84,22 +84,26 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../bash/create_kraken_database.sh.html">Créer les bases de données personnalisées avec Kraken 2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../bash/classify_set_sequences.sh.html">Classifier les séquences</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../bash/create_blast_database_without_low_complexity.sh.html">Création d’une base de donnée pour blast sans les séquences de faibles compléxités</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bash/create_blast_database_without_low_complexity.sh.html">Création d’une base de données pour blast sans les séquences de faibles complexités</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../bash/launch_blast_analyse.sh.html">Analyse des séquences ou reads avec l’algorithme de Blast</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../bash/launch_preprocess.sh.html">Lancer le préprocess ou nettoyage des séquences ou reads</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bash/launch_preprocess.sh.html">Lancer le pre-process ou pré-traitement (nettoyage des reads)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../bash/recover_reads.sh.html">Récupérer les reads d’intérêts</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../bash/find_same_id_kraken_blast_bacteria.sh.html">Comparer les identifiants taxonomiques entre Kraken et Blast</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Python scripts:</span></p>
 <ul>
+<<<<<<< HEAD
 <li class="toctree-l1"><a class="reference internal" href="../python/sort_blasted_seq.py.html">Récupérer les identifiants taxonomiques du même genre entre Kraken et Blast</a></li>
+=======
+<li class="toctree-l1"><a class="reference internal" href="../python/sort_blasted_seq.py.html">Récupérer les identifiants taxonomiques du même genre taxonomique entre Kraken et Blast</a></li>
+>>>>>>> 46829f0275f5955481cdeea94e7829fb25d5f603
 </ul>
 <p class="caption"><span class="caption-text">Cluster</span></p>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_create_16S_database.sh.html">Création d’un base de donnée 16S avec le cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_create_16S_database.sh.html">Création d’une base de données 16S avec le cluster</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_create_2_custom_databases_and_classify.sh.html">Création de plusieurs bases de données et classification</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_launch_blast.sh.html">Alignement des séquences ou reads avec l’algorithme de blast</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_launch_preprocess.sh.html">Nettoyage des séquences ou reads avec l’action de preprocess</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_launch_preprocess.sh.html">Nettoyage des séquences ou reads avec l’action de pré-traitement</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_launch_get_id_and_reads.sh.html">Récupérer l’ID taxonomique et les reads d’intérêts</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Télécharger les bases de données automatiquement</span></p>
@@ -109,7 +113,7 @@
 </ul>
 <p class="caption"><span class="caption-text">Environnement Conda</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Environnement Conda</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Environnement conda</a></li>
 </ul>
 
             
@@ -155,7 +159,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>Environnement Conda</li>
+      <li>Environnement conda</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -175,7 +179,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="environnement-conda">
-<h1>Environnement Conda<a class="headerlink" href="#environnement-conda" title="Lien permanent vers ce titre">¶</a></h1>
+<h1>Environnement conda<a class="headerlink" href="#environnement-conda" title="Lien permanent vers ce titre">¶</a></h1>
 <div class="admonition warning">
 <p class="admonition-title">Avertissement</p>
 <p>Si le message d’erreur apparait CommandNotFoundError: Your shell has not been properly configured to use “conda activate”.
@@ -184,12 +188,12 @@ $ conda init &lt;SHELL_NAME&gt;</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Pour résoudre le problème sur les distributions Linux executer le code suivant dans un terminal ce qui va exporter les variables de conda dans votre shell (~/.bashrc). Ensuite ouvrir une nouvelle fenêtre shell.</p>
+<p>Pour résoudre le problème sur les distributions Linux exécuter le code suivant dans un terminal ce qui va exporter les variables de conda dans votre Shell (~/.bashrc). Ensuite ouvrir une nouvelle fenêtre Shell.</p>
 </div>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> -e <span class="s2">&quot;export -f conda\nexport -f __conda_activate\nexport -f __conda_reactivate\nexport -f __conda_hashr\nexport -f __add_sys_prefix_to_path&quot;</span> &gt;&gt; ~/.bashrc
 </pre></div>
 </div>
-<p>Pour créer un environnement conda a partir du fichier yaml (metagenomic_env.yml) :</p>
+<p>Pour créer un environnement conda à partir du fichier yaml (metagenomic_env.yml) :</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>conda env create -f metagenomic_env.yml
 </pre></div>
 </div>
