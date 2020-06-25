@@ -280,7 +280,7 @@ then
     awk -v path=${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA} '{print ">"$1" "$2" "$3"\n"$4 > pathF"/"$5".fasta"}' ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/1.fasta
     awk -v path=${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA} '{print ">"$1" "$2" "$3"\n"$4 > pathF"/"$5".fasta"}' ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA}/2.fasta
 
-    # # WTF men !
+    # WTF men !
     find ${BLAST_FOLDER}/${NAME_BLAST_TO_FASTA} -type f |
         while read f; do
             i=0
@@ -309,34 +309,35 @@ then
     #
     mv ${BLAST_FOLDER}/{}sorted.txt ${BLAST_FOLDER}/${NAME_BLAST_TO_CONSERVED}
 
-    # #
+
+    # # Change variable blast.txt to temps*.txt .
+    temp1=$(echo $BLAST_FILES | sed "s/blast.txt/temp1.txt/g")
+    temp2=$(echo $BLAST_FILES | sed "s/blast.txt/temp2.txt/g")
+    temp3=$(echo $BLAST_FILES | sed "s/blast.txt/temp3.txt/g")
+
+    echo "temp1 : $temp1"
+    echo "temp2 : $temp2"
+    echo "temp3 : $temp3"
+
+    # 
     # cut -f8 ${BLAST_FOLDER}/${NAME_BLAST_TO_CONSERVED} | uniq -c | sort -k2,2 -g > ${BLAST_FOLDER}/${temp1}
     # cut -f2,8 ${BLAST_FOLDER}/${NAME_BLAST_TO_CONSERVED} | sort -k1 | uniq | cut -f2 | sort -g | uniq -c > ${BLAST_FOLDER}/${temp2}
 
-    # #
+    # 
     # join -1 2 -2 2 ${BLAST_FOLDER}/${temp1} ${BLAST_FOLDER}/${temp2} | sort -k1,1b > ${BLAST_FOLDER}/${temp3}
     # join -1 1 -2 1 ${BLAST_FOLDER}/${temp3} /data2/home/masalm/Antoine/DB/MetaPhlAn/totalCountofGenes.txt | sort -k2,2 -gr > ${BLAST_FOLDER}/${counting}
 
-    # #
+    # 
     # python ../python/get_names.py ${BLAST_FOLDER}/${counting}
 
     #
     # rm ${BLAST_FOLDER}/${counting}
     # rm ${BLAST_FOLDER}/${temp1} ${BLAST_FOLDER}/${temp2} ${BLAST_FOLDER}/${temp3}
 
-    # # Counting variable change blast.txt to counting.txt .
+    # Counting variable change blast.txt to counting.txt .
     # counting=$(echo $BLAST_FILES | sed "s/blast.txt/countbis.txt/g")
 
-    # echo "counting : $counting"
-
-    # # Change variable blast.txt to temps*.txt .
-    # temp1=$(echo $BLAST_FILES | sed "s/blast.txt/temp1.txt/g")
-    # temp2=$(echo $BLAST_FILES | sed "s/blast.txt/temp2.txt/g")
-    # temp3=$(echo $BLAST_FILES | sed "s/blast.txt/temp3.txt/g")
-
-    # echo "temp1 : $temp1"
-    # echo "temp2 : $temp2"
-    # echo "temp3 : $temp3"
+    echo "counting : $counting"
 
     # Remove intermediate files.
     remove_all_intermediate_files
