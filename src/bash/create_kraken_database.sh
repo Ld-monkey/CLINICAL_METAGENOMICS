@@ -7,10 +7,10 @@
 # taxo.k2d: Contains taxonomy information used to build the database.
 # e.g
 # ../bash/create_kraken_database.sh \
-#     -path_seq ../../data/raw_sequences/mycocosm_fungi_cds_19_05_2020 \
-#     -path_db ../../data/databases/mycocosm_fungi_cds_kraken_database_19_05_2020 \
-#     -type_db fungi \
-#     -threads $thread
+    #     -path_seq ../../data/raw_sequences/mycocosm_fungi_cds_19_05_2020/ \
+    #     -path_db data/databases/kraken_2/fda_argos_with_none_library_kraken_database_07_06_2020/ \
+    #     -type_db none \
+    #     -threads $thread
 # Official documentation : https://ccb.jhu.edu/software/kraken2/index.shtml?t=manual
 
 # Function to check if the sequence folder exists.
@@ -39,11 +39,11 @@ function check_database_folder {
 function unzip_sequences {
     
     # Check if the fasta files are already decompressed.
-    unzip_files=$(ls $PATH_SEQUENCES/*.gz 2> /dev/null | wc -l)
+    unzip_files=$(ls ${PATH_SEQUENCES}*.gz 2> /dev/null | wc -l)
     if [ "$unzip_files" != "0" ]
     then
         echo "Unzip all files"
-        gunzip --verbose $PATH_SEQUENCES/*.gz
+        gunzip --verbose ${PATH_SEQUENCES}*.gz
         echo "$PATH_SEQUENCES Unzip done !"
     else
         echo "$PATH_SEQUENCES files are already decompressed"
@@ -54,15 +54,15 @@ function unzip_sequences {
 function unzip_ncbi_taxonomy {
     
     # Check if the taxonomy files from database are already decompressed.
-    taxonomy_unzip=$(ls $DBNAME/taxonomy/*.gz 2> /dev/null | wc -l)
+    taxonomy_unzip=$(ls ${DBNAME}taxonomy/*.gz 2> /dev/null | wc -l)
     if [ "$taxonomy_unzip" != "0" ]
     then
         echo "Unzip all *.gz files"
-        gunzip $DBNAME/taxonomy/*.gz
+        gunzip $DBNAME{taxonomy}*.gz
         echo "$DBNAME Unzip *.gz done !"
-        tar zcvf $DBNAME/taxonomy/*.tar
+        tar zcvf $DBNAME{taxonomy}*.tar
         echo "$DBNAME *.tar unziped"
-        rm $DBNAME/taxonomy/*.tar
+        rm $DBNAME{taxonomy}*.tar
         echo "*.tar files are removed"
     else
         echo "$DBNAME *.gz files are already decompressed"
@@ -73,17 +73,50 @@ function unzip_ncbi_taxonomy {
 function download_ncbi_taxonomy {
     
     # Check if folder with taxonomy is empty.
-    if [ ! "$(ls -A $DBNAME/taxonomy)" ]
+    if [ ! "$(ls -A ${DBNAME}taxonomy)" ]
     then
         echo "$DBNAME is empty!"
         echo "Download NCBI taxonomy in $DBNAME"
         kraken2-build --download-taxonomy --db $DBNAME --use-ftp
         echo "Unzip all data"
-        gunzip $DBNAME/taxonmy/*.gz
+        gunzip ${DBNAME}taxonmy/*.gz
         echo "Unzip done !"
     else
         echo "NCBI taxonomy is already exists."
     fi
+}
+
+# Function to add other .fna sequences to library of database.
+function add_fna_in_library {
+    
+    # Add .fna sequences in the database.
+    if [ "$is_fna_format" != "0" ]
+    then
+        echo "Adding reference to Kraken 2 library"
+        for fna_file in ${PATH_SEQUENCES}*.fna
+        do
+            kraken2-build --add-to-library $fna_file --db $DBNAME
+        done
+    else
+        echo "No *.fna format to add."
+    fi
+}
+
+# Function to add other .fasta sequences to library of database.
+function add_fasta_in_library {
+
+    # Add .fasta sequences in the database.
+    if [ "$is_fasta_format" != "0" ]
+    then
+        echo "Adding reference to Kraken 2 library"
+        for fasta_file in ${PATH_SEQUENCES}*.fasta
+        do
+            kraken2-build --add-to-library $fasta_file --db $DBNAME
+        done
+    else
+        echo "No *.fasta format to add."
+    fi
+    
 }
 
 # Function to check the correct -type_db parameter.
@@ -217,7 +250,7 @@ BAD_OPTION ()
     echo "Unknown option "$1" found on command-line"
     echo "It may be a good idea to read the usage:"
     echo "white $PROGRAM -h to be helped :"
-    echo "example : ../bash/create_kraken_database.sh -path_seq ../../data/raw_sequences/mycocosm_fungi_cds_19_05_2020 -path_db ../../data/databases/mycocosm_fungi_cds_kraken_database_19_05_2020 -type_db fungi -threads $thread "
+    echo "example : ../bash/create_kraken_database.sh -path_seq ../../data/raw_sequences/mycocosm_fungi_cds_19_05_2020/ -path_db ../../data/databases/mycocosm_fungi_cds_kraken_database_19_05_2020/ -type_db none -threads $thread "
     echo -e $USAGE
 
     exit 1
@@ -260,7 +293,7 @@ unzip_ncbi_taxonomy
 # Second, download kraken 2 genomic library depending on the type of db expected.
 if [[ $TYPE_DATABASE != "none" ]]
 then
-    if [ -d $DBNAME/library/$TYPE_DATABASE ]
+    if [ -d ${DBNAME}library/$TYPE_DATABASE ]
     then
         echo "$DBNAME/library/$TYPE_DATABASE folder already exists."
     else
@@ -280,45 +313,30 @@ else
 fi
 
 # Before adding the sequences to the library, check if the database is not already created hash.k2d + opts.k2d + taxo.k2d .
-if [ -f $DBNAME/hash.k2d ] && [ -f $DBNAME/opts.k2d ] && [ -f $DBNAME/taxo.k2d ]
+if [ -f ${DBNAME}hash.k2d ] && [ -f ${DBNAME}opts.k2d ] && [ -f ${DBNAME}taxo.k2d ]
 then
     echo "Data Base are already exists."
     echo "All jobs are done in this session !"
 else
     echo "Let's create database"
 
-    # Check if format is .fna or .fasta .
-    is_fna_format=$(ls $PATH_SEQUENCES/*.fna 2> /dev/null | wc -l)
-    is_fasta_format=$(ls $PATH_SEQUENCES/*.fasta 2> /dev/null | wc -l)
+    # Check if format is .fna or .fasta to add in library of database.
+    is_fna_format=$(ls ${PATH_SEQUENCES}*.fna 2> /dev/null | wc -l)
+    is_fasta_format=$(ls ${PATH_SEQUENCES}*.fasta 2> /dev/null | wc -l)
 
-    # Third, add others sequences in the database.
-    if [ "$is_fna_format" != "0" ]
-    then
-        echo "Adding reference to Kraken 2 library"
-        for fna_file in $PATH_SEQUENCES/*.fna
-        do
-            kraken2-build --add-to-library $fna_file --db $DBNAME
-        done
-    else
-        echo "No *.fna format"
-    fi
+    # Function to add .fna in library of database.
+    add_fna_in_library
 
-    if [ "$is_fasta_format" != "0" ]
-    then
-        echo "Adding reference to Kraken 2 library"
-        for fasta_file in $PATH_SEQUENCES/*.fasta
-        do
-            kraken2-build --add-to-library $fasta_file --db $DBNAME
-        done
-    else
-        echo "No *.fasta format"
-    fi
+    # Function to add .fasta in library of database.
+    add_fasta_in_library
 
-    # 3) Once library is finalized we need to build the database.
-    # parameters --THREADS to reduce build time.
+    # Once library is finalized we build the database.
     echo "Running build program to build database with Kraken 2"
     kraken2-build --build --db $DBNAME --threads $THREADS
+    echo "The database is done in ${DBNAME}"
 fi
 
-# 3.1) For remove intermediate file from the database directory
-#kraken2-build --clean
+# For remove intermediate file from the database directory
+echo "Remove intermediate file of database"
+kraken2-build --db $DBNAME --clean
+echo "Clean done !"

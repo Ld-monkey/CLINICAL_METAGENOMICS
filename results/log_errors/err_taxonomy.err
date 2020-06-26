@@ -1,4 +1,0 @@
-/data2/apps/ge/2011.11/default/spool/NODE03/job_scripts/17682: line 26: wget : commande introuvable
-/data2/apps/ge/2011.11/default/spool/NODE03/job_scripts/17682: line 27: wget : commande introuvable
-Downloading nucleotide est accession to taxon map.../data2/apps/kraken/kraken2/my-install/download_taxonomy.sh: line 25: wget : commande introuvable
-gzip: /taxonmy/*.gz: No such file or directory

@@ -63,10 +63,10 @@ rule create_fda_argos_database:
     input:
         "data/raw_sequences/fda_argos_raw_genomes_assembly_06_06_2020/"
     output:
-        directory("data/databases/fda_argos_with_none_library_kraken_database_07_06_2020/")
+        directory("data/databases/kraken_2/fda_argos_with_none_library_kraken_database_07_06_2020/")
     params:
         type_database = "none",
-        threads = 7
+        threads = 30
     conda:
         "metagenomic_env.yml"
     shell:

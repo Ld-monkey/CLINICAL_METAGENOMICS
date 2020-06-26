@@ -11,15 +11,18 @@ results/test/*
 # Ignore to big logs.
 results/log_outputs/outMetaTest.out
 
-# Ignore test
+# Ignore test.
 results/old_tests/*
 src/old_sources/*
 
-# Ignore notes folder
+# Ignore notes folder.
 note/*
 
-# Ignore nohup files
+# Ignore nohup files.
 *.out
+
+# Ignore errors in racine project.
+*.err
 
 # Ignore cookie.
 cookies
@@ -42,3 +45,6 @@ src/download/*.txt
 # Ignore password and username of jgi genome.
 src/download/username
 src/download/password
+
+# ignore run snakemake in cluster
+run_snakefile_cluster.sh

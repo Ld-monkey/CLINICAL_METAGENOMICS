@@ -1,6 +1,0 @@
-mkdir: impossible de créer le répertoire « FDA_ARGOS_BLAST »: Le fichier existe
-mkdir: impossible de créer le répertoire « FDA_ARGOS_BLAST »: Le fichier existe
-mkdir: impossible de créer le répertoire « FDA_ARGOS_BLAST »: Le fichier existe
-mkdir: impossible de créer le répertoire « FDA_ARGOS_BLAST »: Le fichier existe
-/data2/apps/ge/2011.11/default/spool/NODE06/job_scripts/19107: line 18: Erreur de syntaxe près du symbole inattendu « newline »
-/data2/apps/ge/2011.11/default/spool/NODE06/job_scripts/19107: line 18: `echo "NSLOTS: $NSLOTS"<'
