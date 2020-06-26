@@ -336,7 +336,7 @@ else
     echo "The database is done in ${DBNAME}"
 fi
 
-# For remove intermediate file from the database directory
+# For remove intermediate file from the database directory.
 echo "Remove intermediate file of database"
 kraken2-build --db $DBNAME --clean
 echo "Clean done !"
