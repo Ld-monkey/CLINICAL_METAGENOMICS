@@ -48,3 +48,6 @@ src/download/password
 
 # ignore run snakemake in cluster
 run_snakefile_cluster.sh
+
+# Ignore data/taxonomy folder.
+data/taxonomy/*

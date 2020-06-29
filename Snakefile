@@ -61,20 +61,22 @@ rule download_fda_argos_database:
 # Create FDA ARGOS metagenomic kraken 2 database.
 rule create_fda_argos_database:
     input:
-        "data/raw_sequences/test/"
+        raw="data/raw_sequences/fda_argos_raw_genomes_assembly_06_06_2020/",
+        taxonomy="data/taxonomy/ncbi_taxonomy_29_06_2020/"
     output:
         directory("data/databases/kraken_2/fda_argos_with_none_library_kraken_database_07_06_2020/")
     params:
-        type_database = "none",
-        threads = 30
+        type_database = "none"
+    threads : 27
     conda:
         "metagenomic_env.yml"
     shell:
         "bash src/bash/create_kraken_database.sh "
-        "-path_seq {input} "
+        "-path_seq {input.raw} "
         "-path_db {output} "
         "-type_db {params.type_database} "
-        "-threads {params.threads}"
+        "-taxonomy {input.taxonomy} "
+        "-threads {threads}"
 
 
 # Download all genomes mycocosm aka fungi.
