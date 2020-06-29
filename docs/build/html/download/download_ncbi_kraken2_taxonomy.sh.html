@@ -1,0 +1,306 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="fr" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="fr" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Télécharger la taxonomie NCBI de Kraken 2 &mdash; Documentation CLINICAL METAGENOMICS 0.0.1</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+        <script src="../_static/translations.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Recherche" href="../search.html" />
+    <link rel="next" title="Télécharger les séquences des espèces virales et bactériennes" href="download_refseq_species_sequences.sh.html" />
+    <link rel="prev" title="Récupérer l’ID taxonomique et les reads d’intérêts" href="../cluster/cluster_launch_get_id_and_reads.sh.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> CLINICAL METAGENOMICS
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Shell scripts:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../bash/create_kraken_database.sh.html">Créer les bases de données personnalisées avec Kraken 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bash/classify_set_sequences.sh.html">Classifier les séquences</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bash/create_blast_database_without_low_complexity.sh.html">Création d’une base de données pour blast sans les séquences de faibles complexités</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bash/launch_blast_analyse.sh.html">Analyse des séquences ou reads avec l’algorithme de Blast</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bash/launch_preprocess.sh.html">Lancer le pre-process ou pré-traitement (nettoyage des reads)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bash/recover_reads.sh.html">Récupérer les reads d’intérêts</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../bash/find_same_id_kraken_blast_bacteria.sh.html">Comparer les identifiants taxonomiques entre Kraken et Blast</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Python scripts:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../python/sort_blasted_seq.py.html">Récupérer les identifiants taxonomiques du même genre taxonomique entre Kraken et Blast</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Cluster</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_create_16S_database.sh.html">Création d’une base de données 16S avec le cluster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_create_2_custom_databases_and_classify.sh.html">Création de plusieurs bases de données et classification</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_launch_blast.sh.html">Alignement des séquences ou reads avec l’algorithme de blast</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_launch_preprocess.sh.html">Nettoyage des séquences ou reads avec l’action de pré-traitement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_launch_get_id_and_reads.sh.html">Récupérer l’ID taxonomique et les reads d’intérêts</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Télécharger les bases de données automatiquement</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Télécharger la taxonomie NCBI de Kraken 2</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#localisation">Localisation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#les-parametres-d-entree">Les paramètres d’entrée</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exemples-execution">Exemples exécution</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#message-d-erreur">Message d’erreur</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="download_refseq_species_sequences.sh.html">Télécharger les séquences des espèces virales et bactériennes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="download_ete3_ncbi_taxonomy_database.sh.html">Télécharger la taxonomie de ncbi avec ete3toolkit</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Environnement Conda</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../conda/conda_environnement.html">Environnement conda</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">CLINICAL METAGENOMICS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Télécharger la taxonomie NCBI de Kraken 2</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/download/download_ncbi_kraken2_taxonomy.sh.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="telecharger-la-taxonomie-ncbi-de-kraken-2">
+<h1>Télécharger la taxonomie NCBI de Kraken 2<a class="headerlink" href="#telecharger-la-taxonomie-ncbi-de-kraken-2" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Le script qui permet d’automatiser le téléchargement de la base de données taxonomique NCBI nécessaire pour Kraken 2 est :</p>
+<div class="admonition hint">
+<p class="admonition-title">Indication</p>
+<p>download_ncbi_kraken2_taxonomy.sh</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Avertissement</p>
+<p>Il peut être important d’utiliser l’environnement conda « metagenomic_env » pour utiliser kraken 2 et télécharger la base de données taxonomique.</p>
+</div>
+<div class="section" id="localisation">
+<h2>Localisation<a class="headerlink" href="#localisation" title="Lien permanent vers ce titre">¶</a></h2>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>└── src
+ ├── download
+ │   ├── download_ncbi_kraken2_taxonomy.sh
+</pre></div>
+</div>
+</div>
+<div class="section" id="les-parametres-d-entree">
+<h2>Les paramètres d’entrée<a class="headerlink" href="#les-parametres-d-entree" title="Lien permanent vers ce titre">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="field-list simple">
+<dt class="field-odd">-output_taxonomy</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</li>
+</ul>
+<p>(Output) Le chemin du dossier de sortie qui va contenir les éléments téléchargés de la base de données taxonomique de NCBI.                 *DIR: path_taxonomy/</p>
+<ul class="simple">
+<li><dl class="field-list simple">
+<dt class="field-odd">-force_download</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</li>
+</ul>
+<dl class="simple">
+<dt>(Input) Paramètre ou flag qui est par défaut sur « no », empêche d’écraser la base de données taxonomique lorsque celle-ci existe déjà. En revanche, le paramètre est défini sur « yes » une nouvelle base de données taxonomique sera téléchargée. Si la base de données taxonomique n’existe pas elle sera créée.</dt><dd><p>*STR: yes||no</p>
+</dd>
+</dl>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Par défaut force_downlaod est définit sur « no ».</p>
+</div>
+</div>
+<div class="section" id="exemples-execution">
+<h2>Exemples exécution<a class="headerlink" href="#exemples-execution" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Pour créer une base de données taxonomiques NCBI lorsque que celle-ci n’existe pas à l’emplacement data/taxonomy/ncbi_taxonomy_2020/ .</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash src/download/download_ncbi_kraken2_taxonomy.sh -output_taxonomy data/taxonomy/ncbi_taxonomy_2020/
+</pre></div>
+</div>
+<p>Pour écraser une base de données taxonomique pré-existante et la renouveler exécuter la commande suivant :</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash src/download/download_ncbi_kraken2_taxonomy.sh -output_taxonomy data/taxonomy/ncbi_taxonomy_2020/ -force_download yes
+</pre></div>
+</div>
+</div>
+<div class="section" id="message-d-erreur">
+<h2>Message d’erreur<a class="headerlink" href="#message-d-erreur" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Vous pouvez rencontrer le message d’erreur suivant :</p>
+<div class="admonition warning">
+<p class="admonition-title">Avertissement</p>
+<p>&lt;folder&gt; taxonomy already exists.
+But -force_download is set to no by default.
+To remove old taxnomy folder you should to set the marameter to -force_download yes
+Nothing is downloaded</p>
+</div>
+<p>Utiliser le paramètre -force_download en mode « yes » pour forcer le téléchargement de la base de données taxonomique de NCBI.</p>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="download_refseq_species_sequences.sh.html" class="btn btn-neutral float-right" title="Télécharger les séquences des espèces virales et bactériennes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../cluster/cluster_launch_get_id_and_reads.sh.html" class="btn btn-neutral float-left" title="Récupérer l’ID taxonomique et les reads d’intérêts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Zygnematophyce
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

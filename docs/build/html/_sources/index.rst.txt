@@ -45,6 +45,7 @@ Dans cette documentation vous trouvez la description, l'utilisation, les paramè
    :maxdepth: 1
    :caption: Télécharger les bases de données automatiquement
 
+   download/download_ncbi_kraken2_taxonomy.sh
    download/download_refseq_species_sequences.sh
    download/download_ete3_ncbi_taxonomy_database.sh
 
