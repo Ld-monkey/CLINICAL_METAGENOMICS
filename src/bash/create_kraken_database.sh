@@ -227,6 +227,7 @@ OPTIONS=$(cat << __OPTIONS__
     -path_seq  (Input) Folder path of other sequences in fna or fasta files.                                *DIR: sequences/
     -path_db   (Output) Folder path to create or view the database.                                         *DIR: database/
     -type_db   (Input) Which reference librairie for db (choices: viral, fungi, bacteria) see offical doc.  *STR: fungi
+    -taxonomy  (Input) Folder containt the ncbi taxonomy downloaded by kraken 2.                            *STR: taxonomy/
     -threads   (Input) The number of threads to build the database faster.                                  *INT: 6
 __OPTIONS__
        )
@@ -263,6 +264,7 @@ while [ -n "$1" ]; do
         -path_seq)             PATH_SEQUENCES=$2   ; shift 2; continue ;;
 	      -path_db)              DBNAME=$2           ; shift 2; continue ;;
         -type_db)              TYPE_DATABASE=$2    ; shift 2; continue ;;
+        -taxonomy)             TAXONOMY=$2         ; shift 2; continue ;;
     	  -threads)              THREADS=$2          ; shift 2; continue ;;
         *)       BAD_OPTION $1;;
     esac
@@ -284,8 +286,27 @@ echo "NUMBER of THREADS : $THREADS"
 # Unzip fasta or fna files.
 unzip_sequences
 
-# First, to build a custom database we download a ncbi taxonomy.
-download_ncbi_taxonomy
+# Check if tanoxomy variable of input parameter is setting.
+if [ -z ${TAXONOMY+x} ]
+then
+    echo "-taxonomy parameter is unset."
+    echo -e "A ncbi taxonomy from kraken 2 will be to downloaded to the root \n database folder precised in the parameter."
+
+    # To build a custom database we download a ncbi taxonomy.
+    download_ncbi_taxonomy
+else
+    echo "-taxonomy $TAXONOMY parameter is set."
+    echo "No more ncbi taxonomy is downloaded."
+    echo "last modification of ncbi taxonomy"
+
+    # Get the last modification of folder.
+    date=$(date -r ${TAXONOMY}taxonomy/ "+%m-%d-%Y")
+    echo "$date"
+
+    cp -r -v ${TAXONOMY}taxonomy ${DBNAME}taxonomy
+    
+    echo "copy done !"
+fi
 
 # Unzip all taxonomy files.
 unzip_ncbi_taxonomy

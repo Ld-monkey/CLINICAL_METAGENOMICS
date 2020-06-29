@@ -61,7 +61,7 @@ rule download_fda_argos_database:
 # Create FDA ARGOS metagenomic kraken 2 database.
 rule create_fda_argos_database:
     input:
-        "data/raw_sequences/fda_argos_raw_genomes_assembly_06_06_2020/"
+        "data/raw_sequences/test/"
     output:
         directory("data/databases/kraken_2/fda_argos_with_none_library_kraken_database_07_06_2020/")
     params:
