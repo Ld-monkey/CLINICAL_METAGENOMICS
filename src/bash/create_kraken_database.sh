@@ -15,12 +15,21 @@
 
 # Function to check if the sequence folder exists.
 function check_sequence_folder {
-    if [ -d $PATH_SEQUENCES ]
+
+    #Check if parameter is set.
+    if [ -z ${PATH_SEQUENCES+x} ]
     then
-        echo "$PATH_SEQUENCES folder already exist."
+        echo "-path_seq unset."
+        echo "No others sequence will ne added to the database."
     else
-        echo "Error $PATH_SEQUENCES doesn't exist."
-        exit 1
+        if [ -d ${PATH_SEQUENCES} ]
+        then
+            echo $PATH_SEQUENCES
+            echo "$PATH_SEQUENCES folder of sequence exist."
+        else
+            echo "Error $PATH_SEQUENCES doesn't exist."
+            exit
+        fi
     fi
 }
 
@@ -120,77 +129,79 @@ function add_fasta_in_library {
 }
 
 # Function to check the correct -type_db parameter.
+# For multiple parameter in this case add " " e.g : "bacteria virus"
 function check_type_database {
-    if [[ $TYPE_DATABASE = "archaea" ]] \
-           ||  [[ $TYPE_DATABASE = "bacteria" ]] \
-           ||  [[ $TYPE_DATABASE = "plasmid" ]] \
-           ||  [[ $TYPE_DATABASE = "viral" ]]  \
-           ||  [[ $TYPE_DATABASE = "human" ]] \
-           ||  [[ $TYPE_DATABASE = "fungi" ]] \
-           ||  [[ $TYPE_DATABASE = "plant" ]] \
-           ||  [[ $TYPE_DATABASE = "protozoa" ]] \
-           ||  [[ $TYPE_DATABASE = "nr" ]] \
-           ||  [[ $TYPE_DATABASE = "nt" ]] \
-           ||  [[ $TYPE_DATABASE = "env_nr" ]] \
-           ||  [[ $TYPE_DATABASE = "env_nt" ]] \
-           ||  [[ $TYPE_DATABASE = "UniVec" ]] \
-           ||  [[ $TYPE_DATABASE = "UniVec_Core" ]] \
-           ||  [[ $TYPE_DATABASE = "none" ]]
-    then
-        echo "From https://ccb.jhu.edu/software/kraken2/index.shtml?t=manual#custom-databases"
-        echo "Correct parameter -type_db $TYPE_DATABASE"
-        case $TYPE_DATABASE in
+    for TYPE in ${TYPE_DATABASE}; do
+        if [[ $TYPE = "archaea" ]] \
+               ||  [[ $TYPE = "bacteria" ]] \
+               ||  [[ $TYPE = "plasmid" ]] \
+               ||  [[ $TYPE = "viral" ]]  \
+               ||  [[ $TYPE = "human" ]] \
+               ||  [[ $TYPE = "fungi" ]] \
+               ||  [[ $TYPE = "plant" ]] \
+               ||  [[ $TYPE = "protozoa" ]] \
+               ||  [[ $TYPE = "nr" ]] \
+               ||  [[ $TYPE = "nt" ]] \
+               ||  [[ $TYPE = "env_nr" ]] \
+               ||  [[ $TYPE = "env_nt" ]] \
+               ||  [[ $TYPE = "UniVec" ]] \
+               ||  [[ $TYPE = "UniVec_Core" ]] \
+               ||  [[ $TYPE = "none" ]]
+        then
+            echo "From https://ccb.jhu.edu/software/kraken2/index.shtml?t=manual#custom-databases"
+            echo "Correct parameter -type_db $TYPE"
+            case $TYPE in
 
-            archaea)
-                echo "*   archaea: RefSeq complete archaeal genomes/proteins"
-                ;;
-            bacteria)
-                echo "*   bacteria: RefSeq complete bacterial genomes/proteins"
-                ;;
-            plasmid)
-                echo "*   plasmid: RefSeq plasmid nucleotide/protein sequences"
-                ;;
-            viral)
-                echo "*   viral: RefSeq complete viral genomes/proteins"
-                ;;
-            human)
-                echo "*   human: GRCh38 human genome/proteins"
-                ;;
-            fungi)
-                echo "*   fungi: RefSeq complete fungal genomes/proteins"
-                ;;
-            plant)
-                echo "*   plant: RefSeq complete plant genomes/proteins"
-                ;;
-            protozoa)
-                echo "*   protozoa: RefSeq complete protozoan genomes/proteins"
-                ;;
-            nr)
-                echo "*   nr: NCBI non-redundant protein database"
-                ;;
-            nt)
-                echo "*   nt: NCBI non-redundant nucleotide database"
-                ;;
-            env_nr)
-                echo "*   env_nr: NCBI non-redundant protein database with sequences from large environmental sequencing projects"
-                ;;
-            env_nt)
-                echo "*   env_nt: NCBI non-redundant nucleotide database with sequences from large environmental sequencing projects"
-                ;;
-            UniVec)
-                echo "*   UniVec: NCBI-supplied database of vector, adapter, linker, and primer sequences that may be contaminating sequencing projects and/or assemblies"
-                ;;
-            UniVec_Core)
-                echo "*   UniVec_Core: A subset of UniVec chosen to minimize false positive hits to the vector database"
-                ;;
-            none)
-                echo "*   none : The parameter that prevent the download and installation of one or more reference libraries"
-                ;;
-        esac
-    else
-        echo "Take care about official documentation in https://ccb.jhu.edu/software/kraken2/index.shtml?t=manual#custom-databases"
-        echo "-type_db parameter doesn't correspond to following list :"
-        echo -e "
+                archaea)
+                    echo "*   archaea: RefSeq complete archaeal genomes/proteins"
+                    ;;
+                bacteria)
+                    echo "*   bacteria: RefSeq complete bacterial genomes/proteins"
+                    ;;
+                plasmid)
+                    echo "*   plasmid: RefSeq plasmid nucleotide/protein sequences"
+                    ;;
+                viral)
+                    echo "*   viral: RefSeq complete viral genomes/proteins"
+                    ;;
+                human)
+                    echo "*   human: GRCh38 human genome/proteins"
+                    ;;
+                fungi)
+                    echo "*   fungi: RefSeq complete fungal genomes/proteins"
+                    ;;
+                plant)
+                    echo "*   plant: RefSeq complete plant genomes/proteins"
+                    ;;
+                protozoa)
+                    echo "*   protozoa: RefSeq complete protozoan genomes/proteins"
+                    ;;
+                nr)
+                    echo "*   nr: NCBI non-redundant protein database"
+                    ;;
+                nt)
+                    echo "*   nt: NCBI non-redundant nucleotide database"
+                    ;;
+                env_nr)
+                    echo "*   env_nr: NCBI non-redundant protein database with sequences from large environmental sequencing projects"
+                    ;;
+                env_nt)
+                    echo "*   env_nt: NCBI non-redundant nucleotide database with sequences from large environmental sequencing projects"
+                    ;;
+                UniVec)
+                    echo "*   UniVec: NCBI-supplied database of vector, adapter, linker, and primer sequences that may be contaminating sequencing projects and/or assemblies"
+                    ;;
+                UniVec_Core)
+                    echo "*   UniVec_Core: A subset of UniVec chosen to minimize false positive hits to the vector database"
+                    ;;
+                none)
+                    echo "*   none : The parameter that prevent the download and installation of one or more reference libraries"
+                    ;;
+            esac
+        else
+            echo "Take care about official documentation in https://ccb.jhu.edu/software/kraken2/index.shtml?t=manual#custom-databases"
+            echo "-type_db parameter doesn't correspond to following list :"
+            echo -e "
            *   archaea: RefSeq complete archaeal genomes/proteins
            *   bacteria: RefSeq complete bacterial genomes/proteins
            *   plasmid: RefSeq plasmid nucleotide/protein sequences
@@ -207,10 +218,11 @@ function check_type_database {
            *   UniVec_Core: A subset of UniVec chosen to minimize false positive hits to the vector database
            *   none : The parameter that prevent the download and installation of one or more reference libraries
             "
-        echo "Error in -type parameter"
+            echo "Error in -type parameter"
 
-        exit 1
-    fi    
+            exit 1
+        fi
+    done
 }
 
 PROGRAM=create_kraken_database.sh
@@ -318,7 +330,13 @@ then
     then
         echo "$DBNAME/library/$TYPE_DATABASE folder already exists."
     else
-        kraken2-build --download-library $TYPE_DATABASE --db $DBNAME
+
+        # For each type of database e.g bacteria or more download library.
+        for TYPE in ${TYPE_DATABASE};do
+            echo "Download $TYPE library !"
+            kraken2-build --download-library $TYPE --db $DBNAME
+            echo "$TYPE done !"
+        done
 
         # Check if kraken-build return a error.
         if [ $? -eq 0 ]; then

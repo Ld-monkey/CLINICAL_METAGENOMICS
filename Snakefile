@@ -58,8 +58,8 @@ rule download_fda_argos_database:
         "-path_output {output}"
 
 
-# Create FDA ARGOS metagenomic kraken 2 database.
-rule create_fda_argos_database:
+# Create FDA ARGOS metagenomic kraken 2 database without other library.
+rule create_fda_argos_kraken_2_database:
     input:
         raw="data/raw_sequences/fda_argos_raw_genomes_assembly_06_06_2020/",
         taxonomy="data/taxonomy/ncbi_taxonomy_29_06_2020/"
@@ -73,6 +73,24 @@ rule create_fda_argos_database:
     shell:
         "bash src/bash/create_kraken_database.sh "
         "-path_seq {input.raw} "
+        "-path_db {output} "
+        "-type_db {params.type_database} "
+        "-taxonomy {input.taxonomy} "
+        "-threads {threads}"
+
+# Create refseq (viral+bacteria) kraken 2 database.
+rule create_refseq_viral_bacteria_kraken_2_database:
+    input:
+        taxonomy="data/taxonomy/ncbi_taxonomy_29_06_2020/"
+    output:
+        directory("data/databases/kraken_2/refseq_with_viral_bacteria_libraries_kraken_database_30_06_2020/")
+    params:
+        type_database = "\"bacteria viral\""
+    threads : 27
+    conda:
+        "metagenomic_env.yml"
+    shell:
+        "bash src/bash/create_kraken_database.sh "
         "-path_db {output} "
         "-type_db {params.type_database} "
         "-taxonomy {input.taxonomy} "
