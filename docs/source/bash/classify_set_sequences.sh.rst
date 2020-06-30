@@ -46,7 +46,7 @@ Les paramètres d'entrée
 
    (Input) Le nombre de puissance (threads) pour classer plus vite.                \*INT: e.g 1
 
-Example execution
+Exemple exécution
 *******************
 
 .. code-block:: sh
