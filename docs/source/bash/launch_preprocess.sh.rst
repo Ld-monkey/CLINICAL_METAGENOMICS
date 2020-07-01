@@ -74,7 +74,7 @@ Les fichiers de sorties
    Résultats finals des reads traités par le logiciel Trimmomatic.
 
    - <name_of_read>_trimmed.fastq.gz correspondent donc aux reads qui ont correctement répondu aux conditions de filtrage.
-   - <name_of_read>_unpair_trimmed_fastq.gz correspondent aux reads qui n'ont pas correctement répondu aux condition de filtrage.
+   - <name_of_read>_unpair_trimmed_fastq.gz correspondent aux reads qui n'ont pas correctement répondu aux conditions de filtrage.
 
 
 Perspectives
