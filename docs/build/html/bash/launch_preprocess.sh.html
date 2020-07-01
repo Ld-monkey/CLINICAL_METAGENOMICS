@@ -237,6 +237,14 @@
 <p>(Output) Le chemin du dossier de sortie des reads pré-traités. *DIR: output_reads_trimmed</p>
 <ul class="simple">
 <li><dl class="field-list simple">
+<dt class="field-odd">-path_outputs</dt>
+<dd class="field-odd"><p></p></dd>
+</dl>
+</li>
+</ul>
+<p>(Input) Le nombre de thread (par défaut configuré à 1 thread).</p>
+<ul class="simple">
+<li><dl class="field-list simple">
 <dt class="field-odd">-force_remove</dt>
 <dd class="field-odd"><p></p></dd>
 </dl>
@@ -247,7 +255,7 @@
 </div>
 <div class="section" id="exemple-d-execution">
 <h2>Exemple d’exécution<a class="headerlink" href="#exemple-d-execution" title="Lien permanent vers ce titre">¶</a></h2>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash src/bash/remove_poor_quality_duplicate_reads_preprocess.sh -path_reads data/reads/PAIRED_SAMPLES_ADN_TEST/ -path_output results/trimmed_reads/trimmed_PAIRED_SAMPLES_ADN_TEST_reads_04_06_2020/
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash src/bash/remove_poor_quality_duplicate_reads_preprocess.sh -path_reads data/reads/PAIRED_SAMPLES_ADN_TEST/ -path_output results/trimmed_reads/trimmed_PAIRED_SAMPLES_ADN_TEST_reads_04_06_2020/ -threads <span class="m">28</span>
 </pre></div>
 </div>
 </div>
@@ -263,13 +271,13 @@
 </ul>
 <p>Résultat des logciels Clumpify.sh et Dedupe pour les reads dupliqués dans notre échantillon qui vont être supprimés.</p>
 <ul class="simple">
-<li><p>&lt;name_of_read&gt;_orphans_unpaired_fastq.gz</p></li>
-<li><p>&lt;name_of_read&gt;_survivors_paired.fastq.gz</p></li>
+<li><p>&lt;name_of_read&gt;_trimmed.fastq.gz</p></li>
+<li><p>&lt;name_of_read&gt;_unpair_trimmed_fastq.gz</p></li>
 </ul>
 <p>Résultats finals des reads traités par le logiciel Trimmomatic.</p>
 <ul class="simple">
-<li><p>&lt;name_of_read&gt;_survivors_paired.fastq.gz correspondent donc aux reads qui ont correctement répondu aux conditions de filtrage.</p></li>
-<li><p>&lt;name_of_read&gt;_orphans_unpaired_fastq.gz correspondent aux reads qui n’ont pas correctement répondu aux condition de filtrage.</p></li>
+<li><p>&lt;name_of_read&gt;_trimmed.fastq.gz correspondent donc aux reads qui ont correctement répondu aux conditions de filtrage.</p></li>
+<li><p>&lt;name_of_read&gt;_unpair_trimmed_fastq.gz correspondent aux reads qui n’ont pas correctement répondu aux condition de filtrage.</p></li>
 </ul>
 </div></blockquote>
 </div>

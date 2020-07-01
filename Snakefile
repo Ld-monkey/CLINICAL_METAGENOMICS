@@ -2,6 +2,7 @@
 import os
 
 reads_path = ["data/reads/PAIRED_SAMPLES_ADN_TEST/"]
+
 all_database = ["fda_argos_with_none_library_kraken_database_07_06_2020",
                 "mycocosm_with_fungi_library_kraken_database_07_06_2020"]
 
@@ -14,8 +15,8 @@ for read in reads_path:
 
 rule all:
     input:
-        # expand("results/trimmed_reads/trimmed_{folder}_reads_04_06_2020/",
-        #        folder=sample),
+        expand("results/trimmed_reads/trimmed_{folder}_reads_04_06_2020/",
+               folder=sample),
         # "data/raw_sequences/fda_argos_raw_genomes_assembly_06_06_2020/",
         # "data/databases/fda_argos_with_none_library_kraken_database_07_06_2020/",
         #expand("results/classify_reads/trimmed_classify_{folder}_with_fda_argos_none_library_database/",
@@ -27,21 +28,24 @@ rule all:
         #expand("results/blast_results/blast_result_{folder_blast}/", folder_blast=all_database)
         #"results/final_results/"
         #expand("results/final_results/{folder_a}/", folder_a=all_database)
-        expand("results/html_final/{folder_a}/",
-               folder_a=all_database)
+        #expand("results/html_final/{folder_a}/",
+        #       folder_a=all_database)
 
 # Remove all poor quality and duplicate reads.
 rule remove_poor_quality_and_duplicate_reads:
     input: 
-        "data/reads/{folder}/"
+        "data/reads/PAIRED_SAMPLES_ADN_TEST/"
     output:
-        directory("results/trimmed_reads/trimmed_{folder}_reads_04_06_2020/")
+        directory("results/trimmed_reads/trimmed_PAIRED_SAMPLES_ADN_TEST_reads_01_07_2020/")
     conda:
         "metagenomic_env.yml"
+    threads : 27
     shell:
-        "bash src/bash/remove_poor_quality_duplicate_reads.sh "
+        "bash src/bash/remove_poor_quality_duplicate_reads_preprocess.sh "
         "-path_reads {input} "
-        "-path_output {output}"
+        "-path_output {output} "
+        "-threads {threads} "
+        "-force_remove no"
 
 
 # Download all assembly FDA ARGOS database.
@@ -152,7 +156,7 @@ rule create_mycocosm_database:
         "-type_db {params.type_database} "
         "-threads {params.threads}"
 
-        
+
 # Classify reads with database.
 rule classify_reads_with_database:
     input:

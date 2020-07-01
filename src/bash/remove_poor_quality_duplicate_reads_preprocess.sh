@@ -6,6 +6,7 @@
 # e.g bash src/bash/remove_poor_quality_duplicate_reads_preprocess.sh \
 #     -path_reads data/reads/PAIRED_SAMPLES_ADN_TEST/ \
 #     -path_output results/trimmed_reads/trimmed_PAIRED_SAMPLES_ADN_TEST_reads_04_06_2020/
+#     -threads 28
 
 # Function to check if the read folder exists.
 function check_read_folder {
@@ -76,7 +77,7 @@ function check_output_folder {
 }
 
 
-PROGRAM=remove_poor_quality_duplicate_reads.sh
+PROGRAM=remove_poor_quality_duplicate_reads_preprocess.sh
 VERSION=1.0
 
 DESCRIPTION=$(cat << __DESCRIPTION__
@@ -89,11 +90,13 @@ OPTIONS=$(cat << __OPTIONS__
 ## OPTIONS ##
     -path_reads      (Input)  The path of metagenomic reads folder.                                                *DIR: reads_sample
     -path_output     (output) The folder of output reads trimmed.                                                  *DIR: output_reads_trimmed
+    -threads         (Input)  The number of thread.                                                                *INT: 6
     -force_remove    (Optional) By default the value is yes and allows you to delete intermediate files.           *STR: yes|no
 __OPTIONS__
        )
 
 # default options:
+THREAD=1
 FORCE_REMOVE=yes
 
 USAGE ()
@@ -112,7 +115,7 @@ BAD_OPTION ()
     echo "Unknown option "$1" found on command-line"
     echo "It may be a good idea to read the usage:"
     echo "white $PROGRAM -h to be helped :"
-    echo "example : bash src/bash/remove_poor_quality_duplicate_reads_preprocess.sh -path_reads data/reads/PAIRED_SAMPLES_ADN_TEST/ -path_output results/trimmed_reads/trimmed_PAIRED_SAMPLES_ADN_TEST_reads_04_06_2020/"
+    echo "example : bash src/bash/remove_poor_quality_duplicate_reads_preprocess.sh -path_reads data/reads/PAIRED_SAMPLES_ADN_TEST/ -path_output results/trimmed_reads/trimmed_PAIRED_SAMPLES_ADN_TEST_reads_04_06_2020/ -threads 28"
 
     echo -e $USAGE
 
@@ -125,6 +128,7 @@ while [ -n "$1" ]; do
         -h)                    USAGE      ; exit 0 ;;
         -path_reads)           FOLDER_INPUT=$2    ; shift 2; continue ;;
         -path_output)          FOLDER_OUTPUT=$2   ; shift 2; continue ;;
+        -threads)              THREAD=$2          ; shift 2; continue ;;
         -force_remove)         FORCE_REMOVE=$2    ; shift 2; continue ;;
         *)       BAD_OPTION $1;;
     esac
@@ -138,6 +142,8 @@ unzip_sequences
 
 # Check if -path_output variable of input parameter is setting.
 check_output_folder
+
+echo "The number of threads : $THREAD"
 
 # List all R1*fastq files.
 ALL_R1_FASTQ_READS=$(ls $FOLDER_INPUT | grep -i R1.*\.fastq)
@@ -168,7 +174,7 @@ do
         # Multiply by 2 le number of R1 reads and create a info txt.
         echo $(($countReads * 2)) > ${R1_FASTQ_READ%%.*}_info.txt
 
-        echo "Run clumpify.sh to remove duplicate reads."
+        echo "Run clumpify.sh with depude flag to remove duplicate reads."
         # Clumpify which remove duplicate reads.
         clumpify.sh qin=33 \
                     in1=${R1_FASTQ_READ} \
@@ -176,7 +182,7 @@ do
                     out1=${DEDUPE_R1} \
                     out2=${DEDUPE_R2} \
                     dedupe
-        echo -e "Clumpify.sh outputs are \n$DEDUPE_R1\n$DEDUPE_R2"
+        echo -e "Outputs are \n$DEDUPE_R1\n$DEDUPE_R2"
         echo "Remove duplicated reads done !"
 
         echo "Run trimmonatic to remove poor quality and small reads"
@@ -191,26 +197,22 @@ do
         # <outputFile1U> 	Output file that contains orphaned reads from the _1 file.
         # <outputFile2P> 	Output file that contains surviving pairs from the _2 file.
         # <outputFile2U> 	Output file that contains orphaned reads from the _2 file.
-        trimmomatic PE -threads 10 \
+        trimmomatic PE -threads $THREAD \
                     ${DEDUPE_R1} \
                     ${DEDUPE_R2} \
-                    ${R1_FASTQ_READ%%.*}_survivors_paired.fastq.gz \
-                    ${R1_FASTQ_READ%%.*}_orphans_unpaired.fastq.gz \
-                    ${READ_FILE_R2%%.*}_survivors_paired.fastq.gz \
-                    ${READ_FILE_R2%%.*}_orphans_unpaired.fastq.gz \
+                    ${R1_FASTQ_READ%%.*}_trimmed.fastq.gz \
+                    ${R1_FASTQ_READ%%.*}_unpair_trimmed.fastq.gz \
+                    ${READ_FILE_R2%%.*}_trimmed.fastq.gz \
+                    ${READ_FILE_R2%%.*}_unpair_trimmed.fastq.gz \
                     AVGQUAL:20 \
                     MINLEN:50
         echo -e "Trimmonatic outputs are "
         echo "Trimomonatic done !"
-
-        # After we trimmed with removing of paried dedupe.
-        echo "Remove dedupe files : $DEDUPE_R1 and $DEDUPE_R2 to save space limit."
-        rm $DEDUPE_R1 $DEDUPE_R2
     else
         echo "Not paired reads."
 
         # Count R1 read.
-        zcat ${R1_FASTQ_READ} | grep '^+$' | wc -l > ${R1_FASTQ_READ%%.*}.info.txt
+        cat ${R1_FASTQ_READ} | grep '^+' | wc -l > ${R1_FASTQ_READ%%.*}.info.txt
 
         echo "Run clumpify.sh to remove duplicate reads."
         # Clumpify which remove duplicate reads.
@@ -227,22 +229,17 @@ do
         # <inputFile1> 	Input reads to be trimmed.
         #     Typically the file name will contain an _1 or _R1 in the name.
         # <outputFile1P> 	Output file that contains surviving pairs from the _1 file.
-        trimmomatic SE -threads 10 \
+        trimmomatic SE -threads $THREAD \
                     ${DEDUPE_R1} \
                     ${R1_FASTQ_READ%%.*}_trimmed.fastq.gz \
                     AVGQUAL:20 \
                     MINLEN:50
-        echo -e "Trimmonatic output is \n${R1_FASTQ_READ%%.*}_trimmed.fq.gz"
-
-        # After we trimmed with removing of paried dedupe.
-        echo "Remove dedupe $DEDUPE_R1 file to save space limit."
-        rm ${DEDUPE_R1}
-        echo "Remove done !"
+        echo -e "Trimmonatic output is \n${R1_FASTQ_READ%%.*}_trimmed.fastq.gz"
     fi
 done
 
 # List all trimmed file in current directory.
-ALL_TRIMMONATIC_OUTPUTS=$(ls $FOLDER_INPUT | grep -i "_survivors_paired\|_survivors_unpaired\|_orphans_paired\|_orphans_unpaired\|_trimmed")
+ALL_TRIMMONATIC_OUTPUTS=$(ls $FOLDER_INPUT | grep -i "_trimmed\|_unpair_trimmed")
 
 # Full path of trimmed reads.
 for TRIMMED_READ in $ALL_TRIMMONATIC_OUTPUTS; do
@@ -259,9 +256,10 @@ done
 echo "Move trimmed file done !"
 
 # By default delete intermediate (dedupe) file.
-if [[ $FORCE_REMOVE != "yes" ]]
+if [[ $FORCE_REMOVE == "yes" ]]
 then
-    rm $FOLDER_INPUT*{dedupe.fastq}
+    echo "Remove dedupe files : dedupe file to save space limit."
+    rm $FOLDER_INPUT*_dedupe.fastq
 else
     ALL_DEDUPE_OUTPUTS=$(ls $FOLDER_INPUT | grep -i "_dedupe")
 

@@ -42,6 +42,10 @@ Les paramètres d'entrée
 
    (Output) Le chemin du dossier de sortie des reads pré-traités. \*DIR: output_reads_trimmed 
 
+   * :-path_outputs:
+
+   (Input) Le nombre de thread (par défaut configuré à 1 thread).
+
    * :-force_remove:
 
    (Optional) Par défaut la valeur est sur "yes" et permet de supprimer les fichiers intermédiaires. Pour ne pas supprimer les fichiers intermédiaires configurer le paramètre avec la valeur "no" comme avec l'exemple ci-contre : -force_remove no
@@ -51,7 +55,7 @@ Exemple d'exécution
 
 .. code-block:: sh
 
-   bash src/bash/remove_poor_quality_duplicate_reads_preprocess.sh -path_reads data/reads/PAIRED_SAMPLES_ADN_TEST/ -path_output results/trimmed_reads/trimmed_PAIRED_SAMPLES_ADN_TEST_reads_04_06_2020/
+   bash src/bash/remove_poor_quality_duplicate_reads_preprocess.sh -path_reads data/reads/PAIRED_SAMPLES_ADN_TEST/ -path_output results/trimmed_reads/trimmed_PAIRED_SAMPLES_ADN_TEST_reads_04_06_2020/ -threads 28
 
 Les fichiers de sorties
 ***********************
@@ -64,14 +68,13 @@ Les fichiers de sorties
 
    Résultat des logciels Clumpify.sh et Dedupe pour les reads dupliqués dans notre échantillon qui vont être supprimés.
 
-     
-   * <name_of_read>_orphans_unpaired_fastq.gz
-   * <name_of_read>_survivors_paired.fastq.gz
+   * <name_of_read>_trimmed.fastq.gz  
+   * <name_of_read>_unpair_trimmed_fastq.gz
 
    Résultats finals des reads traités par le logiciel Trimmomatic.
 
-   - <name_of_read>_survivors_paired.fastq.gz correspondent donc aux reads qui ont correctement répondu aux conditions de filtrage.
-   - <name_of_read>_orphans_unpaired_fastq.gz correspondent aux reads qui n'ont pas correctement répondu aux condition de filtrage.
+   - <name_of_read>_trimmed.fastq.gz correspondent donc aux reads qui ont correctement répondu aux conditions de filtrage.
+   - <name_of_read>_unpair_trimmed_fastq.gz correspondent aux reads qui n'ont pas correctement répondu aux condition de filtrage.
 
 
 Perspectives
