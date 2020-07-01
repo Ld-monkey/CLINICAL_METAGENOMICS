@@ -1,11 +1,52 @@
 #!/bin/bash
 
-# Shell cluster script to launch preprocess on sequences or reads.
-# This action removes poor quality and duplicates reads.
-# old name => launch_preprocess.sh
-# e.g remove_poor_quality_duplicate_reads.sh \
-#    -path_reads all_reads_from_sample/
-#    -path_output results/trimmed_reads/
+# Shell cluster script to launch pre-process on reads.
+# This action removes poor quality, duplicates and small reads.
+# Old name => launch_preprocess.sh
+# e.g bash src/bash/remove_poor_quality_duplicate_reads_preprocess.sh \
+#     -path_reads data/reads/PAIRED_SAMPLES_ADN_TEST/ \
+#     -path_output results/trimmed_reads/trimmed_PAIRED_SAMPLES_ADN_TEST_reads_04_06_2020/
+
+# Function to check if the read folder exists.
+function check_read_folder {
+
+    # Check if parameter is set. 
+    if [ -z ${FOLDER_INPUT+x} ]
+    then
+        echo "-path_reads is unset."
+        echo "exit"
+        exit
+    else
+        if [ -d ${FOLDER_INPUT} ]
+        then
+            echo $FOLDER_INPUT
+            echo "$FOLDER_INPUT folder of read exist."
+        else
+            echo "Error $FOLDER_INPUT doesn't exist."
+            exit
+        fi
+    fi
+}
+
+
+# Function to check if the output folder is set.
+function check_output_folder {
+
+    # Check if parameter is set.
+    if [ -z ${FOLDER_OUTPUT+x} ]
+    then
+        echo "-path_output is unset"
+        echo "You must specify the -path_output parameter"
+        echo "exit"
+        exit
+    else
+        echo "-path_output is set"
+
+        # Check the output folder.
+        check_output_folder
+    fi
+
+}
 
 # Function to unzip sequences.
 function unzip_sequences {
@@ -48,11 +89,12 @@ OPTIONS=$(cat << __OPTIONS__
 ## OPTIONS ##
     -path_reads      (Input)  The path of metagenomic reads folder.                                                *DIR: reads_sample
     -path_output     (output) The folder of output reads trimmed.                                                  *DIR: output_reads_trimmed
+    -force_remove    (Optional) By default the value is yes and allows you to delete intermediate files.           *STR: yes|no
 __OPTIONS__
        )
 
 # default options:
-FOLDER_OUTPUT=$(pwd)
+FORCE_REMOVE=yes
 
 USAGE ()
 {
@@ -70,7 +112,8 @@ BAD_OPTION ()
     echo "Unknown option "$1" found on command-line"
     echo "It may be a good idea to read the usage:"
     echo "white $PROGRAM -h to be helped :"
-    echo "example : remove_poor_quality_duplicate_reads.sh -path_reads all_reads_from_sample/ -path_output output_reads_trimmed/"
+    echo "example : bash src/bash/remove_poor_quality_duplicate_reads_preprocess.sh -path_reads data/reads/PAIRED_SAMPLES_ADN_TEST/ -path_output results/trimmed_reads/trimmed_PAIRED_SAMPLES_ADN_TEST_reads_04_06_2020/"
+
     echo -e $USAGE
 
     exit 1
@@ -82,14 +125,18 @@ while [ -n "$1" ]; do
         -h)                    USAGE      ; exit 0 ;;
         -path_reads)           FOLDER_INPUT=$2    ; shift 2; continue ;;
         -path_output)          FOLDER_OUTPUT=$2   ; shift 2; continue ;;
+        -force_remove)         FORCE_REMOVE=$2    ; shift 2; continue ;;
         *)       BAD_OPTION $1;;
     esac
 done
 
+# Check if the read folder exists.
+check_read_folder
+
 # Function to unzip reads.
 unzip_sequences
 
-# Check the output folder.
+# Check if -path_output variable of input parameter is setting.
 check_output_folder
 
 # List all R1*fastq files.
@@ -115,11 +162,11 @@ do
     then
         echo "Paired reads exists !"
 
-        # Count reads
-        countReads=$(zcat ${R1_FASTQ_READ} | grep '^+$' | wc -l )
+        # Count number of reads (zcat of gzip format and cat for decompressed file )
+        countReads=$(cat ${R1_FASTQ_READ} | grep '^+' | wc -l )
 
         # Multiply by 2 le number of R1 reads and create a info txt.
-        echo $(($countReads * 2)) > ${R1_FASTQ_READ%%.*}.info.txt
+        echo $(($countReads * 2)) > ${R1_FASTQ_READ%%.*}_info.txt
 
         echo "Run clumpify.sh to remove duplicate reads."
         # Clumpify which remove duplicate reads.
@@ -197,7 +244,6 @@ done
 # List all trimmed file in current directory.
 ALL_TRIMMONATIC_OUTPUTS=$(ls $FOLDER_INPUT | grep -i "_survivors_paired\|_survivors_unpaired\|_orphans_paired\|_orphans_unpaired\|_trimmed")
 
-
 # Full path of trimmed reads.
 for TRIMMED_READ in $ALL_TRIMMONATIC_OUTPUTS; do
     FULL_PATH_TRIMMONATIC_OUTPUTS+="$FOLDER_INPUT$TRIMMED_READ "
@@ -209,4 +255,26 @@ for TRIMMONATIC_OUTPUT in $FULL_PATH_TRIMMONATIC_OUTPUTS;
 do
     mv -v $TRIMMONATIC_OUTPUT $FOLDER_OUTPUT
 done
-echo "Move done !"
+
+echo "Move trimmed file done !"
+
+# By default delete intermediate (dedupe) file.
+if [[ $FORCE_REMOVE != "yes" ]]
+then
+    rm $FOLDER_INPUT*{dedupe.fastq}
+else
+    ALL_DEDUPE_OUTPUTS=$(ls $FOLDER_INPUT | grep -i "_dedupe")
+
+    # Full path of dedupe reads.
+    for DEDUPE_READ in $ALL_DEDUPE_OUTPUTS; do
+        FULL_PATH_DEDUPE_OUTPUTS+="$FOLDER_INPUT$DEDUPE_READ "
+    done
+
+    # Move dedupe file.
+    echo "Move all trimmed files in $FOLDER_OUTPUT."
+    for DEDUPE_OUTPUT in $FULL_PATH_DEDUPE_OUTPUTS
+    do
+        mv -v $DEDUPE_OUTPUT $FOLDER_OUTPUT
+    done
+    echo "Move dedupe file done !"
+fi
