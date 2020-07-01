@@ -18,8 +18,7 @@ Les logiciels utilisés
 
    * Le logiciel Clumpify.sh :
 
-   Le script Clumpify.sh de l’aligneur BBMap permet d’identifier les séquences
-identiques en sortie de séquençage. Configuré avec le paramètre « Dedupe » le script clumpify, fait intervenir le logiciel Dedupe de la suite BBMap pour éliminer les reads dupliqués.
+   Le script Clumpify.sh de l’aligneur BBMap permet d’identifier les séquences identiques en sortie de séquençage. Configuré avec le paramètre Dedupe le script clumpify, fait intervenir le logiciel Dedupe de la suite BBMap pour éliminer les reads dupliqués.
 
    * Le logiciel Dedupe :
 
