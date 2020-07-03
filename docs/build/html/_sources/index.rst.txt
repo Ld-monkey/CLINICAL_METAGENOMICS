@@ -33,11 +33,17 @@ Dans cette documentation vous trouvez la description, l'utilisation, les paramè
 
 .. toctree::
    :maxdepth: 1
-   :caption: Télécharger les bases de données automatiquement
+   :caption: Télécharger les banques de séquences
 
-   download/download_ncbi_kraken2_taxonomy.sh
+   download/download_mycocosm_fungi_jgi_genomes.sh
    download/download_refseq_species_sequences.sh
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Télécharger les banques taxonomiques
+
    download/download_ete3_ncbi_taxonomy_database.sh
+   download/download_ncbi_kraken2_taxonomy.sh
 
 .. toctree::
    :maxdepth: 1

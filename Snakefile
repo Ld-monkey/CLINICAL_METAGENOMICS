@@ -109,17 +109,36 @@ rule download_all_genomes_mycocosm_fungi_database:
         username="src/download/username",
         password="src/download/password"
     output:
-        "src/download/all_organisms.csv",
-        raw_sequence=directory("data/raw_sequences/mycocosm_fungi_ncbi_CDS_07_06_2020/")
+        directory("data/raw_sequences/mycocosm_fungi_ncbi_CDS_03_07_2020/")
     conda:
         "metagenomic_env.yml"
     shell:
-        "username=$(cat {input.username} );"
-        "password=$(cat {input.password} );"
-        "python src/download/download_jgi_genomes.py "
-        "-u $username "
-        "-p $password "
-        "-out {output.raw_sequence}"
+        "username=$(cat {input.username} ); "
+        "password=$(cat {input.password} ); "
+        "bash src/download/download_mycocosm_fungi_jgi_genomes.sh "
+        "$username "
+        "$password "
+        "{output}"
+
+# Download all genomes mycocosm aka fungi.
+# Be careful about username and password files that contain privates informations.
+# You must create you own jgi account and put informations in respective files.
+# rule download_all_genomes_mycocosm_fungi_database:
+#     input:
+#         username="src/download/username",
+#         password="src/download/password"
+#     output:
+#         "src/download/all_organisms.csv",
+#         raw_sequence=directory("data/raw_sequences/mycocosm_fungi_ncbi_CDS_07_06_2020/")
+#     conda:
+#         "metagenomic_env.yml"
+#     shell:
+#         "username=$(cat {input.username} );"
+#         "password=$(cat {input.password} );"
+#         "python src/download/download_jgi_genomes.py "
+#         "-u $username "
+#         "-p $password "
+#         "-out {output.raw_sequence}"
 
 
 # Add the correct ncbi id taxonomy for all genomes following manual instruction
