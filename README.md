@@ -3,7 +3,7 @@
 
 ## Introduction
 
-La métagénomique clinique permet la recherche large de pathogènes dans un échantillon clinique. Cette technique de diagnostic repose sur l’utilisation du séquençage haut-débit pour séquencer l’ensemble du matériel génétique présent dans un échantillon. Avec le grand nombre de données générées que ce soit au niveau de la création des bases de données de références ou des analyses des résultats de métagénomique clinique nécessite le développement d'outils et de pipeline de bio-informatique adaptés à la détection de pathogènes.
+La métagénomique clinique permet la recherche large de pathogènes dans un échantillon clinique. Cette technique de diagnostic repose sur l’utilisation du séquençage haut-débit pour séquencer l’ensemble du matériel génétique présent dans un échantillon. Avec le grand nombre de données générées que ce soit au niveau de la création des bases de données de références ou de l'analyse des résultats, la métagénomique clinique nécessite le développement d'outils et de pipeline de bio-informatique adaptés à la détection des pathogènes.
 
 ## Source
 
@@ -14,7 +14,7 @@ Dans ce cadre, le projet s'inspire du travail fourni à l'origine par Antoine. L
 ### Environnement conda :metal:
 Conda est un gestionnaire de paquets, il permet de créer son propre environnement
 virtuel contenant les logiciels informatiques nécessaires au fonctionnement du pipeline de métagénomique (exemple Kraken 2, la suite BLAST + etc...).
-Pour créer un environnement conda à partir du fichier yaml (conda_threader.yml) :
+Pour créer un environnement conda à partir du fichier yaml (metagenomic_env.yml) :
 
 ```bash
 conda env create -f metagenomic_env.yml
@@ -79,7 +79,7 @@ Ce qui nous donne :
 
 La documentation se trouve dans le lien suivant :
 
-    * https://clinical-metagenomics.readthedocs.io/fr/latest/
+   * https://clinical-metagenomics.readthedocs.io/fr/latest/
 
 ### Configuration de la documentation
 
@@ -122,7 +122,7 @@ L'architecture du projet dans le cluster est la suivante :
 
 Cette architecture s'inpire de la méthode décrite dans l'article suivant :
 
-    * Noble, W. S. A Quick Guide to Organizing Computational Biology Projects. PLOS Computational Biology 5, e1000424 (2009).
+   * Noble, W. S. A Quick Guide to Organizing Computational Biology Projects. PLOS Computational Biology 5, e1000424 (2009).
 
 ## Objectifs
 
@@ -132,7 +132,7 @@ Cette architecture s'inpire de la méthode décrite dans l'article suivant :
 - [x] Inclure des exemples.
 - [x] Ajouter l'option -h ou help commande pour chaque fichier bash.
 
-Obserctifs inspiré par l'article suivant :
+Objectifs inspirés par l'article suivant :
 
-    * Lee BD (2018) Ten simple rules for documenting scientific software. PLoS Comput Biol 14(12): e1006561. https://doi.org/10.1371/journal.pcbi.1006561
+   * Lee BD (2018) Ten simple rules for documenting scientific software. PLoS Comput Biol 14(12): e1006561. https://doi.org/10.1371/journal.pcbi.1006561
 
