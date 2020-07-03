@@ -43,8 +43,8 @@ src/download/*.txt
 .snakemake/*
 
 # Ignore password and username of jgi genome.
-src/download/username
-src/download/password
+username
+password
 
 # ignore run snakemake in cluster
 run_snakefile_cluster.sh
