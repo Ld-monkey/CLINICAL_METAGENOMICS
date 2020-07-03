@@ -5,7 +5,7 @@
 
 La métagénomique clinique permet la recherche large de pathogènes dans un échantillon clinique. Cette technique de diagnostic repose sur l’utilisation du séquençage haut-débit pour séquencer l’ensemble du matériel génétique présent dans un échantillon. Avec le grand nombre de données générées que ce soit au niveau de la création des bases de données de références ou de l'analyse des résultats, la métagénomique clinique nécessite le développement d'outils et de pipeline de bio-informatique adaptés à la détection des pathogènes.
 
-## Source
+### Le point de départ
 
 Dans ce cadre, le projet s'inspire du travail fourni à l'origine par Antoine. L disponible à l'adresse suivante [gitlab](https://gitlab.com/a_laine/metagenomic-pipeline).
 
@@ -44,7 +44,7 @@ Pour actualiser les modifications dans l'environnement conda :
 conda env update --name metagenomic_env --file metagenomic_env.yml 
 ```
 
-### Automatisation avec SnakeMake :snake:
+## Automatisation avec SnakeMake :snake:
 [Snakemake](https://snakemake.readthedocs.io/en/stable/) est un outil particulièrement adapté au développement de pipelines et permet des analyses de données reproductibles. Ecrit en Python, il suit le principe de règles définies par plusieurs paramètres comme les fichiers d’entrées, et un ou plusieurs fichiers de sorties. Les règles sont écrites dans un fichier appelé « SnakeFile ». 
 
 Pour exécuter snakemake assurez vous d'avoir activé l'environnement conda :
@@ -71,7 +71,7 @@ Pour créer un graphique complet du pipeline :
 snakemake --dag | dot -Tsvg > results/plots/dag.svg 
 ```
 
-Ce qui nous donne :
+### Plot du pipeline de métagénomique clinique
 
 ![pipeline](results/plots/dag.svg)
 
@@ -87,7 +87,7 @@ La documentation utilise [sphinx](https://www.sphinx-doc.org/en/master/) et le t
 
 Le thème peut etre facilement activé avec l'environnement conda ci-dessus.
 
-## Architecture du programme 
+## Architecture du projet 
 
 L'architecture du projet dans le cluster est la suivante :
 
