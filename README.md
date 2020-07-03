@@ -13,7 +13,7 @@ Dans ce cadre, le projet s'inspire du travail fourni à l'origine par Antoine. L
 
 ### Environnement conda :metal:
 Conda est un gestionnaire de paquets, il permet de créer son propre environnement
-virtuel contenant les logiciels informatiques nécessaires au fonctionnement du pipeline de métagénomique (exemple Kraken 2, la suite BLAST + etc...).
+virtuel contenant les logiciels informatiques nécessaires au fonctionnement du pipeline de métagénomique (exemple Kraken 2, la suite blast-plus etc...).
 Pour créer un environnement conda à partir du fichier yaml (metagenomic_env.yml) :
 
 ```bash
@@ -85,7 +85,7 @@ La documentation se trouve dans le lien suivant :
 
 La documentation utilise [sphinx](https://www.sphinx-doc.org/en/master/) et le thème "sphinx-rtd-theme" que l'on peut retrouver sur https://github.com/readthedocs/sphinx_rtd_theme.
 
-Le thème peut etre facilement activé avec l'environnement conda ci-dessus.
+Le thème peut être facilement activé avec l'environnement conda décrit ci-dessus.
 
 ## Architecture du projet 
 
@@ -135,4 +135,3 @@ Cette architecture s'inpire de la méthode décrite dans l'article suivant :
 Objectifs inspirés par l'article suivant :
 
    * Lee BD (2018) Ten simple rules for documenting scientific software. PLoS Comput Biol 14(12): e1006561. https://doi.org/10.1371/journal.pcbi.1006561
-
