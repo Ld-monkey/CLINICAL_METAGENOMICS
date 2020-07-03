@@ -8,10 +8,13 @@
 # *.unclseqs.fastq : all unclassified reads
 # *.output.txt : ??
 # *.report.txt : all claffication of organism classified.
-# e.g ./classify_set_sequences.sh -path_reads all_reads_from_sample \
-#    -path_db database_FDA_ARGOS -path_output output_result -threads 1
+# e.g bash src/bash/classify_set_reads_kraken.sh \
+#          -path_reads results/trimmed_reads/trimmed_PAIRED_SAMPLES_ADN_TEST_reads_01_07_2020/ \
+#          -path_db data/databases/kraken_2/fda_argos_with_none_library_kraken_database_07_06_2020/ \
+#          -path_output results/classify_reads/trimmed_classify_fda_argos_with_none_library_02_07_2020/ \
+#          -threads 8
 
-PROGRAM=classify_set_sequences.sh
+PROGRAM=classify_set_reads_kraken.sh
 VERSION=1.0
 
 DESCRIPTION=$(cat << __DESCRIPTION__
@@ -31,7 +34,7 @@ __OPTIONS__
 
 # default options if they are not defined:
 path_output=output_result_from_kraken2
-threads=1
+threads=8
 
 USAGE ()
 {
@@ -49,7 +52,7 @@ BAD_OPTION ()
     echo "Unknown option "$1" found on command-line"
     echo "It may be a good idea to read the usage:"
     echo "white $PROGRAM -h to be helped :"
-    echo "example : ./classify_set_sequences.sh -path_reads all_reads_from_sample -path_db database_FDA_ARGOS -path_output output_result -threads 1"
+    echo "example : bash src/bash/classify_set_reads_kraken.sh -path_reads results/trimmed_reads/trimmed_PAIRED_SAMPLES_ADN_TEST_reads_01_07_2020/ -path_db data/databases/kraken_2/fda_argos_with_none_library_kraken_database_07_06_2020/ -path_output results/classify_reads/trimmed_classify_fda_argos_with_none_library_02_07_2020/ -threads 8"
     echo -e $USAGE
 
     exit 1
@@ -87,8 +90,11 @@ else
     echo "Create folder $FOLDER_OUTPUT "
 fi
 
-# List all survivors reads files.
-ALL_SURVIVORS_READS=$(ls $PATH_ALL_READS*R1* | grep -i "_survivors_paired\|_trimmed")
+# List only all trimmed reads files.
+# We do not take the files that did not meet the trimmed conditions (unpair_trimmed)
+# or the dedupe files (_dedupe).
+ALL_SURVIVORS_READS=$(ls $PATH_ALL_READS*R1* | grep -i --invert-match "_unpair_trimmed\|_dedupe")
+echo "All survivors : $ALL_SURVIVORS_READS"
 
 # Classify a set of sequences or reads with kraken2 tool.
 echo "Run classify a set of sequences with kraken 2"
@@ -98,10 +104,12 @@ do
     # Get prefix name for outputs.
     prefix=$(basename "$R1_READ" | awk -F "_R1" '{print $1}')
 
+    # Create sub directory.
+    mkdir -p ${FOLDER_OUTPUT}${prefix}/
+
     # Create a R2 read name file to check if paired read exists.
     R2_PAIRED_READ=$(echo ${R1_READ} | sed 's/R1/R2/')
 
-    echo "all survivors : $ALL_SURVIVORS_READS"
     echo "R1 reads : $R1_READ"
     echo "R2 reads : $R2_PAIRED_READ"
     echo "db : $DBNAME"
@@ -131,10 +139,10 @@ do
         kraken2 --db $DBNAME \
                 --threads $THREAD \
                 --paired \
-                --report $FOLDER_OUTPUT/${prefix}_taxon.report.txt \
-                --classified-out $FOLDER_OUTPUT/$prefix.clseqs#.fastq \
-                --unclassified-out $FOLDER_OUTPUT/$prefix.unclseq#.fastq \
-                --output $FOLDER_OUTPUT/$prefix.output.txt \
+                --report ${FOLDER_OUTPUT}${prefix}/${prefix}_taxon.report.txt \
+                --classified-out ${FOLDER_OUTPUT}${prefix}/$prefix.clseqs#.fastq \
+                --unclassified-out ${FOLDER_OUTPUT}${prefix}/$prefix.unclseq#.fastq \
+                --output ${FOLDER_OUTPUT}${prefix}/$prefix.output.txt \
                 $R1_READ $R2_PAIRED_READ
         echo "Kraken 2 classification done !"
     else

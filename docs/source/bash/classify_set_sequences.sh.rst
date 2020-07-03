@@ -1,10 +1,12 @@
-﻿Classifier les séquences
-========================
+﻿Classifier les reads
+====================
 
-Le programme Shell qui permet d'exécuter la classification d'organismes s'appelle :
+Le programme Shell qui permet la classification des reads s'appelle :
 
 .. hint::
-   classify_set_sequences.sh
+   classify_set_reads_kraken.sh
+
+Le programme utilise l'algorithme des k-mers du logiciel Kraken 2 pour classifier plus rapidement les reads.
 
 Localisation
 ************
@@ -13,18 +15,15 @@ Localisation
 
    └── src
     ├── bash
-    │   ├── classify_set_sequences.sh
+    │   ├── classify_set_reads_kraken.sh
 
 Description
 ***********
 
-Détermine les organismes présents dans un échantillon ou reads. L'échantillon possède la totalité des séquences nucléotidique avec un format fastq.
+Classifie les organismes présents dans un échantillon de reads. L'échantillon de reads doit posséder la totalité des séquences en nucléotides en format fastq. Normalement, une étape de pré-traitement (pre-processing) est appliqué sur les reads en amont de cette étape de classification (voir :ref:`launch_preprocess.sh`).
 
 .. warning::
    Les séquences par paires doivent s'appeler \*R1\*.fastq
-
-.. note::
-   \* L'étoile indique que n'importe quelle chaine de caractère peut se positionner avant ou après.
 
 Les paramètres d'entrée
 ***********************
@@ -44,14 +43,19 @@ Les paramètres d'entrée
    
    * :-threads:
 
-   (Input) Le nombre de puissance (threads) pour classer plus vite.                \*INT: e.g 1
+   (Input) Le nombre de threads utilisé pour classifier les reads. Par défaut le nombre de threads est 8.                \*INT: e.g 9
 
 Exemple exécution
 *******************
 
 .. code-block:: sh
 
-   classify_set_sequences.sh -path_reads all_reads_from_sample -path_db database_FDA_ARGOS -path_output output_result -threads 1
+   bash src/bash/classify_set_reads_kraken.sh \
+                -path_reads results/trimmed_reads/trimmed_PAIRED_SAMPLES_ADN_TEST_reads_01_07_2020/ \
+                -path_db data/databases/kraken_2/fda_argos_with_none_library_kraken_database_07_06_2020/ \
+                -path_output results/classify_reads/trimmed_classify_fda_argos_with_none_library_02_07_2020/ \
+                -threads 8
+
 
 Les fichiers de sorties
 ***********************

@@ -157,23 +157,41 @@ rule create_mycocosm_database:
         "-threads {params.threads}"
 
 
-# Classify reads with database.
-rule classify_reads_with_database:
+# Classify reads with fda database.
+rule classify_reads_with_fda_database:
     input:
-        read="results/trimmed_reads/trimmed_{folder}_reads_04_06_2020/",
-        database=expand("data/databases/{database}/", database=all_database)
+        read="results/trimmed_reads/trimmed_PAIRED_SAMPLES_ADN_TEST_reads_01_07_2020/",
+        database=expand("data/databases/kraken_2/fda_argos_with_none_library_kraken_database_07_06_2020/")
     output:
-        reads_output=directory("results/classify_reads/trimmed_classify_{folder}_with_fda_argos_none_library_database/")
-    params:
-        threads = 7
+        reads_output=directory("results/classify_reads/trimmed_classify_fda_argos_with_none_library_02_07_2020/")
+    threads : 28
     conda:
         "metagenomic_env.yml"
     shell:
-        "bash src/bash/classify_set_sequences.sh "
+        "bash src/bash/classify_set_reads_kraken.sh "
         "-path_reads {input.read} "
         "-path_db {input.database} "
         "-path_output {output.reads_output} "
-        "-threads {params.threads}"
+        "-threads {threads}"
+
+
+# Classify reads with refseq (bacteria + viral/ genome + protein)
+rule classify_reads_with_refseq_database:
+    input:
+        read="results/trimmed_reads/trimmed_PAIRED_SAMPLES_ADN_TEST_reads_01_07_2020/",
+        database=expand("data/databases/kraken_2/refseq_with_viral_bacteria_libraries_kraken_database_30_06_2020")
+    output:
+        reads_output=directory("results/classify_reads/trimmed_classify_refseq_with_bacteria_and_viral_libraries_02_07_2020/")
+    threads : 28
+    conda:
+        "metagenomic_env.yml"
+    shell:
+        "bash src/bash/classify_set_reads_kraken.sh "
+        "-path_reads {input.read} "
+        "-path_db {input.database} "
+        "-path_output {output.reads_output} "
+        "-threads {threads}"
+
 
 # Create a blast database
 rule create_blast_database_without_low_complexity:
