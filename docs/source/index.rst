@@ -33,16 +33,6 @@ Dans cette documentation vous trouvez la description, l'utilisation, les paramè
 
 .. toctree::
    :maxdepth: 1
-   :caption: Cluster
-      
-   cluster/cluster_create_16S_database.sh
-   cluster/cluster_create_2_custom_databases_and_classify.sh
-   cluster/cluster_launch_blast.sh
-   cluster/cluster_launch_preprocess.sh
-   cluster/cluster_launch_get_id_and_reads.sh
-
-.. toctree::
-   :maxdepth: 1
    :caption: Télécharger les bases de données automatiquement
 
    download/download_ncbi_kraken2_taxonomy.sh

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Classifier les séquences &mdash; Documentation CLINICAL METAGENOMICS 0.0.1</title>
+  <title>Classifier les reads &mdash; Documentation CLINICAL METAGENOMICS 0.0.1</title>
   
 
   
@@ -84,7 +84,7 @@
               <p class="caption"><span class="caption-text">Shell scripts:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="create_kraken_database.sh.html">Créer les bases de données personnalisées avec Kraken 2</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Classifier les séquences</a><ul>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Classifier les reads</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#localisation">Localisation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#description">Description</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#les-parametres-d-entree">Les paramètres d’entrée</a></li>
@@ -101,14 +101,6 @@
 <p class="caption"><span class="caption-text">Python scripts:</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../python/sort_blasted_seq.py.html">Récupérer les identifiants taxonomiques du même genre taxonomique entre Kraken et Blast</a></li>
-</ul>
-<p class="caption"><span class="caption-text">Cluster</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_create_16S_database.sh.html">Création d’une base de données 16S avec le cluster</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_create_2_custom_databases_and_classify.sh.html">Création de plusieurs bases de données et classification</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_launch_blast.sh.html">Alignement des séquences ou reads avec l’algorithme de blast</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_launch_preprocess.sh.html">Nettoyage des séquences ou reads avec l’action de pré-traitement</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../cluster/cluster_launch_get_id_and_reads.sh.html">Récupérer l’ID taxonomique et les reads d’intérêts</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Télécharger les bases de données automatiquement</span></p>
 <ul>
@@ -164,7 +156,7 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
-      <li>Classifier les séquences</li>
+      <li>Classifier les reads</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -183,31 +175,28 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="classifier-les-sequences">
-<h1>Classifier les séquences<a class="headerlink" href="#classifier-les-sequences" title="Lien permanent vers ce titre">¶</a></h1>
-<p>Le programme Shell qui permet d’exécuter la classification d’organismes s’appelle :</p>
+  <div class="section" id="classifier-les-reads">
+<h1>Classifier les reads<a class="headerlink" href="#classifier-les-reads" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Le programme Shell qui permet la classification des reads s’appelle :</p>
 <div class="admonition hint">
 <p class="admonition-title">Indication</p>
-<p>classify_set_sequences.sh</p>
+<p>classify_set_reads_kraken.sh</p>
 </div>
+<p>Le programme utilise l’algorithme des k-mers du logiciel Kraken 2 pour classifier plus rapidement les reads.</p>
 <div class="section" id="localisation">
 <h2>Localisation<a class="headerlink" href="#localisation" title="Lien permanent vers ce titre">¶</a></h2>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>└── src
  ├── bash
- │   ├── classify_set_sequences.sh
+ │   ├── classify_set_reads_kraken.sh
 </pre></div>
 </div>
 </div>
 <div class="section" id="description">
 <h2>Description<a class="headerlink" href="#description" title="Lien permanent vers ce titre">¶</a></h2>
-<p>Détermine les organismes présents dans un échantillon ou reads. L’échantillon possède la totalité des séquences nucléotidique avec un format fastq.</p>
+<p>Classifie les organismes présents dans un échantillon de reads. L’échantillon de reads doit posséder la totalité des séquences en nucléotides en format fastq. Normalement, une étape de pré-traitement (pre-processing) est appliqué sur les reads en amont de cette étape de classification (voir <span class="xref std std-ref">launch_preprocess.sh</span>).</p>
 <div class="admonition warning">
 <p class="admonition-title">Avertissement</p>
 <p>Les séquences par paires doivent s’appeler *R1*.fastq</p>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>* L’étoile indique que n’importe quelle chaine de caractère peut se positionner avant ou après.</p>
 </div>
 </div>
 <div class="section" id="les-parametres-d-entree">
@@ -245,12 +234,16 @@
 </dl>
 </li>
 </ul>
-<p>(Input) Le nombre de puissance (threads) pour classer plus vite.                *INT: e.g 1</p>
+<p>(Input) Le nombre de threads utilisé pour classifier les reads. Par défaut le nombre de threads est 8.                *INT: e.g 9</p>
 </div></blockquote>
 </div>
 <div class="section" id="exemple-execution">
 <h2>Exemple exécution<a class="headerlink" href="#exemple-execution" title="Lien permanent vers ce titre">¶</a></h2>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>classify_set_sequences.sh -path_reads all_reads_from_sample -path_db database_FDA_ARGOS -path_output output_result -threads <span class="m">1</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash src/bash/classify_set_reads_kraken.sh <span class="se">\</span>
+             -path_reads results/trimmed_reads/trimmed_PAIRED_SAMPLES_ADN_TEST_reads_01_07_2020/ <span class="se">\</span>
+             -path_db data/databases/kraken_2/fda_argos_with_none_library_kraken_database_07_06_2020/ <span class="se">\</span>
+             -path_output results/classify_reads/trimmed_classify_fda_argos_with_none_library_02_07_2020/ <span class="se">\</span>
+             -threads <span class="m">8</span>
 </pre></div>
 </div>
 </div>

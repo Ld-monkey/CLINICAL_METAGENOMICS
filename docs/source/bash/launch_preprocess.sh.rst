@@ -18,15 +18,15 @@ Les logiciels utilisés
 
    * Le logiciel Clumpify.sh :
 
-   Le script Clumpify.sh de l’aligneur BBMap permet d’identifier les séquences identiques en sortie de séquençage. Configuré avec le paramètre Dedupe le script clumpify, fait intervenir le logiciel Dedupe de la suite BBMap pour éliminer les reads dupliqués.
+Le script Clumpify.sh de l’aligneur BBMap permet d’identifier les séquences identiques en sortie de séquençage. Configuré avec le paramètre Dedupe le script clumpify, fait intervenir le logiciel Dedupe de la suite BBMap pour éliminer les reads dupliqués.
 
    * Le logiciel Dedupe :
 
-   Ce logiciel permet de supprimer les reads dupliqués.
+Ce logiciel permet de supprimer les reads dupliqués.
 
    * Le logiciel Trimmomatic :
 
-   Ce logiciel permet de supprimer les reads de mauvaises qualités c'est à dire les reads qui ont un score phread (score de qualité) moyen d'au moins 20 et des reads de taille minimum de 50 nucléotides pour avoir assez d'information pour classifier les reads. 
+Ce logiciel permet de supprimer les reads de mauvaises qualités c'est à dire les reads qui ont un score phread (score de qualité) moyen d'au moins 20 et des reads de taille minimum de 50 nucléotides pour avoir assez d'information pour classifier les reads. 
 
 .. warning::
    L'environnement conda metagenomic_env possède les outils Clumpify.sh, Dedupe (BBMap) et Trimmomatic pour le bon fonctionnement du pipeline.
