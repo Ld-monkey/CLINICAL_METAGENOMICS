@@ -51,3 +51,6 @@ run_snakefile_cluster.sh
 
 # Ignore data/taxonomy folder.
 data/taxonomy/*
+
+# Ignore assembly file too big.
+data/assembly/fungi_files.xml

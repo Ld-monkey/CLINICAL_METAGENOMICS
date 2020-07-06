@@ -43,3 +43,7 @@ echo "Adding done !"
 echo "Move csv fungi output"
 mv --verbose output_fungi_csv.csv $PATH_MYCOCOSM_GENOME
 echo "Move done !"
+
+echo "Move impossible opening file"
+mv --verbose impossible_opening.txt $PATH_MYCOCOSM_GENOME
+echo "Move done !

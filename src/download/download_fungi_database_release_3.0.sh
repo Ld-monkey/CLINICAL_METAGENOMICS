@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # Download all data from fungi db.
-# e.g bash src/download/download_fungi_db.sh \
+# e.g bash src/download/download_fungi_database_release_3.0.sh \
 #          -path_output data/raw_sequences/fungi_db_all_genomes_06_07_2020/
 
-PROGRAM=download_fungi_db.sh
+PROGRAM=src/download/download_fungi_database_release_3.0.sh.sh
 VERSION=1.0
 
 DESCRIPTION=$(cat << __DESCRIPTION__
@@ -38,7 +38,7 @@ BAD_OPTION ()
     echo "Unknown option "$1" found on command-line"
     echo "It may be a good idea to read the usage:"
     echo "white $PROGRAM -h to be helped :"
-    echo "example : bash src/download/download_fungi_db.sh -path_output data/raw_sequences/fungi_db_all_genomes_06_07_2020/"
+    echo "example : bash src/download/download_fungi_database_release_3.0.sh -path_output data/raw_sequences/fungi_db_all_genomes_06_07_2020/"
     echo -e $USAGE
 
     exit 1
