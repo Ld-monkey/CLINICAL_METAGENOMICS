@@ -4,57 +4,36 @@
    contain the root `toctree` directive.
 
 Documentation
-=============
+#############
 
-Introduction :
-==============
+Current version: 1.0.0 Juillet 2020
 
-Le but de cette documentation est d’éclaircir les zones d'ombres du projet de métagénomique clinique « CLINICAL_METAGENOMICS » et de s'imprégner le plus rapidement possible des différents scripts Bash et python que constitue ce projet.
+:Python version: Python 3.7
 
-Dans cette documentation vous trouvez la description, l'utilisation, les paramètres ou encore les fichiers de sorties de chaque programme.
+:Source: `https://github.com/Zygnematophyce/CLINICAL_METAGENOMICS <https://github.com/Zygnematophyce/CLINICAL_METAGENOMICS>`__.
 
-.. toctree::
-   :maxdepth: 1
-   :caption: Shell scripts:
-   
-   bash/create_kraken_database.sh
-   bash/classify_set_sequences.sh
-   bash/create_blast_database_without_low_complexity.sh
-   bash/launch_blast_analyse.sh
-   bash/launch_preprocess.sh
-   bash/recover_reads.sh
-   bash/find_same_id_kraken_blast_bacteria.sh
+Qu'est ce que le projet CLINICAL METAGENOMICS ?
+===============================================
 
-.. toctree::
-   :maxdepth: 1
-   :caption: Python scripts:
+**CLINICAL METAGENOMICS** est un ensemble de programme de bio-informatique adaptés à la dectection des pathogènes dans un échantillon clinique de métagénomique.
 
-   python/sort_blasted_seq.py
+Il permet :
+
+#. Le téléchargement des librairies de séquences.
+#. La création et l'indexation des bases de données de références pour la métagénomique.
+#. L'analyse des résultats NGS.
+
+Actuellement, ...
+
+Guide d'utilisation et référence
+################################
 
 .. toctree::
-   :maxdepth: 1
-   :caption: Télécharger les banques de séquences
+   :numbered:
+   :maxdepth: 2
 
-   download/download_mycocosm_fungi_jgi_genomes.sh
-   download/download_refseq_species_sequences.sh
-
-.. toctree::
-   :maxdepth: 1
-   :caption: Télécharger les banques taxonomiques
-
-   download/download_ete3_ncbi_taxonomy_database.sh
-   download/download_ncbi_kraken2_taxonomy.sh
-
-.. toctree::
-   :maxdepth: 1
-   :caption: Environnement Conda
-
-   conda/conda_environnement
-
-.. toctree::
-   :maxdepth: 1
-   :caption: SnakeMake
-   
+   installation_conda_environnement.rst
+   overview.rst
 
 Indices and tables
 ==================
