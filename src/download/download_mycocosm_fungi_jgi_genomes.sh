@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 USERNAME=$1
 PASSWORD=$2
 PATH_MYCOCOSM_GENOME=$3
@@ -23,14 +22,13 @@ python src/download/download_jgi_genomes.py \
 
 echo "Download done !"
 
-
 rm --verbose cookies
 
 # Move the xml file in data/assembly .
 mv --verbose fungi_files.xml data/assembly/
 
 # Move the csv file in raw_sequences directory.
-mv --verbvose all_organisms.csv $PATH_MYCOCOSM_GENOME
+mv --verbose all_organisms.csv $PATH_MYCOCOSM_GENOME
 
 echo "Unzip all mycocosm genomes."
 gunzip --verbose $PATH_MYCOCOSM_GENOME$MYCOCOSM_TYPE/*.gz
@@ -41,3 +39,7 @@ python src/python/jgi_id_to_ncbi_id_taxonomy.py \
        -csv ${PATH_MYCOCOSM_GENOME}all_organisms.csv \
        -path_sequence $PATH_MYCOCOSM_GENOME$MYCOCOSM_TYPE/
 echo "Adding done !"
+
+echo "Move csv fungi output"
+mv --verbose output_fungi_csv.csv $PATH_MYCOCOSM_GENOME
+echo "Move done !"
