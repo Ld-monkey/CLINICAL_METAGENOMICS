@@ -40,7 +40,7 @@ BAD_OPTION ()
     echo "Unknown option "$1" found on command-line"
     echo "It may be a good idea to read the usage:"
     echo "white $PROGRAM -h to be helped :"
-    echo "example : ./download_fda_argos_assembly.sh -assembly_xml data/assembly/assembly_fda_argos_ncbi_result.xml -path_reads data/raw_sequences/fda_argos_all_assembly_06_06_2020/"
+    echo "example : bash download_fda_argos_assembly.sh -assembly_xml data/assembly/assembly_fda_argos_ncbi_result.xml -path_output data/raw_sequences/fda_argos_assembly_raw_sequences/"
     echo -e $USAGE
 
     exit 1

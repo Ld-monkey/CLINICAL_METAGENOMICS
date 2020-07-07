@@ -1,0 +1,448 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="fr" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="fr" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>3. Tutoriel &mdash; Documentation CLINICAL METAGENOMICS 0.0.1</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script src="_static/translations.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="prev" title="2. Vue d’ensemble" href="overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> CLINICAL METAGENOMICS
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="installation_conda_environnement.html">1. Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">2. Vue d’ensemble</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Tutoriel</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#le-pre-traitement-des-reads">3.1. Le pré-traitement des reads</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#programme">3.1.1. Programme</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#localisation">3.1.2. Localisation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#les-outils-utilises">3.1.3. Les outils utilisés</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#exemple-d-utilisation">3.1.4. Exemple d’utilisation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#les-parametres">3.1.5. Les paramètres</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#les-fichiers-de-sorties">3.1.6. Les fichiers de sorties</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#le-telechargement-de-la-base-de-donnees-fda-argos">3.2. Le téléchargement de la base de données FDA-ARGOS</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">3.2.1. Programme</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">3.2.2. Localisation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">3.2.3. Exemple d’utilisation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">3.2.4. Les paramètres</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">3.2.5. Les fichiers de sorties</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#le-telechargement-de-la-base-de-donnees-mycocosm">3.3. Le téléchargement de la base de données Mycocosm</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id6">3.3.1. Programme</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id7">3.3.2. Localisation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id8">3.3.3. Exemple d’utilisation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CLINICAL METAGENOMICS</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li><span class="section-number">3. </span>Tutoriel</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/tutorial.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="tutoriel">
+<h1><a class="toc-backref" href="#id9"><span class="section-number">3. </span>Tutoriel</a><a class="headerlink" href="#tutoriel" title="Lien permanent vers ce titre">¶</a></h1>
+<p>Ci-dessous vous pouvez trouver le tutoriel sur comment utiliser le pipeline de métagénomique clinique.</p>
+<div class="contents topic" id="sommaire">
+<p class="topic-title">Sommaire</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#tutoriel" id="id9">Tutoriel</a></p>
+<ul>
+<li><p><a class="reference internal" href="#le-pre-traitement-des-reads" id="id10">Le pré-traitement des reads</a></p></li>
+<li><p><a class="reference internal" href="#le-telechargement-de-la-base-de-donnees-fda-argos" id="id11">Le téléchargement de la base de données FDA-ARGOS</a></p></li>
+<li><p><a class="reference internal" href="#le-telechargement-de-la-base-de-donnees-mycocosm" id="id12">Le téléchargement de la base de données Mycocosm</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="le-pre-traitement-des-reads">
+<span id="pre-processing"></span><h2><a class="toc-backref" href="#id10"><span class="section-number">3.1. </span>Le pré-traitement des reads</a><a class="headerlink" href="#le-pre-traitement-des-reads" title="Lien permanent vers ce titre">¶</a></h2>
+<p>L’exemple suivant nous montre comment utiliser les étapes de pré-traitement.</p>
+<div class="section" id="programme">
+<h3><span class="section-number">3.1.1. </span>Programme<a class="headerlink" href="#programme" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Nom du programme:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">remove_poor_quality_duplicate_reads_preprocess</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="localisation">
+<h3><span class="section-number">3.1.2. </span>Localisation<a class="headerlink" href="#localisation" title="Lien permanent vers ce titre">¶</a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>└── src
+ ├── bash
+ │   ├── remove_poor_quality_duplicate_reads_preprocess.sh
+</pre></div>
+</div>
+</div>
+<div class="section" id="les-outils-utilises">
+<h3><span class="section-number">3.1.3. </span>Les outils utilisés<a class="headerlink" href="#les-outils-utilises" title="Lien permanent vers ce titre">¶</a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">Clumpify.sh</dt>
+<dd class="field-odd"><p>Le script Clumpify.sh de l’aligneur BBMap permet d’identifier les séquences identiques en sortie de séquençage. Configuré avec le paramètre Dedupe le script clumpify, fait intervenir le logiciel Dedupe de la suite BBMap pour éliminer les reads dupliqués.</p>
+</dd>
+<dt class="field-even">Dedupe</dt>
+<dd class="field-even"><p>Dedupe supprime les reads dupliqués.</p>
+</dd>
+<dt class="field-odd">Trimmomatic</dt>
+<dd class="field-odd"><p>Trimmomatic permet de supprimer les reads de mauvaises qualités c’est à dire les reads qui ont un score phread (score de qualité) moyen d’au moins 20 et des reads de taille minimum de 50 nucléotides pour avoir assez d’information pour classifier les reads.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="exemple-d-utilisation">
+<h3><span class="section-number">3.1.4. </span>Exemple d’utilisation<a class="headerlink" href="#exemple-d-utilisation" title="Lien permanent vers ce titre">¶</a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash src/bash/remove_poor_quality_duplicate_reads_preprocess.sh <span class="se">\</span>
+             -path_reads data/reads/PAIRED_SAMPLES_ADN_TEST/ <span class="se">\</span>
+             -path_output results/trimmed_reads/trimmed_PAIRED_SAMPLES_ADN_TEST_reads_04_06_2020/ <span class="se">\</span>
+             -threads <span class="m">28</span>
+</pre></div>
+</div>
+<p>Dans cet exemple, nous indiquons le dossier contenant les reads et nous précisons le dossier de sortie pour lequel les reads sortirons traités et filtrés. Nous pouvons préciser le nombre de threads pour accélérer le traitement, ici le nombre de thread est à 28.</p>
+</div>
+<div class="section" id="les-parametres">
+<h3><span class="section-number">3.1.5. </span>Les paramètres<a class="headerlink" href="#les-parametres" title="Lien permanent vers ce titre">¶</a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">-path_reads</dt>
+<dd class="field-odd"><p>(Input) Le chemin du dossier avec l’ensemble des reads.</p>
+</dd>
+<dt class="field-even">-path_outputs</dt>
+<dd class="field-even"><p>(Output) Le chemin du dossier de sortie des reads pré-traités.</p>
+</dd>
+<dt class="field-odd">-threads</dt>
+<dd class="field-odd"><p>(Input) Le nombre de thread (par défaut configuré à 1 thread).</p>
+</dd>
+<dt class="field-even">-force_remove</dt>
+<dd class="field-even"><p>(Optionnel) Par défaut la valeur est sur « yes » et permet de supprimer les fichiers intermédiaires. Pour ne pas supprimer les fichiers intermédiaires configurer le paramètre avec la valeur « no » comme avec l’exemple ci-contre :</p>
+</dd>
+</dl>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash src/bash/remove_poor_quality_duplicate_reads_preprocess.sh <span class="se">\</span>
+             -path_reads data/reads/PAIRED_SAMPLES_ADN_TEST/ <span class="se">\</span>
+             -path_output results/trimmed_reads/trimmed_PAIRED_SAMPLES_ADN_TEST_reads_04_06_2020/ <span class="se">\</span>
+             -force_remove no <span class="se">\</span>
+             -threads <span class="m">28</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="les-fichiers-de-sorties">
+<h3><span class="section-number">3.1.6. </span>Les fichiers de sorties<a class="headerlink" href="#les-fichiers-de-sorties" title="Lien permanent vers ce titre">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Avec l’outil Trimmomatic :</p></li>
+</ul>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">name_of_read</span><span class="o">&gt;</span><span class="n">_trimmed</span><span class="o">.</span><span class="n">fastq</span><span class="o">.</span><span class="n">gz</span>
+</pre></div>
+</div>
+<p><strong>&lt;name_of_read&gt;_trimmed.fastq.gz</strong> correspondent aux reads qui ont correctement répondu aux conditions de filtrage.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">name_of_read</span><span class="o">&gt;</span><span class="n">_unpair_trimmed_fastq</span><span class="o">.</span>
+</pre></div>
+</div>
+<p><strong>&lt;name_of_read&gt;_unpair_trimmed_fastq.gz</strong> correspondent aux reads qui n’ont pas correctement répondu aux conditions de filtrage.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Avec l’outil Clumpify.sh et Dedupe:</p></li>
+</ul>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">name_of_read</span><span class="o">&gt;</span><span class="n">_depupe</span><span class="o">.</span><span class="n">fastq</span> <span class="p">:</span>
+</pre></div>
+</div>
+<p><strong>&lt;name_of_read&gt;_depupe.fastq</strong> est le résultat des outils Clumpify.sh et Dedupe pour les reads.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">name_of_read</span><span class="o">&gt;</span><span class="n">_info</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+<p><strong>&lt;name_of_read&gt;_info.txt</strong> contient le nombre de reads totaux.</p>
+</div>
+</div>
+<div class="section" id="le-telechargement-de-la-base-de-donnees-fda-argos">
+<span id="download-fda-argos"></span><h2><a class="toc-backref" href="#id11"><span class="section-number">3.2. </span>Le téléchargement de la base de données FDA-ARGOS</a><a class="headerlink" href="#le-telechargement-de-la-base-de-donnees-fda-argos" title="Lien permanent vers ce titre">¶</a></h2>
+<p>La session suivante, nous montre comment télécharger la base de données FDA-ARGOS.</p>
+<div class="section" id="id1">
+<h3><span class="section-number">3.2.1. </span>Programme<a class="headerlink" href="#id1" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Nom du programme:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">download_fda_argos_assembly</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h3><span class="section-number">3.2.2. </span>Localisation<a class="headerlink" href="#id2" title="Lien permanent vers ce titre">¶</a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>└── src
+ ├── download
+ │   ├── download_fda_argos_assembly.sh
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3><span class="section-number">3.2.3. </span>Exemple d’utilisation<a class="headerlink" href="#id3" title="Lien permanent vers ce titre">¶</a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash src/download/download_fda_argos_assembly.sh <span class="se">\</span>
+                 -assembly_xml data/assembly/assembly_fda_argos_ncbi_result.xml <span class="se">\</span>
+                 -path_output data/raw_sequences/fda_argos_assembly_raw_sequences/
+</pre></div>
+</div>
+<p>Dans cet exemple, nous téléchargeons les séquences assemblées de FDA-ARGOS à l’aide d’un fichier XML présent dans le dossier data/assembly/assembly_fda_argos_ncbi_result.xml de l’architecture du projet git et nous précisons le dossier de sortie qui contiendra toutes les séquences, ici nous voulons que les résultats se retrouvent dans le dossier data/raw_sequences/fda_argos_assembly_raw_sequences/ .</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Il serait intéressant d’ajouter une fonctionnalité au programme afin de télécharger le fichier XML automatiquement avec les requêtes de NCBI et ainsi avoir les dernières modifications et ajouts de la base de données FDA-ARGOS.</p>
+</div>
+</div>
+<div class="section" id="id4">
+<h3><span class="section-number">3.2.4. </span>Les paramètres<a class="headerlink" href="#id4" title="Lien permanent vers ce titre">¶</a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">-assembly_xml</dt>
+<dd class="field-odd"><p>(Input) Récupère le fichier XML pour l’analyser.</p>
+</dd>
+<dt class="field-even">-path_output</dt>
+<dd class="field-even"><p>(Output) Le chemin du dossier de sortie des les séquences de FDA-ARGOS.</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="id5">
+<h3><span class="section-number">3.2.5. </span>Les fichiers de sorties<a class="headerlink" href="#id5" title="Lien permanent vers ce titre">¶</a></h3>
+<p>L’ensemble des séquences assemblées de FDA-ARGOS vont être téléchargées exemple :</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>├── GCF_000626615.2_ASM62661v3_genomic.fna
+├── GCF_000783435.2_ASM78343v2_genomic.fna
+├── GCF_000783445.2_ASM78344v2_genomic.fna
+├── GCF_000783455.2_ASM78345v2_genomic.fna
+├── GCF_000783465.2_ASM78346v2_genomic.fna
+├── ...
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="le-telechargement-de-la-base-de-donnees-mycocosm">
+<span id="download-mycocosm"></span><h2><a class="toc-backref" href="#id12"><span class="section-number">3.3. </span>Le téléchargement de la base de données Mycocosm</a><a class="headerlink" href="#le-telechargement-de-la-base-de-donnees-mycocosm" title="Lien permanent vers ce titre">¶</a></h2>
+<p>La session suivante, nous montre comment télécharger la base de données Mycocosm.</p>
+<div class="section" id="id6">
+<h3><span class="section-number">3.3.1. </span>Programme<a class="headerlink" href="#id6" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Nom du programme:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">download_mycocosm_scaffolds</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id7">
+<h3><span class="section-number">3.3.2. </span>Localisation<a class="headerlink" href="#id7" title="Lien permanent vers ce titre">¶</a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>└── src
+ ├── download
+ │   ├── download_mycocosm_scaffolds.sh
+</pre></div>
+</div>
+<p>Pour pouvoir télécharger les séquences de Mycocosm plusieurs étapes doivent être réalisées.</p>
+<ol class="arabic simple">
+<li><p>Créer un compte sur le site du JGI <em>Joint Genome Institure</em> <a class="reference external" href="https://contacts.jgi.doe.gov/registration/new">https://contacts.jgi.doe.gov/registration/new</a></p></li>
+<li><p>Confirmer votre inscription par mail.</p></li>
+</ol>
+</div>
+<div class="section" id="id8">
+<h3><span class="section-number">3.3.3. </span>Exemple d’utilisation<a class="headerlink" href="#id8" title="Lien permanent vers ce titre">¶</a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash src/download/download_mycocosm_scaffolds.sh <span class="se">\</span>
+                  username <span class="se">\</span>
+                  password <span class="se">\</span>
+                  data/raw_sequences/mycoccosm_fungi_ncbi_scaffolds/
+</pre></div>
+</div>
+<p>Dans le cas :</p>
+<ol class="arabic simple" start="3">
+<li><p>Mettre dans 2 fichiers distincts :</p></li>
+</ol>
+<blockquote>
+<div><ul class="simple">
+<li><p>Dans un fichier username (sans extension) mettre le mail utilisé lors de la création de son compte au site JGI.</p></li>
+<li><p>Dans un fichier password (sans extension) mettre le mot de passe utilisé lors de la création de son compte.</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition warning">
+<p class="admonition-title">Avertissement</p>
+<p>Les fichiers username et password sont automatiquement ignorés dans le .gitignore du projet. Ceci permet d’éviter de partager sur un projet github de l’identifiant et du mot de passe. Cependant, si vous utilisez d’autres noms de fichier pour stocker, faites attention de ne pas partager ces fichiers avec des informations confidentielles sur Internet.</p>
+</div>
+<p>Les 2 fichiers peuvent se retrouver dans le dossier src/download :</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>└── src
+ ├── download
+ │   ├── username
+ │   ├── password
+</pre></div>
+</div>
+<ol class="arabic simple" start="4">
+<li><p>Exécuter les programmes pour télécharger les séquences</p></li>
+</ol>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="overview.html" class="btn btn-neutral float-left" title="2. Vue d’ensemble" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2020, Zygnematophyce
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

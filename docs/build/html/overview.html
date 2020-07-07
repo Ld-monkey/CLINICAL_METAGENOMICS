@@ -36,6 +36,7 @@
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="3. Tutoriel" href="tutorial.html" />
     <link rel="prev" title="1. Installation" href="installation_conda_environnement.html" /> 
 </head>
 
@@ -82,7 +83,20 @@
             
               <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation_conda_environnement.html">1. Installation</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">2. Vue d’ensemble</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">2. Vue d’ensemble</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#etape-de-pre-traitement">2.1. Étape de pré-traitement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creation-des-bases-de-donnees-de-references">2.2. Création des bases de données de références</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#la-base-de-donnees-fda-argos">2.2.1. La base de données FDA-ARGOS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#la-base-de-donnees-mycocosm">2.2.2. La base de données Mycocosm</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#la-base-de-donnees-fungidb">2.2.3. La base de données FungiDB</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#la-base-de-donnees-refseq">2.2.4. La base de données RefSeq</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#etape-de-classification">2.3. Étape de classification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#etape-d-analyse-des-resultats">2.4. Étape d’analyse des résultats</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">3. Tutoriel</a></li>
 </ul>
 
             
@@ -149,7 +163,48 @@
             
   <div class="section" id="vue-d-ensemble">
 <h1><span class="section-number">2. </span>Vue d’ensemble<a class="headerlink" href="#vue-d-ensemble" title="Lien permanent vers ce titre">¶</a></h1>
-<a class="reference internal image-reference" href="_images/complete_pipeline.png"><img alt="Diagramme du pipeline de métagénomique clinique réalisé avec l'outil Snakemake" src="_images/complete_pipeline.png" style="width: 900px;" /></a>
+<a class="reference internal image-reference" href="_images/flowchart_pipeline_metagenomic.png"><img alt="Organigramme des étapes de métagénomique clinique réalisées" src="_images/flowchart_pipeline_metagenomic.png" style="width: 400px;" /></a>
+<p>Simple organigramme des étapes de métagénomique clinique (image par Zygnematophyce)</p>
+<div class="section" id="etape-de-pre-traitement">
+<h2><span class="section-number">2.1. </span>Étape de pré-traitement<a class="headerlink" href="#etape-de-pre-traitement" title="Lien permanent vers ce titre">¶</a></h2>
+<p>L’étape de pré-traitement (ou pre-processing en anglais) est nécessaire avant toute analyse. Cette étape consiste à éliminer les séquences de mauvaise qualité et les séquences dupliquées à partir des fichiers fastq de reads bruts (raw reads sequences) issus du séquençage. Cette étape permet de réduire la quantité d’informations à traiter, et d’éliminer les informations redondantes. Vous pouvez utiliser le programme construit à cette occasion dans la session <a class="reference internal" href="tutorial.html#pre-processing"><span class="std std-ref">le pré-traitement des reads</span></a> du tutoriel.</p>
+</div>
+<div class="section" id="creation-des-bases-de-donnees-de-references">
+<h2><span class="section-number">2.2. </span>Création des bases de données de références<a class="headerlink" href="#creation-des-bases-de-donnees-de-references" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Avant de classifier les reads, il est indispensable de créer des bases de données de référence pour identifier un organisme. Au total, 4 bases de données ont été créées :</p>
+<div class="section" id="la-base-de-donnees-fda-argos">
+<h3><span class="section-number">2.2.1. </span>La base de données FDA-ARGOS<a class="headerlink" href="#la-base-de-donnees-fda-argos" title="Lien permanent vers ce titre">¶</a></h3>
+<p>FDA-ARGOS est une base de données génomique, curée, et publique. Cette base de
+données est construite à des fins de diagnostic clinique. FDA-ARGOS applique des mesures de qualité sur les séquences de pathogènes qui la composent. Ces mesures de qualité sont basées par exemple sur des critères tels que l’assemblage du génome avec une couverture de 95% couplé à d’autres critères.</p>
+<p>Au final la base de données FDA-ARGOS est composée à la date de décembre 2019 de 487 isolats avec 88,3% de bactéries, 11,1% des virus et 0,6% d’eucaryotes, représentant 189 taxons différents avec au total 81,9% des génomes d’origine clinique et les 8,1% restants de génomes environnementaux.</p>
+<p>Pour télécharger la base de données FDA-ARGOS utiliser le programme construit décrit dans la session <a class="reference internal" href="tutorial.html#download-fda-argos"><span class="std std-ref">Le téléchargement de la base de données FDA-ARGOS</span></a> du tutoriel.</p>
+</div>
+<div class="section" id="la-base-de-donnees-mycocosm">
+<h3><span class="section-number">2.2.2. </span>La base de données Mycocosm<a class="headerlink" href="#la-base-de-donnees-mycocosm" title="Lien permanent vers ce titre">¶</a></h3>
+<p>La base de données Mycocosm est un projet de génomique fongique du Joint Genome Institute (JGI) qui s’est associé à la communauté scientifique internationale pour soutenir l’exploration génomique des champignons.</p>
+<p>Aujourd’hui le portail propose plus de 1000 espèces fongiques et plus de 500 familles fongiques.</p>
+<p>Pour télécharger la base de données de Mycocosm utiliser le programme construit décrit dans la session <a class="reference internal" href="tutorial.html#download-mycocosm"><span class="std std-ref">Le téléchargement de la base de données Mycocosm</span></a> du tutoriel.</p>
+</div>
+<div class="section" id="la-base-de-donnees-fungidb">
+<h3><span class="section-number">2.2.3. </span>La base de données FungiDB<a class="headerlink" href="#la-base-de-donnees-fungidb" title="Lien permanent vers ce titre">¶</a></h3>
+</div>
+<div class="section" id="la-base-de-donnees-refseq">
+<h3><span class="section-number">2.2.4. </span>La base de données RefSeq<a class="headerlink" href="#la-base-de-donnees-refseq" title="Lien permanent vers ce titre">¶</a></h3>
+<p>La base de données RefSeq comprend les génomes humains, bactériens et viraux.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Pour les virus, la base de données « RefSeq viral » a été choisie : elle est composée des génomes complets d’environ 9000 espèces virales et apparait adaptée pour couvrir la grande majorité des virus rencontrés dans un échantillon clinique.</p></li>
+<li><p>Pour les bactéries, l’utilisation d’une base de données de génomes complets comme « RefSeq bacteria » est composée de 25000 espèces bactériennes.</p></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="etape-de-classification">
+<h2><span class="section-number">2.3. </span>Étape de classification<a class="headerlink" href="#etape-de-classification" title="Lien permanent vers ce titre">¶</a></h2>
+</div>
+<div class="section" id="etape-d-analyse-des-resultats">
+<h2><span class="section-number">2.4. </span>Étape d’analyse des résultats<a class="headerlink" href="#etape-d-analyse-des-resultats" title="Lien permanent vers ce titre">¶</a></h2>
+</div>
 </div>
 
 
@@ -159,6 +214,8 @@
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tutorial.html" class="btn btn-neutral float-right" title="3. Tutoriel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="installation_conda_environnement.html" class="btn btn-neutral float-left" title="1. Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
