@@ -70,7 +70,7 @@ Les paramètres
                 -force_remove no \
                 -threads 28
 
-Les fichiers de sorties
+LES fichiers de sorties
 ~~~~~~~~~~~~~~~~~~~~~~~
 
    * Avec l'outil Trimmomatic :
@@ -190,6 +190,7 @@ Pour pouvoir télécharger les séquences de Mycocosm plusieurs étapes doivent 
 
 (2) Confirmer votre inscription par mail.
 
+(3) Exécuter le programme.
 
 Exemple d'utilisation
 ~~~~~~~~~~~~~~~~~~~~~
@@ -197,29 +198,27 @@ Exemple d'utilisation
 .. code-block:: sh
 
       bash src/download/download_mycocosm_scaffolds.sh \
-                        username \
-                        password \
-                        data/raw_sequences/mycoccosm_fungi_ncbi_scaffolds/
+                        -username mail@a.com\
+                        -password azerty \
+                        -path_output data/raw_sequences/mycoccosm_fungi_ncbi_scaffolds/
 
-Dans le cas :
+Dans cet exemple, nous téléchargeons les scaffolds de la base de données Mycocosm en indiquant notre adresse mail avec le mot de passe associé (l'adresse mail et le mot de passe sont donnés ici à titre d'exemple et ne sont pas utilisables). Nous indiquons ensuite le chemin de sortie avec le paramètre -path_output, ici les scaffolds irons dans le dossier de sortie data/raw_sequences/mycoccosm_fungi_ncbi_scaffolds/ .
 
-(3) Mettre dans 2 fichiers distincts :
+Dépendances
+~~~~~~~~~~~
 
-   - Dans un fichier username (sans extension) mettre le mail utilisé lors de la création de son compte au site JGI.
-   - Dans un fichier password (sans extension) mettre le mot de passe utilisé lors de la création de son compte.
+Le programme dépend de deux scripts Python :
 
-.. warning::
-   Les fichiers username et password sont automatiquement ignorés dans le .gitignore du projet. Ceci permet d'éviter de partager sur un projet github de l'identifiant et du mot de passe. Cependant, si vous utilisez d'autres noms de fichier pour stocker, faites attention de ne pas partager ces fichiers avec des informations confidentielles sur Internet.
+::
 
-Les 2 fichiers peuvent se retrouver dans le dossier src/download :
+   src/download/download_scaffold_mycocosm_jgi.py
 
-.. code-block:: sh
+**download_scaffold_mycocosm_jgi.py** permet de télécharger le cookie, le fichier xml, les séquences scaffolds, de créer un fichier récapitulatif en csv des espèces avec leurs noms etc.. 
 
-   └── src
-    ├── download
-    │   ├── username
-    │   ├── password
-   
+Le second script est :
 
-(4) Exécuter les programmes pour télécharger les séquences
+::
 
+   src/python/jgi_id_to_ncbi_id_taxonomy.py
+
+**jgi_id_to_ncbi_id_taxonomy.py**

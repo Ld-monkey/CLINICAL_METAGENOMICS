@@ -90,7 +90,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#les-outils-utilises">3.1.3. Les outils utilisés</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#exemple-d-utilisation">3.1.4. Exemple d’utilisation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#les-parametres">3.1.5. Les paramètres</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#les-fichiers-de-sorties">3.1.6. Les fichiers de sorties</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#les-fichiers-de-sorties">3.1.6. LES fichiers de sorties</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#le-telechargement-de-la-base-de-donnees-fda-argos">3.2. Le téléchargement de la base de données FDA-ARGOS</a><ul>
@@ -105,6 +105,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#id6">3.3.1. Programme</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id7">3.3.2. Localisation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#id8">3.3.3. Exemple d’utilisation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#dependances">3.3.4. Dépendances</a></li>
 </ul>
 </li>
 </ul>
@@ -255,7 +256,7 @@
 </div>
 </div>
 <div class="section" id="les-fichiers-de-sorties">
-<h3><span class="section-number">3.1.6. </span>Les fichiers de sorties<a class="headerlink" href="#les-fichiers-de-sorties" title="Lien permanent vers ce titre">¶</a></h3>
+<h3><span class="section-number">3.1.6. </span>LES fichiers de sorties<a class="headerlink" href="#les-fichiers-de-sorties" title="Lien permanent vers ce titre">¶</a></h3>
 <blockquote>
 <div><ul class="simple">
 <li><p>Avec l’outil Trimmomatic :</p></li>
@@ -360,40 +361,31 @@
 <ol class="arabic simple">
 <li><p>Créer un compte sur le site du JGI <em>Joint Genome Institure</em> <a class="reference external" href="https://contacts.jgi.doe.gov/registration/new">https://contacts.jgi.doe.gov/registration/new</a></p></li>
 <li><p>Confirmer votre inscription par mail.</p></li>
+<li><p>Exécuter le programme.</p></li>
 </ol>
 </div>
 <div class="section" id="id8">
 <h3><span class="section-number">3.3.3. </span>Exemple d’utilisation<a class="headerlink" href="#id8" title="Lien permanent vers ce titre">¶</a></h3>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash src/download/download_mycocosm_scaffolds.sh <span class="se">\</span>
-                  username <span class="se">\</span>
-                  password <span class="se">\</span>
-                  data/raw_sequences/mycoccosm_fungi_ncbi_scaffolds/
+                  -username mail@a.com<span class="se">\</span>
+                  -password azerty <span class="se">\</span>
+                  -path_output data/raw_sequences/mycoccosm_fungi_ncbi_scaffolds/
 </pre></div>
 </div>
-<p>Dans le cas :</p>
-<ol class="arabic simple" start="3">
-<li><p>Mettre dans 2 fichiers distincts :</p></li>
-</ol>
-<blockquote>
-<div><ul class="simple">
-<li><p>Dans un fichier username (sans extension) mettre le mail utilisé lors de la création de son compte au site JGI.</p></li>
-<li><p>Dans un fichier password (sans extension) mettre le mot de passe utilisé lors de la création de son compte.</p></li>
-</ul>
-</div></blockquote>
-<div class="admonition warning">
-<p class="admonition-title">Avertissement</p>
-<p>Les fichiers username et password sont automatiquement ignorés dans le .gitignore du projet. Ceci permet d’éviter de partager sur un projet github de l’identifiant et du mot de passe. Cependant, si vous utilisez d’autres noms de fichier pour stocker, faites attention de ne pas partager ces fichiers avec des informations confidentielles sur Internet.</p>
+<p>Dans cet exemple, nous téléchargeons les scaffolds de la base de données Mycocosm en indiquant notre adresse mail avec le mot de passe associé (l’adresse mail et le mot de passe sont donnés ici à titre d’exemple et ne sont pas utilisables). Nous indiquons ensuite le chemin de sortie avec le paramètre -path_output, ici les scaffolds irons dans le dossier de sortie data/raw_sequences/mycoccosm_fungi_ncbi_scaffolds/ .</p>
 </div>
-<p>Les 2 fichiers peuvent se retrouver dans le dossier src/download :</p>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>└── src
- ├── download
- │   ├── username
- │   ├── password
+<div class="section" id="dependances">
+<h3><span class="section-number">3.3.4. </span>Dépendances<a class="headerlink" href="#dependances" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Le programme dépend de deux scripts Python :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">src</span><span class="o">/</span><span class="n">download</span><span class="o">/</span><span class="n">download_scaffold_mycocosm_jgi</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
-<ol class="arabic simple" start="4">
-<li><p>Exécuter les programmes pour télécharger les séquences</p></li>
-</ol>
+<p><strong>download_scaffold_mycocosm_jgi.py</strong> permet de télécharger le cookie, le fichier xml, les séquences scaffolds, de créer un fichier récapitulatif en csv des espèces avec leurs noms etc..</p>
+<p>Le second script est :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">src</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">jgi_id_to_ncbi_id_taxonomy</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p><strong>jgi_id_to_ncbi_id_taxonomy.py</strong></p>
 </div>
 </div>
 </div>
