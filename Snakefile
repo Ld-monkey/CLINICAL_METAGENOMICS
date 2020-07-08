@@ -116,9 +116,9 @@ rule download_all_scaffolds_mycocosm_fungi_database:
         "username=$(cat {input.username} ); "
         "password=$(cat {input.password} ); "
         "bash src/download/download_mycocosm_scaffolds.sh "
-        "$username "
-        "$password "
-        "{output}"
+        "-username $username "
+        "-password $password "
+        "-path_output {output}"
 
 # Download all genomes mycocosm aka fungi.
 # Be careful about username and password files that contain privates informations.
