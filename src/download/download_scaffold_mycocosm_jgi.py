@@ -134,7 +134,7 @@ def download_database(list_url, database, cookie, path_output_folder):
             --verbose \
             --max-time 46800 \
             --connect-timeout 46800 \
-            'https://genome.jgi.doe.gov"+downloaded_file+"' \
+            'https://genome.jgi.doe.gov/portal"+downloaded_file+"' \
             -b "+cookie+" \
             > "+path_output_folder+database+"/"+basename_file+" "], shell=True)
 
@@ -149,9 +149,6 @@ def get_url_scaffold_mycocosm_xml(xml_file):
 
     # List with all urls of coding sequences of mycocosm.
     url_scaffold = list()
-
-    # Filtering all sequences that we don't want.
-    filtering_sequence = ["primary", "secondary", "alleles", "diploid", "old"]
 
     # The xpath of coding sequence in xml file.
     query_coding_sequence = '.[@name="fungi"]'\
@@ -172,6 +169,8 @@ def get_url_scaffold_mycocosm_xml(xml_file):
         for scaffold in root.find(query_coding_sequence):
             label = scaffold.get("label")
             url = scaffold.get("url")
+            # Find the correct url.
+            url = url.split("url=", 1)[1]
             jgi_fullname = scaffold.get("filename")
             jgi_basename = os.path.splitext(jgi_fullname)[0]
 
@@ -212,6 +211,7 @@ if __name__ == "__main__":
 
     # Download the database.
     download_database(list_url=ALL_URLS_scaffold,
+
                       database=DATABASE,
                       cookie=COOKIE,
                       path_output_folder=PATH_DB_OUTPUT)
