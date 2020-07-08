@@ -209,16 +209,27 @@ Dépendances
 
 Le programme dépend de deux scripts Python :
 
+Le premier script Python est :
+
 ::
 
    src/download/download_scaffold_mycocosm_jgi.py
 
-**download_scaffold_mycocosm_jgi.py** permet de télécharger le cookie, le fichier xml, les séquences scaffolds, de créer un fichier récapitulatif en csv des espèces avec leurs noms etc.. 
+**download_scaffold_mycocosm_jgi.py** va télécharger :
 
-Le second script est :
+   * le cookie,
+   * le fichier xml,
+   * les séquences scaffolds,
+   * et créer un fichier récapitulatif en format csv *(Comma-separated values)*. 
+
+Le second script Python est :
 
 ::
 
    src/python/jgi_id_to_ncbi_id_taxonomy.py
 
-**jgi_id_to_ncbi_id_taxonomy.py**
+**jgi_id_to_ncbi_id_taxonomy.py** associe les identifiants taxonomiques utilisés par JGI dans les scaffold et convertit en identifiant taxonomique du NCBI.
+
+.. note::
+   Cette conversion est nécessaire car elle permet l'indexation des bases de données avec le logiciel Kraken 2. Kraken 2 (utilisé dans la suite du tutoriel) utilise et la taxonomie de référence du NCBI et l'algorithme de k-mer pour classifier les reads rapidement (voir section ..) 
+

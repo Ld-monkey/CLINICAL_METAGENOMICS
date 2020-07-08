@@ -377,15 +377,28 @@
 <div class="section" id="dependances">
 <h3><span class="section-number">3.3.4. </span>Dépendances<a class="headerlink" href="#dependances" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Le programme dépend de deux scripts Python :</p>
+<p>Le premier script Python est :</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">src</span><span class="o">/</span><span class="n">download</span><span class="o">/</span><span class="n">download_scaffold_mycocosm_jgi</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
-<p><strong>download_scaffold_mycocosm_jgi.py</strong> permet de télécharger le cookie, le fichier xml, les séquences scaffolds, de créer un fichier récapitulatif en csv des espèces avec leurs noms etc..</p>
-<p>Le second script est :</p>
+<p><strong>download_scaffold_mycocosm_jgi.py</strong> va télécharger :</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>le cookie,</p></li>
+<li><p>le fichier xml,</p></li>
+<li><p>les séquences scaffolds,</p></li>
+<li><p>et créer un fichier récapitulatif en format csv <em>(Comma-separated values)</em>.</p></li>
+</ul>
+</div></blockquote>
+<p>Le second script Python est :</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">src</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">jgi_id_to_ncbi_id_taxonomy</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
-<p><strong>jgi_id_to_ncbi_id_taxonomy.py</strong></p>
+<p><strong>jgi_id_to_ncbi_id_taxonomy.py</strong> associe les identifiants taxonomiques utilisés par JGI dans les scaffold et convertit en identifiant taxonomique du NCBI.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Cette conversion est nécessaire car elle permet l’indexation des bases de données avec le logiciel Kraken 2. Kraken 2 (utilisé dans la suite du tutoriel) utilise et la taxonomie de référence du NCBI et l’algorithme de k-mer pour classifier les reads rapidement (voir section ..)</p>
+</div>
 </div>
 </div>
 </div>
