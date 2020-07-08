@@ -129,7 +129,9 @@ def download_database(list_url, database, cookie, path_output_folder):
 
             basename_file = os.path.basename(downloaded_file)
 
+            # Download sequences with a maximum time of 1h for each sequences.
             subprocess.run(["curl \
+            --max-time 3600 \
             'https://genome.jgi.doe.gov"+downloaded_file+"' \
             -b "+cookie+" \
             > "+path_output_folder+database+"/"+basename_file+" "], shell=True)
