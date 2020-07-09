@@ -70,7 +70,7 @@ def add_ncbi_id_taxonym_in_csv(csv_file, output_csv_name):
 
                              # Check if in this case id taxonomic was found.
                              if bool(ncbi_id_taxid) is True:
-                                 # In this case we found nbci taxonomy.
+                                 # In this case wea found nbci taxonomy.
                                  ncbi_id = ncbi_id_taxid.get(str(row_name_split))[0]
                                  row.append(ncbi_id)
                                  csv_writer.writerow(row)
@@ -115,7 +115,7 @@ def add_ncbi_id_in_fasta(complete_csv_file, path_sequence):
 
                                 # We modify according to the documentation of
                                 # kraken 2 and replace JGI id to ncbi taxonomic.
-                                modified_line = line[0:4]+"|kraken:taxid|"+row[3]+"|" + line[5:]
+                                modified_line = line[0:1]+"|kraken:taxid|"+row[3]+"|"+row[0]+", " + line[1:]
                                 fasta_file_write.write(line.replace(line, modified_line))
                             else:
                                 # Simply write the nucleotide sequences.
