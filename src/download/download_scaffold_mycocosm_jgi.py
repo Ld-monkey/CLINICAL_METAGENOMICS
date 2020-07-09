@@ -129,15 +129,35 @@ def download_database(list_url, database, cookie, path_output_folder):
 
             basename_file = os.path.basename(downloaded_file)
 
-            # Download sequences with a maximum time of 13h for each sequences.
-            subprocess.run(["curl \
-            --verbose \
-            --max-time 46800 \
-            --connect-timeout 46800 \
-            'https://genome.jgi.doe.gov/portal"+downloaded_file+"' \
-            -b "+cookie+" \
-            > "+path_output_folder+database+"/"+basename_file+" "], shell=True)
+            # By default we consider that the site does not give us control
+            # over the downloading of sequences and returns an error.
+            curl_error = True
 
+            # Define the full url.
+            full_url = "https://genome.jgi.doe.gov/portal"+downloaded_file
+            print(full_url)
+
+            # As long as the JGI site doesn't give us a hand.
+            while(curl_error == True):
+                # Try to get a response on the resquest.
+                try:
+                    subprocess.check_call(["curl", "-I", "--fail", full_url, "-b", cookie])
+                except subprocess.CalledProcessError as e:
+                    if e.returncode == 22:
+                        print("Continue donwload ...")
+                        print("Error 22")
+                else:
+                    print("Downloading {}".format(basename_file))
+
+                    # Download sequence.
+                    subprocess.run(["curl \
+                    'https://genome.jgi.doe.gov/portal"+downloaded_file+"' \
+                    -b "+cookie+" \
+                    > "+path_output_folder+database+"/"+basename_file+" "],
+                                   shell=True)
+
+                    # Stop the loop.
+                    curl_error = False
 
 # Can split function between csv creation and url list return.
 def get_url_scaffold_mycocosm_xml(xml_file):
