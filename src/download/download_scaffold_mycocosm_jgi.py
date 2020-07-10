@@ -6,10 +6,11 @@ Master II BI - 2020
 program : download_scaffold_mycocosm_jgi_genomes.py
 """
 
-import argparse
-import subprocess
 import os
 import csv
+import time
+import argparse
+import subprocess
 import xml.etree.ElementTree as ET
 
 
@@ -134,27 +135,41 @@ def download_database(list_url, database, cookie, path_output_folder):
             curl_error = True
 
             # Define the full url.
-            full_url = "https://genome.jgi.doe.gov/portal"+downloaded_file
+            full_url = "https://genome.jgi.doe.gov"+downloaded_file
             print(full_url)
+
+            # Get the current time.
+            start_time = time.time()
 
             # As long as the JGI site doesn't give us a hand.
             while(curl_error == True):
                 # Try to get a response on the resquest.
                 try:
-                    subprocess.check_call(["curl", "-I", "--fail", full_url, "-b", cookie])
+                    subprocess.check_call(["curl \
+                    -I \
+                    --fail \
+                    'https://genome.jgi.doe.gov"+downloaded_file+"' \
+                    -b "+cookie+" \
+                    > "+path_output_folder+database+"/"+basename_file+" "], shell=True)
+
+                    curl_error = True
                 except subprocess.CalledProcessError as e:
                     if e.returncode == 22:
-                        print("Continue donwload ...")
-                        print("Error 22")
+                        elapsed_time = time.time() - start_time
+                        print("Continue donwloading {} s".format(elapsed_time))
                 else:
+                    print("error !22")
                     print("Downloading {}".format(basename_file))
 
-                    # Download sequence.
+                    # Download scaffold.
                     subprocess.run(["curl \
                     'https://genome.jgi.doe.gov/portal"+downloaded_file+"' \
                     -b "+cookie+" \
                     > "+path_output_folder+database+"/"+basename_file+" "],
                                    shell=True)
+
+                    # Diplay the elapsed time.
+                    print("Total time for {} = {} s ".format(full_url, time.time() - start_time))
 
                     # Stop the loop.
                     curl_error = False
@@ -189,8 +204,6 @@ def get_url_scaffold_mycocosm_xml(xml_file):
         for scaffold in root.find(query_coding_sequence):
             label = scaffold.get("label")
             url = scaffold.get("url")
-            # Find the correct url.
-            url = url.split("url=", 1)[1]
             jgi_fullname = scaffold.get("filename")
             jgi_basename = os.path.splitext(jgi_fullname)[0]
 
