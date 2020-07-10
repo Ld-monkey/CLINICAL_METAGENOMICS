@@ -126,7 +126,7 @@ def download_database(list_url, database, cookie, path_output_folder):
         print("The list of url is empty")
     else:
         for downloaded_file in list_url:
-            print(downloaded_file)
+            print("url=", downloaded_file)
 
             basename_file = os.path.basename(downloaded_file)
 
@@ -136,7 +136,7 @@ def download_database(list_url, database, cookie, path_output_folder):
 
             # Define the full url.
             full_url = "https://genome.jgi.doe.gov"+downloaded_file
-            print(full_url)
+            print("full_url=", full_url)
 
             # Get the current time.
             start_time = time.time()
@@ -163,7 +163,7 @@ def download_database(list_url, database, cookie, path_output_folder):
 
                     # Download scaffold.
                     subprocess.run(["curl \
-                    'https://genome.jgi.doe.gov/portal"+downloaded_file+"' \
+                    'https://genome.jgi.doe.gov"+downloaded_file+"' \
                     -b "+cookie+" \
                     > "+path_output_folder+database+"/"+basename_file+" "],
                                    shell=True)
