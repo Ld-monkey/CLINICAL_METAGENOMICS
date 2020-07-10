@@ -6,11 +6,11 @@
 # opts.k2d: Contains information about the options used to build the database.
 # taxo.k2d: Contains taxonomy information used to build the database.
 # e.g
-# ../bash/create_kraken_database.sh \
-    #     -path_seq ../../data/raw_sequences/mycocosm_fungi_cds_19_05_2020/ \
-    #     -path_db data/databases/kraken_2/fda_argos_with_none_library_kraken_database_07_06_2020/ \
-    #     -type_db none \
-    #     -threads $thread
+# bash src/bash/create_kraken_database.sh \
+#      -path_seq data/raw_sequences/test/ \
+#      -path_db data/databases/kraken_2/fda_argos_with_none_library_kraken_database_07_06_2020/ \
+#      -type_db none \
+#      -threads 30
 # Official documentation : https://ccb.jhu.edu/software/kraken2/index.shtml?t=manual
 
 # Function to check if the sequence folder exists.
@@ -263,7 +263,8 @@ BAD_OPTION ()
     echo "Unknown option "$1" found on command-line"
     echo "It may be a good idea to read the usage:"
     echo "white $PROGRAM -h to be helped :"
-    echo "example : ../bash/create_kraken_database.sh -path_seq ../../data/raw_sequences/mycocosm_fungi_cds_19_05_2020/ -path_db ../../data/databases/mycocosm_fungi_cds_kraken_database_19_05_2020/ -type_db none -threads $thread "
+    echo "example : bash src/bash/create_kraken_database.sh -path_seq data/raw_sequences/test/ -path_db data/databases/kraken_2/fda_argos_with_none_library_kraken_database_07_06_2020/ -type_db none -threads 30"
+    #  "
     echo -e $USAGE
 
     exit 1

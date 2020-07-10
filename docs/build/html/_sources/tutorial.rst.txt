@@ -233,3 +233,113 @@ Le second script Python est :
 .. note::
    Cette conversion est nécessaire car elle permet l'indexation des bases de données avec le logiciel Kraken 2. Kraken 2 (utilisé dans la suite du tutoriel) utilise et la taxonomie de référence du NCBI et l'algorithme de k-mer pour classifier les reads rapidement (voir section ..) 
 
+
+.. _indexation_kraken2:
+
+L'indexation d'une base de données avec Kraken 2
+------------------------------------------------
+
+Le logiciel Kraken 2 propose :
+
+1. l'indexation avec l'algorithme de k-mer d'une base de données,
+2. la classification taxonomique des reads.
+
+.. note::
+   L'étape d'indexation de la base de données est la plus coûteuse en ressources et en temps. Une fois construite, la base de données de Kraken 2 est conservée, et n’a besoin d’être reconstruite que si une mise à jour est nécessaire.
+
+
+La théorie
+~~~~~~~~~~
+
+.. image:: images/indexation_kraken_2.png
+   :width: 400
+   :alt: Indexation des librairies de séquences avec Kraken 2
+   :align: right
+
+Schéma des étapes d'indexation d'une base de données avec le logiciel Kraken 2 (image par Zygnematophyce).
+
+1. Une base de données est une librairie de génomes (étape 1) qui recense l’ensemble des séquences génomiques.
+2. Pour indexer la base de données sélectionnée, l’algorithme de Kraken 2 va ensuite hacher (étape 2) chaque génome de la base de données en fragments appelés k-mers de 31 nucléotides.
+3. Chaque k-mer est ajouté à la base de données et obtient un numéro d’identification taxonomique (étape 3). Si c’est un nouveau k-mer, l’identifiant taxonomique de l’espèce d‘où il provient lui est associé.
+
+.. note::
+     Si le k-mer est déjà présent dans la base de données, l’ancêtre commun le plus proche (LCA) des deux identifiants taxonomiques est utilisé pour identifier ce fragment.
+
+.. seealso:: Les informations sur les taxons sont obtenues à partir de la base de données taxonomique du NCBI.
+
+La pratique
+~~~~~~~~~~~
+
+La session qui suit, nous montre comment indexer la base de données avec l'algorithme de k-mer et l'outil Kraken 2.
+
+Programme
+~~~~~~~~~
+
+Nom du programme::
+
+   create_kraken_database.sh
+
+Localisation
+~~~~~~~~~~~~
+
+.. code-block:: sh
+
+   └── src
+    ├── bash
+    │   ├── create_kraken_database.sh
+
+
+Exemple d'utilisation
+~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: sh
+
+   bash src/bash/create_kraken_database.sh \
+                -path_seq data/raw_sequences/fda_argos_raw_genomes_assembly_06_06_2020/ \
+                -path_db data/databases/kraken_2/fda_argos_with_none_library_kraken_database_07_06_2020/ \
+                -type_db none \
+                -threads 30
+
+Dans cet exemple, nous créons une base de données indexée à partir d'une librairie de séquence. Ici, les séquences assemblées de la base de données FDA-ARGOS qui se trouvent dans data/raw_sequences/fda_argos_raw_genomes_assembly_06_06_2020/ est la librairie choisie (voir :ref:`Le téléchargement de la base de données FDA-ARGOS <download_FDA_ARGOS>`). Ensuite, avec le paramètre -path_db nous précisons le chemin de sortie pour notre base de données indexée ici le chemin sera data/databases/kraken_2/fda_argos_with_none_library_kraken_database_07_06_2020/.
+
+Le paramètres -type_db est le paramètre qui détermine le type de la base de données. Nous avons choisi de ne pas rajouter d'autre libraire à notre base de données notre type est donc "none". 
+
+.. note::
+   Kraken 2 propose une multitude de librairies qui peuvent être rajoutées à notre base de données. La liste non exhaustive des possibilités :
+
+   * none : Paramètre qui empêche le téléchargement et l'installation d'une ou plusieurs bibliothèques de référence
+   * bacteria : RefSeq génomes / protéines bactériens complets
+   * viral : RefSeq génome / protéines virales complètes
+   * human : génome / protéines humains GRCh38
+   * fungi : RefSeq génomes / protéines fongiques complets
+   * ...
+
+.. seealso::
+   Pour voir l'ensemble de la liste : https://github.com/DerrickWood/kraken2/wiki/Manual#custom-databases
+
+Et enfin le nombre de threads pour accélérer le processus, ici le nombre de threads est à 30.
+
+
+Les paramètres
+~~~~~~~~~~~~~~
+
+:-path_seq: (Input) Chemin du dossier de la librairie de séquences sous format fna ou fasta.
+:-path_db: (Output) Chemin du dossier de sortie pour créer et indexer notre base de données.
+:-type_db: (Input) Quel type de librairie ajouter à notre base de données (choix : none, viral, fungi ...).
+:-threads: (Input) Le nombre de threads pour indexer la base de données plus rapidement.
+:-taxonomy: (Optional) Dossier contenant la taxonomie du NCBI téléchargée par Kraken 2.
+
+.. note::
+   Dans le cas où l’on a téléchargé la taxonomie du NCBI en dehors de Kraken 2, on peut préciser le paramètre -taxonomy. Par défaut, le script va télécharger la taxonomie du NCBI automatiquement si le paramètre n’est pas précisé.
+
+Les fichiers de sorties
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Les fichiers de sorties sont les suivants :
+
+   * **hash.k2d** : Les mappages de taxons.
+   * **opts.k2d** : Les options utilisées pour créer la base de données.
+   * **taxo.k2d** : Les informations taxonomique utilisées pour créer la base de données.
+
+.. note::
+   Par défaut, le script supprime les fichiers intermédaires.
