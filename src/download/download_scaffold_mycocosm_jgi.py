@@ -114,7 +114,7 @@ def download_xml(database, cookie):
     os.chmod(database+"_files.xml", 0o664)
 
 
-def download_database(list_url, database, cookie, path_output_folder):
+def download_database(list_url, database, cookie, path_output_folder, username, password):
     """ Method to download database from a list of url. """
 
     print("Donwloading database !")
@@ -129,6 +129,7 @@ def download_database(list_url, database, cookie, path_output_folder):
             print("url=", downloaded_file)
 
             basename_file = os.path.basename(downloaded_file)
+            print("For {} download ".format(basename_file))
 
             # By default we consider that the site does not give us control
             # over the downloading of sequences and returns an error.
@@ -141,9 +142,14 @@ def download_database(list_url, database, cookie, path_output_folder):
             # Get the current time.
             start_time = time.time()
 
+            # Number of attempt.
+            nb_attempt = 0
+
             # As long as the JGI site doesn't give us a hand.
             while(curl_error == True):
                 # Try to get a response on the resquest.
+                nb_attempt = nb_attempt + 1
+                print("Number of attempt {}".format(nb_attempt))
                 try:
                     subprocess.check_call(["curl \
                     -I \
@@ -158,21 +164,46 @@ def download_database(list_url, database, cookie, path_output_folder):
                         elapsed_time = time.time() - start_time
                         print("Continue donwloading {} s".format(elapsed_time))
                 else:
-                    print("error !22")
-                    print("Downloading {}".format(basename_file))
+                    file_in_directory = path_output_folder+database+"/"+basename_file
+                    print(file_in_directory)
 
-                    # Download scaffold.
-                    subprocess.run(["curl \
-                    'https://genome.jgi.doe.gov"+downloaded_file+"' \
-                    -b "+cookie+" \
-                    > "+path_output_folder+database+"/"+basename_file+" "],
-                                   shell=True)
+                    if os.stat(file_in_directory).st_size < 400:
+                        print("File is not correctly downloaded, maybe because internal server error")
+                        print("For {}, we continue to download".format(basename_file))
 
-                    # Diplay the elapsed time.
-                    print("Total time for {} = {} s ".format(full_url, time.time() - start_time))
+                        print("Remove file")
+                        os.remove(file_in_directory)
 
-                    # Stop the loop.
-                    curl_error = False
+                        print("Remove cookie and re-upload cookie.")
+                        
+                        # Remove cookie
+                        os.remove(cookie)
+
+                        # Download cookie
+                        download_cookie(username, password, cookie)
+
+                        print("Download cookie done !")
+                        
+                        print("curl_error = True")
+                        curl_error = True
+                    else:
+                        print("error !22")
+                        print("Downloading {}".format(basename_file))
+
+                        # Download scaffold.
+                        subprocess.run(["curl \
+                        'https://genome.jgi.doe.gov"+downloaded_file+"' \
+                        -b "+cookie+" \
+                        > "+path_output_folder+database+"/"+basename_file+" "],
+                                       shell=True)
+
+                        # Diplay the elapsed time.
+                        print("Total time for {} = {} s ".format(full_url,
+                                                                 time.time() - start_time))
+
+                        # Stop the loop.
+                        curl_error = False
+
 
 # Can split function between csv creation and url list return.
 def get_url_scaffold_mycocosm_xml(xml_file):
@@ -244,7 +275,8 @@ if __name__ == "__main__":
 
     # Download the database.
     download_database(list_url=ALL_URLS_scaffold,
-
                       database=DATABASE,
                       cookie=COOKIE,
-                      path_output_folder=PATH_DB_OUTPUT)
+                      path_output_folder=PATH_DB_OUTPUT,
+                      username=JGI_USERNAME,
+                      password=JGI_PASSWORD)
