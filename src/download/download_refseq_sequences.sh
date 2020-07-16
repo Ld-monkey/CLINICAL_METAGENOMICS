@@ -3,7 +3,7 @@
 # download_refseq_sequences.sh is a shell script to download sequences from
 # refseq database (Must have makemap.pl to recover fasta part).
 #
-# e.g bash src/download/download_refseq_viral_sequences.sh
+# e.g bash src/download/download_refseq_sequences.sh
 
 # Function to download viral refseq sequences.
 function download_bacteria_sequences {
@@ -92,9 +92,7 @@ function download_viral_sequences {
 # Function to check the correct -type_db parameter.
 function check_type_and_download_database {
     for TYPE in ${TYPE_DATABASE}; do
-        if [[ $TYPE = "bacteria" ]] \
-               ||  [[ $TYPE = "viral" ]]  \
-               ||  [[ $TYPE = "human" ]]
+        if [[ $TYPE = "bacteria" ]]  ||  [[ $TYPE = "viral" ]]
         then
             echo "Correct parameter -type_db $TYPE"
             case $TYPE in
@@ -116,7 +114,6 @@ function check_type_and_download_database {
             echo -e "
            *   bacteria: RefSeq complete bacterial genomes/proteins
            *   viral: RefSeq complete viral genomes/proteins
-           *   human: GRCh38 human genome/proteins
            "
             echo "Error in -type parameter"
 
@@ -126,7 +123,7 @@ function check_type_and_download_database {
 }
 
 
-PROGRAM=download_refseq_viral_sequences.sh
+PROGRAM=download_refseq_sequences.sh
 VERSION=1.0
 
 DESCRIPTION=$(cat << __DESCRIPTION__
