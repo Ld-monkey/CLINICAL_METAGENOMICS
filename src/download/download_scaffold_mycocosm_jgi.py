@@ -142,14 +142,9 @@ def download_database(list_url, database, cookie, path_output_folder, username, 
             # Get the current time.
             start_time = time.time()
 
-            # Number of attempt.
-            nb_attempt = 0
-
             # As long as the JGI site doesn't give us a hand.
             while(curl_error == True):
                 # Try to get a response on the resquest.
-                nb_attempt = nb_attempt + 1
-                print("Number of attempt {}".format(nb_attempt))
                 try:
                     subprocess.check_call(["curl \
                     -I \
@@ -164,10 +159,25 @@ def download_database(list_url, database, cookie, path_output_folder, username, 
                         elapsed_time = time.time() - start_time
                         print("Continue donwloading {} s".format(elapsed_time))
                 else:
+                    print("error !22")
+                    print("Downloading {}".format(basename_file))
+                    
+                    # Download scaffold.
+                    subprocess.run(["curl \
+                    'https://genome.jgi.doe.gov"+downloaded_file+"' \
+                    -b "+cookie+" \
+                    > "+path_output_folder+database+"/"+basename_file+" "],
+                                   shell=True)
+                    
+                    # Diplay the elapsed time.
+                    print("Total time for {} = {} s ".format(full_url,
+                                                                 time.time() - start_time))
+                finally:
                     file_in_directory = path_output_folder+database+"/"+basename_file
                     print(file_in_directory)
 
-                    if os.stat(file_in_directory).st_size < 400:
+                    # Limit when file have just error message of 646 bytes. 
+                    if os.stat(file_in_directory).st_size < 648:
                         print("File is not correctly downloaded, maybe because internal server error")
                         print("For {}, we continue to download".format(basename_file))
 
@@ -187,23 +197,11 @@ def download_database(list_url, database, cookie, path_output_folder, username, 
                         print("curl_error = True")
                         curl_error = True
                     else:
-                        print("error !22")
-                        print("Downloading {}".format(basename_file))
+                        print("All is good for {}".format(basename_file))
 
-                        # Download scaffold.
-                        subprocess.run(["curl \
-                        'https://genome.jgi.doe.gov"+downloaded_file+"' \
-                        -b "+cookie+" \
-                        > "+path_output_folder+database+"/"+basename_file+" "],
-                                       shell=True)
-
-                        # Diplay the elapsed time.
-                        print("Total time for {} = {} s ".format(full_url,
-                                                                 time.time() - start_time))
-
+                        print("curl_error = False")
                         # Stop the loop.
                         curl_error = False
-
 
 # Can split function between csv creation and url list return.
 def get_url_scaffold_mycocosm_xml(xml_file):

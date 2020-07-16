@@ -59,8 +59,6 @@ while [ -n "$1" ]; do
     esac
 done
 
-echo $USERNAME
-echo $PASSWORD
 echo $PATH_MYCOCOSM_GENOME
  
 mkdir -p -v $PATH_MYCOCOSM_GENOME
@@ -87,9 +85,9 @@ mv --verbose fungi_files.xml data/assembly/
 # Move the csv file in raw_sequences directory.
 mv --verbose all_organisms.csv $PATH_MYCOCOSM_GENOME
 
-echo "Unzip all mycocosm scaffolds."
-gunzip --verbose $PATH_MYCOCOSM_GENOME$MYCOCOSM_TYPE/*.gz
-echo "Unzip done !"
+#echo "Unzip all mycocosm scaffolds."
+#gunzip --verbose $PATH_MYCOCOSM_GENOME$MYCOCOSM_TYPE/*.gz
+#echo "Unzip done !"
 
 # echo "Add ncbi id taxonomy for all genome"
 # python src/python/jgi_id_to_ncbi_id_taxonomy.py \
