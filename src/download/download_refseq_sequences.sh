@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # download_refseq_sequences.sh is a shell script to download sequences from
-# refseq database (Must have makemap.pl to recover fasta part).
+# refseq database.
 #
 # e.g bash src/download/download_refseq_sequences.sh \
 #          -type_db viral \
@@ -212,9 +212,9 @@ __DESCRIPTION__
 OPTIONS=$(cat << __OPTIONS__
 
 ## OPTIONS ##
-    -type_db         (Input)  Which reference librairie for database (choices: viral, bacteria, human)                  *STR: viral
-    -type_sq         (Input)  What kind of sequences to download. Maybe complementary (choices: genomic and or protein) *STR: genomic
-    -path_output     (Output) The folder of refseq output                                                               *DIR: data/raw_sequences/viral_refseq/
+    -type_db         (Input)     Which reference librairie for database (choices: viral, bacteria, human)                  *STR: viral
+    -type_sq         (Optional)  What kind of sequences to download. Maybe complementary (choices: genomic and or protein) *STR: genomic
+    -path_output     (Output)    The folder of refseq output                                                               *DIR: data/raw_sequences/viral_refseq/
 __OPTIONS__
        )
 
