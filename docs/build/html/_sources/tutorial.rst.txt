@@ -70,7 +70,7 @@ Les paramètres
                 -force_remove no \
                 -threads 28
 
-LES fichiers de sorties
+Les fichiers de sorties
 ~~~~~~~~~~~~~~~~~~~~~~~
 
    * Avec l'outil Trimmomatic :
@@ -233,6 +233,67 @@ Le second script Python est :
 .. note::
    Cette conversion est nécessaire car elle permet l'indexation des bases de données avec le logiciel Kraken 2. Kraken 2 (utilisé dans la suite du tutoriel) utilise et la taxonomie de référence du NCBI et l'algorithme de k-mer pour classifier les reads rapidement (voir section ..) 
 
+.. _download_FungiDB:
+
+Le téléchargement de la base de données FungiDB
+-----------------------------------------------
+
+La session suivante, nous montre comment télécharger la base de données FungiDB.
+
+Programme
+~~~~~~~~~
+
+Nom du programme::
+
+   download_fungi_database_release_3.0.sh
+
+Localisation
+~~~~~~~~~~~~
+
+.. code-block:: sh
+
+   └── src
+    ├── download
+    │   ├── download_fungi_database_release_3.0.sh
+
+Exemple d'utilisation
+~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: sh
+
+      bash src/download/download_fungi_database_release_3.0.sh \
+                        -path_output data/raw_sequences/fungi_db_all_genomes_06_07_2020/
+
+Dans cet exemple, nous téléchargeons la base de données FungiDB et nous précisons le dossier de sortie qui est data/raw_sequences/fungi_db_all_genomes_06_07_2020/ .
+
+
+Les paramètres
+~~~~~~~~~~~~~~
+
+:-path_output: (Output) Le chemin du dossier de sortie des les séquences de FungiDB. 
+
+
+Les fichiers de sorties
+~~~~~~~~~~~~~~~~~~~~~~~
+
+L'ensemble des séquences de FungiDB vont être téléchargées exemple :
+
+.. code-block:: sh
+
+   ├── FungiDB-3.0_Aaculeatus_ATCC16872_Genome.fasta
+   ├── FungiDB-3.0_Acapsulatus_G186AR_Genome.fasta
+   ├── FungiDB-3.0_Acapsulatus_NAm1_Genome.fasta
+   ├── FungiDB-3.0_Acarbonarius_ITEM5010_Genome.fasta
+   ├── FungiDB-3.0_Aclavatus_NRRL1_Genome.fasta
+   ├── ...
+
+
+.. _download_RefSeq:
+
+Le téléchargement de la base de données RefSeq
+----------------------------------------------
+
+
 
 .. _indexation_kraken2:
 
@@ -343,3 +404,100 @@ Les fichiers de sorties sont les suivants :
 
 .. note::
    Par défaut, le script supprime les fichiers intermédaires.
+
+.. _classification_kraken2:
+
+Classification des reads avec Kraken 2
+--------------------------------------
+
+La session suivante, nous montre comment classifier un échantillon de reads avec le logiciel Kraken 2.
+
+.. warning::
+   La classification des reads ne peut se faire sans une base de données de référence indexée par le logiciel Kraken 2 (voir :ref:`L'indexation d'une base de données avec Kraken 2 <indexation_kraken2>`).
+
+
+La théorie
+~~~~~~~~~~
+
+.. image:: images/classification_kraken2.png
+   :width: 450
+   :alt: Classification des reads avec Kraken 2
+   :align: right
+
+Schéma des étapes de l'identification taxonomique d'une séquence cible avec le logiciel Kraken 2 (image par Zygnematophyce).
+
+Pour classer une séquence, la séquence cible est fragmentée en tous les k-mers possibles de 31 nucléotides (étape 1). Chaque k-mer de la séquence cible est confronté à une base de données indexée par Kraken 2 (voir :ref:`L'indexation d'une base de données avec Kraken 2 <indexation_kraken2>`) par correspondance exacte de k-mers, et un identifiant taxonomique lui est assigné (étape 2).
+
+Avec la liste complète des identifiants taxonomiques associés à un read, l’algorithme reproduit un arbre taxonomique où chaque nœud correspond à un identifiant taxonomique (étape 3). Dans l'arbre de classification, le nombre de k-mers mappés est comptabilisé et permet d’apporter du poids au nombre de k-mers dans la séquence associée au taxon du nœud de l’arbre (étape 4). La branche avec la somme la plus grande est choisie, et la feuille de cette branche (exemple le nœud à l’extrémité) est utilisée pour identifier le read.
+
+La pratique
+~~~~~~~~~~~
+
+La session qui suit, nous montre comment classifier des reads avec Kraken 2.
+
+Programme
+~~~~~~~~~
+
+Nom du programme::
+
+   classify_set_reads_kraken.sh
+
+Localisation
+~~~~~~~~~~~~
+
+.. code-block:: sh
+
+   └── src
+    ├── bash
+    │   ├── classify_set_reads_kraken.sh
+
+
+Exemple d'utilisation
+~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: sh
+
+   bash src/bash/classify_set_reads_kraken.sh \
+                -path_reads results/trimmed_reads/trimmed_PAIRED_SAMPLES_ADN_TEST_reads_01_07_2020/ \
+                -path_db data/databases/kraken_2/fda_argos_with_none_library_kraken_database_07_06_2020/ \
+                -path_output results/classify_reads/trimmed_classify_fda_argos_with_none_library_02_07_2020/ \
+                -threads 27
+
+Dans cet exemple, nous allons classifier les reads traités dans le contenus dans le dossier results/trimmed_reads/trimmed_PAIRED_SAMPLES_ADN_TEST_reads_01_07_2020/ .
+
+.. note::
+   Une étape de pré-traitement (pre-processing) est appliqué sur les reads en amont de cette étape de classification voir :ref:`Le pré-traitement des reads <pre_processing>`.
+
+Nous indiquons quelle base de données de référence utiliser avec le paramètre -path_db qui se trouve être dans le dossier data/databases/kraken_2/fda_argos_with_none_library_kraken_database_07_06_2020/ .
+
+.. note::
+   L'indexation d'une base de données de référence est expliqué dans la session :ref:`L'indexation d'une base de données avec Kraken 2 <indexation_kraken2>`
+
+Nous précisons le dossier de sortie dans lequel les résultats de classification pourront être déposés, ici nous choisissons results/classify_reads/trimmed_classify_fda_argos_with_none_library_02_07_2020/ .
+
+Et enfin le nombre de threads pour accélérer le processus, ici le nombre de threads est à 27.
+
+Les paramètres
+~~~~~~~~~~~~~~
+
+:-path_reads: (Input) Le chemin du dossier contenant les reads.
+:-path_db: (Input) Le chemin du dossier qui contient la base de donnée indexé par Kraken 2.
+:-path_output: (Output) Le nom du dossier pour les sorties.
+:-threads: (Input) Le nombre de threads utilisé pour classifier les reads. Par défaut le nombre de threads est 8.
+
+
+Les fichiers de sorties
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Les fichiers de sorties sont les suivants :
+
+   * **.clseqs.fastq** : Les séquences classifiées.
+   * **.unclseqs.fastq** : Les séquences non-classifiées.
+   * **.report.txt** : Format de rapport standard de Kraken 2 avec une ligne par taxon (délimité par des tabulations). 
+   * **.output.txt** : Format de sortie standard de Kraken 2. Chaque séquence classée par Kraken 2 entraîne une seule ligne de sortie. Les lignes de sortie de Kraken 2 contiennent cinq champs séparés par des tabulations.
+
+.. note::
+   Pour comprendre en détail comment est agencé le fichier de sortie *.output.txt* voir la documentation officielle : https://github.com/DerrickWood/kraken2/wiki/Manual#output-formats .
+
+.. note::
+   Pour comprendre en détail la composition du fichier de sortie *.report.txt* voir la documentation officielle : https://github.com/DerrickWood/kraken2/wiki/Manual#sample-report-output-format .

@@ -5,6 +5,7 @@ Vue d'ensemble
 .. image:: images/flowchart_pipeline_metagenomic.png
    :width: 400
    :alt: Organigramme des étapes de métagénomique clinique réalisées
+   :align: center
 
 Simple organigramme des étapes de métagénomique clinique (image par Zygnematophyce)
 
@@ -42,18 +43,32 @@ Pour télécharger la base de données de Mycocosm utiliser le programme constru
 La base de données FungiDB
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+FungiDB (fungidb.org) est une ressource en ligne gratuite pour l'exploration de données et l'analyse génomique fonctionnelle des espèces fongiques et oomycètes. FungiDB contient un nombre croissant de génomes de divers taxons, y compris des plantes, des animaux et des pathogènes humains.
+
+Pour télécharger la base de données de FungiDB utiliser le programme construit décrit dans la session :ref:`Le téléchargement de la base de données FungiDB <download_FungiDB>` du tutoriel. 
+
 
 La base de données RefSeq
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-La base de données RefSeq comprend les génomes humains, bactériens et viraux.
+La base de données RefSeq comprend plus de 220 000 organismes (Jul, 2020) avec des genomes viraux et bactériens.
 
-   * Pour les virus, la base de données « RefSeq viral » a été choisie : elle est composée des génomes complets d’environ 9000 espèces virales et apparait adaptée pour couvrir la grande majorité des virus rencontrés dans un échantillon clinique.
-   * Pour les bactéries, l’utilisation d’une base de données de génomes complets comme « RefSeq bacteria » est composée de 25000 espèces bactériennes.
+   * Pour les virus, la base de données « viral » de RefSeq a été choisie : elle est composée des génomes complets d’environ 10 000 espèces virales (Jul 06, 2020) et apparait adaptée pour couvrir la grande majorité des virus rencontrés dans un échantillon clinique.
+   * Pour les bactéries, l’utilisation d’une base de données de génomes complets comme « bacteria » de RefSeq est composée de 62 000 espèces bactériennes (Jul 06, 2020).
+
+Pour télécharger la base de données de RefSeq utiliser le programme construit décrit dans la session :ref:`Le téléchargement de la base de données RefSeq <download_RefSeq>` du tutoriel.
+
+.. note::
+   Les chiffres officiels pour chaque taxon sont visibles sur le lien suivant : ftp://ftp.ncbi.nlm.nih.gov/refseq/release/release-statistics/ .
 
 Étape de classification
 -----------------------
 
+La classification taxonomique est une étape cruciale de la métagénomique. Plusieurs algorithmes et outils permettent d’identifier les organismes. L’outil le plus connu est sans doute l’algorithme de BLAST. Cependant, BLAST est un outil qui demande beaucoup de ressource, et prend du temps d’exécution lorsqu’il s'agit de comparer un read à l’ensemble d’une base de données. Pour identifier plus rapidement les reads, une solution alternative est proposé par l’outil Kraken 2 qui utilise l’algorithme des k-mers. L'algorithme de k-mer va hacher les reads et les séquences dans les bases de données en fragment de nucléotide. Avant d'identifier un organisme, Kraken 2 va indexer la base de données en associant un identifiant taxonomique aux k-mer d'une base de données. Enfin pour classifier des reads, Kraken 2 compare l'association exacte des k-mers d'un read à ceux d'une base de données et détermine l'identifiant taxonomique associé.
+
+Pour indexer une bases de données avec l'algorithme de k-mer utiliser le programme décrit dans la session :ref:`L'indexation d'une base de données avec Kraken 2 <indexation_kraken2>` du tutoriel.
+
+Pour classifier un échantillon de reads par rapport à une base de données utiliser le programme décrit dans la session :ref:`Classification des reads avec Kraken 2 <classification_kraken2>` du tutoriel. 
 
 Étape d'analyse des résultats
 -----------------------------

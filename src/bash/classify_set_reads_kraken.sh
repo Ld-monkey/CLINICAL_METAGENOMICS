@@ -1,13 +1,15 @@
 #!/bin/bash
 
-# From a set of reads and depend of the database gived in argument
-# allow to classify the reads sequences.
-# Note : paired sequence must named *R1*.fastq (* = something before and after).
-# output files : *.clseqs_*.fastq, *.unclseq_*.fq, *.output.txt, *.report.txt .
-# *.clseqs.fastq : all classified reads
-# *.unclseqs.fastq : all unclassified reads
-# *.output.txt : ??
-# *.report.txt : all claffication of organism classified.
+# From a set of reads and depend of the database gived in argument allow to
+# classify the reads sequences (Note : paired sequence must named *R1*.fastq).
+# Output files :
+#   *.clseqs.fastq : all classified reads
+#   *.unclseqs.fastq : all unclassified reads
+#   *.output.txt : Each sequence classified by Kraken results in a single line
+# of output. Output lines contain five tab-delimited fields.
+#   *.report.txt : Kraken 2's standard sample report format is tab-delimited
+# with one line per taxon.
+#
 # e.g bash src/bash/classify_set_reads_kraken.sh \
 #          -path_reads results/trimmed_reads/trimmed_PAIRED_SAMPLES_ADN_TEST_reads_01_07_2020/ \
 #          -path_db data/databases/kraken_2/fda_argos_with_none_library_kraken_database_07_06_2020/ \
