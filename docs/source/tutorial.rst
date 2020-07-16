@@ -270,7 +270,7 @@ Dans cet exemple, nous téléchargeons la base de données FungiDB et nous préc
 Les paramètres
 ~~~~~~~~~~~~~~
 
-:-path_output: (Output) Le chemin du dossier de sortie des les séquences de FungiDB. 
+:-path_output: (Output) Le chemin du dossier de sortie des séquences de FungiDB. 
 
 
 Les fichiers de sorties
@@ -293,7 +293,84 @@ L'ensemble des séquences de FungiDB vont être téléchargées exemple :
 Le téléchargement de la base de données RefSeq
 ----------------------------------------------
 
+La session suivante, nous montre comment télécharger la base de données RefSeq.
 
+
+Programme
+~~~~~~~~~
+
+Nom du programme::
+
+   download_refseq_sequences.sh
+
+Localisation
+~~~~~~~~~~~~
+
+.. code-block:: sh
+
+   └── src
+    ├── download
+    │   ├── download_refseq_sequences.sh
+
+Exemple d'utilisation
+~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: sh
+
+      bash src/download/download_refseq_sequences.sh \                        
+           -type_db viral \                                                   
+           -type_sq genomic \                                                 
+           -path_output data/raw_sequences/refseq_viral/
+
+Dans cet exemple, nous téléchargeons les séquences virales de la base de données RefSeq en précisant le type de la base de données qui est donc -type_db viral et quel type de séquence nous voulons entre le génome et ou les protéines, ici nous choisissons le génome en indiquant -type_sq genomic. Les différentes séquences téléchargées iront dans le dossier de sortie data/raw_sequences/refseq_viral/.
+
+Les paramètres
+~~~~~~~~~~~~~~
+
+:-type_db: (Input) Quel type de librairie à télécharger.
+
+.. note::
+   La liste de tous les organismes que l'on peut télécharger avec le programme ci-dessus :
+
+   *   bacteria
+   *   viral
+   *   archaea
+   *   fungi
+   *   invertebrate
+   *   mitochondrion
+   *   plant
+   *   plasmid
+   *   plastid
+   *   protozoa
+   *   vertebrate_mammalian
+   *   human
+
+Avec le programme, nous pouvons télécharger plusieurs librairies à la fois mais il faut ajouter des guillemets pour indiquer que l'on veut ajouter plusieurs paramètres comme illustré dans l'exemple suivant :
+
+.. code-block:: sh
+
+   bash src/download/download_refseq_sequences.sh \                        
+           -type_db "viral bacteria" \                                             
+           -type_sq "genomic protein" \                                            
+           -path_output data/raw_sequences/refseq_viral_bacteria_genomics_proteins/
+
+Dans cet exemple, nous téléchargeons les séquences génomiques et protéiques des virus et bactéries de la base de données RefSeq.
+
+:-type_sq: (Optionel) Précise le type de séquence à télécharger. Le choix se limite aux protéines (protein) et ou génomes (genomic). Par défaut, c'est le génome qui est téléchargé si cet argument n'est pas précisé.
+
+:-path_output: (Output) Le chemin du dossier de sortie des séquences de RefSeq.
+
+
+Les fichiers de sorties
+~~~~~~~~~~~~~~~~~~~~~~~
+
+L'ensemble des séquences de RefSeq vont être téléchargées exemple :
+
+.. code-block:: sh
+
+   .
+   ├── viral.1.1.genomic.fna.gz
+   └── viral.2.1.genomic.fna.gz
 
 .. _indexation_kraken2:
 

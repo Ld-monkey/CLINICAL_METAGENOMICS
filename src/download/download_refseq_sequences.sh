@@ -195,8 +195,8 @@ function check_type_sequence {
                 ;;            
         esac
     else
-        # By default it's genomics sequences.
-        SEQUENCE="*genomic.fna.gz"
+        # Error not protein or genomic.
+        echo "ERROR ! this $BIOMOLECULE doesn't exists."
     fi
 }
 
