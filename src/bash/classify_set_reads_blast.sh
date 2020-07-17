@@ -1,11 +1,12 @@
 #!/bin/bash
 
-# From a set of reads and depend of the database gived in argument
-# allow to align the sequences with the blast algorithms. 
-# e.g $launch_blast_analyse.sh -path_reads sample_reads \
-# -path_db FDA_ARGOS_db -path_result blast_metaplan_output
+# From a set of reads and depend of the database gived in argument allow to
+# align the sequences with the blast algorithms.
+#
+# e.g bash src/bash/classify_set_reads_blast.sh \
 
-PROGRAM=launch_blast_analyse.sh
+
+PROGRAM=classify_set_reads_blast.sh
 VERSION=1.0
 
 DESCRIPTION=$(cat << __DESCRIPTION__
@@ -16,9 +17,9 @@ __DESCRIPTION__
 OPTIONS=$(cat << __OPTIONS__
 
 ## OPTIONS ##
-    -path_reads      (Input) folder path of other sequences file fna                                        *DIR: sequences*.fna
-    -path_db         (Input)  The path of blast database.                                                   *DIR: input_database
-    -path_results    (Output) folder path for blast results                                                 *DIR: blast_result
+    -path_seq    (Input)  Path to the folder that contains the sequences to be aligned.                 *DIR: results/trimmed_reads/trimmed_PAIRED_SAMPLES_ADN_TEST_reads_04_06_2020/
+    -path_db     (Input)  Path to local blast database folder. (see create_blast_database.sh)           *DIR: refseq_genomics_virus_blast_db_17_07_2020/
+    -path_output (Output) The folder of output blast classification.                                    *DIR: results/blast/refseq_result_blast_17_07_2020/
 __OPTIONS__
        )
 
@@ -40,43 +41,56 @@ BAD_OPTION ()
     echo "Unknown option "$1" found on command-line"
     echo "It may be a good idea to read the usage:"
     echo "white $PROGRAM -h to be helped :"
-    echo "example : launch_blast_analyse.sh -path_reads sample_reads -path_db FDA_ARGOS_db -path_result blast_metaplan_output"
+    echo "e.g : "
     echo -e $USAGE
 
     exit 1
 }
 
+# -path_seq   
+# -path_db    
+# -path_output
+
 # Check options
 while [ -n "$1" ]; do
     case $1 in
-        -h)                    USAGE      ; exit 0 ;;
-        -path_reads)          PATH_FOLDER_INPUT=$2      ; shift 2; continue ;;
-  	    -path_db)             CUSTOM_DATA_BASE=$2       ; shift 2; continue ;;
-    	  -path_results)        BASENAME_OUTPUT_FOLDER=$2 ; shift 2; continue ;;
+        -h)                 USAGE      ; exit 0 ;;
+        -path_seq)          PATH_SEQUENCES=$2      ; shift 2; continue ;;
+  	    -path_db)           BLAST_DATABASE=$2       ; shift 2; continue ;;
+    	  -path_output)       OUTPUT_BLAST=$2 ; shift 2; continue ;;
         *)       BAD_OPTION $1;;
     esac
 done
 
+# Check folder with sequences.
+
+# Check folder with blast database.
+
+# Create output folder.
+
+
+
+
 # Move all *.blast files in specific folder.
 move_output_blast_to_folder () {
     # Create a folder to put all *.blast.txt files.
-    mkdir $BASENAME_OUTPUT_FOLDER
+    mkdir $OUTPUT_BLAST
 
     # Move all *.blast.txt to specific folder.
     for blast_files in *.blast.txt
     do
-        mv $blast_files $BASENAME_OUTPUT_FOLDER
-        echo "$blast_files is moved in $BASENAME_OUTPUT_FOLDER folder"
+        mv $blast_files $OUTPUT_BLAST
+        echo "$blast_files is moved in $OUTPUT_BLAST folder"
     done    
 }
 
 # Check if Viruses folder exists.
-if [ -d ${PATH_FOLDER_INPUT}/Viruses ]
+if [ -d ${PATH_SEQUENCES}/Viruses ]
 then
     echo "Folder Viruses exists."
 
     # Move in the folder/Viruses.
-    cd ${PATH_FOLDER_INPUT}/Viruses
+    cd ${PATH_SEQUENCES}/Viruses
 
     # Get all interesting files *.interesting.fasta .
     ALL_INTEREST_FASTA_FILES=$(ls | grep -i interesting)
@@ -98,7 +112,7 @@ then
         # > output = ${interestingFile%%.*}.blasttemp.txt
         cat $interestingFile | parallel --block 1M --recstart '>' --pipe blastn \
                                         -task megablast -evalue 10e-10 \
-                                        -db $CUSTOM_DATA_BASE \
+                                        -db $BLAST_DATABASE \
                                         -num_threads 1 \
                                         -outfmt \"7 qseqid sseqid sstart send evalue bitscore slen staxids\" \
                                         -max_target_seqs 1 \
@@ -116,7 +130,7 @@ then
         then
             # Remove blast temporary files.
             rm ${interestingFile%%.*}.blasttemp.txt ${interestingFile%%.*}.blasttemp2.txt
-            echo "Move all blast files in $BASENAME_OUTPUT_FOLDER=$2"
+            echo "Move all blast files in $OUTPUT_BLAST=$2"
 
             # Call a function to move all blast files in folder.
             move_output_blast_to_folder
@@ -131,21 +145,21 @@ else
 fi
 
 # Check if bacteria folder exists.
-if [ -d ${PATH_FOLDER_INPUT}/Bacteria ]
+if [ -d ${PATH_SEQUENCES}/Bacteria ]
 then
     # Check if the output folder database exists.
-    if [ -d ${PATH_FOLDER_INPUT}/Bacteria/$NAME_OUTPUT_DATABASE ]
+    if [ -d ${PATH_SEQUENCES}/Bacteria/$NAME_OUTPUT_DATABASE ]
     then
         echo "The $NAME_OUTPUT_DATABASE already exists."
     else
-        echo "Create folder ${PATH_FOLDER_INPUT}/Bacteria/$NAME_OUTPUT_DATABASE"
-        mkdir ${PATH_FOLDER_INPUT}/Bacteria/$NAME_OUTPUT_DATABASE
+        echo "Create folder ${PATH_SEQUENCES}/Bacteria/$NAME_OUTPUT_DATABASE"
+        mkdir ${PATH_SEQUENCES}/Bacteria/$NAME_OUTPUT_DATABASE
         echo "Create done."
     fi
     echo "Folder Bacteria exists."
 
     # Move in the Bacteria folder.
-    cd ${PATH_FOLDER_INPUT}/Bacteria
+    cd ${PATH_SEQUENCES}/Bacteria
 
     # Get all interesting files *.interesting.fasta .
     ALL_INTEREST_FASTA_FILES=$(ls | grep -i interesting)
@@ -158,7 +172,7 @@ then
         echo "interestingFile%%.* : ${interestingFile%%.*}"
         
         # Run the blast program.
-        cat $interestingFile | parallel --block 50M --recstart '>' --pipe blastn -task megablast -evalue 10e-10 -db $CUSTOM_DATA_BASE -num_threads 1 -outfmt \"7 qseqid sseqid sstart send evalue bitscore slen staxids\" -max_target_seqs 1 -max_hsps 1 > ${interestingFile%%.*}.blasttemp.txt
+        cat $interestingFile | parallel --block 50M --recstart '>' --pipe blastn -task megablast -evalue 10e-10 -db $BLAST_DATABASE -num_threads 1 -outfmt \"7 qseqid sseqid sstart send evalue bitscore slen staxids\" -max_target_seqs 1 -max_hsps 1 > ${interestingFile%%.*}.blasttemp.txt
 
         # Replace all "processed" in d.
         sed "/\processed\b/d" ${interestingFile%%.*}.blasttemp.txt > ${interestingFile%%.*}.blasttemp2.txt
@@ -174,7 +188,7 @@ then
 
             rm ${interestingFile%%.*}.blasttemp.txt ${interestingFile%%.*}.blasttemp2.txt
             echo "Remove done."
-            echo "Move all blast files in $BASENAME_OUTPUT_FOLDER=$2"
+            echo "Move all blast files in $OUTPUT_BLAST=$2"
 
             # Call a function to move all blast files in folder.
             move_output_blast_to_folder

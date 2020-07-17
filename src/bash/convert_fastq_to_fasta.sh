@@ -1,8 +1,9 @@
 #!/bin/bash
 
-# Gets reads in "clseqs" files from names,
-# and transforms them into fasta format.
-# e.g ./recover_reads \
+# Because some tools like blast alignment need a file in fasta format. It is
+# important in some cases to transform the fastq file into a fasta or fna file.
+#
+# e.g bash src/bash/convert_fastq_to_fasta \
 #      -reads_list ReadsList.txt
 #      -clseqs_1 clseqs_1.fastq
 #      -clseqs_2 clseqs_2.fastq
@@ -44,7 +45,7 @@ BAD_OPTION ()
     echo "Unknown option "$1" found on command-line"
     echo "It may be a good idea to read the usage:"
     echo "white $PROGRAM -h to be helped :"
-    echo "example :./recover_reads -reads_list ReadsList.txt -clseqs_1 clseqs_1.fastq -clseqs_2 clseqs_2.fastq -output output_interest_fasta.fasta"
+    echo "e.g "
     echo -e $USAGE
 
     exit 1
@@ -74,12 +75,10 @@ then
     echo "read list $READS_LIST exists."
     echo "classified sequences $CLASSIFIED_SEQUENCE_FASTQ1 exists".
 
-    # Seqtk is a fast and lightweight tool for processing sequences in
-    # the FASTA or FASTQ format. It seamlessly parses both FASTA and FASTQ files.
     # Extract sequences with names in file name.lst (READS_LIST) one sequence name per line.
     seqtk subseq $CLASSIFIED_SEQUENCE_FASTQ1 $READS_LIST > ${TEMPORARY_FILE}
 
-    # Convert fastq to fasta.
+    # Convert fastq to fasta (.fa).
     seqtk seq -a $TEMPORARY_FILE > $OUTPUT_INTEREST_FASTA
 
     # Check if seqtk return (0) for a success and $? return previous command seqtk seq -a. 
