@@ -20,7 +20,7 @@ function check_sequence_folder {
     if [ -z ${PATH_SEQUENCES+x} ]
     then
         echo "-path_seq unset."
-        echo "No others sequence will ne added to the database."
+        echo "No others sequence will be added to the database."
     else
         if [ -d ${PATH_SEQUENCES} ]
         then
