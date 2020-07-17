@@ -144,6 +144,16 @@
 <li class="toctree-l3"><a class="reference internal" href="#id30">3.7.7. Les fichiers de sorties</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#creation-d-une-base-de-donnees-avec-la-suite-blast">3.8. Création d’une base de données avec la suite BLAST+</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id31">3.8.1. Dépendances</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id32">3.8.2. Programme</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id33">3.8.3. Localisation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id34">3.8.4. Exemple d’utilisation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id35">3.8.5. Les paramètres</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id36">3.8.6. Les fichiers de sorties</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#classification-des-reads-avec-la-suite-blast">3.9. Classification des reads avec la suite BLAST+</a></li>
 </ul>
 </li>
 </ul>
@@ -211,26 +221,28 @@
            <div itemprop="articleBody">
             
   <div class="section" id="tutoriel">
-<h1><a class="toc-backref" href="#id31"><span class="section-number">3. </span>Tutoriel</a><a class="headerlink" href="#tutoriel" title="Lien permanent vers ce titre">¶</a></h1>
+<h1><a class="toc-backref" href="#id37"><span class="section-number">3. </span>Tutoriel</a><a class="headerlink" href="#tutoriel" title="Lien permanent vers ce titre">¶</a></h1>
 <p>Ci-dessous vous pouvez trouver le tutoriel sur comment utiliser le pipeline de métagénomique clinique.</p>
 <div class="contents topic" id="sommaire">
 <p class="topic-title">Sommaire</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#tutoriel" id="id31">Tutoriel</a></p>
+<li><p><a class="reference internal" href="#tutoriel" id="id37">Tutoriel</a></p>
 <ul>
-<li><p><a class="reference internal" href="#le-pre-traitement-des-reads" id="id32">Le pré-traitement des reads</a></p></li>
-<li><p><a class="reference internal" href="#le-telechargement-de-la-base-de-donnees-fda-argos" id="id33">Le téléchargement de la base de données FDA-ARGOS</a></p></li>
-<li><p><a class="reference internal" href="#le-telechargement-de-la-base-de-donnees-mycocosm" id="id34">Le téléchargement de la base de données Mycocosm</a></p></li>
-<li><p><a class="reference internal" href="#le-telechargement-de-la-base-de-donnees-fungidb" id="id35">Le téléchargement de la base de données FungiDB</a></p></li>
-<li><p><a class="reference internal" href="#le-telechargement-de-la-base-de-donnees-refseq" id="id36">Le téléchargement de la base de données RefSeq</a></p></li>
-<li><p><a class="reference internal" href="#l-indexation-d-une-base-de-donnees-avec-kraken-2" id="id37">L’indexation d’une base de données avec Kraken 2</a></p></li>
-<li><p><a class="reference internal" href="#classification-des-reads-avec-kraken-2" id="id38">Classification des reads avec Kraken 2</a></p></li>
+<li><p><a class="reference internal" href="#le-pre-traitement-des-reads" id="id38">Le pré-traitement des reads</a></p></li>
+<li><p><a class="reference internal" href="#le-telechargement-de-la-base-de-donnees-fda-argos" id="id39">Le téléchargement de la base de données FDA-ARGOS</a></p></li>
+<li><p><a class="reference internal" href="#le-telechargement-de-la-base-de-donnees-mycocosm" id="id40">Le téléchargement de la base de données Mycocosm</a></p></li>
+<li><p><a class="reference internal" href="#le-telechargement-de-la-base-de-donnees-fungidb" id="id41">Le téléchargement de la base de données FungiDB</a></p></li>
+<li><p><a class="reference internal" href="#le-telechargement-de-la-base-de-donnees-refseq" id="id42">Le téléchargement de la base de données RefSeq</a></p></li>
+<li><p><a class="reference internal" href="#l-indexation-d-une-base-de-donnees-avec-kraken-2" id="id43">L’indexation d’une base de données avec Kraken 2</a></p></li>
+<li><p><a class="reference internal" href="#classification-des-reads-avec-kraken-2" id="id44">Classification des reads avec Kraken 2</a></p></li>
+<li><p><a class="reference internal" href="#creation-d-une-base-de-donnees-avec-la-suite-blast" id="id45">Création d’une base de données avec la suite BLAST+</a></p></li>
+<li><p><a class="reference internal" href="#classification-des-reads-avec-la-suite-blast" id="id46">Classification des reads avec la suite BLAST+</a></p></li>
 </ul>
 </li>
 </ul>
 </div>
 <div class="section" id="le-pre-traitement-des-reads">
-<span id="pre-processing"></span><h2><a class="toc-backref" href="#id32"><span class="section-number">3.1. </span>Le pré-traitement des reads</a><a class="headerlink" href="#le-pre-traitement-des-reads" title="Lien permanent vers ce titre">¶</a></h2>
+<span id="pre-processing"></span><h2><a class="toc-backref" href="#id38"><span class="section-number">3.1. </span>Le pré-traitement des reads</a><a class="headerlink" href="#le-pre-traitement-des-reads" title="Lien permanent vers ce titre">¶</a></h2>
 <p>L’exemple suivant nous montre comment utiliser les étapes de pré-traitement.</p>
 <div class="section" id="programme">
 <h3><span class="section-number">3.1.1. </span>Programme<a class="headerlink" href="#programme" title="Lien permanent vers ce titre">¶</a></h3>
@@ -326,7 +338,7 @@
 </div>
 </div>
 <div class="section" id="le-telechargement-de-la-base-de-donnees-fda-argos">
-<span id="download-fda-argos"></span><h2><a class="toc-backref" href="#id33"><span class="section-number">3.2. </span>Le téléchargement de la base de données FDA-ARGOS</a><a class="headerlink" href="#le-telechargement-de-la-base-de-donnees-fda-argos" title="Lien permanent vers ce titre">¶</a></h2>
+<span id="download-fda-argos"></span><h2><a class="toc-backref" href="#id39"><span class="section-number">3.2. </span>Le téléchargement de la base de données FDA-ARGOS</a><a class="headerlink" href="#le-telechargement-de-la-base-de-donnees-fda-argos" title="Lien permanent vers ce titre">¶</a></h2>
 <p>La session suivante, nous montre comment télécharger la base de données FDA-ARGOS.</p>
 <div class="section" id="id1">
 <h3><span class="section-number">3.2.1. </span>Programme<a class="headerlink" href="#id1" title="Lien permanent vers ce titre">¶</a></h3>
@@ -381,7 +393,7 @@
 </div>
 </div>
 <div class="section" id="le-telechargement-de-la-base-de-donnees-mycocosm">
-<span id="download-mycocosm"></span><h2><a class="toc-backref" href="#id34"><span class="section-number">3.3. </span>Le téléchargement de la base de données Mycocosm</a><a class="headerlink" href="#le-telechargement-de-la-base-de-donnees-mycocosm" title="Lien permanent vers ce titre">¶</a></h2>
+<span id="download-mycocosm"></span><h2><a class="toc-backref" href="#id40"><span class="section-number">3.3. </span>Le téléchargement de la base de données Mycocosm</a><a class="headerlink" href="#le-telechargement-de-la-base-de-donnees-mycocosm" title="Lien permanent vers ce titre">¶</a></h2>
 <p>La session suivante, nous montre comment télécharger la base de données Mycocosm.</p>
 <div class="section" id="id6">
 <h3><span class="section-number">3.3.1. </span>Programme<a class="headerlink" href="#id6" title="Lien permanent vers ce titre">¶</a></h3>
@@ -442,7 +454,7 @@
 </div>
 </div>
 <div class="section" id="le-telechargement-de-la-base-de-donnees-fungidb">
-<span id="download-fungidb"></span><h2><a class="toc-backref" href="#id35"><span class="section-number">3.4. </span>Le téléchargement de la base de données FungiDB</a><a class="headerlink" href="#le-telechargement-de-la-base-de-donnees-fungidb" title="Lien permanent vers ce titre">¶</a></h2>
+<span id="download-fungidb"></span><h2><a class="toc-backref" href="#id41"><span class="section-number">3.4. </span>Le téléchargement de la base de données FungiDB</a><a class="headerlink" href="#le-telechargement-de-la-base-de-donnees-fungidb" title="Lien permanent vers ce titre">¶</a></h2>
 <p>La session suivante, nous montre comment télécharger la base de données FungiDB.</p>
 <div class="section" id="id9">
 <h3><span class="section-number">3.4.1. </span>Programme<a class="headerlink" href="#id9" title="Lien permanent vers ce titre">¶</a></h3>
@@ -489,7 +501,7 @@
 </div>
 </div>
 <div class="section" id="le-telechargement-de-la-base-de-donnees-refseq">
-<span id="download-refseq"></span><h2><a class="toc-backref" href="#id36"><span class="section-number">3.5. </span>Le téléchargement de la base de données RefSeq</a><a class="headerlink" href="#le-telechargement-de-la-base-de-donnees-refseq" title="Lien permanent vers ce titre">¶</a></h2>
+<span id="download-refseq"></span><h2><a class="toc-backref" href="#id42"><span class="section-number">3.5. </span>Le téléchargement de la base de données RefSeq</a><a class="headerlink" href="#le-telechargement-de-la-base-de-donnees-refseq" title="Lien permanent vers ce titre">¶</a></h2>
 <p>La session suivante, nous montre comment télécharger la base de données RefSeq.</p>
 <div class="section" id="id14">
 <h3><span class="section-number">3.5.1. </span>Programme<a class="headerlink" href="#id14" title="Lien permanent vers ce titre">¶</a></h3>
@@ -569,7 +581,7 @@
 </div>
 </div>
 <div class="section" id="l-indexation-d-une-base-de-donnees-avec-kraken-2">
-<span id="indexation-kraken2"></span><h2><a class="toc-backref" href="#id37"><span class="section-number">3.6. </span>L’indexation d’une base de données avec Kraken 2</a><a class="headerlink" href="#l-indexation-d-une-base-de-donnees-avec-kraken-2" title="Lien permanent vers ce titre">¶</a></h2>
+<span id="indexation-kraken2"></span><h2><a class="toc-backref" href="#id43"><span class="section-number">3.6. </span>L’indexation d’une base de données avec Kraken 2</a><a class="headerlink" href="#l-indexation-d-une-base-de-donnees-avec-kraken-2" title="Lien permanent vers ce titre">¶</a></h2>
 <p>Le logiciel Kraken 2 propose :</p>
 <ol class="arabic simple">
 <li><p>l’indexation avec l’algorithme de k-mer d’une base de données,</p></li>
@@ -686,7 +698,7 @@
 </div>
 </div>
 <div class="section" id="classification-des-reads-avec-kraken-2">
-<span id="classification-kraken2"></span><h2><a class="toc-backref" href="#id38"><span class="section-number">3.7. </span>Classification des reads avec Kraken 2</a><a class="headerlink" href="#classification-des-reads-avec-kraken-2" title="Lien permanent vers ce titre">¶</a></h2>
+<span id="classification-kraken2"></span><h2><a class="toc-backref" href="#id44"><span class="section-number">3.7. </span>Classification des reads avec Kraken 2</a><a class="headerlink" href="#classification-des-reads-avec-kraken-2" title="Lien permanent vers ce titre">¶</a></h2>
 <p>La session suivante, nous montre comment classifier un échantillon de reads avec le logiciel Kraken 2.</p>
 <div class="admonition warning">
 <p class="admonition-title">Avertissement</p>
@@ -777,6 +789,110 @@
 <p>Pour comprendre en détail la composition du fichier de sortie <em>.report.txt</em> voir la documentation officielle : <a class="reference external" href="https://github.com/DerrickWood/kraken2/wiki/Manual#sample-report-output-format">https://github.com/DerrickWood/kraken2/wiki/Manual#sample-report-output-format</a> .</p>
 </div>
 </div>
+</div>
+<div class="section" id="creation-d-une-base-de-donnees-avec-la-suite-blast">
+<span id="creation-database-blast"></span><h2><a class="toc-backref" href="#id45"><span class="section-number">3.8. </span>Création d’une base de données avec la suite BLAST+</a><a class="headerlink" href="#creation-d-une-base-de-donnees-avec-la-suite-blast" title="Lien permanent vers ce titre">¶</a></h2>
+<p>La session suivante, nous montre comment créer une base de données locale qui permettra d’utiliser en amont l’alignement de séquence par l’algorithme de BLAST.</p>
+<div class="section" id="id31">
+<h3><span class="section-number">3.8.1. </span>Dépendances<a class="headerlink" href="#id31" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Avec la suite BLAST + nous utilisons :</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>L’application <strong>makeblastdb</strong> qui produit une base de données locale adaptée à l’algorithme de BLAST.</p></li>
+<li><p>L’application <strong>dustmasker</strong> qui identifie et masque les parties à faible complexité d’un génome.</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Les séquences de faible complexité sont par exemple les séquences répétées « ACACACACACACACACACACACACACAC » connus pour se produire dans de nombreux organismes différents et moins instructifs dans les alignements. Enlever ces séquences aide à prévenir les faux positifs dans les résultats.</p>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">Voir aussi</p>
+<p>Pour comprendre rapidement l’utilisation de chaque application voir <a class="reference external" href="https://www.ncbi.nlm.nih.gov/books/NBK279681/">https://www.ncbi.nlm.nih.gov/books/NBK279681/</a> .</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Avertissement</p>
+<p>Pour l’instant, aucune implementation a été faite au niveau de la création d’une base de données concernant les séquences proteiques ainsi que la suppression des séquences à faible complexité des proteines (par exemple avec le logiciel segmasker).</p>
+</div>
+</div>
+<div class="section" id="id32">
+<h3><span class="section-number">3.8.2. </span>Programme<a class="headerlink" href="#id32" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Nom du programme:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">create_blast_database</span><span class="o">.</span><span class="n">sh</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id33">
+<h3><span class="section-number">3.8.3. </span>Localisation<a class="headerlink" href="#id33" title="Lien permanent vers ce titre">¶</a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>└── src
+ ├── bash
+ │   ├── create_blast_database.sh
+</pre></div>
+</div>
+</div>
+<div class="section" id="id34">
+<h3><span class="section-number">3.8.4. </span>Exemple d’utilisation<a class="headerlink" href="#id34" title="Lien permanent vers ce titre">¶</a></h3>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash src/bash/create_blast_database.sh <span class="se">\</span>
+             -path_seq data/raw_sequences/refseq/bacteria/ <span class="se">\</span>
+             -output_db data/databases/blast/refseq/
+</pre></div>
+</div>
+<p>Dans cet exemple, nous créons une base de données adaptée à BLAST en indiquant les séquences que l’on veut ajouter à notre base de données. Ici les séquences à ajouter sont celles téléchargées avec la base de données RefSeq expliqué en détail dans la session <a class="reference internal" href="#download-refseq"><span class="std std-ref">Le téléchargement de la base de données RefSeq</span></a> du tutoriel. Ensuite, avec le paramètre -output_db nous précisons le chemin de sortie pour notre base de données.</p>
+</div>
+<div class="section" id="id35">
+<h3><span class="section-number">3.8.5. </span>Les paramètres<a class="headerlink" href="#id35" title="Lien permanent vers ce titre">¶</a></h3>
+<dl class="field-list simple">
+<dt class="field-odd">-path_seq</dt>
+<dd class="field-odd"><p>(Input) Chemin du dossier de la librairie de séquences.</p>
+</dd>
+<dt class="field-even">-output_db</dt>
+<dd class="field-even"><p>(Output) Chemin du dossier de sortie pour créer notre base de données.</p>
+</dd>
+<dt class="field-odd">-dustmasker</dt>
+<dd class="field-odd"><p>(Optional) Paramètre optionnel qui permet de choisir l’application ou non de dustmasker sur notre génome. Par défaut, le paramètre est sur « yes ». Pour ne pas utiliser dustmasker et changer le paramètre par « no » comme illustré ci-dessous.</p>
+</dd>
+</dl>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash src/bash/create_blast_database.sh <span class="se">\</span>
+             -path_seq data/raw_sequences/refseq/bacteria/ <span class="se">\</span>
+             -output_db data/databases/blast/refseq/ <span class="se">\</span>
+             -dustmasker no
+</pre></div>
+</div>
+<p>Ici, nous créons un base de données refseq adapté à BLAST mais sans utiliser <em>dustmasker</em> et donc sans supprimer les séquences à faible complexité dans notre base de données.</p>
+<dl class="field-list simple">
+<dt class="field-odd">-force_remove</dt>
+<dd class="field-odd"><p>(Optional) Paramètre optionnel qui permet de ne pas supprimer les fichiers intermédiaires. Par défaut, le paramètre est sur « yes » et supprime les fichiers intermédiares. Pour ne pas supprimer les fichiers intermédiaires changer le param_tre par « no » comme illustré ci-dessous.</p>
+</dd>
+</dl>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash src/bash/create_blast_database.sh <span class="se">\</span>
+             -path_seq data/raw_sequences/refseq/bacteria/ <span class="se">\</span>
+             -output_db data/databases/blast/refseq/ <span class="se">\</span>
+             -dustmasker no
+             -force_remove no
+</pre></div>
+</div>
+<p>Ici, nous créons un base de données refseq adapté à BLAST mais sans utiliser <em>dustmasker</em> et sans supprimer les fichiers intermédiaires.</p>
+</div>
+<div class="section" id="id36">
+<h3><span class="section-number">3.8.6. </span>Les fichiers de sorties<a class="headerlink" href="#id36" title="Lien permanent vers ce titre">¶</a></h3>
+<p>Les fichiers de sorties de la base de données sont par exemple :</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>.
+├── makeblastdb.naa
+├── makeblastdb.nab
+├── makeblastdb.nac
+├── makeblastdb.nhr
+├── makeblastdb.nin
+├── makeblastdb.nog
+├── makeblastdb.nsd
+├── makeblastdb.nsi
+├── makeblastdb.nsq
+└── README.txt
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="classification-des-reads-avec-la-suite-blast">
+<span id="classification-blast"></span><h2><a class="toc-backref" href="#id46"><span class="section-number">3.9. </span>Classification des reads avec la suite BLAST+</a><a class="headerlink" href="#classification-des-reads-avec-la-suite-blast" title="Lien permanent vers ce titre">¶</a></h2>
 </div>
 </div>
 

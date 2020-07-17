@@ -578,3 +578,112 @@ Les fichiers de sorties sont les suivants :
 
 .. note::
    Pour comprendre en détail la composition du fichier de sortie *.report.txt* voir la documentation officielle : https://github.com/DerrickWood/kraken2/wiki/Manual#sample-report-output-format .
+
+
+.. _creation_database_blast+:
+
+Création d'une base de données avec la suite BLAST+
+---------------------------------------------------
+
+La session suivante, nous montre comment créer une base de données locale qui permettra d'utiliser en amont l'alignement de séquence par l'algorithme de BLAST.
+
+Dépendances
+~~~~~~~~~~~
+
+Avec la suite BLAST + nous utilisons :
+
+   * L'application **makeblastdb** qui produit une base de données locale adaptée à l’algorithme de BLAST.
+
+   * L'application **dustmasker** qui identifie et masque les parties à faible complexité d'un génome.
+
+.. note::
+   Les séquences de faible complexité sont par exemple les séquences répétées "ACACACACACACACACACACACACACAC" connus pour se produire dans de nombreux organismes différents et moins instructifs dans les alignements. Enlever ces séquences aide à prévenir les faux positifs dans les résultats.
+
+.. seealso::
+   Pour comprendre rapidement l'utilisation de chaque application voir https://www.ncbi.nlm.nih.gov/books/NBK279681/ .
+
+.. warning::
+   Pour l'instant, aucune implementation a été faite au niveau de la création d'une base de données concernant les séquences proteiques ainsi que la suppression des séquences à faible complexité des proteines (par exemple avec le logiciel segmasker).
+
+Programme
+~~~~~~~~~
+
+Nom du programme::
+
+   create_blast_database.sh
+
+Localisation
+~~~~~~~~~~~~
+
+.. code-block:: sh
+
+   └── src
+    ├── bash
+    │   ├── create_blast_database.sh
+
+
+
+Exemple d'utilisation
+~~~~~~~~~~~~~~~~~~~~~
+
+.. code-block:: sh
+
+   bash src/bash/create_blast_database.sh \
+                -path_seq data/raw_sequences/refseq/bacteria/ \
+                -output_db data/databases/blast/refseq/
+
+Dans cet exemple, nous créons une base de données adaptée à BLAST en indiquant les séquences que l'on veut ajouter à notre base de données. Ici les séquences à ajouter sont celles téléchargées avec la base de données RefSeq expliqué en détail dans la session :ref:`Le téléchargement de la base de données RefSeq <download_RefSeq>` du tutoriel. Ensuite, avec le paramètre -output_db nous précisons le chemin de sortie pour notre base de données.
+
+
+Les paramètres
+~~~~~~~~~~~~~~
+
+:-path_seq:  (Input) Chemin du dossier de la librairie de séquences.
+:-output_db: (Output) Chemin du dossier de sortie pour créer notre base de données.
+:-dustmasker: (Optional) Paramètre optionnel qui permet de choisir l'application ou non de dustmasker sur notre génome. Par défaut, le paramètre est sur "yes". Pour ne pas utiliser dustmasker et changer le paramètre par "no" comme illustré ci-dessous.
+
+.. code-block:: sh
+
+   bash src/bash/create_blast_database.sh \
+                -path_seq data/raw_sequences/refseq/bacteria/ \
+                -output_db data/databases/blast/refseq/ \
+                -dustmasker no
+
+Ici, nous créons un base de données refseq adapté à BLAST mais sans utiliser *dustmasker* et donc sans supprimer les séquences à faible complexité dans notre base de données.
+
+:-force_remove: (Optional) Paramètre optionnel qui permet de ne pas supprimer les fichiers intermédiaires. Par défaut, le paramètre est sur "yes" et supprime les fichiers intermédiares. Pour ne pas supprimer les fichiers intermédiaires changer le param_tre par "no" comme illustré ci-dessous.
+
+.. code-block:: sh
+
+   bash src/bash/create_blast_database.sh \
+                -path_seq data/raw_sequences/refseq/bacteria/ \
+                -output_db data/databases/blast/refseq/ \
+                -dustmasker no
+                -force_remove no
+
+Ici, nous créons un base de données refseq adapté à BLAST mais sans utiliser *dustmasker* et sans supprimer les fichiers intermédiaires.
+
+
+Les fichiers de sorties
+~~~~~~~~~~~~~~~~~~~~~~~
+
+Les fichiers de sorties de la base de données sont par exemple :
+
+.. code-block:: sh
+
+   .
+   ├── makeblastdb.naa
+   ├── makeblastdb.nab
+   ├── makeblastdb.nac
+   ├── makeblastdb.nhr
+   ├── makeblastdb.nin
+   ├── makeblastdb.nog
+   ├── makeblastdb.nsd
+   ├── makeblastdb.nsi
+   ├── makeblastdb.nsq
+   └── README.txt
+
+.. _classification_blast+:
+
+Classification des reads avec la suite BLAST+
+---------------------------------------------
