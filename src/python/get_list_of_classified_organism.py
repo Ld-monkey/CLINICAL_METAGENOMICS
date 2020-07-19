@@ -5,8 +5,8 @@
 July. 2020
 CLINICAL METAGENOMICS
 
-get_list_of_classified_organism.py (obsoletes names GetIntFasta3.py or get_id_
-taxo_from_report.py) is a script which makes it possible to retrieve the
+Program get_list_of_classified_organism.py (obsoletes names GetIntFasta3.py or
+get_id_taxo_from_report.py) is a script which makes it possible to retrieve the
 sequence IDs (e.g NB552188:4:H353CBGXC:2:23310:15171:17832), obtained from the
 FASTA / FASTQ header from either a particular taxon (example bacteria, virus) or
 from all the classified sequences.
@@ -27,13 +27,16 @@ def arguments():
     parser = argparse.ArgumentParser(description="get_list_of_classified_organism.py")
 
     parser.add_argument("-path_report",
-                        help="(Input) The path of the *.report.txt file provided by the classification of kraken 2",
+                        help="(Input) The path of the *.report.txt file provided" \
+                        " by the classification of kraken 2",
                         type=str)
     parser.add_argument("-path_output",
-                        help="(Input) The path of the *.output.txt file provided by the classification of kraken 2",
+                        help="(Input) The path of the *.output.txt file provided" \
+                        " by the classification of kraken 2",
                         type=str)
     parser.add_argument("-output_list",
-                        help="(Output) The path of the output text file which will contain only the classified sequences",
+                        help="(Output) The path of the output text file which will" \
+                        " contain only the classified sequences",
                         type=str)
     args = parser.parse_args()
 
@@ -46,8 +49,8 @@ def create_output_folder(filename):
     if not os.path.exists(os.path.dirname(filename)):
         try:
             os.makedirs(os.path.dirname(filename))
-        except OSError as e:
-            if e.errno != errno.EEXIST:
+        except OSError as exc:
+            if exc.errno != errno.EEXIST:
                 raise
 
 
@@ -92,7 +95,7 @@ def get_all_specific_line_of_output_kraken2(taxonomic_id_list, output_kraken_fil
         list_header_sequences_name = list()
 
         while line:
-            status_classification = re.split("\t", line)[0]
+            #status_classification = re.split("\t", line)[0]
             header_sequences_id = re.split("\t", line)[1]
             output_taxonomy_id = re.split("\t", line)[2]
 
@@ -106,7 +109,7 @@ def get_all_specific_line_of_output_kraken2(taxonomic_id_list, output_kraken_fil
             line = output_file.readline()
 
     return list_header_sequences_name
-    
+
 
 def get_all_specific_classified_taxonomic_id(report_file, taxon):
     """ Method that return a list of taxonomic id from *report.txt of Kraken 2
@@ -125,11 +128,11 @@ def get_all_specific_classified_taxonomic_id(report_file, taxon):
             # Remove new line.
             line = line.strip()
 
-            if len(re.findall(taxon, line)) >=1:
+            if len(re.findall(taxon, line)) >= 1:
                 #print(line)
                 line_splitted = re.split(r"\t", line)
                 list_id_species.append(line_splitted[4])
-                while flag_domain == True:
+                while flag_domain:
                     line = report.readline()
                     # Remove new line.
                     line = line.strip()
@@ -154,12 +157,13 @@ def get_all_specific_classified_taxonomic_id(report_file, taxon):
 
         # If the length of list with id taxonomic egal 0.
         if len(list_id_species) == 0:
-            print("Warning ! either the selected taxon '{}' is not in the list, or no fragment could be assigned to this taxon.".format(taxon))
+            print("Warning ! either the selected taxon '"+taxon+"' is not in " \
+            "the list, or no fragment could be assigned to this taxon.")
             sys.exit("Error exit program !")
 
         return list_id_species
-        
-                            
+
+
 if __name__ == "__main__":
     print("Get a list of classified organism !")
 
@@ -170,15 +174,13 @@ if __name__ == "__main__":
     #LIST_CLASSIFIED_ORGANISM = get_all_classified_organism(OUTPUT_KRAKEN_FILE)
 
     # Get all taxonomic id from specific taxon (bacteria, viral, fungi ...).
-    LIST_CLASSIFIED_SPECIES = get_all_specific_classified_taxonomic_id(REPORT_KRAKEN_FILE, "Bacteria")
-    print(len(LIST_CLASSIFIED_SPECIES))
+    LIST_CLASSIFIED_SPECIES = get_all_specific_classified_taxonomic_id(REPORT_KRAKEN_FILE,
+                                                                       "Bacteria")
 
     print(OUTPUT_KRAKEN_FILE)
     # Recover each sequences from *output.txt of Kraken 2.
     ALL_HEADER_SEQUENCES_ID = get_all_specific_line_of_output_kraken2(LIST_CLASSIFIED_SPECIES,
                                                                       OUTPUT_KRAKEN_FILE)
-
-    print(len(ALL_HEADER_SEQUENCES_ID))
 
     # create output folders if necessary.
     create_output_folder(OUTPUT_LIST)
