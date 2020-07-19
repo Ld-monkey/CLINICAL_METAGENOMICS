@@ -4,6 +4,7 @@
 # important in some cases to transform the fastq file into a fasta or fna file.
 # One of the advantages of using seqtk in this script is that it can take into
 # account specific lists to select the sequences you want to take.
+# To have more details on seqtk see also https://github.com/lh3/seqtk .
 #
 # e.g bash src/bash/convert_fastq_to_fasta \
 #                 -path_fastq_1 results/trimmed_classify/1-MAR-LBA-ADN_S1_clseqs_1.fastq \
@@ -181,8 +182,8 @@ BAD_OPTION ()
 while [ -n "$1" ]; do
     case $1 in
         -h)                    USAGE      ; exit 0 ;;
-  	    -path_fastq_1)         FASTQ1=$2       ; shift 2; continue ;;
-    	  -path_fastq_2)         FASTQ2=$2       ; shift 2; continue ;;
+        -path_fastq_1)         FASTQ1=$2       ; shift 2; continue ;;
+        -path_fastq_2)         FASTQ2=$2       ; shift 2; continue ;;
         -path_list)            LIST=$2         ; shift 2; continue ;;
         -output_fasta)         OUTPUT_FASTA=$2 ; shift 2; continue ;;
         *)       BAD_OPTION $1;;
