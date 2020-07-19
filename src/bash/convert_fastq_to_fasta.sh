@@ -2,14 +2,140 @@
 
 # Because some tools like blast alignment need a file in fasta format. It is
 # important in some cases to transform the fastq file into a fasta or fna file.
+# One of the advantages of using seqtk in this script is that it can take into
+# account specific lists to select the sequences you want to take.
 #
 # e.g bash src/bash/convert_fastq_to_fasta \
-#      -reads_list ReadsList.txt
-#      -clseqs_1 clseqs_1.fastq
-#      -clseqs_2 clseqs_2.fastq
-#      -output output_interest_fasta.fasta
+#                 -path_fastq_1 results/trimmed_classify/1-MAR-LBA-ADN_S1_clseqs_1.fastq \
+#                 -path_fastq_2 results/trimmed_classify/1-MAR-LBA-ADN_S1_clseqs_2.fastq \
+#                 -path_list    results/list_taxon/bacteria.lst \
+#                 -output_fasta results/convertion_fastq_2_fasta/bacteria_1-MAR-LBA-ADN_S1.fasta
 
-PROGRAM=recover_reads.sh
+
+function create_output_folder {
+    # Create output folder of output_fasta file.
+    mkdir -p --verbose "$(dirname "$OUTPUT_FASTA")"
+    OUTPUT_FOLDER="$(dirname "$OUTPUT_FASTA")"/
+}
+
+
+function check_paired_sequences {
+    # Check if the sequences are in pairs.
+    if [[ -f "$R1_READ" ]] && [[ -z ${R2_PAIRED_READ} ]] && [[ -f "$F2_READ" ]]; then
+        echo "Paired sequences"
+        FLAG_PAIRED_SEQUENCE="yes"
+    else
+        echo "Not paired sequences"
+        FLAG_PAIRED_SEQUENCE="no"
+    fi
+}
+
+
+function check_list_parameter {
+    # Checks if a list is specified as a parameter.
+    if [ -z ${LIST+x} ]; then
+        echo "-path_list unset."
+        echo "Warning ! No list was selectionned !"
+        FLAG_LIST_BOOLEAN="False"
+    else
+        if [ -f "$LIST" ]; then
+            echo $LIST
+            echo "$LIST list file exists."
+            FLAG_PAIRED_SEQUENCE="True"
+        else
+            echo "Error parameter -path_list was indicate but $LIST list file doesn't exists."
+            exit
+        fi
+    fi
+}
+
+
+function check_correct_execution_seqtk {
+    # Check if seqtk return (0) for a success and $? return previous command
+    # seqtk seq -a. 
+    if [ $? -eq 0 ]
+    then
+        echo "Conversion has been completed."
+        echo "The output is $OUTPUT_FASTA in .fasta format."
+    else
+        echo "Conversion hasn't been completed !"
+        echo "FAIL !"
+        exit
+    fi
+}
+
+
+function convert_fastq_to_fasta {
+    # Convert fastq files to fasta file.
+    if [ $FLAG_PAIRED_SEQUENCE = "yes" ]; then
+        if [ $FLAG_LIST_BOOLEAN = "True" ];then
+            # Paired + list.
+
+            # The temporary file for seqtk.
+            TEMPORARY_FILE_2=$(dirname $LIST)_temporary_2.fq
+            echo " temporary file : $TEMPORARY_FILE"
+
+            # Extract sequences with names in file name.lst (LIST) one sequence
+            # name per line.
+            seqtk subseq $FASTQ1 $LIST > $OUTPUT_FOLDER${TEMPORARY_FILE}
+
+            # Convert fastq to fasta.
+            seqtk seq -a $OUTPUT_FOLDER$TEMPORARY_FILE > $OUTPUT_FASTA
+
+            # Check good execution of seqtk program.
+            check_correct_execution_seqtk
+
+            # Toolkit to transform fastq to fasta with tempory file.
+            seqtk subseq $FASTQ2 $LIST > $OUTPUT_FOLDER$TEMPORARY_FILE_2
+
+            # Convert fastq to fasta and concatenate.
+            seqtk seq -a $OUTPUT_FOLDER$TEMPORARY_FILE_2 >> $OUTPUT_FASTA
+
+            # Check good execution of seqtk program.
+            check_correct_execution_seqtk
+        else
+            # Paired but not list.
+
+            # Convert fastq to fasta for paired sequences and concatenate.
+            seqtk seq -a $FASTQ1 > $OUTPUT_FASTA
+            seqtk seq -a $FASTQ2 >> $OUTPUT_FASTA
+
+            # Check good execution of seqtk program.
+            check_correct_execution_seqtk
+        fi
+    else
+        if [ $FLAG_LIST_BOOLEAN = "True" ];then
+            # No paired + list.
+
+            # Extract sequences with names in file name.lst (LIST) one sequence
+            # name per line.
+            seqtk subseq $FASTQ1 $LIST > $OUTPUT_FOLDER${TEMPORARY_FILE}
+
+            # Convert fastq to fasta (.fa).
+            seqtk seq -a $OUTPUT_FOLDER$TEMPORARY_FILE > $OUTPUT_FASTA
+
+            # Check good execution of seqtk program.
+            check_correct_execution_seqtk
+        else
+            # Not paired and not list.
+
+            # Convert fastq to fasta for paired sequences.
+            seqtk seq -a $FASTQ1 > $OUTPUT_FASTA
+
+            # Check good execution of seqtk program.
+            check_correct_execution_seqtk
+        fi
+    fi
+}
+
+
+function remove_intermediate_file {
+    # Remove tempory file.
+    rm -rf $OUTPUT_FOLDER$TEMPORARY_FILE
+    rm -rf $OUTPUT_FOLDER$$TEMPORARY_FILE_2
+}
+
+PROGRAM=convert_fastq_to_fasta.sh
 VERSION=1.0
 
 DESCRIPTION=$(cat << __DESCRIPTION__
@@ -20,10 +146,10 @@ __DESCRIPTION__
 OPTIONS=$(cat << __OPTIONS__
 
 ## OPTIONS ##
-    -reads_list   (Input) The ReadsList.txt file containt all parameters to find sequences of interest.    *FILE: ReadsList.txt
-    -clseqs_1     (Input) The classified sequences in first paired sequences named *clseqs_1.fastq .       *FILE: *clseqs_1.fastq
-    -clseqs_2     (Input) The classified sequences in second paired sequences named *clseqs_2.fastq .      *FILE: *clseqs_2.fastq
-    -output       (Output) The output name of the sequence of interest named *.interesting.fasta .         *STRING: result_example
+    -path_fastq_1 (Input)     Sequences in fastq format to convert in fasta format.                                  *FILE: results/trimmed_classify/1-MAR-LBA-ADN_S1_clseqs_1.fastq
+    -path_fastq_2 (Optional)  The classified sequences in second paired sequences named *clseqs_2.fastq .            *FILE: results/trimmed_classify/1-MAR-LBA-ADN_S1_clseqs_2.fastq
+    -path_list    (Optional)  Select a list of specific sequences see also python/get_list_of_classified_organism.py *FILE: results/list_taxon/bacteria.lst
+    -output_fasta (Output)    The name of the output sequence in fasta format                                        *STR : results/convertion_fastq_2_fasta/bacteria_1-MAR-LBA-ADN_S1.fasta
 __OPTIONS__
        )
 
@@ -55,100 +181,29 @@ BAD_OPTION ()
 while [ -n "$1" ]; do
     case $1 in
         -h)                    USAGE      ; exit 0 ;;
-        -reads_list)           READS_LIST=$2                    ; shift 2; continue ;;
-  	    -clseqs_1)             CLASSIFIED_SEQUENCE_FASTQ1=$2    ; shift 2; continue ;;
-    	  -clseqs_2)             CLASSIFIED_SEQUENCE_FASTQ2=$2    ; shift 2; continue ;;
-        -output)               OUTPUT_INTEREST_FASTA=$2         ; shift 2; continue ;;
+  	    -path_fastq_1)         FASTQ1=$2       ; shift 2; continue ;;
+    	  -path_fastq_2)         FASTQ2=$2       ; shift 2; continue ;;
+        -path_list)            LIST=$2         ; shift 2; continue ;;
+        -output_fasta)         OUTPUT_FASTA=$2 ; shift 2; continue ;;
         *)       BAD_OPTION $1;;
     esac
 done
 
-# Check for no paired sequences (only fastq1 is necessary).
-if [[ -s $READS_LIST && -s $CLASSIFIED_SEQUENCE_FASTQ1 ]]
-then
-    
-    # The temporary file for seqtk.
-    TEMPORARY_FILE=$(dirname $READS_LIST)_temporary.fq
-    echo " temporary file : $TEMPORARY_FILE"   
+# Create output folder if doesn't exists.
+create_output_folder
 
-    echo "First condition"
-    echo "read list $READS_LIST exists."
-    echo "classified sequences $CLASSIFIED_SEQUENCE_FASTQ1 exists".
+# Check if paired or not sequences.
+check_paired_sequences
 
-    # Extract sequences with names in file name.lst (READS_LIST) one sequence name per line.
-    seqtk subseq $CLASSIFIED_SEQUENCE_FASTQ1 $READS_LIST > ${TEMPORARY_FILE}
+# Check if reads list is precised if not display a message.
+check_list_parameter
 
-    # Convert fastq to fasta (.fa).
-    seqtk seq -a $TEMPORARY_FILE > $OUTPUT_INTEREST_FASTA
+# The temporary file for seqtk.
+TEMPORARY_FILE=$(dirname $LIST)_temporary.fq
+echo " temporary file : $TEMPORARY_FILE"   
 
-    # Check if seqtk return (0) for a success and $? return previous command seqtk seq -a. 
-    if [ $? -eq 0 ]
-    then
-        # Remove tempory file.
-        #rm $TEMPORARY_FILE
+# Transfort fastq sequences to fasta (can extract sequences with a list).
+convert_fastq_to_fasta
 
-        echo "Reads recovered for $CLASSIFIED_SEQUENCE_FASTQ1."
-        echo "The output is $OUTPUT_INTEREST_FASTA in .fasta format."
-    else
-        echo "Reads not recovered for $CLASSIFIED_SEQUENCE_FASTQ1"
-        echo "FAIL for $CLASSIFIED_SEQUENCE_FASTQ1"
-    fi
-
-else
-    echo "$CLASSIFIED_SEQUENCE_FASTQ1 or/and $READS_LIST are empty"
-fi
-
-# Check if ReadList.txt + *clseqs_1 + *clseqs_2 exists and has a size greater than zero.
-if [[ -s $READS_LIST && -s $CLASSIFIED_SEQUENCE_FASTQ1 && -s $CLASSIFIED_SEQUENCE_FASTQ2 ]]
-then
-    # The temporary file for seqtk.
-    TEMPORARY_FILE=$(dirname $READS_LIST)_temporary.fq
-    echo " temporary file : $TEMPORARY_FILE"   
-
-    echo "2nd condition"
-    echo "The $READS_LIST exists"
-    echo "The $CLASSIFIED_SEQUENCE_FASTQ1 exists"
-    echo "The $CLASSIFIED_SEQUENCE_FASTQ2 exists"
-
-    # Seqtk is a fast and lightweight tool for processing sequences in
-    # the FASTA or FASTQ format. It seamlessly parses both FASTA and FASTQ files.
-    # Extract sequences with names in file name.lst (READS_LIST) one sequence name per line.
-    seqtk subseq $CLASSIFIED_SEQUENCE_FASTQ1 $READS_LIST > ${TEMPORARY_FILE}
-
-    # Convert fastq to fasta.
-    seqtk seq -a $TEMPORARY_FILE > $OUTPUT_INTEREST_FASTA
-
-    # Check if seqtk return (0) for a success and $? return previous command seqtk seq -a. 
-    if [ $? -eq 0 ]
-    then
-        # Remove tempory file.
-        #rm $TEMPORARY_FILE
-
-        echo "Reads recovered for $CLASSIFIED_SEQUENCE_FASTQ1."
-        echo "The output is $OUTPUT_INTEREST_FASTA in .fasta format."
-    else
-        echo "Reads not recovered for $CLASSIFIED_SEQUENCE_FASTQ1"
-        echo "FAIL for $CLASSIFIED_SEQUENCE_FASTQ1"
-    fi
-
-    # The temporary file for seqtk.
-    TEMPORARY_FILE_2=$(dirname $READS_LIST)_temporary_2.fq
-    echo " temporary file : $TEMPORARY_FILE"   
-
-    # Toolkit to transform fastq2 to fasta with tempory file.
-    seqtk subseq $CLASSIFIED_SEQUENCE_FASTQ1 $READS_LIST > $TEMPORARY_FILE_2
-    seqtk seq -a $TEMPORARY_FILE_2 >> $OUTPUT_INTEREST_FASTA
-
-    # Check if seqtk return (0) for a success and $? return previous command seqtk seq -a. 
-    if [ $? -eq 0 ]
-    then
-        # Remove tempory file.
-        #rm $TEMPORARY_FILE_2
-
-        echo "Reads recovered for $CLASSIFIED_SEQUENCE_FASTQ2."
-        echo "The output is concatenate in $OUTPUT_INTEREST_FASTA in .fasta format."
-    else
-        echo "Reads not recovered for $CLASSIFIED_SEQUENCE_FASTQ2"
-        echo "FAIL for $CLASSIFIED_SEQUENCE_FASTQ1"
-    fi
-fi
+# Remove intermediate files.
+remove_intermediate_file

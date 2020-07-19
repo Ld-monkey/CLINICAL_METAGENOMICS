@@ -8,11 +8,11 @@ CLINICAL METAGENOMICS
 Program get_list_of_classified_organism.py (obsoletes names GetIntFasta3.py or
 get_id_taxo_from_report.py) is a script which makes it possible to retrieve the
 sequence IDs (e.g NB552188:4:H353CBGXC:2:23310:15171:17832), obtained from the
-FASTA / FASTQ header from either a particular taxon (example bacteria, virus) or
-from all the classified sequences.
+FASTA / FASTQ header from either a particular taxon (example bacteria, virus)
+or from all the classified sequences.
 
 The output file therefore contains a list of all the id of selected sequences
-in text format.
+in text format (e.g: -output_list results/list_taxon/bacteria.lst)
 """
 
 import argparse
@@ -84,7 +84,8 @@ def get_all_classified_organism(output_file):
                 print(line)
 
 
-def get_all_specific_line_of_output_kraken2(taxonomic_id_list, output_kraken_file):
+def get_all_specific_line_of_output_kraken2(taxonomic_id_list,
+                                            output_kraken_file):
     """ Method that return a list of specific lines of *.output.txt from Kraken 2
     thank to all classified taxonomics id of specifis taxon """
 
@@ -95,7 +96,7 @@ def get_all_specific_line_of_output_kraken2(taxonomic_id_list, output_kraken_fil
         list_header_sequences_name = list()
 
         while line:
-            #status_classification = re.split("\t", line)[0]
+            # status_classification = re.split("\t", line)[0]
             header_sequences_id = re.split("\t", line)[1]
             output_taxonomy_id = re.split("\t", line)[2]
 
