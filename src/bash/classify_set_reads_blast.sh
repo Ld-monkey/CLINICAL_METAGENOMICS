@@ -57,22 +57,14 @@ function create_output_folder {
 function blast_all_sequences {
 
     COMPLETE_OUTPUT=$OUTPUT_BLAST${BASENAME_WITHOUT_EXTENSION}_blast_temp.out
+
     # For blast + (http://nebc.nerc.ac.uk/bioinformatics/documentation/blast+/user_manual.pdf)
     # blastn -task megablast : used to find very similar sequences.
     # -evalue : Expectation value threshold for saving hits.
     # -db : File name of BLAST database.
     # -outfmt : Allows for the specification of the search application’s output format.
     # -max_target_seqs : Maximum number of aligned sequences to keep from the blast database.
-    # > output
-
-    # cat $FASTA | parallel --block 1M --recstart '>' --pipe blastn -task megablast -evalue 10e-10 -db data/databases/blast/fda_argos_assembly_blast_db_17_07_2020/makeblastdb -num_threads 1 -outfmt \"7 qseqid sseqid sstart send evalue bitscore slen staxids\" -max_target_seqs 1 -max_hsps 1 > $COMPLETE_OUTPUT
-
-    # blastn -task megablast \
-    #        -query $FASTA \
-    #        -evalue 10e-10 \
-    #        -db data/databases/blast/fda_argos_assembly_blast_db_17_07_2020/makeblastdb \
-    #        -outfmt \"7 qseqid sseqid sstart send evalue bitscore slen staxids\" \
-    #        -out $COMPLETE_OUTPUT
+    # -out : output
 
     blastn -db data/databases/blast/fda_argos_assembly_blast_db_17_07_2020/makeblastdb \
            -query $FASTA \
@@ -82,8 +74,9 @@ function blast_all_sequences {
            -outfmt "7 qseqid sseqid sstart send evalue bitscore slen staxids" \
            -max_hsps 1 \
            -max_target_seqs 5 \
-
            -num_threads 7
+
+    echo "Blast done !"
 
     # Replace all "processed" to d.
     # sed "/\processed\b/d" $OUTPUT_BLAST${%%.*}_blast_temp.txt \
@@ -172,5 +165,6 @@ for FASTA in ${PATH_SEQUENCES}*.fasta; do
     echo "basename = $BASENAME_WITHOUT_EXTENSION"
     blast_all_sequences
 done
-# # Remove intermediate files.
+
+# Remove intermediate files.
 # remove_intermediate_file
