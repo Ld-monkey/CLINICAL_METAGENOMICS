@@ -105,7 +105,7 @@ __DESCRIPTION__
 OPTIONS=$(cat << __OPTIONS__
 
 ## OPTIONS ##
-    -path_seq    (Input)  Path to the folder that contains the sequences to be aligned.                 *DIR: results/trimmed_reads/trimmed_reads/
+    -path_seq    (Input)  Path to the folder that contains the sequences to be aligned.                 *DIR: results/classify_reads/trimmed_classify_fda_argos_with_none_library_02_07_2020/1-MAR-LBA-ADN_S1/convert_fastq_to_fasta/1-MAR-LBA-ADN.fasta
     -path_db     (Input)  Path to local blast database folder. (see create_blast_database.sh)           *DIR: data/refseq_genomics_virus_blast_db_17_07_2020/
     -path_output (Output) The folder of output blast classification.                                    *DIR: results/blast/refseq_result_blast_17_07_2020/
 __OPTIONS__
