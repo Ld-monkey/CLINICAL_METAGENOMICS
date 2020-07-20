@@ -24,6 +24,9 @@ note/*
 # Ignore errors in racine project.
 *.err
 
+# Ignore .log file.
+*.log
+
 # Ignore cookie.
 cookies
 
