@@ -22,11 +22,14 @@ function create_output_folder {
 
 function check_paired_sequences {
     # Check if the sequences are in pairs.
-    if [[ -f "$R1_READ" ]] && [[ -z ${R2_PAIRED_READ} ]] && [[ -f "$F2_READ" ]]; then
+    if [[ -f "$FASTQ1" ]] && ([[ -n "${FASTQ2+x}" ]] && [[ -f "$FASTQ2" ]]); then
         echo "Paired sequences"
         FLAG_PAIRED_SEQUENCE="yes"
+        echo `basename $FASTQ1`
+        echo `basename $FASTQ2`
     else
         echo "Not paired sequences"
+        echo `basename $FASTQ1`
         FLAG_PAIRED_SEQUENCE="no"
     fi
 }
@@ -39,10 +42,10 @@ function check_list_parameter {
         echo "Warning ! No list was selectionned !"
         FLAG_LIST_BOOLEAN="False"
     else
+        echo  "-path_list set."
         if [ -f "$LIST" ]; then
-            echo $LIST
-            echo "$LIST list file exists."
-            FLAG_PAIRED_SEQUENCE="True"
+            echo "`basename $LIST` list file exists."
+            FLAG_LIST_BOOLEAN="True"
         else
             echo "Error parameter -path_list was indicate but $LIST list file doesn't exists."
             exit
@@ -67,18 +70,22 @@ function check_correct_execution_seqtk {
 
 
 function convert_fastq_to_fasta {
+    echo $FLAG_PAIRED_SEQUENCE
+    echo $FLAG_LIST_BOOLEAN
+
     # Convert fastq files to fasta file.
-    if [ $FLAG_PAIRED_SEQUENCE = "yes" ]; then
-        if [ $FLAG_LIST_BOOLEAN = "True" ];then
+    if [[ $FLAG_PAIRED_SEQUENCE = "yes" ]]; then
+        if [[ $FLAG_LIST_BOOLEAN = "True" ]]; then
             # Paired + list.
+            echo "Paired + list."
 
             # The temporary file for seqtk.
-            TEMPORARY_FILE_2=$(dirname $LIST)_temporary_2.fq
+            TEMPORARY_FILE_2="temporary_2.fq"
             echo " temporary file : $TEMPORARY_FILE"
 
             # Extract sequences with names in file name.lst (LIST) one sequence
             # name per line.
-            seqtk subseq $FASTQ1 $LIST > $OUTPUT_FOLDER${TEMPORARY_FILE}
+            seqtk subseq $FASTQ1 $LIST > $OUTPUT_FOLDER$TEMPORARY_FILE
 
             # Convert fastq to fasta.
             seqtk seq -a $OUTPUT_FOLDER$TEMPORARY_FILE > $OUTPUT_FASTA
@@ -96,6 +103,7 @@ function convert_fastq_to_fasta {
             check_correct_execution_seqtk
         else
             # Paired but not list.
+            echo "Paired but not list."
 
             # Convert fastq to fasta for paired sequences and concatenate.
             seqtk seq -a $FASTQ1 > $OUTPUT_FASTA
@@ -105,8 +113,9 @@ function convert_fastq_to_fasta {
             check_correct_execution_seqtk
         fi
     else
-        if [ $FLAG_LIST_BOOLEAN = "True" ];then
+        if [[ $FLAG_LIST_BOOLEAN = "True" ]]; then
             # No paired + list.
+            echo "No paired + list."
 
             # Extract sequences with names in file name.lst (LIST) one sequence
             # name per line.
@@ -119,6 +128,7 @@ function convert_fastq_to_fasta {
             check_correct_execution_seqtk
         else
             # Not paired and not list.
+            echo "Not paired and not list."
 
             # Convert fastq to fasta for paired sequences.
             seqtk seq -a $FASTQ1 > $OUTPUT_FASTA
@@ -132,8 +142,8 @@ function convert_fastq_to_fasta {
 
 function remove_intermediate_file {
     # Remove tempory file.
-    rm -rf $OUTPUT_FOLDER$TEMPORARY_FILE
-    rm -rf $OUTPUT_FOLDER$$TEMPORARY_FILE_2
+    rm -rf --verbose $OUTPUT_FOLDER$TEMPORARY_FILE
+    rm -rf --verbose $OUTPUT_FOLDER$TEMPORARY_FILE_2
 }
 
 PROGRAM=convert_fastq_to_fasta.sh
@@ -200,8 +210,8 @@ check_paired_sequences
 check_list_parameter
 
 # The temporary file for seqtk.
-TEMPORARY_FILE=$(dirname $LIST)_temporary.fq
-echo " temporary file : $TEMPORARY_FILE"   
+TEMPORARY_FILE="temporary_1.fq"
+echo "Temporary file : $TEMPORARY_FILE"   
 
 # Transfort fastq sequences to fasta (can extract sequences with a list).
 convert_fastq_to_fasta
