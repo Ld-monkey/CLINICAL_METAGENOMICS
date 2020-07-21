@@ -9,6 +9,58 @@ La métagénomique clinique permet la recherche large de pathogènes dans un éc
 
 Dans ce cadre, le projet s'inspire du travail fourni à l'origine par Antoine. L disponible à l'adresse suivante [gitlab](https://gitlab.com/a_laine/metagenomic-pipeline).
 
+
+## Documentation :book:
+
+Une documentation a été créée dans le but d'avoir une référence et un support consultable sur l'ensemble du travail fournit, elle peut être visionnée avec le lien suivant :
+
+   * https://clinical-metagenomics.readthedocs.io/fr/latest/
+
+### Configuration de la documentation
+
+La documentation utilise [sphinx](https://www.sphinx-doc.org/en/master/) et le thème ["sphinx-rtd-theme"](https://github.com/readthedocs/sphinx_rtd_theme).
+
+Le thème peut être facilement activé avec l'environnement conda.
+
+## Architecture du projet 
+
+L'architecture du projet dans le cluster est la suivante :
+
+```bash
+.
+├── data
+│   ├── assembly
+│   ├── databases
+│   ├── raw_sequences
+│   ├── reads
+│   └── taxonomy
+├── docs
+│   ├── build
+│   ├── make.bat
+│   ├── Makefile
+│   └── source
+├── metagenomic_env.yml
+├── README.md
+├── results
+│   ├── classify_reads
+│   ├── logs
+│   ├── plots
+│   └── trimmed_reads
+├── Snakefile
+└── src
+    ├── bash
+    ├── download
+    ├── old_sources
+    ├── python
+    ├── r
+    └── report
+```
+
+Cette architecture s'inpire de la méthode décrite dans l'article suivant :
+
+   * Noble, W. S. A Quick Guide to Organizing Computational Biology Projects. PLOS Computational Biology 5, e1000424 (2009).
+
+
 ## Configurations
 
 ### Environnement conda :metal:
@@ -44,85 +96,9 @@ Pour actualiser les modifications dans l'environnement conda :
 conda env update --name metagenomic_env --file metagenomic_env.yml 
 ```
 
-## Automatisation avec SnakeMake :snake:
-[Snakemake](https://snakemake.readthedocs.io/en/stable/) est un outil particulièrement adapté au développement de pipelines et permet des analyses de données reproductibles. Ecrit en Python, il suit le principe de règles définies par plusieurs paramètres comme les fichiers d’entrées, et un ou plusieurs fichiers de sorties. Les règles sont écrites dans un fichier appelé « SnakeFile ». 
-
-Pour exécuter snakemake assurez vous d'avoir activé l'environnement conda :
-
-```bash
-conda activate metagenomic_env
-```
-
-Pour tester si le pipeline marche sans bug :
-
-```bash
-snakemake -np
-```
-
-Pour exécuter le pipeline sur un cluster avec une puissance de 30 CPU :
-
-```bash
-snakemake --cores 30
-```
-
-Pour créer un graphique complet du pipeline :
-
-```bash
-snakemake --dag | dot -Tsvg > results/plots/dag.svg 
-```
-
 ### Plot du pipeline de métagénomique clinique
 
 ![pipeline](results/plots/dag.svg)
-
-## Documentation :book:
-
-La documentation se trouve dans le lien suivant :
-
-   * https://clinical-metagenomics.readthedocs.io/fr/latest/
-
-### Configuration de la documentation
-
-La documentation utilise [sphinx](https://www.sphinx-doc.org/en/master/) et le thème "sphinx-rtd-theme" que l'on peut retrouver sur https://github.com/readthedocs/sphinx_rtd_theme.
-
-Le thème peut être facilement activé avec l'environnement conda décrit ci-dessus.
-
-## Architecture du projet 
-
-L'architecture du projet dans le cluster est la suivante :
-
-```bash
-.
-├── data
-│   ├── assembly
-│   ├── databases
-│   ├── raw_sequences
-│   ├── reads
-│   └── taxonomy
-├── docs
-│   ├── build
-│   ├── make.bat
-│   ├── Makefile
-│   └── source
-├── metagenomic_env.yml
-├── README.md
-├── results
-│   ├── classify_reads
-│   ├── logs
-│   ├── plots
-│   └── trimmed_reads
-├── run_snakefile_cluster.sh
-├── Snakefile
-└── src
-    ├── bash
-    ├── download
-    ├── python
-    └── r
-```
-
-Cette architecture s'inpire de la méthode décrite dans l'article suivant :
-
-   * Noble, W. S. A Quick Guide to Organizing Computational Biology Projects. PLOS Computational Biology 5, e1000424 (2009).
 
 ## Objectifs
 

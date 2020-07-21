@@ -9,8 +9,13 @@ Ci-dessous vous pouvez trouver le tutoriel sur comment utiliser le pipeline de m
 .. _pre_processing:
 
 .. warning::
-   Dans la majorité des programmes présentés dans les sessions suivantes du tutoriel, il est possible de consulter les paramètres précis d'un programme en ajoutant la comme :-h: pour help comme illustré ci-contre ::
-   <programe> -h
+   Dans la majorité des programmes présentés dans les sessions suivantes, il est possible de consulter les paramètres précis d'un programme en ajoutant la comme -h pour help comme illustré ci-contre.
+
+
+Pour appeler l'aide dans les programmes :
+::
+
+   <programme> -h
 
 Le pré-traitement des reads
 ---------------------------

@@ -1,0 +1,73 @@
+\babel@toc {french}{}
+\contentsline {chapter}{\numberline {1}Qu’est ce que le projet CLINICAL METAGENOMICS ?}{3}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Guide d’utilisation et référence}{5}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Installation}{5}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Télécharger le projet sur github}{5}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Création de l’environnement conda}{5}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Activation de l’environnement conda}{6}{subsection.2.1.3}%
+\contentsline {subsection}{\numberline {2.1.4}Les messages d’erreurs}{6}{subsection.2.1.4}%
+\contentsline {section}{\numberline {2.2}Vue d’ensemble}{7}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Étape de pré\sphinxhyphen {}traitement}{7}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Création des bases de données de références}{7}{subsection.2.2.2}%
+\contentsline {subsubsection}{La base de données FDA\sphinxhyphen {}ARGOS}{8}{subsubsection*.3}%
+\contentsline {subsubsection}{La base de données Mycocosm}{8}{subsubsection*.4}%
+\contentsline {subsubsection}{La base de données FungiDB}{8}{subsubsection*.5}%
+\contentsline {subsubsection}{La base de données RefSeq}{8}{subsubsection*.6}%
+\contentsline {subsection}{\numberline {2.2.3}Étape de classification}{9}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}Étape d’analyse des résultats}{9}{subsection.2.2.4}%
+\contentsline {section}{\numberline {2.3}Tutoriel}{9}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Le pré\sphinxhyphen {}traitement des reads}{10}{subsection.2.3.1}%
+\contentsline {subsubsection}{Programme}{10}{subsubsection*.18}%
+\contentsline {subsubsection}{Localisation}{10}{subsubsection*.19}%
+\contentsline {subsubsection}{Les outils utilisés}{10}{subsubsection*.20}%
+\contentsline {subsubsection}{Exemple d’utilisation}{10}{subsubsection*.21}%
+\contentsline {subsubsection}{Les paramètres}{10}{subsubsection*.22}%
+\contentsline {subsubsection}{Les fichiers de sorties}{11}{subsubsection*.23}%
+\contentsline {subsection}{\numberline {2.3.2}Le téléchargement de la base de données FDA\sphinxhyphen {}ARGOS}{11}{subsection.2.3.2}%
+\contentsline {subsubsection}{Programme}{11}{subsubsection*.24}%
+\contentsline {subsubsection}{Localisation}{11}{subsubsection*.25}%
+\contentsline {subsubsection}{Exemple d’utilisation}{12}{subsubsection*.26}%
+\contentsline {subsubsection}{Les paramètres}{12}{subsubsection*.27}%
+\contentsline {subsubsection}{Les fichiers de sorties}{12}{subsubsection*.28}%
+\contentsline {subsection}{\numberline {2.3.3}Le téléchargement de la base de données Mycocosm}{12}{subsection.2.3.3}%
+\contentsline {subsubsection}{Programme}{12}{subsubsection*.29}%
+\contentsline {subsubsection}{Localisation}{13}{subsubsection*.30}%
+\contentsline {subsubsection}{Exemple d’utilisation}{13}{subsubsection*.31}%
+\contentsline {subsubsection}{Dépendances}{13}{subsubsection*.32}%
+\contentsline {subsection}{\numberline {2.3.4}Le téléchargement de la base de données FungiDB}{14}{subsection.2.3.4}%
+\contentsline {subsubsection}{Programme}{14}{subsubsection*.33}%
+\contentsline {subsubsection}{Localisation}{14}{subsubsection*.34}%
+\contentsline {subsubsection}{Exemple d’utilisation}{14}{subsubsection*.35}%
+\contentsline {subsubsection}{Les paramètres}{14}{subsubsection*.36}%
+\contentsline {subsubsection}{Les fichiers de sorties}{14}{subsubsection*.37}%
+\contentsline {subsection}{\numberline {2.3.5}Le téléchargement de la base de données RefSeq}{14}{subsection.2.3.5}%
+\contentsline {subsubsection}{Programme}{15}{subsubsection*.38}%
+\contentsline {subsubsection}{Localisation}{15}{subsubsection*.39}%
+\contentsline {subsubsection}{Exemple d’utilisation}{15}{subsubsection*.40}%
+\contentsline {subsubsection}{Les paramètres}{15}{subsubsection*.41}%
+\contentsline {subsubsection}{Les fichiers de sorties}{16}{subsubsection*.42}%
+\contentsline {subsection}{\numberline {2.3.6}L’indexation d’une base de données avec Kraken 2}{16}{subsection.2.3.6}%
+\contentsline {subsubsection}{La théorie}{16}{subsubsection*.43}%
+\contentsline {subsubsection}{La pratique}{17}{subsubsection*.44}%
+\contentsline {subsubsection}{Programme}{17}{subsubsection*.45}%
+\contentsline {subsubsection}{Localisation}{17}{subsubsection*.46}%
+\contentsline {subsubsection}{Exemple d’utilisation}{17}{subsubsection*.47}%
+\contentsline {subsubsection}{Les paramètres}{18}{subsubsection*.48}%
+\contentsline {subsubsection}{Les fichiers de sorties}{18}{subsubsection*.49}%
+\contentsline {subsection}{\numberline {2.3.7}Classification des reads avec Kraken 2}{18}{subsection.2.3.7}%
+\contentsline {subsubsection}{La théorie}{19}{subsubsection*.50}%
+\contentsline {subsubsection}{La pratique}{20}{subsubsection*.51}%
+\contentsline {subsubsection}{Programme}{20}{subsubsection*.52}%
+\contentsline {subsubsection}{Localisation}{20}{subsubsection*.53}%
+\contentsline {subsubsection}{Exemple d’utilisation}{20}{subsubsection*.54}%
+\contentsline {subsubsection}{Les paramètres}{21}{subsubsection*.55}%
+\contentsline {subsubsection}{Les fichiers de sorties}{21}{subsubsection*.56}%
+\contentsline {subsection}{\numberline {2.3.8}Création d’une base de données avec la suite BLAST+}{21}{subsection.2.3.8}%
+\contentsline {subsubsection}{Dépendances}{21}{subsubsection*.57}%
+\contentsline {subsubsection}{Programme}{22}{subsubsection*.58}%
+\contentsline {subsubsection}{Localisation}{22}{subsubsection*.59}%
+\contentsline {subsubsection}{Exemple d’utilisation}{22}{subsubsection*.60}%
+\contentsline {subsubsection}{Les paramètres}{22}{subsubsection*.61}%
+\contentsline {subsubsection}{Les fichiers de sorties}{23}{subsubsection*.62}%
+\contentsline {subsection}{\numberline {2.3.9}Classification des reads avec la suite BLAST+}{23}{subsection.2.3.9}%
+\contentsline {section}{\numberline {2.4}Indices and tables}{23}{section.2.4}%
