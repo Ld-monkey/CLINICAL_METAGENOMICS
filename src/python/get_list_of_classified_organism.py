@@ -34,13 +34,43 @@ def arguments():
                         help="(Input) The path of the *.output.txt file provided" \
                         " by the classification of kraken 2",
                         type=str)
+    parser.add_argument("-taxon",
+                        help="(Input) Can specified a taxon e.g (Bacteria, Viruses)",
+                        type=str)
     parser.add_argument("-output_list",
                         help="(Output) The path of the output text file which will" \
                         " contain only the classified sequences",
                         type=str)
     args = parser.parse_args()
 
-    return args.path_report, args.path_output, args.output_list
+    return args.path_report, args.path_output, args.taxon, args.output_list
+
+
+def get_correct_taxon(taxon):
+    """Check that this is the correct taxon based on top level of the taxonomy
+    database by NCBI at https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi
+    """
+
+    list_taxon = ["Archaea",
+                  "Viruses",
+                  "Eukaryota",
+                  "other sequences",
+                  "cellular organisms",
+                  "Bacteria",
+                  "Fungi"]
+
+    taxon_correct = ""
+
+    for i, element in enumerate(list_taxon):
+        if taxon.lower() in element.lower():
+            taxon_correct = list_taxon[i]
+            break
+
+    if taxon_correct == "":
+        print(list_taxon)
+        sys.exit("You specified a taxon which is not part of the list. Exit!")
+
+    return taxon_correct
 
 
 def create_output_folder(filename):
@@ -84,35 +114,7 @@ def get_all_classified_organism(output_file):
                 print(line)
 
 
-def get_all_specific_line_of_output_kraken2(taxonomic_id_list,
-                                            output_kraken_file):
-    """ Method that return a list of specific lines of *.output.txt from Kraken 2
-    thank to all classified taxonomics id of specifis taxon """
-
-    with open(output_kraken_file) as output_file:
-        line = output_file.readline()
-
-        # A list with all specific header sequences name from *.output.txt.
-        list_header_sequences_name = list()
-
-        while line:
-            # status_classification = re.split("\t", line)[0]
-            header_sequences_id = re.split("\t", line)[1]
-            output_taxonomy_id = re.split("\t", line)[2]
-
-            if output_taxonomy_id in taxonomic_id_list:
-                list_header_sequences_name.append(header_sequences_id)
-
-            # if status_classification == "U":
-            #     print("problem unclassified output")
-            #     print(line)
-
-            line = output_file.readline()
-
-    return list_header_sequences_name
-
-
-def get_all_specific_classified_taxonomic_id(report_file, taxon):
+def get_specific_classified_taxonomic_id(report_file, taxon):
     """ Method that return a list of taxonomic id from *report.txt of Kraken 2
     for specific taxon (e.g: Bacteria) with a number of fragments assigned
     directly to this taxon > 0 """
@@ -165,26 +167,62 @@ def get_all_specific_classified_taxonomic_id(report_file, taxon):
         return list_id_species
 
 
+def get_all_specific_line_of_output_kraken2(taxonomic_id_list,
+                                            output_kraken_file):
+    """ Method that return a list of specific lines of *.output.txt from Kraken 2
+    thank to all classified taxonomics id of specifis taxon """
+
+    with open(output_kraken_file) as output_file:
+        line = output_file.readline()
+
+        # A list with all specific header sequences name from *.output.txt.
+        list_header_sequences_name = list()
+
+        while line:
+            # status_classification = re.split("\t", line)[0]
+            header_sequences_id = re.split("\t", line)[1]
+            output_taxonomy_id = re.split("\t", line)[2]
+
+            if output_taxonomy_id in taxonomic_id_list:
+                list_header_sequences_name.append(header_sequences_id)
+
+            # if status_classification == "U":
+            #     print("problem unclassified output")
+            #     print(line)
+
+            line = output_file.readline()
+
+    return list_header_sequences_name
+
+
 if __name__ == "__main__":
     print("Get a list of classified organism !")
 
     # Get all parameters.
-    REPORT_KRAKEN_FILE, OUTPUT_KRAKEN_FILE, OUTPUT_LIST = arguments()
+    REPORT_KRAKEN_FILE, OUTPUT_KRAKEN_FILE, TAXON, OUTPUT_LIST = arguments()
 
-    # Get all classified organisms.
-    #LIST_CLASSIFIED_ORGANISM = get_all_classified_organism(OUTPUT_KRAKEN_FILE)
+    if TAXON == None or TAXON.lower() == "all":
+        print("No specific taxon was precised !")
+        print("Get all classified organisms.")
 
-    # Get all taxonomic id from specific taxon (bacteria, viral, fungi ...).
-    LIST_CLASSIFIED_SPECIES = get_all_specific_classified_taxonomic_id(REPORT_KRAKEN_FILE,
-                                                                       "Bacteria")
+        # Get all classified organisms.
+        #LIST_CLASSIFIED_ORGANISM = get_all_classified_organism(OUTPUT_KRAKEN_FILE)
+    else:
+        # Verified the correct taxon parameter.
+        TAXON = get_correct_taxon(TAXON)
 
-    print(OUTPUT_KRAKEN_FILE)
-    # Recover each sequences from *output.txt of Kraken 2.
-    ALL_HEADER_SEQUENCES_ID = get_all_specific_line_of_output_kraken2(LIST_CLASSIFIED_SPECIES,
-                                                                      OUTPUT_KRAKEN_FILE)
+        # Get all taxonomic id from specific taxon (bacteria, viral, fungi ...).
+        LIST_CLASSIFIED_SPECIES = get_specific_classified_taxonomic_id(REPORT_KRAKEN_FILE,
+                                                                       TAXON)
 
-    # create output folders if necessary.
-    create_output_folder(OUTPUT_LIST)
+        # Recover each sequences from *output.txt of Kraken 2.
+        ALL_HEADER_SEQUENCES_ID = get_all_specific_line_of_output_kraken2(LIST_CLASSIFIED_SPECIES,
+                                                                          OUTPUT_KRAKEN_FILE)
 
-    # create a output list.
-    create_output_list_file(OUTPUT_LIST, ALL_HEADER_SEQUENCES_ID)
+        # create output folders if necessary.
+        create_output_folder(OUTPUT_LIST)
+
+        # create a output list.
+        create_output_list_file(OUTPUT_LIST, ALL_HEADER_SEQUENCES_ID)
+
+        print("Creation of list done !")
