@@ -71,9 +71,8 @@ if __name__ == "__main__":
     # Find fasta information after >.
     list_genbank_fda_argos = list()
 
-    #for i in range(len(LIST_ALL_SEQUENCES))
-    for i in range(0, 3):
-        print(i)
+    # Get list of id genbank fda argos.
+    for i in range(len(LIST_ALL_SEQUENCES)):
         with open(PATH_SEQUENCES+LIST_ALL_SEQUENCES[i]) as fasta:
             lines = fasta.readlines()
             for line in lines:
