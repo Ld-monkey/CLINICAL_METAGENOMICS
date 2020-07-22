@@ -4,6 +4,7 @@
 #
 # e.g bash src/create_blast_database \
 #              -path_seq data/raw_sequences/refseq/bacteria/ \
+#              -taxid_map data/raw_sequences/refseq/bacteria/taxid.map
 #              -output_db data/databases/blast/refseq/
 
 
@@ -28,6 +29,27 @@ function check_sequence_folder {
     fi
 }
 
+
+# Funciton to check if taxon map file exists.
+function check_taxid_map_file {
+
+    #Check if parameter is set.
+    if [ -z ${TAXON_MAP+x} ]
+    then
+        echo "-taxon_map unset."
+        echo "Error ! No taxonomic ID can be added to the database."
+        exit
+    else
+        if [ -f $TAXON_MAP ]
+        then
+            echo $TAXON_MAP
+            echo "$TAXON_MAP taxon map exist."
+        else
+            echo "Error $TAXON_MAP doesn't exist."
+            exit
+        fi
+    fi    
+}
 
 # Function to check if the database folder exists.
 function check_output_database_folder {
@@ -99,6 +121,7 @@ function run_makeblastdb {
         makeblastdb -in ${OUTPUT_DATABASE}${DEFAULT_NAME_CONCATENATION}fasta \
                     -dbtype nucl \
                     -parse_seqids \
+                    -taxid_map $TAXON_MAP \
                     -mask_data ${OUTPUT_DATABASE}dustmasker/dustmasker.asnb \
                     -out ${OUTPUT_DATABASE}/makeblastdb \
                     -title "Blast database without low complexity sequences"
@@ -108,6 +131,7 @@ function run_makeblastdb {
         makeblastdb -in ${OUTPUT_DATABASE}${DEFAULT_NAME_CONCATENATION}fasta \
                     -dbtype nucl \
                     -parse_seqids \
+                    -taxid_map $TAXON_MAP \
                     -out ${OUTPUT_DATABASE}/makeblastdb \
                     -title "Blast database with low complexity sequences"
     fi
@@ -152,10 +176,11 @@ __DESCRIPTION__
 OPTIONS=$(cat << __OPTIONS__
 
 ## OPTIONS ##
-    -path_seq  (Input)  The path of all sequences to create database.                                *DIR: all_sequences
-    -output_db (Output) The output file containt all sequences.                                      *FILE: output_sequences
-    -dustmasker (Optional) Applied dustmasker or not to remove low complexity sequences.             *STR: (yes|no)
-    -force_remove (Optional) Change the default parameter the deletion of intermediate files.        *STR: (yes|no)
+    -path_seq     (Input)    The path of all sequences to create database.                           *DIR:  all_sequences
+    -taxon_map    (Input)    The path of the taxid map.                                              *FILE: taxmap.txt
+    -output_db    (Output)   The output file containt all sequences.                                 *FILE: output_sequences
+    -dustmasker   (Optional) Applied dustmasker or not to remove low complexity sequences.           *STR:  (yes|no)
+    -force_remove (Optional) Change the default parameter the deletion of intermediate files.        *STR:  (yes|no)
 __OPTIONS__
        )
 
@@ -190,6 +215,7 @@ while [ -n "$1" ]; do
     case $1 in
         -h)                   USAGE      ; exit 0 ;;
         -path_seq)            PATH_SEQUENCES=$2         ; shift 2; continue ;;
+        -taxon_map)           TAXON_MAP=$2              ; shift 2; continue ;;
   	    -output_db)           OUTPUT_DATABASE=$2        ; shift 2; continue ;;
         -dustmasker)          DUSTMASKER_FLAG=$2        ; shift 2; continue ;;
         -force_remove)        FORCE_REMOVE=$2           ; shift 2; continue ;;
@@ -199,6 +225,9 @@ done
 
 # Check if sequences exists.
 check_sequence_folder
+
+# Checf if taxid map exists.
+check_taxid_map_file
 
 # Check if output folder exists.
 check_output_database_folder

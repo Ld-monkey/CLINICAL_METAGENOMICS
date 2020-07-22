@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # From a set of reads and depend of the database gived in argument allow to
 # align the sequences with the blast algorithms.
 #
