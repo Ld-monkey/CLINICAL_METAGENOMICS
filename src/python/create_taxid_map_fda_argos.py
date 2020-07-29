@@ -5,8 +5,8 @@
 July. 2020
 CLINICAL METAGENOMICS
 
-Creation of a taxid_map file specific to Kraken 2 sequences. The taxid_map file
-created allows to associate a genbank identifier used by Kraken 2 with a taxomic
+Creation of a taxid_map file specific to FDA-ARGOS sequences. The taxid_map file
+created allows to associate a genbank identifier used by FDA-ARGOS with a taxomic
 identifier of ncbi and which can be consulted with the blast algorithm by
 specifying the -taxon parameter of the src script /bash/create_blast_database.sh
 
