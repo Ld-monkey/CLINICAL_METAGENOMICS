@@ -1,8 +1,14 @@
 #!/bin/bash
+#
 # From a set of reads and depend of the database gived in argument allow to
 # align the sequences with the blast algorithms.
-#
+# Warning : For moment doesn't take  into account compressed fasta files like
+# fasta.gz .
 # e.g bash src/bash/classify_set_reads_blast.sh \
+#          -path_seq results/classify_reads/trimmed_classify_fda_argos_with_none_library_02_07_2020/1-MAR-LBA-ADN_S1/convert_fastq_to_fasta/ \
+#          -path_db data/refseq_genomics_virus_blast_db_17_07_2020/ \    
+#          -path_output results/blast/refseq_result_blast_17_07_2020/ \
+#          -threads 10
 
 
 # Function to check if the sequence folder exists.
