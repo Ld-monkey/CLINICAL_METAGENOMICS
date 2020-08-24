@@ -15,13 +15,13 @@ Current version: 1.0.0 Juillet 2020
 Qu'est ce que le projet CLINICAL METAGENOMICS ?
 ===============================================
 
-**CLINICAL METAGENOMICS** est un ensemble de programme de bio-informatique adaptés à la dectection des pathogènes dans un échantillon clinique de métagénomique.
+**CLINICAL METAGENOMICS** est un ensemble de programme de bio-informatique adaptés à la dectection de pathogènes dans un échantillon clinique de NGS.
 
 Il permet :
 
 #. Le téléchargement des librairies de séquences.
-#. La création et l'indexation des bases de données de références pour la métagénomique.
-#. L'analyse des résultats NGS.
+#. La création et l'indexation des bases de données de références.
+#. L'analyse des résultats de l'échatillon NGS.
 
 Actuellement, ...
 
