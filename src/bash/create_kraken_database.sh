@@ -1,17 +1,26 @@
 #!/bin/bash
 
-# Create custom kraken 2 database.
-# --> 3 outputs files : hash.k2d, opts.k2d, taxo.k2d.
-# hash.k2d: Contains the minimizer to taxon mappings.
-# opts.k2d: Contains information about the options used to build the database.
-# taxo.k2d: Contains taxonomy information used to build the database.
-# e.g
-# bash src/bash/create_kraken_database.sh \
-#      -path_seq data/raw_sequences/test/ \
-#      -path_db data/databases/kraken_2/fda_argos_with_none_library_kraken_database_07_06_2020/ \
-#      -type_db none \
-#      -threads 30
-# Official documentation : https://ccb.jhu.edu/software/kraken2/index.shtml?t=manual
+# Create custom Kraken 2 database.
+# e.g bash src/bash/create_kraken_database.sh \
+#          -path_seq data/raw_sequences/test/ \
+#          -path_db data/databases/kraken_2/fda_argos_database_07_06_2020/ \
+#          -type_db none \
+#          -threads 30
+# Official documentation : https://github.com/DerrickWood/kraken2/wiki/Manual
+
+
+# Check is Kraken 2 is load.
+function check_load_kraken {
+
+    # Check is result is load.
+    if kraken2-build --version; then
+	echo "Kraken 2 is initialized."
+    else
+	echo "Error : Kraken 2 is not initialized !"
+	echo "Install Kraken 2 or load a conda environment with Kraken 2 (metagenomic_env?)"
+	exit 1
+    fi
+}
 
 
 # Function to check if the sequence folder exists.
@@ -105,6 +114,9 @@ function check_taxonomy_parameter {
 
 	cp -r -v ${TAXONOMY}taxonomy ${DBNAME}taxonomy
 	
+	# Unzip all taxonomy files.
+	unzip_ncbi_taxonomy
+
 	echo "copy done !"
     fi
 }
@@ -161,19 +173,19 @@ function check_database_exists {
 # Function to download ncbi taxonomy if doesn't exists.
 function download_ncbi_taxonomy {
     
-    # Check if folder with taxonomy is empty.
-    if [ ! "$(ls -A ${DBNAME}taxonomy)" ]
+    # Check if folder with taxonomy not exists.
+    if [ ! -d  "${DBNAME}taxonomy" ]
     then
-        echo "$DBNAME is empty!"
-        echo "Download NCBI taxonomy in $DBNAME"
+        echo "Download NCBI taxonomy in ${DBNAME}taxonomy"
         kraken2-build --download-taxonomy --db $DBNAME --use-ftp
-        echo "Unzip all data"
-        gunzip ${DBNAME}taxonmy/*.gz
-        echo "Unzip done !"
+        #echo "Unzip all data"
+        #gunzip ${DBNAME}taxonomy/*.gz
+        #echo "Unzip done !"
     else
-        echo "NCBI taxonomy is already exists."
+        echo "NCBI taxonomy folder already exists."
     fi
 }
+
 
 # Function to add other .fna sequences to library of database.
 function add_fna_in_library {
@@ -401,13 +413,17 @@ while [ -n "$1" ]; do
     esac
 done
 
-echo " ---- Create Kraken 2 Database ---- "
-
-# Check if folder containing sequences exists (-path_seq).
-check_sequence_folder
+# Check Kraken 2 is loaded.
+check_load_kraken
 
 # Check if database folder exists (-path_db).
 check_database_folder
+
+# Verified if Kraken 2 database is already exists.
+check_database_exists
+
+# Check if folder containing sequences exists (-path_seq).
+check_sequence_folder
 
 # Check the correct parameter (-type_db).
 check_type_database
@@ -420,16 +436,10 @@ unzip_sequences
 # Check taxonomy variable is set.
 check_taxonomy_parameter
 
-# Unzip all taxonomy files.
-unzip_ncbi_taxonomy
-
 # Download the genomics libraries if specified.
 download_genomic_libraries
 
-# Verified if kraken 2 database is already exists.
-check_database_exists
-
-# Add custom sequences if specified
+# Add custom sequences if specified.
 add_custom_sequences
 
 # Build the Kraken 2 database.

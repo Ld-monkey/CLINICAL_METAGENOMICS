@@ -26,6 +26,8 @@ OPTIONS=$(cat << __OPTIONS__
 
 ## OPTIONS ##
     -output_taxonomy   (Output) The folder path to download the ncbi taxonomy for kraken 2.                                         *DIR: path_taxonomy/
+    -force_download    (Optional) Force to update the folder path of ncbi taxonomy.                                                 *STR: ("yes"/"no")
+
 __OPTIONS__
        )
 
