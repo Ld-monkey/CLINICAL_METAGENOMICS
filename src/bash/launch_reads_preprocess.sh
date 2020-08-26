@@ -139,7 +139,7 @@ function trimmed_sequences {
 	    count_total_reads
 
 	    # Multiply by 2 le number of R1 reads and create a info txt.
-	    echo $(($countReads * 2)) > ${FASTQ_READ%%.*}_info.txt
+	    echo $(($countReads * 2)) > $FOLDER_INPUT${R1_FASTQ_READ%%.*}_info.txt
 
             echo "Run clumpify.sh with depude flag to remove duplicate reads."
 	    
@@ -190,7 +190,7 @@ function trimmed_sequences {
 	    count_total_reads
 
 	    total_reads=$(count_total_reads)
-	    echo "$total_reads" > ${R1_FASTQ_READ%%.*}.info.txt
+	    echo "$total_reads" > $FOLDER_INPUT${R1_FASTQ_READ%%.*}_info.txt
 
             echo "Run clumpify.sh to remove duplicate reads."
 	    
@@ -247,6 +247,7 @@ function move_trimmed_files {
 
 # Remove all intermediates files.
 function remove_intermediate_files {
+
     # By default delete intermediate (dedupe) file.
     if [[ $FORCE_REMOVE == "yes" ]]; then
 	echo "Remove dedupe files : dedupe file to save space limit."
@@ -259,8 +260,6 @@ function remove_intermediate_files {
 
 # Move dedupe files.
 function move_dedupe_files {
-
-    echo $FOLDER_OUTPUT
     
     # Move all dedupe files
     ALL_DEDUPE_OUTPUTS=$(ls $FOLDER_INPUT | grep -i "_dedupe")
@@ -276,8 +275,6 @@ function move_dedupe_files {
     for DEDUPE_OUTPUT in $FULL_PATH_DEDUPE_OUTPUTS; do
 	mv -v $DEDUPE_OUTPUT $FOLDER_OUTPUT
     done
-
-    echo $FOLDER_OUTPUT
     
     echo "Move dedupe file done !"
 }
@@ -285,8 +282,6 @@ function move_dedupe_files {
 
 # Move info.txt that contain the total of reads.
 function move_info_total_reads {
-
-    echo $FOLDER_OUTPUT
 
     # Create a specific folder for info.
     mkdir -p -v ${FOLDER_OUTPUT}info
@@ -298,9 +293,6 @@ function move_info_total_reads {
     for INFO in $ALL_INFO_OUTPUTS; do
 	FULL_PATH_INFO_OUTPUTS+="$FOLDER_INPUT$INFO "
     done
-
-    echo $FULL_PATH_INFO_OUTPUTS
-    echo $FOLDER_OUTPUT
     
     # Move all info files.
     echo "Move all info files in $FOLDER_OUTPUT."
