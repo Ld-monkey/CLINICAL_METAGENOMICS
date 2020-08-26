@@ -27,7 +27,7 @@ Programme
 
 Nom du programme::
 
-   remove_poor_quality_duplicate_reads_preprocess.sh
+   launch_reads_preprocess.sh
 
 Localisation
 ~~~~~~~~~~~~
@@ -36,7 +36,7 @@ Localisation
 
    └── src
     ├── bash
-    │   ├── remove_poor_quality_duplicate_reads_preprocess.sh
+    │   ├── launch_reads_preprocess.sh
 
 Les outils utilisés
 ~~~~~~~~~~~~~~~~~~~
@@ -53,7 +53,7 @@ Exemple d'utilisation
 
 .. code-block:: sh
 
-   bash src/bash/remove_poor_quality_duplicate_reads_preprocess.sh \
+   bash src/bash/launch_reads_preprocess.sh \
                 -path_reads data/reads/PAIRED_SAMPLES_ADN_TEST/ \
                 -path_output results/trimmed_reads/trimmed_PAIRED_SAMPLES_ADN_TEST_reads_04_06_2020/ \
                 -threads 28
@@ -73,7 +73,7 @@ Les paramètres
 
 .. code-block:: sh
 
-   bash src/bash/remove_poor_quality_duplicate_reads_preprocess.sh \
+   bash src/bash/launch_reads_preprocess.sh \
                 -path_reads data/reads/PAIRED_SAMPLES_ADN_TEST/ \
                 -path_output results/trimmed_reads/trimmed_PAIRED_SAMPLES_ADN_TEST_reads_04_06_2020/ \
                 -force_remove no \

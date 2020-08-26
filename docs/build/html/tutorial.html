@@ -241,7 +241,7 @@
 </li>
 </ul>
 </div>
-<div class="admonition warning">
+<div class="admonition warning" id="pre-processing">
 <p class="admonition-title">Avertissement</p>
 <p>Dans la majorité des programmes présentés dans les sessions suivantes, il est possible de consulter les paramètres précis d’un programme en ajoutant la commande <strong>-h</strong> pour <strong>help</strong> comme illustré ci-contre.</p>
 </div>
@@ -255,7 +255,7 @@
 <div class="section" id="programme">
 <h3><span class="section-number">3.1.1. </span>Programme<a class="headerlink" href="#programme" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Nom du programme:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">remove_poor_quality_duplicate_reads_preprocess</span><span class="o">.</span><span class="n">sh</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">launch_reads_preprocess</span><span class="o">.</span><span class="n">sh</span>
 </pre></div>
 </div>
 </div>
@@ -263,7 +263,7 @@
 <h3><span class="section-number">3.1.2. </span>Localisation<a class="headerlink" href="#localisation" title="Lien permanent vers ce titre">¶</a></h3>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>└── src
  ├── bash
- │   ├── remove_poor_quality_duplicate_reads_preprocess.sh
+ │   ├── launch_reads_preprocess.sh
 </pre></div>
 </div>
 </div>
@@ -283,7 +283,7 @@
 </div>
 <div class="section" id="exemple-d-utilisation">
 <h3><span class="section-number">3.1.4. </span>Exemple d’utilisation<a class="headerlink" href="#exemple-d-utilisation" title="Lien permanent vers ce titre">¶</a></h3>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash src/bash/remove_poor_quality_duplicate_reads_preprocess.sh <span class="se">\</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash src/bash/launch_reads_preprocess.sh <span class="se">\</span>
              -path_reads data/reads/PAIRED_SAMPLES_ADN_TEST/ <span class="se">\</span>
              -path_output results/trimmed_reads/trimmed_PAIRED_SAMPLES_ADN_TEST_reads_04_06_2020/ <span class="se">\</span>
              -threads <span class="m">28</span>
@@ -307,7 +307,7 @@
 <dd class="field-even"><p>(Optionnel) Par défaut la valeur est sur « yes » et permet de supprimer les fichiers intermédiaires. Pour ne pas supprimer les fichiers intermédiaires configurer le paramètre avec la valeur « no » comme avec l’exemple ci-contre :</p>
 </dd>
 </dl>
-<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash src/bash/remove_poor_quality_duplicate_reads_preprocess.sh <span class="se">\</span>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash src/bash/launch_reads_preprocess.sh <span class="se">\</span>
              -path_reads data/reads/PAIRED_SAMPLES_ADN_TEST/ <span class="se">\</span>
              -path_output results/trimmed_reads/trimmed_PAIRED_SAMPLES_ADN_TEST_reads_04_06_2020/ <span class="se">\</span>
              -force_remove no <span class="se">\</span>
