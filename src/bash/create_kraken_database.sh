@@ -35,9 +35,9 @@ function check_sequence_folder {
         if [ -d ${PATH_SEQUENCES} ]
         then
             echo $PATH_SEQUENCES
-            echo "$PATH_SEQUENCES folder of sequence exist."
+            echo "$PATH_SEQUENCES folder of sequence exists."
         else
-            echo "Error $PATH_SEQUENCES doesn't exist."
+            echo "Error $PATH_SEQUENCES doesn't exists."
             exit
         fi
     fi
