@@ -50,18 +50,18 @@ function check_sequence_folder {
 function check_database_folder {
 
     # Check if parameter is set.
-    if [ -z ${DBNAMES+x} ]
+    if [ -z ${DBNAME+x} ]
     then
         echo "-path_db unset."
         echo "No classification can be done without a reference database"
 	exit 1
     else
-        if [ -d ${DBNAMES} ]
+        if [ -d ${DBNAME} ]
         then
-            echo $DBNAMES
-            echo "$DBNAMES folder of Kraken 2 database exists."
+            echo $DBNAME
+            echo "$DBNAME folder of Kraken 2 database exists."
         else
-	    echo "Error $DBNAMES folder doesn't exists."
+	    echo "Error $DBNAME folder doesn't exists."
 	    echo "No classification can be done without a reference database"
             exit 1
         fi
