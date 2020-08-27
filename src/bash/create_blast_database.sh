@@ -51,6 +51,7 @@ function check_taxid_map_file {
     fi    
 }
 
+
 # Function to check if the database folder exists.
 function check_output_database_folder {
     if [ -d $OUTPUT_DATABASE ]
@@ -108,6 +109,7 @@ function run_dustmasker {
     fi    
 
 }
+
 
 # Run makeblastdb to create local blast database.
 function run_makeblastdb {
