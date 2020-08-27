@@ -63,7 +63,7 @@ def get_all_ncbi_genome_accession(path_sequences):
     id_ncbi_genome_accession = list()
 
     # Get list of id genbank fda argos.
-    for i in range(0, 2):
+    for i in range(0, len(list_all_sequences)):
         with open(path_sequences+list_all_sequences[i]) as fasta:
             lines = fasta.readlines()
             for line in lines:
@@ -98,6 +98,7 @@ def create_taxonomic_mapping_file(path_taxid_map, list_genome_accession):
 
 
 if __name__ == "__main__":
+
     print("Create a taxid map for Kraken2 database")
 
     # Get all arguements.
