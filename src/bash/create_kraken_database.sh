@@ -17,7 +17,7 @@ function check_load_kraken {
 	echo "Kraken 2 is initialized."
     else
 	echo "Error : Kraken 2 is not initialized !"
-	echo "Install Kraken 2 or load a conda environment with Kraken 2 (metagenomic_env?)"
+	echo "Install Kraken 2 or load a conda environment (metagenomic_env?)"
 	exit 1
     fi
 }

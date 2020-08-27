@@ -8,6 +8,20 @@
 #              -output_db data/databases/blast/refseq/
 
 
+# Check is makeblastdb is load.
+function check_load_blastdb {
+
+    # Check is result is load.
+    if makeblastdb -version; then
+	echo "makeblastdb is initialized."
+    else
+	echo "Error : makeblastdb is not initialized !"
+	echo "Install makeblastdb or load a conda environment (metagenomic_env?)"
+	exit 1
+    fi
+}
+
+
 # Function to check if the sequence folder exists.
 function check_sequence_folder {
 
@@ -218,12 +232,15 @@ while [ -n "$1" ]; do
         -h)                   USAGE      ; exit 0 ;;
         -path_seq)            PATH_SEQUENCES=$2         ; shift 2; continue ;;
         -taxon_map)           TAXON_MAP=$2              ; shift 2; continue ;;
-  	    -output_db)           OUTPUT_DATABASE=$2        ; shift 2; continue ;;
+	-output_db)           OUTPUT_DATABASE=$2        ; shift 2; continue ;;
         -dustmasker)          DUSTMASKER_FLAG=$2        ; shift 2; continue ;;
         -force_remove)        FORCE_REMOVE=$2           ; shift 2; continue ;;
         *)       BAD_OPTION $1;;
     esac
 done
+
+# Check if makeblastdb is loaded.
+check_load_blastdb
 
 # Check if sequences exists.
 check_sequence_folder
