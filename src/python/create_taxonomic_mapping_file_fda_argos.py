@@ -63,7 +63,7 @@ def get_all_ncbi_genome_accession(path_sequences):
     id_ncbi_genome_accession = list()
 
     # Get list of id genbank fda argos.
-    for i in range(0, len(list_all_sequences)):
+    for i in range(len(list_all_sequences)):
         with open(path_sequences+list_all_sequences[i]) as fasta:
             lines = fasta.readlines()
             for line in lines:
@@ -72,7 +72,6 @@ def get_all_ncbi_genome_accession(path_sequences):
                     id_ncbi_genome_accession.append(splitted_line)
 
     print("Get all ncbi genome accession of FDA ARGOS done !")
-
     return id_ncbi_genome_accession
 
 
