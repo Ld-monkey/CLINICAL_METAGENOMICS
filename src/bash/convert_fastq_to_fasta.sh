@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# Because some tools like blast alignment need a file in fasta format. It is
-# important in some cases to transform the fastq file into a fasta or fna file.
+# Because some tools like blast alignment need a file in fasta format
+# (https://www.biostars.org/p/377247/#377248 ). It is important in some
+# cases to transform the fastq file into a fasta or fna file.
 # One of the advantages of using seqtk in this script is that it can take into
 # account specific lists to select the sequences you want to take.
 # To have more details on seqtk see also https://github.com/lh3/seqtk .
@@ -101,6 +102,11 @@ function convert_fastq_to_fasta {
 
             # Check good execution of seqtk program.
             check_correct_execution_seqtk
+
+	    # Remove tempory file.
+	    rm -rf --verbose $OUTPUT_FOLDER$TEMPORARY_FILE
+	    rm -rf --verbose $OUTPUT_FOLDER$TEMPORARY_FILE_2
+
         else
             # Paired but not list.
             echo "Paired but not list."
@@ -126,6 +132,8 @@ function convert_fastq_to_fasta {
 
             # Check good execution of seqtk program.
             check_correct_execution_seqtk
+
+	    rm -rf --verbose $OUTPUT_FOLDER${TEMPORARY_FILE}
         else
             # Not paired and not list.
             echo "Not paired and not list."
@@ -139,12 +147,6 @@ function convert_fastq_to_fasta {
     fi
 }
 
-
-function remove_intermediate_file {
-    # Remove tempory file.
-    rm -rf --verbose $OUTPUT_FOLDER$TEMPORARY_FILE
-    rm -rf --verbose $OUTPUT_FOLDER$TEMPORARY_FILE_2
-}
 
 PROGRAM=convert_fastq_to_fasta.sh
 VERSION=1.0
@@ -216,5 +218,4 @@ echo "Temporary file : $TEMPORARY_FILE"
 # Transfort fastq sequences to fasta (can extract sequences with a list).
 convert_fastq_to_fasta
 
-# Remove intermediate files.
-remove_intermediate_file
+echo $OUTPUT_FOLDER$TEMPORARY_FILE

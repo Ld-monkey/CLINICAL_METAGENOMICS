@@ -147,7 +147,6 @@ function run_classification_kraken2 {
 
 	    if [[ $FLAG_GZIP == "True" ]]; then
 		echo "gzip format"
-
 		echo "Run kraken 2 classification reads."
 		
 		# Official documentation : https://github.com/DerrickWood/kraken2/wiki/Manual

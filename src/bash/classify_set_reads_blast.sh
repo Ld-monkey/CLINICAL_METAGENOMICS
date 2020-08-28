@@ -5,7 +5,7 @@
 # Warning : For moment doesn't take  into account compressed fasta files like
 # fasta.gz .
 # e.g bash src/bash/classify_set_reads_blast.sh \
-#          -path_seq results/classify_reads/trimmed_classify_fda_argos_with_none_library_02_07_2020/1-MAR-LBA-ADN_S1/convert_fastq_to_fasta/ \
+#          -path_seq results/classify_reads/trimmed_fda_argos/1-MAR-LBA-ADN_S1/convert_fastq_to_fasta/ \
 #          -path_db data/refseq_genomics_virus_blast_db_17_07_2020/ \    
 #          -path_output results/blast/refseq_result_blast_17_07_2020/ \
 #          -threads 10
@@ -24,7 +24,7 @@ function check_sequence_folder {
         then
             echo "`basename $PATH_SEQUENCES` folder of sequence exist."
         else
-            echo "Error $PATH_SEQUENCES doesn't exist."
+            echo "Error $PATH_SEQUENCES folder with all sequences doesn't exist."
             echo "No sequences for the blast algorithm."
             exit
         fi
@@ -59,6 +59,16 @@ function create_output_folder {
 }
 
 
+# Function to determinate if .gz format.
+function check_gzip_format {
+    if [ ${FASTA: -3} == ".gz" ]; then
+	FLAG_GZIP="True"
+    else
+	FLAG_GZIP="False"
+    fi
+}
+
+
 function blast_all_sequences {
 
     COMPLETE_OUTPUT=$OUTPUT_BLAST${BASENAME_WITHOUT_EXTENSION}_blast_temp.out
@@ -74,32 +84,53 @@ function blast_all_sequences {
     # -max_hsps : Maximum number of HSPs (alignments) to keep for any single query-subject pair.
     # -max_target_seqs : Maximum number of aligned sequences to keep from the blast database.
     # -num_threads : Number of threads.
-    
-    blastn -db $BLAST_DATABASE$NAME_DATABASE \
-           -query $FASTA \
-           -task "megablast" \
-           -out $COMPLETE_OUTPUT \
-           -evalue 10e-10 \
-           -outfmt "7 qseqid sseqid sstart send evalue bitscore slen staxids" \
-           -max_hsps 1 \
-           -max_target_seqs 5 \
-           -num_threads $THREADS
 
+    
+    if [[ $FLAG_GZIP == "True" ]]; then
+	echo "gzip format"
+
+	gunzip -c $FASTA | blastn -db $BLAST_DATABASE$NAME_DATABASE \
+				  -query $FASTA \
+				  -task "megablast" \
+				  -out $COMPLETE_OUTPUT \
+				  -evalue 10e-10 \
+				  -outfmt "7 qseqid sseqid sstart send evalue bitscore slen staxids" \
+				  -max_hsps 1 \
+				  -max_target_seqs 5 \
+				  -num_threads $THREADS
+    else
+	echo "No gzip format"
+	
+	blastn -db $BLAST_DATABASE$NAME_DATABASE \
+			   -query $FASTA \
+			   -task "megablast" \
+			   -out $COMPLETE_OUTPUT \
+			   -evalue 10e-10 \
+			   -outfmt "7 qseqid sseqid sstart send evalue bitscore slen staxids" \
+			   -max_hsps 1 \
+			   -max_target_seqs 5 \
+			   -num_threads $THREADS
+    fi
+    
     echo "Blast done !"
 
     echo "Delete last line of file."
+    
     # Delete last line of file.
     sed "/\processed\b/d" $OUTPUT_BLAST${BASENAME_WITHOUT_EXTENSION}_blast_temp.out \
-      > $OUTPUT_BLAST${BASENAME_WITHOUT_EXTENSION}_blast_temp_2.out
+	> $OUTPUT_BLAST${BASENAME_WITHOUT_EXTENSION}_blast_temp_2.out
+    
     echo "Delete done !"
 
     # The goal is to remove 0 hits from the blast output. As the 0 hits are usually
     # towards the end of the file we read the file upside down with 'tac' command
     # then we put it right side up on other output.
     echo "Remove 0 hits from blast output."
+    
     tac $OUTPUT_BLAST${BASENAME_WITHOUT_EXTENSION}_blast_temp_2.out \
         | sed '/0 hits/I,+3 d' \
         | tac > $OUTPUT_BLAST${BASENAME_WITHOUT_EXTENSION}_blast.txt
+    
     echo "Remove 0 hits done !"
 }
 
