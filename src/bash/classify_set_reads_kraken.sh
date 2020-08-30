@@ -134,6 +134,10 @@ function run_classification_kraken2 {
 	# Create sub directory.
 	mkdir -p ${FOLDER_OUTPUT}${prefix}/
 
+	# Create classified and unclassified subfolders.
+	mkdir -p --verbose ${FOLDER_OUTPUT}${prefix}/classified/
+	mkdir -p --verbose ${FOLDER_OUTPUT}${prefix}/unclassified/
+
 	# Create a R2 read name file to check if paired read exists.
 	R2_PAIRED_READ=$(echo ${R1_READ} | sed 's/R1/R2/')
 
@@ -165,8 +169,8 @@ function run_classification_kraken2 {
 			--paired \
 			--gzip-compressed \
 			--report ${FOLDER_OUTPUT}${prefix}/${prefix}_taxon.report.txt \
-			--classified-out ${FOLDER_OUTPUT}${prefix}/$prefix.clseqs#.fastq.gz \
-			--unclassified-out ${FOLDER_OUTPUT}${prefix}/$prefix.unclseq#.fastq.gz \
+			--classified-out ${FOLDER_OUTPUT}${prefix}/classified/$prefix.clseqs#.fastq.gz \
+			--unclassified-out ${FOLDER_OUTPUT}${prefix}/unclassified/$prefix.unclseq#.fastq.gz \
 			--output ${FOLDER_OUTPUT}${prefix}/$prefix.output.txt \
 			$R1_READ $R2_PAIRED_READ
 		
@@ -178,8 +182,8 @@ function run_classification_kraken2 {
 			--threads $THREAD \
 			--paired \
 			--report ${FOLDER_OUTPUT}${prefix}/${prefix}_taxon.report.txt \
-			--classified-out ${FOLDER_OUTPUT}${prefix}/$prefix.clseqs#.fastq \
-			--unclassified-out ${FOLDER_OUTPUT}${prefix}/$prefix.unclseq#.fastq \
+			--classified-out ${FOLDER_OUTPUT}${prefix}/classified/$prefix.clseqs#.fastq \
+			--unclassified-out ${FOLDER_OUTPUT}${prefix}/unclassified/$prefix.unclseq#.fastq \
 			--output ${FOLDER_OUTPUT}${prefix}/$prefix.output.txt \
 			$R1_READ $R2_PAIRED_READ
 		
@@ -197,10 +201,10 @@ function run_classification_kraken2 {
 		kraken2 --db $DBNAME \
 			--threads $THREAD \
 			--gzip-compressed \
-			--report $FOLDER_OUTPUT/${prefix}_taxon.report.txt \
-			--classified-out $FOLDER_OUTPUT/$prefix.clseqs#.fastq.gz \
-			--unclassified-out $FOLDER_OUTPUT/$prefix.unclseq#.fastq.gz \
-			--output $FOLDER_OUTPUT/$prefix.output.txt \
+			--report $FOLDER_OUTPUT${prefix}/${prefix}_taxon.report.txt \
+			--classified-out $FOLDER_OUTPUT${prefix}/classified/$prefix.clseqs#.fastq.gz \
+			--unclassified-out $FOLDER_OUTPUT${prefix}/unclassified/$prefix.unclseq#.fastq.gz \
+			--output $FOLDER_OUTPUT${prefix}/$prefix.output.txt \
 			$R1_READ
 		
 		echo "Kraken 2 classification done !"
@@ -213,9 +217,9 @@ function run_classification_kraken2 {
 		kraken2 --db $DBNAME \
 			--threads $THREAD \
 			--report $FOLDER_OUTPUT/${prefix}_taxon.report.txt \
-			--classified-out $FOLDER_OUTPUT/$prefix.clseqs#.fastq \
-			--unclassified-out $FOLDER_OUTPUT/$prefix.unclseq#.fastq \
-			--output $FOLDER_OUTPUT/$prefix.output.txt \
+			--classified-out $FOLDER_OUTPUT${prefix}/classified/$prefix.clseqs#.fastq \
+			--unclassified-out $FOLDER_OUTPUT${prefix}/unclassified/$prefix.unclseq#.fastq \
+			--output $FOLDER_OUTPUT${prefix}/$prefix.output.txt \
 			$R1_READ
 		
 		echo "Kraken 2 classification done !"
