@@ -1,7 +1,7 @@
 # CLINICAL METAGENOMICS
 [![Documentation Status](https://readthedocs.org/projects/clinical-metagenomics/badge/?version=latest)](https://clinical-metagenomics.readthedocs.io/fr/latest/?badge=latest)
 
-[![pdf](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://raw.githubusercontent.com/Zygnematophyce/CLINICAL_METAGENOMICS/master/docs/build/latex/clinicalmetagenomics.pdf)
+[![PDF badge](https://img.shields.io/badge/pdf-yes-green.svg)](https://raw.githubusercontent.com/Zygnematophyce/CLINICAL_METAGENOMICS/master/docs/build/latex/clinicalmetagenomics.pdf)
 
 ## Introduction
 
