@@ -1,4 +1,4 @@
-﻿.. CLINICAL METAGENOMICS documentation master file, created by
+.. CLINICAL METAGENOMICS documentation master file, created by
    sphinx-quickstart on Fri Apr 10 18:21:11 2020.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
@@ -6,24 +6,24 @@
 Documentation
 #############
 
-Current version: 1.0.0 Juillet 2020
+Current version: 1.0.0 juillet 2020
 
 :Python version: Python 3.7
 
 :Source: `https://github.com/Zygnematophyce/CLINICAL_METAGENOMICS <https://github.com/Zygnematophyce/CLINICAL_METAGENOMICS>`__.
 
-Qu'est ce que le projet CLINICAL METAGENOMICS ?
+Qu'est-ce que le projet CLINICAL METAGENOMICS ?
 ===============================================
 
-**CLINICAL METAGENOMICS** est un ensemble de programme de bio-informatique adaptés à la dectection de pathogènes dans un échantillon clinique de NGS.
+**CLINICAL METAGENOMICS** est un ensemble de programmes de bio-informatique adaptés à la détection de pathogènes dans un échantillon clinique de NGS.
 
 Il permet :
 
 #. Le téléchargement des librairies de séquences.
 #. La création et l'indexation des bases de données de références.
-#. L'analyse des résultats de l'échatillon NGS.
+#. L'analyse des résultats de l'échantillon NGS.
 
-Actuellement, ...
+Actuellement ...
 
 Guide d'utilisation et référence
 ################################

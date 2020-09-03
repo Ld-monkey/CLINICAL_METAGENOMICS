@@ -1,7 +1,7 @@
 Tutoriel
 ########
 
-Ci-dessous vous pouvez trouver le tutoriel sur comment utiliser le pipeline de métagénomique clinique.
+Ci-dessous, vous pouvez trouver le tutoriel sur comment utiliser le pipeline de métagénomique clinique.
 
 .. contents::
    :depth: 2
@@ -17,10 +17,10 @@ Pour appeler l'aide dans les programmes :
 
    <programme> -h
 
-Le pré-traitement des reads
+Le prétraitement des reads
 ---------------------------
 
-L'exemple suivant nous montre comment utiliser les étapes de pré-traitement.
+L'exemple suivant nous montre comment utiliser les étapes de prétraitement.
 
 Programme
 ~~~~~~~~~
@@ -36,7 +36,7 @@ Localisation
 
    └── src
     ├── bash
-    │   ├── launch_reads_preprocess.sh
+    │   ├── launch_reads_preprocess.sh
 
 Les outils utilisés
 ~~~~~~~~~~~~~~~~~~~
@@ -45,7 +45,7 @@ Les outils utilisés
 
 :Dedupe: Dedupe supprime les reads dupliqués.
 
-:Trimmomatic: Trimmomatic permet de supprimer les reads de mauvaises qualités c'est à dire les reads qui ont un score phread (score de qualité) moyen d'au moins 20 et des reads de taille minimum de 50 nucléotides pour avoir assez d'information pour classifier les reads.
+:Trimmomatic: Trimmomatic permet de supprimer les reads de mauvaise qualité c'est-à-dire les reads qui ont un score phread (score de qualité) moyen d'au moins 20 et des reads de taille minimum de 50 nucléotides pour avoir assez d'information pour classifier les reads.
 
 Exemple d'utilisation
 ~~~~~~~~~~~~~~~~~~~~~
@@ -58,7 +58,7 @@ Exemple d'utilisation
                 -path_output results/trimmed_reads/trimmed_PAIRED_SAMPLES_ADN_TEST_reads_04_06_2020/ \
                 -threads 28
 
-Dans cet exemple, nous indiquons le dossier contenant les reads et nous précisons le dossier de sortie pour lequel les reads sortirons traités et filtrés. Nous pouvons préciser le nombre de threads pour accélérer le traitement, ici le nombre de thread est à 28.
+Dans cet exemple, nous indiquons le dossier contenant les reads et nous précisons le dossier de sortie pour lequel les reads sortiront traités et filtrés. Nous pouvons préciser le nombre de threads pour accélérer le traitement, ici le nombre de thread est à 28.
 
 Les paramètres
 ~~~~~~~~~~~~~~
@@ -69,7 +69,7 @@ Les paramètres
 
 :-threads: (Input) Le nombre de thread (par défaut configuré à 1 thread).
 
-:-force_remove: (Optionnel) Par défaut la valeur est sur "yes" et permet de supprimer les fichiers intermédiaires. Pour ne pas supprimer les fichiers intermédiaires configurer le paramètre avec la valeur "no" comme avec l'exemple ci-contre :
+:-force_remove: (optionnel) Par défaut la valeur est sur "yes" et permet de supprimer les fichiers intermédiaires. Pour ne pas supprimer les fichiers intermédiaires configurer le paramètre avec la valeur "no" comme avec l'exemple ci-contre :
 
 .. code-block:: sh
 
@@ -132,7 +132,7 @@ Localisation
 
    └── src
     ├── download
-    │   ├── download_fda_argos_assembly.sh
+    │   ├── download_fda_argos_assembly.sh
 
 
 Exemple d'utilisation
@@ -152,9 +152,9 @@ Dans cet exemple, nous téléchargeons les séquences assemblées de FDA-ARGOS �
 Les paramètres
 ~~~~~~~~~~~~~~
 
-:-assembly_xml: (Input) Récupère le fichier XML pour l'analyser.
+:-assembly_xml: (Input) récupère le fichier XML pour l'analyser.
 
-:-path_output: (Output) Le chemin du dossier de sortie des les séquences de FDA-ARGOS. 
+:-path_output: (Output) le chemin du dossier de sortie des les séquences de FDA-ARGOS. 
 
 Les fichiers de sorties
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -191,9 +191,9 @@ Localisation
 
    └── src
     ├── download
-    │   ├── download_mycocosm_scaffolds.sh
+    │   ├── download_mycocosm_scaffolds.sh
 
-Pour pouvoir télécharger les séquences de Mycocosm plusieurs étapes doivent être réalisées.
+Pour pouvoir télécharger les séquences de Mycocosm, plusieurs étapes doivent être réalisées.
 
 (1) Créer un compte sur le site du JGI *Joint Genome Institure* https://contacts.jgi.doe.gov/registration/new
 
@@ -211,7 +211,7 @@ Exemple d'utilisation
                         -password azerty \
                         -path_output data/raw_sequences/mycoccosm_fungi_ncbi_scaffolds/
 
-Dans cet exemple, nous téléchargeons les scaffolds de la base de données Mycocosm en indiquant notre adresse mail avec le mot de passe associé (l'adresse mail et le mot de passe sont donnés ici à titre d'exemple et ne sont pas utilisables). Nous indiquons ensuite le chemin de sortie avec le paramètre -path_output, ici les scaffolds irons dans le dossier de sortie data/raw_sequences/mycoccosm_fungi_ncbi_scaffolds/ .
+Dans cet exemple, nous téléchargeons les scaffolds de la base de données Mycocosm en indiquant notre adresse mail avec le mot de passe associé (l'adresse mail et le mot de passe sont donnés ici à titre d'exemple et ne sont pas utilisables). Nous indiquons ensuite le chemin de sortie avec le paramètre -path_output, ici les scaffolds iront dans le dossier de sortie data/raw_sequences/mycoccosm_fungi_ncbi_scaffolds/ .
 
 Dépendances
 ~~~~~~~~~~~
@@ -227,9 +227,9 @@ Le premier script Python est :
 **download_scaffold_mycocosm_jgi.py** va télécharger :
 
    * le cookie,
-   * le fichier xml,
+   * le fichier XML,
    * les séquences scaffolds,
-   * et créer un fichier récapitulatif en format csv *(Comma-separated values)*. 
+   * et créer un fichier récapitulatif en format csv *(The comma-separated values)*. 
 
 Le second script Python est :
 
@@ -237,10 +237,10 @@ Le second script Python est :
 
    src/python/jgi_id_to_ncbi_id_taxonomy.py
 
-**jgi_id_to_ncbi_id_taxonomy.py** associe les identifiants taxonomiques utilisés par JGI dans les scaffold et convertit en identifiant taxonomique du NCBI.
+**jgi_id_to_ncbi_id_taxonomy.py** associe les identifiants taxonomiques utilisés par JGI dans les scaffold et convertis en identifiant taxonomique du NCBI.
 
 .. note::
-   Cette conversion est nécessaire car elle permet l'indexation des bases de données avec le logiciel Kraken 2. Kraken 2 (utilisé dans la suite du tutoriel) utilise et la taxonomie de référence du NCBI et l'algorithme de k-mer pour classifier les reads rapidement (voir section ..) 
+   Cette conversion est nécessaire, car elle permet l'indexation des bases de données avec le logiciel Kraken 2. Kraken 2 (utilisé dans la suite du tutoriel) utilise et la taxonomie de référence du NCBI et l'algorithme de k-mer pour classifier les reads rapidement (voir section.). 
 
 .. _download_FungiDB:
 
@@ -263,7 +263,7 @@ Localisation
 
    └── src
     ├── download
-    │   ├── download_fungi_database_release_3.0.sh
+    │   ├── download_fungi_database_release_3.0.sh
 
 Exemple d'utilisation
 ~~~~~~~~~~~~~~~~~~~~~
@@ -319,7 +319,7 @@ Localisation
 
    └── src
     ├── download
-    │   ├── download_refseq_sequences.sh
+    │   ├── download_refseq_sequences.sh
 
 Exemple d'utilisation
 ~~~~~~~~~~~~~~~~~~~~~
@@ -331,12 +331,12 @@ Exemple d'utilisation
            -type_sq genomic \                                                 
            -path_output data/raw_sequences/refseq_viral/
 
-Dans cet exemple, nous téléchargeons les séquences virales de la base de données RefSeq en précisant le type de la base de données qui est donc -type_db viral et quel type de séquence nous voulons entre le génome et ou les protéines, ici nous choisissons le génome en indiquant -type_sq genomic. Les différentes séquences téléchargées iront dans le dossier de sortie data/raw_sequences/refseq_viral/.
+Dans cet exemple, nous téléchargeons les séquences virales de la base de données RefSeq en précisant le type de la base de données qui est donc -type_db viral et quel type de séquence nous voulons entre le génome et/ou les protéines, ici nous choisissons le génome en indiquant -type_sq genomic. Les différentes séquences téléchargées iront dans le dossier de sortie data/raw_sequences/refseq_viral/.
 
 Les paramètres
 ~~~~~~~~~~~~~~
 
-:-type_db: (Input) Quel type de librairie à télécharger.
+:-type_db: (Input) quel type de librairie à télécharger.
 
 .. note::
    La liste de tous les organismes que l'on peut télécharger avec le programme ci-dessus :
@@ -354,7 +354,7 @@ Les paramètres
    *   vertebrate_mammalian
    *   human
 
-Avec le programme, nous pouvons télécharger plusieurs librairies à la fois mais il faut ajouter des guillemets pour indiquer que l'on veut ajouter plusieurs paramètres comme illustré dans l'exemple suivant :
+Avec le programme, nous pouvons télécharger plusieurs librairies à la fois, mais il faut ajouter des guillemets pour indiquer que l'on veut ajouter plusieurs paramètres comme illustrés dans l'exemple suivant :
 
 .. code-block:: sh
 
@@ -365,9 +365,9 @@ Avec le programme, nous pouvons télécharger plusieurs librairies à la fois ma
 
 Dans cet exemple, nous téléchargeons les séquences génomiques et protéiques des virus et bactéries de la base de données RefSeq.
 
-:-type_sq: (Optionel) Précise le type de séquence à télécharger. Le choix se limite aux protéines (protein) et ou génomes (genomic). Par défaut, c'est le génome qui est téléchargé si cet argument n'est pas précisé.
+:-type_sq: (Optionel) précise le type de séquence à télécharger. Le choix se limite aux protéines (protein) et/ou génomes (genomic). Par défaut, c'est le génome qui est téléchargé si cet argument n'est pas précisé.
 
-:-path_output: (Output) Le chemin du dossier de sortie des séquences de RefSeq.
+:-path_output: (Output) le chemin du dossier de sortie des séquences de RefSeq.
 
 
 Les fichiers de sorties
@@ -417,7 +417,7 @@ Schéma des étapes d'indexation d'une base de données avec le logiciel Kraken 
 La pratique
 ~~~~~~~~~~~
 
-La session qui suit, nous montre comment indexer la base de données avec l'algorithme de k-mer et l'outil Kraken 2.
+La session qui suit nous montre comment indexer la base de données avec l'algorithme de k-mer et l'outil Kraken 2.
 
 Programme
 ~~~~~~~~~
@@ -433,7 +433,7 @@ Localisation
 
    └── src
     ├── bash
-    │   ├── create_kraken_database.sh
+    │   ├── create_kraken_database.sh
 
 
 Exemple d'utilisation
@@ -447,9 +447,9 @@ Exemple d'utilisation
                 -type_db none \
                 -threads 30
 
-Dans cet exemple, nous créons une base de données indexée à partir d'une librairie de séquence. Ici, les séquences assemblées de la base de données FDA-ARGOS qui se trouvent dans data/raw_sequences/fda_argos_raw_genomes_assembly_06_06_2020/ est la librairie choisie (voir :ref:`Le téléchargement de la base de données FDA-ARGOS <download_FDA_ARGOS>`). Ensuite, avec le paramètre -path_db nous précisons le chemin de sortie pour notre base de données indexée ici le chemin sera data/databases/kraken_2/fda_argos_with_none_library_kraken_database_07_06_2020/.
+Dans cet exemple, nous créons une base de données indexée à partir d'une librairie de séquence. Ici, les séquences assemblées de la base de données FDA-ARGOS qui se trouvent dans data/raw_sequences/fda_argos_raw_genomes_assembly_06_06_2020/ est la librairie choisie (voir :ref:`le téléchargement de la base de données FDA-ARGOS <download_FDA_ARGOS>`). Ensuite, avec le paramètre -path_db nous précisons le chemin de sortie pour notre base de données indexée ici le chemin sera data/databases/kraken_2/fda_argos_with_none_library_kraken_database_07_06_2020/.
 
-Le paramètres -type_db est le paramètre qui détermine le type de la base de données. Nous avons choisi de ne pas rajouter d'autre libraire à notre base de données notre type est donc "none". 
+Le paramètre -type_db est le paramètre qui détermine le type de la base de données. Nous avons choisi de ne pas rajouter d'autre libraire à notre base de données notre type est donc "none". 
 
 .. note::
    Kraken 2 propose une multitude de librairies qui peuvent être rajoutées à notre base de données. La liste non exhaustive des possibilités :
@@ -472,8 +472,8 @@ Les paramètres
 
 :-path_seq: (Input) Chemin du dossier de la librairie de séquences sous format fna ou fasta.
 :-path_db: (Output) Chemin du dossier de sortie pour créer et indexer notre base de données.
-:-type_db: (Input) Quel type de librairie ajouter à notre base de données (choix : none, viral, fungi ...).
-:-threads: (Input) Le nombre de threads pour indexer la base de données plus rapidement.
+:-type_db: (Input) quel type de librairie ajouter à notre base de données (choix : none, viral, fungi ...).
+:-threads: (Input) le nombre de threads pour indexer la base de données plus rapidement.
 :-taxonomy: (Optional) Dossier contenant la taxonomie du NCBI téléchargée par Kraken 2.
 
 .. note::
@@ -486,17 +486,17 @@ Les fichiers de sorties sont les suivants :
 
    * **hash.k2d** : Les mappages de taxons.
    * **opts.k2d** : Les options utilisées pour créer la base de données.
-   * **taxo.k2d** : Les informations taxonomique utilisées pour créer la base de données.
+   * **taxo.k2d** : Les informations taxonomiques utilisées pour créer la base de données.
 
 .. note::
-   Par défaut, le script supprime les fichiers intermédaires.
+   Par défaut, le script supprime les fichiers intermédiaires.
 
 .. _classification_kraken2:
 
 Classification des reads avec Kraken 2
 --------------------------------------
 
-La session suivante, nous montre comment classifier un échantillon de reads avec le logiciel Kraken 2.
+La session suivante nous montre comment classifier un échantillon de reads avec le logiciel Kraken 2.
 
 .. warning::
    La classification des reads ne peut se faire sans une base de données de référence indexée par le logiciel Kraken 2 (voir :ref:`L'indexation d'une base de données avec Kraken 2 <indexation_kraken2>`).
@@ -519,7 +519,7 @@ Avec la liste complète des identifiants taxonomiques associés à un read, l’
 La pratique
 ~~~~~~~~~~~
 
-La session qui suit, nous montre comment classifier des reads avec Kraken 2.
+La session qui suit, nous montrent comment classifier des reads avec Kraken 2.
 
 Programme
 ~~~~~~~~~
@@ -535,7 +535,7 @@ Localisation
 
    └── src
     ├── bash
-    │   ├── classify_set_reads_kraken.sh
+    │   ├── classify_set_reads_kraken.sh
 
 
 Exemple d'utilisation
@@ -552,12 +552,12 @@ Exemple d'utilisation
 Dans cet exemple, nous allons classifier les reads traités dans le contenus dans le dossier results/trimmed_reads/trimmed_PAIRED_SAMPLES_ADN_TEST_reads_01_07_2020/ .
 
 .. note::
-   Une étape de pré-traitement (pre-processing) est appliqué sur les reads en amont de cette étape de classification voir :ref:`Le pré-traitement des reads <pre_processing>`.
+   Une étape de prétraitement (pre-processing) est appliquée sur les reads en amont de cette étape de classification voir :ref:`le prétraitement des reads <pre_processing>`.
 
 Nous indiquons quelle base de données de référence utiliser avec le paramètre -path_db qui se trouve être dans le dossier data/databases/kraken_2/fda_argos_with_none_library_kraken_database_07_06_2020/ .
 
 .. note::
-   L'indexation d'une base de données de référence est expliqué dans la session :ref:`L'indexation d'une base de données avec Kraken 2 <indexation_kraken2>`
+   L'indexation d'une base de données de référence est expliquée dans la session :ref:`l'indexation d'une base de données avec Kraken 2 <indexation_kraken2>`
 
 Nous précisons le dossier de sortie dans lequel les résultats de classification pourront être déposés, ici nous choisissons results/classify_reads/trimmed_classify_fda_argos_with_none_library_02_07_2020/ .
 
@@ -567,9 +567,9 @@ Les paramètres
 ~~~~~~~~~~~~~~
 
 :-path_reads: (Input) Le chemin du dossier contenant les reads.
-:-path_db: (Input) Le chemin du dossier qui contient la base de donnée indexé par Kraken 2.
-:-path_output: (Output) Le nom du dossier pour les sorties.
-:-threads: (Input) Le nombre de threads utilisé pour classifier les reads. Par défaut le nombre de threads est 8.
+:-path_db: (Input) Le chemin du dossier qui contient la base de données indexée par Kraken 2.
+:-path_output: (Output) le nom du dossier pour les sorties.
+:-threads: (Input) le nombre de threads utilisé pour classifier les reads. Par défaut le nombre de threads est 8.
 
 
 Les fichiers de sorties
@@ -578,7 +578,7 @@ Les fichiers de sorties
 Les fichiers de sorties sont les suivants :
 
    * **.clseqs.fastq** : Les séquences classifiées.
-   * **.unclseqs.fastq** : Les séquences non-classifiées.
+   * **.unclseqs.fastq** : Les séquences non classifiées.
    * **.report.txt** : Format de rapport standard de Kraken 2 avec une ligne par taxon (délimité par des tabulations). 
    * **.output.txt** : Format de sortie standard de Kraken 2. Chaque séquence classée par Kraken 2 entraîne une seule ligne de sortie. Les lignes de sortie de Kraken 2 contiennent cinq champs séparés par des tabulations.
 
@@ -594,7 +594,7 @@ Les fichiers de sorties sont les suivants :
 Création d'une base de données avec la suite BLAST+
 ---------------------------------------------------
 
-La session suivante, nous montre comment créer une base de données locale qui permettra d'utiliser en amont l'alignement de séquence par l'algorithme de BLAST.
+La session suivante nous montre comment créer une base de données locale qui permettra d'utiliser en amont l'alignement de séquence par l'algorithme de BLAST.
 
 Dépendances
 ~~~~~~~~~~~
@@ -606,13 +606,13 @@ Avec la suite BLAST + nous utilisons :
    * L'application **dustmasker** qui identifie et masque les parties à faible complexité d'un génome.
 
 .. note::
-   Les séquences de faible complexité sont par exemple les séquences répétées "ACACACACACACACACACACACACACAC" connus pour se produire dans de nombreux organismes différents et moins instructifs dans les alignements. Enlever ces séquences aide à prévenir les faux positifs dans les résultats.
+   Les séquences de faible complexité sont par exemple les séquences répétées "ACACACACACACACACACACACACACAC" connues pour se produire dans de nombreux organismes différents et moins instructifs dans les alignements. Enlever ces séquences aide à prévenir les faux positifs dans les résultats.
 
 .. seealso::
-   Pour comprendre rapidement l'utilisation de chaque application voir https://www.ncbi.nlm.nih.gov/books/NBK279681/ .
+   Pour comprendre rapidement l'utilisation de chaque application, voir https://www.ncbi.nlm.nih.gov/books/NBK279681/ .
 
 .. warning::
-   Pour l'instant, aucune implementation a été faite au niveau de la création d'une base de données concernant les séquences proteiques ainsi que la suppression des séquences à faible complexité des proteines (par exemple avec le logiciel segmasker).
+   Pour l'instant, aucune implémentation n’a été faite au niveau de la création d'une base de données concernant les séquences protéiques ainsi que la suppression des séquences à faible complexité des protéines (par exemple avec le logiciel segmasker).
 
 Programme
 ~~~~~~~~~
@@ -628,7 +628,7 @@ Localisation
 
    └── src
     ├── bash
-    │   ├── create_blast_database.sh
+    │   ├── create_blast_database.sh
 
 
 
@@ -641,7 +641,7 @@ Exemple d'utilisation
                 -path_seq data/raw_sequences/refseq/bacteria/ \
                 -output_db data/databases/blast/refseq/
 
-Dans cet exemple, nous créons une base de données adaptée à BLAST en indiquant les séquences que l'on veut ajouter à notre base de données. Ici les séquences à ajouter sont celles téléchargées avec la base de données RefSeq expliqué en détail dans la session :ref:`Le téléchargement de la base de données RefSeq <download_RefSeq>` du tutoriel. Ensuite, avec le paramètre -output_db nous précisons le chemin de sortie pour notre base de données.
+Dans cet exemple, nous créons une base de données adaptée à BLAST en indiquant les séquences que l'on veut ajouter à notre base de données. Ici les séquences à ajouter sont celles téléchargées avec la base de données RefSeq expliquée en détail dans la session :ref:`le téléchargement de la base de données RefSeq <download_RefSeq>` du tutoriel. Ensuite, avec le paramètre -output_db nous précisons le chemin de sortie pour notre base de données.
 
 
 Les paramètres
@@ -658,9 +658,9 @@ Les paramètres
                 -output_db data/databases/blast/refseq/ \
                 -dustmasker no
 
-Ici, nous créons un base de données refseq adapté à BLAST mais sans utiliser *dustmasker* et donc sans supprimer les séquences à faible complexité dans notre base de données.
+Ici, nous créons une base de données refseq adaptée à BLAST, mais sans utiliser *dustmasker* et donc sans supprimer les séquences à faible complexité dans notre base de données.
 
-:-force_remove: (Optional) Paramètre optionnel qui permet de ne pas supprimer les fichiers intermédiaires. Par défaut, le paramètre est sur "yes" et supprime les fichiers intermédiares. Pour ne pas supprimer les fichiers intermédiaires changer le param_tre par "no" comme illustré ci-dessous.
+:-force_remove: (Optional) Paramètre optionnel qui permet de ne pas supprimer les fichiers intermédiaires. Par défaut, le paramètre est sur "yes" et supprime les fichiers intermédiaires. Pour ne pas supprimer les fichiers intermédiaires, changez le param_tre par "no" comme illustré ci-dessous.
 
 .. code-block:: sh
 
@@ -670,7 +670,7 @@ Ici, nous créons un base de données refseq adapté à BLAST mais sans utiliser
                 -dustmasker no
                 -force_remove no
 
-Ici, nous créons un base de données refseq adapté à BLAST mais sans utiliser *dustmasker* et sans supprimer les fichiers intermédiaires.
+Ici, nous créons une base de données refseq adaptée à BLAST, mais sans utiliser *dustmasker* et sans supprimer les fichiers intermédiaires.
 
 
 Les fichiers de sorties

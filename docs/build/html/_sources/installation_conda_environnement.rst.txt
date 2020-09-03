@@ -1,11 +1,11 @@
-﻿Installation
+Installation
 ############
 
-L'installation du projet est facilité par l'utilisation de Conda.
+L'installation du projet est facilitée par l'utilisation de Conda.
 
-Conda est un gestionnaire de paquets, il permet de créer son propre environnement virtuel contenant les logiciels informatiques nécessaires au fonctionnement du pipeline de métagénomique (exemple Kraken 2, la suite blast-plus etc...). Pour créer un environnement conda à partir du fichier yaml (metagenomic_env.yml) :
+Conda est un gestionnaire de paquets, il permet de créer son propre environnement virtuel contenant les logiciels nécessaires au fonctionnement du pipeline de métagénomique (exemple Kraken 2, la suite blast-plus, etc.). Pour créer un environnement conda à partir du fichier yaml (metagenomic_env.yml) :
 
-Télécharger le projet sur github
+Télécharger le projet sur GitHub
 --------------------------------
 
 Télécharger le projet
@@ -64,4 +64,4 @@ Dans ce cas et pour les distributions Linux, exécuter la commande suivante dans
 
    echo -e "export -f conda\nexport -f __conda_activate\nexport -f __conda_reactivate\nexport -f __conda_hashr\nexport -f __add_sys_prefix_to_path" >> ~/.bashrc
 
-Ensuite ouvrir un nouveau terminal.
+Ensuite, ouvrir un nouveau terminal.

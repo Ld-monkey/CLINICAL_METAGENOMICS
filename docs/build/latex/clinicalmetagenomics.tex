@@ -74,8 +74,8 @@
 
 
 \title{CLINICAL METAGENOMICS}
-\date{juil. 21, 2020}
-\release{0.0.1}
+\date{sept. 03, 2020}
+\release{1.0.0}
 \author{Zygnematophyce}
 \newcommand{\sphinxlogo}{\vbox{}}
 \renewcommand{\releasename}{Version}
@@ -95,7 +95,7 @@
 \phantomsection\label{\detokenize{index::doc}}
 
 
-Current version: 1.0.0 Juillet 2020
+Current version: 1.0.0 juillet 2020
 \begin{quote}\begin{description}
 \item[{Python version}] \leavevmode
 Python 3.7
@@ -106,9 +106,9 @@ Python 3.7
 \end{description}\end{quote}
 
 
-\chapter{Qu’est ce que le projet CLINICAL METAGENOMICS ?}
+\chapter{Qu’est\sphinxhyphen{}ce que le projet CLINICAL METAGENOMICS ?}
 \label{\detokenize{index:qu-est-ce-que-le-projet-clinical-metagenomics}}
-\sphinxstylestrong{CLINICAL METAGENOMICS} est un ensemble de programme de bio\sphinxhyphen{}informatique adaptés à la dectection des pathogènes dans un échantillon clinique de métagénomique.
+\sphinxstylestrong{CLINICAL METAGENOMICS} est un ensemble de programmes de bio\sphinxhyphen{}informatique adaptés à la détection de pathogènes dans un échantillon clinique de NGS.
 
 Il permet :
 \begin{enumerate}
@@ -117,14 +117,14 @@ Il permet :
 Le téléchargement des librairies de séquences.
 
 \item {} 
-La création et l’indexation des bases de données de références pour la métagénomique.
+La création et l’indexation des bases de données de références.
 
 \item {} 
-L’analyse des résultats NGS.
+L’analyse des résultats de l’échantillon NGS.
 
 \end{enumerate}
 
-Actuellement, …
+Actuellement …
 
 
 \chapter{Guide d’utilisation et référence}
@@ -132,12 +132,12 @@ Actuellement, …
 
 \section{Installation}
 \label{\detokenize{installation_conda_environnement:installation}}\label{\detokenize{installation_conda_environnement::doc}}
-L’installation du projet est facilité par l’utilisation de Conda.
+L’installation du projet est facilitée par l’utilisation de Conda.
 
-Conda est un gestionnaire de paquets, il permet de créer son propre environnement virtuel contenant les logiciels informatiques nécessaires au fonctionnement du pipeline de métagénomique (exemple Kraken 2, la suite blast\sphinxhyphen{}plus etc…). Pour créer un environnement conda à partir du fichier yaml (metagenomic\_env.yml) :
+Conda est un gestionnaire de paquets, il permet de créer son propre environnement virtuel contenant les logiciels nécessaires au fonctionnement du pipeline de métagénomique (exemple Kraken 2, la suite blast\sphinxhyphen{}plus, etc.). Pour créer un environnement conda à partir du fichier yaml (metagenomic\_env.yml) :
 
 
-\subsection{Télécharger le projet sur github}
+\subsection{Télécharger le projet sur GitHub}
 \label{\detokenize{installation_conda_environnement:telecharger-le-projet-sur-github}}
 Télécharger le projet
 
@@ -196,7 +196,7 @@ Dans ce cas et pour les distributions Linux, exécuter la commande suivante dans
 \PYG{n+nb}{echo} \PYGZhy{}e \PYG{l+s+s2}{\PYGZdq{}export \PYGZhy{}f conda\PYGZbs{}nexport \PYGZhy{}f \PYGZus{}\PYGZus{}conda\PYGZus{}activate\PYGZbs{}nexport \PYGZhy{}f \PYGZus{}\PYGZus{}conda\PYGZus{}reactivate\PYGZbs{}nexport \PYGZhy{}f \PYGZus{}\PYGZus{}conda\PYGZus{}hashr\PYGZbs{}nexport \PYGZhy{}f \PYGZus{}\PYGZus{}add\PYGZus{}sys\PYGZus{}prefix\PYGZus{}to\PYGZus{}path\PYGZdq{}} \PYGZgt{}\PYGZgt{} \PYGZti{}/.bashrc
 \end{sphinxVerbatim}
 
-Ensuite ouvrir un nouveau terminal.
+Ensuite, ouvrir un nouveau terminal.
 
 
 \section{Vue d’ensemble}
@@ -206,9 +206,9 @@ Ensuite ouvrir un nouveau terminal.
 Simple organigramme des étapes de métagénomique clinique (image par Zygnematophyce)
 
 
-\subsection{Étape de pré\sphinxhyphen{}traitement}
-\label{\detokenize{overview:etape-de-pre-traitement}}
-L’étape de pré\sphinxhyphen{}traitement (ou pre\sphinxhyphen{}processing en anglais) est nécessaire avant toute analyse. Cette étape consiste à éliminer les séquences de mauvaise qualité et les séquences dupliquées à partir des fichiers fastq de reads bruts (raw reads sequences) issus du séquençage. Cette étape permet de réduire la quantité d’informations à traiter, et d’éliminer les informations redondantes. Vous pouvez utiliser le programme construit à cette occasion dans la session {\hyperref[\detokenize{tutorial:pre-processing}]{\sphinxcrossref{\DUrole{std,std-ref}{le pré\sphinxhyphen{}traitement des reads}}}} du tutoriel.
+\subsection{Étape de prétraitement}
+\label{\detokenize{overview:etape-de-pretraitement}}
+L’étape de prétraitement (ou pre\sphinxhyphen{}processing en anglais) est nécessaire avant toute analyse. Cette étape consiste à éliminer les séquences de mauvaise qualité et les séquences dupliquées à partir des fichiers fastq de reads bruts (raw reads sequences) issus du séquençage. Cette étape permet de réduire la quantité d’informations à traiter, et d’éliminer les informations redondantes. Vous pouvez utiliser le programme construit à cette occasion dans la session {\hyperref[\detokenize{tutorial:pre-processing}]{\sphinxcrossref{\DUrole{std,std-ref}{le prétraitement des reads}}}} du tutoriel.
 
 
 \subsection{Création des bases de données de références}
@@ -223,7 +223,7 @@ données est construite à des fins de diagnostic clinique. FDA\sphinxhyphen{}AR
 
 Au final la base de données FDA\sphinxhyphen{}ARGOS est composée à la date de décembre 2019 de 487 isolats avec 88,3\% de bactéries, 11,1\% des virus et 0,6\% d’eucaryotes, représentant 189 taxons différents avec au total 81,9\% des génomes d’origine clinique et les 8,1\% restants de génomes environnementaux.
 
-Pour télécharger la base de données FDA\sphinxhyphen{}ARGOS utiliser le programme construit décrit dans la session {\hyperref[\detokenize{tutorial:download-fda-argos}]{\sphinxcrossref{\DUrole{std,std-ref}{Le téléchargement de la base de données FDA\sphinxhyphen{}ARGOS}}}} du tutoriel.
+Pour télécharger la base de données FDA\sphinxhyphen{}ARGOS utiliser le programme construit décrit dans la session {\hyperref[\detokenize{tutorial:download-fda-argos}]{\sphinxcrossref{\DUrole{std,std-ref}{le téléchargement de la base de données FDA\sphinxhyphen{}ARGOS}}}} du tutoriel.
 
 
 \subsubsection{La base de données Mycocosm}
@@ -232,19 +232,19 @@ La base de données Mycocosm est un projet de génomique fongique du Joint Genom
 
 Aujourd’hui le portail propose plus de 1000 espèces fongiques et plus de 500 familles fongiques.
 
-Pour télécharger la base de données de Mycocosm utiliser le programme construit décrit dans la session {\hyperref[\detokenize{tutorial:download-mycocosm}]{\sphinxcrossref{\DUrole{std,std-ref}{Le téléchargement de la base de données Mycocosm}}}} du tutoriel.
+Pour télécharger la base de données de Mycocosm, utiliser le programme construit décrit dans la session {\hyperref[\detokenize{tutorial:download-mycocosm}]{\sphinxcrossref{\DUrole{std,std-ref}{le téléchargement de la base de données Mycocosm}}}} du tutoriel.
 
 
 \subsubsection{La base de données FungiDB}
 \label{\detokenize{overview:la-base-de-donnees-fungidb}}
 FungiDB (fungidb.org) est une ressource en ligne gratuite pour l’exploration de données et l’analyse génomique fonctionnelle des espèces fongiques et oomycètes. FungiDB contient un nombre croissant de génomes de divers taxons, y compris des plantes, des animaux et des pathogènes humains.
 
-Pour télécharger la base de données de FungiDB utiliser le programme construit décrit dans la session {\hyperref[\detokenize{tutorial:download-fungidb}]{\sphinxcrossref{\DUrole{std,std-ref}{Le téléchargement de la base de données FungiDB}}}} du tutoriel.
+Pour télécharger la base de données de FungiDB utiliser le programme construit décrit dans la session {\hyperref[\detokenize{tutorial:download-fungidb}]{\sphinxcrossref{\DUrole{std,std-ref}{le téléchargement de la base de données FungiDB}}}} du tutoriel.
 
 
 \subsubsection{La base de données RefSeq}
 \label{\detokenize{overview:la-base-de-donnees-refseq}}
-La base de données RefSeq comprend plus de 220 000 organismes (Jul, 2020) avec des genomes viraux et bactériens.
+La base de données RefSeq comprend plus de 220 000 organismes (Jul, 2020) avec des génomes viraux et bactériens.
 \begin{itemize}
 \item {} 
 Pour les virus, la base de données « viral » de RefSeq a été choisie : elle est composée des génomes complets d’environ 10 000 espèces virales (Jul 06, 2020) et apparait adaptée pour couvrir la grande majorité des virus rencontrés dans un échantillon clinique.
@@ -254,7 +254,7 @@ Pour les bactéries, l’utilisation d’une base de données de génomes comple
 
 \end{itemize}
 
-Pour télécharger la base de données de RefSeq utiliser le programme construit décrit dans la session {\hyperref[\detokenize{tutorial:download-refseq}]{\sphinxcrossref{\DUrole{std,std-ref}{Le téléchargement de la base de données RefSeq}}}} du tutoriel.
+Pour télécharger la base de données de RefSeq utiliser le programme construit décrit dans la session {\hyperref[\detokenize{tutorial:download-refseq}]{\sphinxcrossref{\DUrole{std,std-ref}{le téléchargement de la base de données RefSeq}}}} du tutoriel.
 
 \begin{sphinxadmonition}{note}{Note:}
 Les chiffres officiels pour chaque taxon sont visibles sur le lien suivant : \sphinxurl{ftp://ftp.ncbi.nlm.nih.gov/refseq/release/release-statistics/} .
@@ -263,9 +263,9 @@ Les chiffres officiels pour chaque taxon sont visibles sur le lien suivant : \sp
 
 \subsection{Étape de classification}
 \label{\detokenize{overview:etape-de-classification}}
-La classification taxonomique est une étape cruciale de la métagénomique. Plusieurs algorithmes et outils permettent d’identifier les organismes. L’outil le plus connu est sans doute l’algorithme de BLAST. Cependant, BLAST est un outil qui demande beaucoup de ressource, et prend du temps d’exécution lorsqu’il s’agit de comparer un read à l’ensemble d’une base de données. Pour identifier plus rapidement les reads, une solution alternative est proposé par l’outil Kraken 2 qui utilise l’algorithme des k\sphinxhyphen{}mers. L’algorithme de k\sphinxhyphen{}mer va hacher les reads et les séquences dans les bases de données en fragment de nucléotide. Avant d’identifier un organisme, Kraken 2 va indexer la base de données en associant un identifiant taxonomique aux k\sphinxhyphen{}mer d’une base de données. Enfin pour classifier des reads, Kraken 2 compare l’association exacte des k\sphinxhyphen{}mers d’un read à ceux d’une base de données et détermine l’identifiant taxonomique associé.
+La classification taxonomique est une étape cruciale de la métagénomique. Plusieurs algorithmes et outils permettent d’identifier les organismes. L’outil le plus connu est sans doute l’algorithme de BLAST. Cependant, BLAST est un outil qui demande beaucoup de ressource, et prend du temps d’exécution lorsqu’il s’agit de comparer un read à l’ensemble d’une base de données. Pour identifier plus rapidement les reads, une solution alternative est proposée par l’outil Kraken 2 qui utilise l’algorithme des k\sphinxhyphen{}mers. L’algorithme de k\sphinxhyphen{}mer va hacher les reads et les séquences dans les bases de données en fragment de nucléotide. Avant d’identifier un organisme, Kraken 2 va indexer la base de données en associant un identifiant taxonomique aux k\sphinxhyphen{}mer d’une base de données. Enfin pour classifier des reads, Kraken 2 compare l’association exacte des k\sphinxhyphen{}mers d’un read à ceux d’une base de données et détermine l’identifiant taxonomique associé.
 
-Pour indexer une bases de données avec l’algorithme de k\sphinxhyphen{}mer utiliser le programme décrit dans la session {\hyperref[\detokenize{tutorial:indexation-kraken2}]{\sphinxcrossref{\DUrole{std,std-ref}{L’indexation d’une base de données avec Kraken 2}}}} du tutoriel.
+Pour indexer une base de données avec l’algorithme de k\sphinxhyphen{}mer utiliser le programme décrit dans la session {\hyperref[\detokenize{tutorial:indexation-kraken2}]{\sphinxcrossref{\DUrole{std,std-ref}{l’indexation d’une base de données avec Kraken 2}}}} du tutoriel.
 
 Pour classifier un échantillon de reads par rapport à une base de données utiliser le programme décrit dans la session {\hyperref[\detokenize{tutorial:classification-kraken2}]{\sphinxcrossref{\DUrole{std,std-ref}{Classification des reads avec Kraken 2}}}} du tutoriel.
 
@@ -275,7 +275,7 @@ Pour classifier un échantillon de reads par rapport à une base de données uti
 
 \section{Tutoriel}
 \label{\detokenize{tutorial:tutoriel}}\label{\detokenize{tutorial::doc}}
-Ci\sphinxhyphen{}dessous vous pouvez trouver le tutoriel sur comment utiliser le pipeline de métagénomique clinique.
+Ci\sphinxhyphen{}dessous, vous pouvez trouver le tutoriel sur comment utiliser le pipeline de métagénomique clinique.
 
 \begin{sphinxShadowBox}
 \sphinxstyletopictitle{Sommaire}
@@ -284,7 +284,7 @@ Ci\sphinxhyphen{}dessous vous pouvez trouver le tutoriel sur comment utiliser le
 \phantomsection\label{\detokenize{tutorial:id37}}{\hyperref[\detokenize{tutorial:tutoriel}]{\sphinxcrossref{Tutoriel}}}
 \begin{itemize}
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id38}}{\hyperref[\detokenize{tutorial:le-pre-traitement-des-reads}]{\sphinxcrossref{Le pré\sphinxhyphen{}traitement des reads}}}
+\phantomsection\label{\detokenize{tutorial:id38}}{\hyperref[\detokenize{tutorial:le-pretraitement-des-reads}]{\sphinxcrossref{Le prétraitement des reads}}}
 
 \item {} 
 \phantomsection\label{\detokenize{tutorial:id39}}{\hyperref[\detokenize{tutorial:le-telechargement-de-la-base-de-donnees-fda-argos}]{\sphinxcrossref{Le téléchargement de la base de données FDA\sphinxhyphen{}ARGOS}}}
@@ -326,9 +326,9 @@ Pour appeler l’aide dans les programmes :
 \end{sphinxVerbatim}
 
 
-\subsection{Le pré\sphinxhyphen{}traitement des reads}
-\label{\detokenize{tutorial:le-pre-traitement-des-reads}}
-L’exemple suivant nous montre comment utiliser les étapes de pré\sphinxhyphen{}traitement.
+\subsection{Le prétraitement des reads}
+\label{\detokenize{tutorial:le-pretraitement-des-reads}}
+L’exemple suivant nous montre comment utiliser les étapes de prétraitement.
 
 
 \subsubsection{Programme}
@@ -336,7 +336,7 @@ L’exemple suivant nous montre comment utiliser les étapes de pré\sphinxhyphe
 Nom du programme:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{n}{remove\PYGZus{}poor\PYGZus{}quality\PYGZus{}duplicate\PYGZus{}reads\PYGZus{}preprocess}\PYG{o}{.}\PYG{n}{sh}
+\PYG{n}{launch\PYGZus{}reads\PYGZus{}preprocess}\PYG{o}{.}\PYG{n}{sh}
 \end{sphinxVerbatim}
 
 
@@ -345,7 +345,7 @@ Nom du programme:
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 └── src
  ├── bash
- │   ├── remove\PYGZus{}poor\PYGZus{}quality\PYGZus{}duplicate\PYGZus{}reads\PYGZus{}preprocess.sh
+ │   ├── launch\PYGZus{}reads\PYGZus{}preprocess.sh
 \end{sphinxVerbatim}
 
 
@@ -358,7 +358,7 @@ Le script Clumpify.sh de l’aligneur BBMap permet d’identifier les séquences
 Dedupe supprime les reads dupliqués.
 
 \item[{Trimmomatic}] \leavevmode
-Trimmomatic permet de supprimer les reads de mauvaises qualités c’est à dire les reads qui ont un score phread (score de qualité) moyen d’au moins 20 et des reads de taille minimum de 50 nucléotides pour avoir assez d’information pour classifier les reads.
+Trimmomatic permet de supprimer les reads de mauvaise qualité c’est\sphinxhyphen{}à\sphinxhyphen{}dire les reads qui ont un score phread (score de qualité) moyen d’au moins 20 et des reads de taille minimum de 50 nucléotides pour avoir assez d’information pour classifier les reads.
 
 \end{description}\end{quote}
 
@@ -366,13 +366,13 @@ Trimmomatic permet de supprimer les reads de mauvaises qualités c’est à dire
 \subsubsection{Exemple d’utilisation}
 \label{\detokenize{tutorial:exemple-d-utilisation}}
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-bash src/bash/remove\PYGZus{}poor\PYGZus{}quality\PYGZus{}duplicate\PYGZus{}reads\PYGZus{}preprocess.sh \PYG{l+s+se}{\PYGZbs{}}
+bash src/bash/launch\PYGZus{}reads\PYGZus{}preprocess.sh \PYG{l+s+se}{\PYGZbs{}}
              \PYGZhy{}path\PYGZus{}reads data/reads/PAIRED\PYGZus{}SAMPLES\PYGZus{}ADN\PYGZus{}TEST/ \PYG{l+s+se}{\PYGZbs{}}
              \PYGZhy{}path\PYGZus{}output results/trimmed\PYGZus{}reads/trimmed\PYGZus{}PAIRED\PYGZus{}SAMPLES\PYGZus{}ADN\PYGZus{}TEST\PYGZus{}reads\PYGZus{}04\PYGZus{}06\PYGZus{}2020/ \PYG{l+s+se}{\PYGZbs{}}
              \PYGZhy{}threads \PYG{l+m}{28}
 \end{sphinxVerbatim}
 
-Dans cet exemple, nous indiquons le dossier contenant les reads et nous précisons le dossier de sortie pour lequel les reads sortirons traités et filtrés. Nous pouvons préciser le nombre de threads pour accélérer le traitement, ici le nombre de thread est à 28.
+Dans cet exemple, nous indiquons le dossier contenant les reads et nous précisons le dossier de sortie pour lequel les reads sortiront traités et filtrés. Nous pouvons préciser le nombre de threads pour accélérer le traitement, ici le nombre de thread est à 28.
 
 
 \subsubsection{Les paramètres}
@@ -387,12 +387,12 @@ Dans cet exemple, nous indiquons le dossier contenant les reads et nous préciso
 (Input) Le nombre de thread (par défaut configuré à 1 thread).
 
 \item[{\sphinxhyphen{}force\_remove}] \leavevmode
-(Optionnel) Par défaut la valeur est sur « yes » et permet de supprimer les fichiers intermédiaires. Pour ne pas supprimer les fichiers intermédiaires configurer le paramètre avec la valeur « no » comme avec l’exemple ci\sphinxhyphen{}contre :
+(optionnel) Par défaut la valeur est sur « yes » et permet de supprimer les fichiers intermédiaires. Pour ne pas supprimer les fichiers intermédiaires configurer le paramètre avec la valeur « no » comme avec l’exemple ci\sphinxhyphen{}contre :
 
 \end{description}\end{quote}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-bash src/bash/remove\PYGZus{}poor\PYGZus{}quality\PYGZus{}duplicate\PYGZus{}reads\PYGZus{}preprocess.sh \PYG{l+s+se}{\PYGZbs{}}
+bash src/bash/launch\PYGZus{}reads\PYGZus{}preprocess.sh \PYG{l+s+se}{\PYGZbs{}}
              \PYGZhy{}path\PYGZus{}reads data/reads/PAIRED\PYGZus{}SAMPLES\PYGZus{}ADN\PYGZus{}TEST/ \PYG{l+s+se}{\PYGZbs{}}
              \PYGZhy{}path\PYGZus{}output results/trimmed\PYGZus{}reads/trimmed\PYGZus{}PAIRED\PYGZus{}SAMPLES\PYGZus{}ADN\PYGZus{}TEST\PYGZus{}reads\PYGZus{}04\PYGZus{}06\PYGZus{}2020/ \PYG{l+s+se}{\PYGZbs{}}
              \PYGZhy{}force\PYGZus{}remove no \PYG{l+s+se}{\PYGZbs{}}
@@ -456,7 +456,7 @@ Nom du programme:
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 └── src
  ├── download
- │   ├── download\PYGZus{}fda\PYGZus{}argos\PYGZus{}assembly.sh
+ │   ├── download\PYGZus{}fda\PYGZus{}argos\PYGZus{}assembly.sh
 \end{sphinxVerbatim}
 
 
@@ -478,10 +478,10 @@ Il serait intéressant d’ajouter une fonctionnalité au programme afin de tél
 \subsubsection{Les paramètres}
 \label{\detokenize{tutorial:id4}}\begin{quote}\begin{description}
 \item[{\sphinxhyphen{}assembly\_xml}] \leavevmode
-(Input) Récupère le fichier XML pour l’analyser.
+(Input) récupère le fichier XML pour l’analyser.
 
 \item[{\sphinxhyphen{}path\_output}] \leavevmode
-(Output) Le chemin du dossier de sortie des les séquences de FDA\sphinxhyphen{}ARGOS.
+(Output) le chemin du dossier de sortie des les séquences de FDA\sphinxhyphen{}ARGOS.
 
 \end{description}\end{quote}
 
@@ -519,10 +519,10 @@ Nom du programme:
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 └── src
  ├── download
- │   ├── download\PYGZus{}mycocosm\PYGZus{}scaffolds.sh
+ │   ├── download\PYGZus{}mycocosm\PYGZus{}scaffolds.sh
 \end{sphinxVerbatim}
 
-Pour pouvoir télécharger les séquences de Mycocosm plusieurs étapes doivent être réalisées.
+Pour pouvoir télécharger les séquences de Mycocosm, plusieurs étapes doivent être réalisées.
 \begin{enumerate}
 \sphinxsetlistlabels{\arabic}{enumi}{enumii}{(}{)}%
 \item {} 
@@ -546,7 +546,7 @@ bash src/download/download\PYGZus{}mycocosm\PYGZus{}scaffolds.sh \PYG{l+s+se}{\P
                   \PYGZhy{}path\PYGZus{}output data/raw\PYGZus{}sequences/mycoccosm\PYGZus{}fungi\PYGZus{}ncbi\PYGZus{}scaffolds/
 \end{sphinxVerbatim}
 
-Dans cet exemple, nous téléchargeons les scaffolds de la base de données Mycocosm en indiquant notre adresse mail avec le mot de passe associé (l’adresse mail et le mot de passe sont donnés ici à titre d’exemple et ne sont pas utilisables). Nous indiquons ensuite le chemin de sortie avec le paramètre \sphinxhyphen{}path\_output, ici les scaffolds irons dans le dossier de sortie data/raw\_sequences/mycoccosm\_fungi\_ncbi\_scaffolds/ .
+Dans cet exemple, nous téléchargeons les scaffolds de la base de données Mycocosm en indiquant notre adresse mail avec le mot de passe associé (l’adresse mail et le mot de passe sont donnés ici à titre d’exemple et ne sont pas utilisables). Nous indiquons ensuite le chemin de sortie avec le paramètre \sphinxhyphen{}path\_output, ici les scaffolds iront dans le dossier de sortie data/raw\_sequences/mycoccosm\_fungi\_ncbi\_scaffolds/ .
 
 
 \subsubsection{Dépendances}
@@ -565,13 +565,13 @@ Le premier script Python est :
 le cookie,
 
 \item {} 
-le fichier xml,
+le fichier XML,
 
 \item {} 
 les séquences scaffolds,
 
 \item {} 
-et créer un fichier récapitulatif en format csv \sphinxstyleemphasis{(Comma\sphinxhyphen{}separated values)}.
+et créer un fichier récapitulatif en format csv \sphinxstyleemphasis{(The comma\sphinxhyphen{}separated values)}.
 
 \end{itemize}
 
@@ -581,10 +581,10 @@ Le second script Python est :
 \PYG{n}{src}\PYG{o}{/}\PYG{n}{python}\PYG{o}{/}\PYG{n}{jgi\PYGZus{}id\PYGZus{}to\PYGZus{}ncbi\PYGZus{}id\PYGZus{}taxonomy}\PYG{o}{.}\PYG{n}{py}
 \end{sphinxVerbatim}
 
-\sphinxstylestrong{jgi\_id\_to\_ncbi\_id\_taxonomy.py} associe les identifiants taxonomiques utilisés par JGI dans les scaffold et convertit en identifiant taxonomique du NCBI.
+\sphinxstylestrong{jgi\_id\_to\_ncbi\_id\_taxonomy.py} associe les identifiants taxonomiques utilisés par JGI dans les scaffold et convertis en identifiant taxonomique du NCBI.
 
 \begin{sphinxadmonition}{note}{Note:}
-Cette conversion est nécessaire car elle permet l’indexation des bases de données avec le logiciel Kraken 2. Kraken 2 (utilisé dans la suite du tutoriel) utilise et la taxonomie de référence du NCBI et l’algorithme de k\sphinxhyphen{}mer pour classifier les reads rapidement (voir section ..)
+Cette conversion est nécessaire, car elle permet l’indexation des bases de données avec le logiciel Kraken 2. Kraken 2 (utilisé dans la suite du tutoriel) utilise et la taxonomie de référence du NCBI et l’algorithme de k\sphinxhyphen{}mer pour classifier les reads rapidement (voir section.).
 \end{sphinxadmonition}
 
 
@@ -607,7 +607,7 @@ Nom du programme:
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 └── src
  ├── download
- │   ├── download\PYGZus{}fungi\PYGZus{}database\PYGZus{}release\PYGZus{}3.0.sh
+ │   ├── download\PYGZus{}fungi\PYGZus{}database\PYGZus{}release\PYGZus{}3.0.sh
 \end{sphinxVerbatim}
 
 
@@ -662,7 +662,7 @@ Nom du programme:
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 └── src
  ├── download
- │   ├── download\PYGZus{}refseq\PYGZus{}sequences.sh
+ │   ├── download\PYGZus{}refseq\PYGZus{}sequences.sh
 \end{sphinxVerbatim}
 
 
@@ -675,13 +675,13 @@ bash src/download/download\PYGZus{}refseq\PYGZus{}sequences.sh \PYG{l+s+se}{\PYG
      \PYGZhy{}path\PYGZus{}output data/raw\PYGZus{}sequences/refseq\PYGZus{}viral/
 \end{sphinxVerbatim}
 
-Dans cet exemple, nous téléchargeons les séquences virales de la base de données RefSeq en précisant le type de la base de données qui est donc \sphinxhyphen{}type\_db viral et quel type de séquence nous voulons entre le génome et ou les protéines, ici nous choisissons le génome en indiquant \sphinxhyphen{}type\_sq genomic. Les différentes séquences téléchargées iront dans le dossier de sortie data/raw\_sequences/refseq\_viral/.
+Dans cet exemple, nous téléchargeons les séquences virales de la base de données RefSeq en précisant le type de la base de données qui est donc \sphinxhyphen{}type\_db viral et quel type de séquence nous voulons entre le génome et/ou les protéines, ici nous choisissons le génome en indiquant \sphinxhyphen{}type\_sq genomic. Les différentes séquences téléchargées iront dans le dossier de sortie data/raw\_sequences/refseq\_viral/.
 
 
 \subsubsection{Les paramètres}
 \label{\detokenize{tutorial:id17}}\begin{quote}\begin{description}
 \item[{\sphinxhyphen{}type\_db}] \leavevmode
-(Input) Quel type de librairie à télécharger.
+(Input) quel type de librairie à télécharger.
 
 \end{description}\end{quote}
 
@@ -727,7 +727,7 @@ human
 \end{itemize}
 \end{sphinxadmonition}
 
-Avec le programme, nous pouvons télécharger plusieurs librairies à la fois mais il faut ajouter des guillemets pour indiquer que l’on veut ajouter plusieurs paramètres comme illustré dans l’exemple suivant :
+Avec le programme, nous pouvons télécharger plusieurs librairies à la fois, mais il faut ajouter des guillemets pour indiquer que l’on veut ajouter plusieurs paramètres comme illustrés dans l’exemple suivant :
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 bash src/download/download\PYGZus{}refseq\PYGZus{}sequences.sh \PYG{l+s+se}{\PYGZbs{}}
@@ -739,10 +739,10 @@ bash src/download/download\PYGZus{}refseq\PYGZus{}sequences.sh \PYG{l+s+se}{\PYG
 Dans cet exemple, nous téléchargeons les séquences génomiques et protéiques des virus et bactéries de la base de données RefSeq.
 \begin{quote}\begin{description}
 \item[{\sphinxhyphen{}type\_sq}] \leavevmode
-(Optionel) Précise le type de séquence à télécharger. Le choix se limite aux protéines (protein) et ou génomes (genomic). Par défaut, c’est le génome qui est téléchargé si cet argument n’est pas précisé.
+(Optionel) précise le type de séquence à télécharger. Le choix se limite aux protéines (protein) et/ou génomes (genomic). Par défaut, c’est le génome qui est téléchargé si cet argument n’est pas précisé.
 
 \item[{\sphinxhyphen{}path\_output}] \leavevmode
-(Output) Le chemin du dossier de sortie des séquences de RefSeq.
+(Output) le chemin du dossier de sortie des séquences de RefSeq.
 
 \end{description}\end{quote}
 
@@ -809,7 +809,7 @@ Les informations sur les taxons sont obtenues à partir de la base de données t
 
 \subsubsection{La pratique}
 \label{\detokenize{tutorial:la-pratique}}
-La session qui suit, nous montre comment indexer la base de données avec l’algorithme de k\sphinxhyphen{}mer et l’outil Kraken 2.
+La session qui suit nous montre comment indexer la base de données avec l’algorithme de k\sphinxhyphen{}mer et l’outil Kraken 2.
 
 
 \subsubsection{Programme}
@@ -826,7 +826,7 @@ Nom du programme:
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 └── src
  ├── bash
- │   ├── create\PYGZus{}kraken\PYGZus{}database.sh
+ │   ├── create\PYGZus{}kraken\PYGZus{}database.sh
 \end{sphinxVerbatim}
 
 
@@ -840,9 +840,9 @@ bash src/bash/create\PYGZus{}kraken\PYGZus{}database.sh \PYG{l+s+se}{\PYGZbs{}}
              \PYGZhy{}threads \PYG{l+m}{30}
 \end{sphinxVerbatim}
 
-Dans cet exemple, nous créons une base de données indexée à partir d’une librairie de séquence. Ici, les séquences assemblées de la base de données FDA\sphinxhyphen{}ARGOS qui se trouvent dans data/raw\_sequences/fda\_argos\_raw\_genomes\_assembly\_06\_06\_2020/ est la librairie choisie (voir {\hyperref[\detokenize{tutorial:download-fda-argos}]{\sphinxcrossref{\DUrole{std,std-ref}{Le téléchargement de la base de données FDA\sphinxhyphen{}ARGOS}}}}). Ensuite, avec le paramètre \sphinxhyphen{}path\_db nous précisons le chemin de sortie pour notre base de données indexée ici le chemin sera data/databases/kraken\_2/fda\_argos\_with\_none\_library\_kraken\_database\_07\_06\_2020/.
+Dans cet exemple, nous créons une base de données indexée à partir d’une librairie de séquence. Ici, les séquences assemblées de la base de données FDA\sphinxhyphen{}ARGOS qui se trouvent dans data/raw\_sequences/fda\_argos\_raw\_genomes\_assembly\_06\_06\_2020/ est la librairie choisie (voir {\hyperref[\detokenize{tutorial:download-fda-argos}]{\sphinxcrossref{\DUrole{std,std-ref}{le téléchargement de la base de données FDA\sphinxhyphen{}ARGOS}}}}). Ensuite, avec le paramètre \sphinxhyphen{}path\_db nous précisons le chemin de sortie pour notre base de données indexée ici le chemin sera data/databases/kraken\_2/fda\_argos\_with\_none\_library\_kraken\_database\_07\_06\_2020/.
 
-Le paramètres \sphinxhyphen{}type\_db est le paramètre qui détermine le type de la base de données. Nous avons choisi de ne pas rajouter d’autre libraire à notre base de données notre type est donc « none ».
+Le paramètre \sphinxhyphen{}type\_db est le paramètre qui détermine le type de la base de données. Nous avons choisi de ne pas rajouter d’autre libraire à notre base de données notre type est donc « none ».
 
 \begin{sphinxadmonition}{note}{Note:}
 Kraken 2 propose une multitude de librairies qui peuvent être rajoutées à notre base de données. La liste non exhaustive des possibilités :
@@ -888,10 +888,10 @@ Et enfin le nombre de threads pour accélérer le processus, ici le nombre de th
 (Output) Chemin du dossier de sortie pour créer et indexer notre base de données.
 
 \item[{\sphinxhyphen{}type\_db}] \leavevmode
-(Input) Quel type de librairie ajouter à notre base de données (choix : none, viral, fungi …).
+(Input) quel type de librairie ajouter à notre base de données (choix : none, viral, fungi …).
 
 \item[{\sphinxhyphen{}threads}] \leavevmode
-(Input) Le nombre de threads pour indexer la base de données plus rapidement.
+(Input) le nombre de threads pour indexer la base de données plus rapidement.
 
 \item[{\sphinxhyphen{}taxonomy}] \leavevmode
 (Optional) Dossier contenant la taxonomie du NCBI téléchargée par Kraken 2.
@@ -914,18 +914,18 @@ Les fichiers de sorties sont les suivants :
 \sphinxstylestrong{opts.k2d} : Les options utilisées pour créer la base de données.
 
 \item {} 
-\sphinxstylestrong{taxo.k2d} : Les informations taxonomique utilisées pour créer la base de données.
+\sphinxstylestrong{taxo.k2d} : Les informations taxonomiques utilisées pour créer la base de données.
 
 \end{itemize}
 
 \begin{sphinxadmonition}{note}{Note:}
-Par défaut, le script supprime les fichiers intermédaires.
+Par défaut, le script supprime les fichiers intermédiaires.
 \end{sphinxadmonition}
 
 
 \subsection{Classification des reads avec Kraken 2}
 \label{\detokenize{tutorial:classification-des-reads-avec-kraken-2}}\label{\detokenize{tutorial:classification-kraken2}}
-La session suivante, nous montre comment classifier un échantillon de reads avec le logiciel Kraken 2.
+La session suivante nous montre comment classifier un échantillon de reads avec le logiciel Kraken 2.
 
 \begin{sphinxadmonition}{warning}{Avertissement:}
 La classification des reads ne peut se faire sans une base de données de référence indexée par le logiciel Kraken 2 (voir {\hyperref[\detokenize{tutorial:indexation-kraken2}]{\sphinxcrossref{\DUrole{std,std-ref}{L’indexation d’une base de données avec Kraken 2}}}}).
@@ -945,7 +945,7 @@ Avec la liste complète des identifiants taxonomiques associés à un read, l’
 
 \subsubsection{La pratique}
 \label{\detokenize{tutorial:id25}}
-La session qui suit, nous montre comment classifier des reads avec Kraken 2.
+La session qui suit, nous montrent comment classifier des reads avec Kraken 2.
 
 
 \subsubsection{Programme}
@@ -962,7 +962,7 @@ Nom du programme:
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 └── src
  ├── bash
- │   ├── classify\PYGZus{}set\PYGZus{}reads\PYGZus{}kraken.sh
+ │   ├── classify\PYGZus{}set\PYGZus{}reads\PYGZus{}kraken.sh
 \end{sphinxVerbatim}
 
 
@@ -979,13 +979,13 @@ bash src/bash/classify\PYGZus{}set\PYGZus{}reads\PYGZus{}kraken.sh \PYG{l+s+se}{
 Dans cet exemple, nous allons classifier les reads traités dans le contenus dans le dossier results/trimmed\_reads/trimmed\_PAIRED\_SAMPLES\_ADN\_TEST\_reads\_01\_07\_2020/ .
 
 \begin{sphinxadmonition}{note}{Note:}
-Une étape de pré\sphinxhyphen{}traitement (pre\sphinxhyphen{}processing) est appliqué sur les reads en amont de cette étape de classification voir {\hyperref[\detokenize{tutorial:pre-processing}]{\sphinxcrossref{\DUrole{std,std-ref}{Le pré\sphinxhyphen{}traitement des reads}}}}.
+Une étape de prétraitement (pre\sphinxhyphen{}processing) est appliquée sur les reads en amont de cette étape de classification voir {\hyperref[\detokenize{tutorial:pre-processing}]{\sphinxcrossref{\DUrole{std,std-ref}{le prétraitement des reads}}}}.
 \end{sphinxadmonition}
 
 Nous indiquons quelle base de données de référence utiliser avec le paramètre \sphinxhyphen{}path\_db qui se trouve être dans le dossier data/databases/kraken\_2/fda\_argos\_with\_none\_library\_kraken\_database\_07\_06\_2020/ .
 
 \begin{sphinxadmonition}{note}{Note:}
-L’indexation d’une base de données de référence est expliqué dans la session {\hyperref[\detokenize{tutorial:indexation-kraken2}]{\sphinxcrossref{\DUrole{std,std-ref}{L’indexation d’une base de données avec Kraken 2}}}}
+L’indexation d’une base de données de référence est expliquée dans la session {\hyperref[\detokenize{tutorial:indexation-kraken2}]{\sphinxcrossref{\DUrole{std,std-ref}{l’indexation d’une base de données avec Kraken 2}}}}
 \end{sphinxadmonition}
 
 Nous précisons le dossier de sortie dans lequel les résultats de classification pourront être déposés, ici nous choisissons results/classify\_reads/trimmed\_classify\_fda\_argos\_with\_none\_library\_02\_07\_2020/ .
@@ -999,13 +999,13 @@ Et enfin le nombre de threads pour accélérer le processus, ici le nombre de th
 (Input) Le chemin du dossier contenant les reads.
 
 \item[{\sphinxhyphen{}path\_db}] \leavevmode
-(Input) Le chemin du dossier qui contient la base de donnée indexé par Kraken 2.
+(Input) Le chemin du dossier qui contient la base de données indexée par Kraken 2.
 
 \item[{\sphinxhyphen{}path\_output}] \leavevmode
-(Output) Le nom du dossier pour les sorties.
+(Output) le nom du dossier pour les sorties.
 
 \item[{\sphinxhyphen{}threads}] \leavevmode
-(Input) Le nombre de threads utilisé pour classifier les reads. Par défaut le nombre de threads est 8.
+(Input) le nombre de threads utilisé pour classifier les reads. Par défaut le nombre de threads est 8.
 
 \end{description}\end{quote}
 
@@ -1018,7 +1018,7 @@ Les fichiers de sorties sont les suivants :
 \sphinxstylestrong{.clseqs.fastq} : Les séquences classifiées.
 
 \item {} 
-\sphinxstylestrong{.unclseqs.fastq} : Les séquences non\sphinxhyphen{}classifiées.
+\sphinxstylestrong{.unclseqs.fastq} : Les séquences non classifiées.
 
 \item {} 
 \sphinxstylestrong{.report.txt} : Format de rapport standard de Kraken 2 avec une ligne par taxon (délimité par des tabulations).
@@ -1039,7 +1039,7 @@ Pour comprendre en détail la composition du fichier de sortie \sphinxstyleempha
 
 \subsection{Création d’une base de données avec la suite BLAST+}
 \label{\detokenize{tutorial:creation-d-une-base-de-donnees-avec-la-suite-blast}}\label{\detokenize{tutorial:creation-database-blast}}
-La session suivante, nous montre comment créer une base de données locale qui permettra d’utiliser en amont l’alignement de séquence par l’algorithme de BLAST.
+La session suivante nous montre comment créer une base de données locale qui permettra d’utiliser en amont l’alignement de séquence par l’algorithme de BLAST.
 
 
 \subsubsection{Dépendances}
@@ -1055,19 +1055,19 @@ L’application \sphinxstylestrong{dustmasker} qui identifie et masque les parti
 \end{itemize}
 
 \begin{sphinxadmonition}{note}{Note:}
-Les séquences de faible complexité sont par exemple les séquences répétées « ACACACACACACACACACACACACACAC » connus pour se produire dans de nombreux organismes différents et moins instructifs dans les alignements. Enlever ces séquences aide à prévenir les faux positifs dans les résultats.
+Les séquences de faible complexité sont par exemple les séquences répétées « ACACACACACACACACACACACACACAC » connues pour se produire dans de nombreux organismes différents et moins instructifs dans les alignements. Enlever ces séquences aide à prévenir les faux positifs dans les résultats.
 \end{sphinxadmonition}
 
 
 \sphinxstrong{Voir aussi:}
 
 
-Pour comprendre rapidement l’utilisation de chaque application voir \sphinxurl{https://www.ncbi.nlm.nih.gov/books/NBK279681/} .
+Pour comprendre rapidement l’utilisation de chaque application, voir \sphinxurl{https://www.ncbi.nlm.nih.gov/books/NBK279681/} .
 
 
 
 \begin{sphinxadmonition}{warning}{Avertissement:}
-Pour l’instant, aucune implementation a été faite au niveau de la création d’une base de données concernant les séquences proteiques ainsi que la suppression des séquences à faible complexité des proteines (par exemple avec le logiciel segmasker).
+Pour l’instant, aucune implémentation n’a été faite au niveau de la création d’une base de données concernant les séquences protéiques ainsi que la suppression des séquences à faible complexité des protéines (par exemple avec le logiciel segmasker).
 \end{sphinxadmonition}
 
 
@@ -1085,7 +1085,7 @@ Nom du programme:
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 └── src
  ├── bash
- │   ├── create\PYGZus{}blast\PYGZus{}database.sh
+ │   ├── create\PYGZus{}blast\PYGZus{}database.sh
 \end{sphinxVerbatim}
 
 
@@ -1097,7 +1097,7 @@ bash src/bash/create\PYGZus{}blast\PYGZus{}database.sh \PYG{l+s+se}{\PYGZbs{}}
              \PYGZhy{}output\PYGZus{}db data/databases/blast/refseq/
 \end{sphinxVerbatim}
 
-Dans cet exemple, nous créons une base de données adaptée à BLAST en indiquant les séquences que l’on veut ajouter à notre base de données. Ici les séquences à ajouter sont celles téléchargées avec la base de données RefSeq expliqué en détail dans la session {\hyperref[\detokenize{tutorial:download-refseq}]{\sphinxcrossref{\DUrole{std,std-ref}{Le téléchargement de la base de données RefSeq}}}} du tutoriel. Ensuite, avec le paramètre \sphinxhyphen{}output\_db nous précisons le chemin de sortie pour notre base de données.
+Dans cet exemple, nous créons une base de données adaptée à BLAST en indiquant les séquences que l’on veut ajouter à notre base de données. Ici les séquences à ajouter sont celles téléchargées avec la base de données RefSeq expliquée en détail dans la session {\hyperref[\detokenize{tutorial:download-refseq}]{\sphinxcrossref{\DUrole{std,std-ref}{le téléchargement de la base de données RefSeq}}}} du tutoriel. Ensuite, avec le paramètre \sphinxhyphen{}output\_db nous précisons le chemin de sortie pour notre base de données.
 
 
 \subsubsection{Les paramètres}
@@ -1120,10 +1120,10 @@ bash src/bash/create\PYGZus{}blast\PYGZus{}database.sh \PYG{l+s+se}{\PYGZbs{}}
              \PYGZhy{}dustmasker no
 \end{sphinxVerbatim}
 
-Ici, nous créons un base de données refseq adapté à BLAST mais sans utiliser \sphinxstyleemphasis{dustmasker} et donc sans supprimer les séquences à faible complexité dans notre base de données.
+Ici, nous créons une base de données refseq adaptée à BLAST, mais sans utiliser \sphinxstyleemphasis{dustmasker} et donc sans supprimer les séquences à faible complexité dans notre base de données.
 \begin{quote}\begin{description}
 \item[{\sphinxhyphen{}force\_remove}] \leavevmode
-(Optional) Paramètre optionnel qui permet de ne pas supprimer les fichiers intermédiaires. Par défaut, le paramètre est sur « yes » et supprime les fichiers intermédiares. Pour ne pas supprimer les fichiers intermédiaires changer le param\_tre par « no » comme illustré ci\sphinxhyphen{}dessous.
+(Optional) Paramètre optionnel qui permet de ne pas supprimer les fichiers intermédiaires. Par défaut, le paramètre est sur « yes » et supprime les fichiers intermédiaires. Pour ne pas supprimer les fichiers intermédiaires, changez le param\_tre par « no » comme illustré ci\sphinxhyphen{}dessous.
 
 \end{description}\end{quote}
 
@@ -1135,7 +1135,7 @@ bash src/bash/create\PYGZus{}blast\PYGZus{}database.sh \PYG{l+s+se}{\PYGZbs{}}
              \PYGZhy{}force\PYGZus{}remove no
 \end{sphinxVerbatim}
 
-Ici, nous créons un base de données refseq adapté à BLAST mais sans utiliser \sphinxstyleemphasis{dustmasker} et sans supprimer les fichiers intermédiaires.
+Ici, nous créons une base de données refseq adaptée à BLAST, mais sans utiliser \sphinxstyleemphasis{dustmasker} et sans supprimer les fichiers intermédiaires.
 
 
 \subsubsection{Les fichiers de sorties}

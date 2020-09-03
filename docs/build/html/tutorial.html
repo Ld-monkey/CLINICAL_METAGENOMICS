@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>3. Tutoriel &mdash; Documentation CLINICAL METAGENOMICS 0.0.1</title>
+  <title>3. Tutoriel &mdash; Documentation CLINICAL METAGENOMICS 1.0.0</title>
   
 
   
@@ -84,7 +84,7 @@
 <li class="toctree-l1"><a class="reference internal" href="installation_conda_environnement.html">1. Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="overview.html">2. Vue d’ensemble</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">3. Tutoriel</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#le-pre-traitement-des-reads">3.1. Le pré-traitement des reads</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#le-pretraitement-des-reads">3.1. Le prétraitement des reads</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#programme">3.1.1. Programme</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#localisation">3.1.2. Localisation</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#les-outils-utilises">3.1.3. Les outils utilisés</a></li>
@@ -222,13 +222,13 @@
             
   <div class="section" id="tutoriel">
 <h1><a class="toc-backref" href="#id37"><span class="section-number">3. </span>Tutoriel</a><a class="headerlink" href="#tutoriel" title="Lien permanent vers ce titre">¶</a></h1>
-<p>Ci-dessous vous pouvez trouver le tutoriel sur comment utiliser le pipeline de métagénomique clinique.</p>
+<p>Ci-dessous, vous pouvez trouver le tutoriel sur comment utiliser le pipeline de métagénomique clinique.</p>
 <div class="contents topic" id="sommaire">
 <p class="topic-title">Sommaire</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#tutoriel" id="id37">Tutoriel</a></p>
 <ul>
-<li><p><a class="reference internal" href="#le-pre-traitement-des-reads" id="id38">Le pré-traitement des reads</a></p></li>
+<li><p><a class="reference internal" href="#le-pretraitement-des-reads" id="id38">Le prétraitement des reads</a></p></li>
 <li><p><a class="reference internal" href="#le-telechargement-de-la-base-de-donnees-fda-argos" id="id39">Le téléchargement de la base de données FDA-ARGOS</a></p></li>
 <li><p><a class="reference internal" href="#le-telechargement-de-la-base-de-donnees-mycocosm" id="id40">Le téléchargement de la base de données Mycocosm</a></p></li>
 <li><p><a class="reference internal" href="#le-telechargement-de-la-base-de-donnees-fungidb" id="id41">Le téléchargement de la base de données FungiDB</a></p></li>
@@ -249,9 +249,9 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">programme</span><span class="o">&gt;</span> <span class="o">-</span><span class="n">h</span>
 </pre></div>
 </div>
-<div class="section" id="le-pre-traitement-des-reads">
-<h2><a class="toc-backref" href="#id38"><span class="section-number">3.1. </span>Le pré-traitement des reads</a><a class="headerlink" href="#le-pre-traitement-des-reads" title="Lien permanent vers ce titre">¶</a></h2>
-<p>L’exemple suivant nous montre comment utiliser les étapes de pré-traitement.</p>
+<div class="section" id="le-pretraitement-des-reads">
+<h2><a class="toc-backref" href="#id38"><span class="section-number">3.1. </span>Le prétraitement des reads</a><a class="headerlink" href="#le-pretraitement-des-reads" title="Lien permanent vers ce titre">¶</a></h2>
+<p>L’exemple suivant nous montre comment utiliser les étapes de prétraitement.</p>
 <div class="section" id="programme">
 <h3><span class="section-number">3.1.1. </span>Programme<a class="headerlink" href="#programme" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Nom du programme:</p>
@@ -263,7 +263,7 @@
 <h3><span class="section-number">3.1.2. </span>Localisation<a class="headerlink" href="#localisation" title="Lien permanent vers ce titre">¶</a></h3>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>└── src
  ├── bash
- │   ├── launch_reads_preprocess.sh
+ │   ├── launch_reads_preprocess.sh
 </pre></div>
 </div>
 </div>
@@ -277,7 +277,7 @@
 <dd class="field-even"><p>Dedupe supprime les reads dupliqués.</p>
 </dd>
 <dt class="field-odd">Trimmomatic</dt>
-<dd class="field-odd"><p>Trimmomatic permet de supprimer les reads de mauvaises qualités c’est à dire les reads qui ont un score phread (score de qualité) moyen d’au moins 20 et des reads de taille minimum de 50 nucléotides pour avoir assez d’information pour classifier les reads.</p>
+<dd class="field-odd"><p>Trimmomatic permet de supprimer les reads de mauvaise qualité c’est-à-dire les reads qui ont un score phread (score de qualité) moyen d’au moins 20 et des reads de taille minimum de 50 nucléotides pour avoir assez d’information pour classifier les reads.</p>
 </dd>
 </dl>
 </div>
@@ -289,7 +289,7 @@
              -threads <span class="m">28</span>
 </pre></div>
 </div>
-<p>Dans cet exemple, nous indiquons le dossier contenant les reads et nous précisons le dossier de sortie pour lequel les reads sortirons traités et filtrés. Nous pouvons préciser le nombre de threads pour accélérer le traitement, ici le nombre de thread est à 28.</p>
+<p>Dans cet exemple, nous indiquons le dossier contenant les reads et nous précisons le dossier de sortie pour lequel les reads sortiront traités et filtrés. Nous pouvons préciser le nombre de threads pour accélérer le traitement, ici le nombre de thread est à 28.</p>
 </div>
 <div class="section" id="les-parametres">
 <h3><span class="section-number">3.1.5. </span>Les paramètres<a class="headerlink" href="#les-parametres" title="Lien permanent vers ce titre">¶</a></h3>
@@ -304,7 +304,7 @@
 <dd class="field-odd"><p>(Input) Le nombre de thread (par défaut configuré à 1 thread).</p>
 </dd>
 <dt class="field-even">-force_remove</dt>
-<dd class="field-even"><p>(Optionnel) Par défaut la valeur est sur « yes » et permet de supprimer les fichiers intermédiaires. Pour ne pas supprimer les fichiers intermédiaires configurer le paramètre avec la valeur « no » comme avec l’exemple ci-contre :</p>
+<dd class="field-even"><p>(optionnel) Par défaut la valeur est sur « yes » et permet de supprimer les fichiers intermédiaires. Pour ne pas supprimer les fichiers intermédiaires configurer le paramètre avec la valeur « no » comme avec l’exemple ci-contre :</p>
 </dd>
 </dl>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash src/bash/launch_reads_preprocess.sh <span class="se">\</span>
@@ -359,7 +359,7 @@
 <h3><span class="section-number">3.2.2. </span>Localisation<a class="headerlink" href="#id2" title="Lien permanent vers ce titre">¶</a></h3>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>└── src
  ├── download
- │   ├── download_fda_argos_assembly.sh
+ │   ├── download_fda_argos_assembly.sh
 </pre></div>
 </div>
 </div>
@@ -380,10 +380,10 @@
 <h3><span class="section-number">3.2.4. </span>Les paramètres<a class="headerlink" href="#id4" title="Lien permanent vers ce titre">¶</a></h3>
 <dl class="field-list simple">
 <dt class="field-odd">-assembly_xml</dt>
-<dd class="field-odd"><p>(Input) Récupère le fichier XML pour l’analyser.</p>
+<dd class="field-odd"><p>(Input) récupère le fichier XML pour l’analyser.</p>
 </dd>
 <dt class="field-even">-path_output</dt>
-<dd class="field-even"><p>(Output) Le chemin du dossier de sortie des les séquences de FDA-ARGOS.</p>
+<dd class="field-even"><p>(Output) le chemin du dossier de sortie des les séquences de FDA-ARGOS.</p>
 </dd>
 </dl>
 </div>
@@ -414,10 +414,10 @@
 <h3><span class="section-number">3.3.2. </span>Localisation<a class="headerlink" href="#id7" title="Lien permanent vers ce titre">¶</a></h3>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>└── src
  ├── download
- │   ├── download_mycocosm_scaffolds.sh
+ │   ├── download_mycocosm_scaffolds.sh
 </pre></div>
 </div>
-<p>Pour pouvoir télécharger les séquences de Mycocosm plusieurs étapes doivent être réalisées.</p>
+<p>Pour pouvoir télécharger les séquences de Mycocosm, plusieurs étapes doivent être réalisées.</p>
 <ol class="arabic simple">
 <li><p>Créer un compte sur le site du JGI <em>Joint Genome Institure</em> <a class="reference external" href="https://contacts.jgi.doe.gov/registration/new">https://contacts.jgi.doe.gov/registration/new</a></p></li>
 <li><p>Confirmer votre inscription par mail.</p></li>
@@ -432,7 +432,7 @@
                   -path_output data/raw_sequences/mycoccosm_fungi_ncbi_scaffolds/
 </pre></div>
 </div>
-<p>Dans cet exemple, nous téléchargeons les scaffolds de la base de données Mycocosm en indiquant notre adresse mail avec le mot de passe associé (l’adresse mail et le mot de passe sont donnés ici à titre d’exemple et ne sont pas utilisables). Nous indiquons ensuite le chemin de sortie avec le paramètre -path_output, ici les scaffolds irons dans le dossier de sortie data/raw_sequences/mycoccosm_fungi_ncbi_scaffolds/ .</p>
+<p>Dans cet exemple, nous téléchargeons les scaffolds de la base de données Mycocosm en indiquant notre adresse mail avec le mot de passe associé (l’adresse mail et le mot de passe sont donnés ici à titre d’exemple et ne sont pas utilisables). Nous indiquons ensuite le chemin de sortie avec le paramètre -path_output, ici les scaffolds iront dans le dossier de sortie data/raw_sequences/mycoccosm_fungi_ncbi_scaffolds/ .</p>
 </div>
 <div class="section" id="dependances">
 <h3><span class="section-number">3.3.4. </span>Dépendances<a class="headerlink" href="#dependances" title="Lien permanent vers ce titre">¶</a></h3>
@@ -445,19 +445,19 @@
 <blockquote>
 <div><ul class="simple">
 <li><p>le cookie,</p></li>
-<li><p>le fichier xml,</p></li>
+<li><p>le fichier XML,</p></li>
 <li><p>les séquences scaffolds,</p></li>
-<li><p>et créer un fichier récapitulatif en format csv <em>(Comma-separated values)</em>.</p></li>
+<li><p>et créer un fichier récapitulatif en format csv <em>(The comma-separated values)</em>.</p></li>
 </ul>
 </div></blockquote>
 <p>Le second script Python est :</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">src</span><span class="o">/</span><span class="n">python</span><span class="o">/</span><span class="n">jgi_id_to_ncbi_id_taxonomy</span><span class="o">.</span><span class="n">py</span>
 </pre></div>
 </div>
-<p><strong>jgi_id_to_ncbi_id_taxonomy.py</strong> associe les identifiants taxonomiques utilisés par JGI dans les scaffold et convertit en identifiant taxonomique du NCBI.</p>
+<p><strong>jgi_id_to_ncbi_id_taxonomy.py</strong> associe les identifiants taxonomiques utilisés par JGI dans les scaffold et convertis en identifiant taxonomique du NCBI.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Cette conversion est nécessaire car elle permet l’indexation des bases de données avec le logiciel Kraken 2. Kraken 2 (utilisé dans la suite du tutoriel) utilise et la taxonomie de référence du NCBI et l’algorithme de k-mer pour classifier les reads rapidement (voir section ..)</p>
+<p>Cette conversion est nécessaire, car elle permet l’indexation des bases de données avec le logiciel Kraken 2. Kraken 2 (utilisé dans la suite du tutoriel) utilise et la taxonomie de référence du NCBI et l’algorithme de k-mer pour classifier les reads rapidement (voir section.).</p>
 </div>
 </div>
 </div>
@@ -475,7 +475,7 @@
 <h3><span class="section-number">3.4.2. </span>Localisation<a class="headerlink" href="#id10" title="Lien permanent vers ce titre">¶</a></h3>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>└── src
  ├── download
- │   ├── download_fungi_database_release_3.0.sh
+ │   ├── download_fungi_database_release_3.0.sh
 </pre></div>
 </div>
 </div>
@@ -522,7 +522,7 @@
 <h3><span class="section-number">3.5.2. </span>Localisation<a class="headerlink" href="#id15" title="Lien permanent vers ce titre">¶</a></h3>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>└── src
  ├── download
- │   ├── download_refseq_sequences.sh
+ │   ├── download_refseq_sequences.sh
 </pre></div>
 </div>
 </div>
@@ -534,13 +534,13 @@
      -path_output data/raw_sequences/refseq_viral/
 </pre></div>
 </div>
-<p>Dans cet exemple, nous téléchargeons les séquences virales de la base de données RefSeq en précisant le type de la base de données qui est donc -type_db viral et quel type de séquence nous voulons entre le génome et ou les protéines, ici nous choisissons le génome en indiquant -type_sq genomic. Les différentes séquences téléchargées iront dans le dossier de sortie data/raw_sequences/refseq_viral/.</p>
+<p>Dans cet exemple, nous téléchargeons les séquences virales de la base de données RefSeq en précisant le type de la base de données qui est donc -type_db viral et quel type de séquence nous voulons entre le génome et/ou les protéines, ici nous choisissons le génome en indiquant -type_sq genomic. Les différentes séquences téléchargées iront dans le dossier de sortie data/raw_sequences/refseq_viral/.</p>
 </div>
 <div class="section" id="id17">
 <h3><span class="section-number">3.5.4. </span>Les paramètres<a class="headerlink" href="#id17" title="Lien permanent vers ce titre">¶</a></h3>
 <dl class="field-list simple">
 <dt class="field-odd">-type_db</dt>
-<dd class="field-odd"><p>(Input) Quel type de librairie à télécharger.</p>
+<dd class="field-odd"><p>(Input) quel type de librairie à télécharger.</p>
 </dd>
 </dl>
 <div class="admonition note">
@@ -561,7 +561,7 @@
 <li><p>human</p></li>
 </ul>
 </div>
-<p>Avec le programme, nous pouvons télécharger plusieurs librairies à la fois mais il faut ajouter des guillemets pour indiquer que l’on veut ajouter plusieurs paramètres comme illustré dans l’exemple suivant :</p>
+<p>Avec le programme, nous pouvons télécharger plusieurs librairies à la fois, mais il faut ajouter des guillemets pour indiquer que l’on veut ajouter plusieurs paramètres comme illustrés dans l’exemple suivant :</p>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash src/download/download_refseq_sequences.sh <span class="se">\</span>
         -type_db <span class="s2">&quot;viral bacteria&quot;</span> <span class="se">\</span>
         -type_sq <span class="s2">&quot;genomic protein&quot;</span> <span class="se">\</span>
@@ -571,10 +571,10 @@
 <p>Dans cet exemple, nous téléchargeons les séquences génomiques et protéiques des virus et bactéries de la base de données RefSeq.</p>
 <dl class="field-list simple">
 <dt class="field-odd">-type_sq</dt>
-<dd class="field-odd"><p>(Optionel) Précise le type de séquence à télécharger. Le choix se limite aux protéines (protein) et ou génomes (genomic). Par défaut, c’est le génome qui est téléchargé si cet argument n’est pas précisé.</p>
+<dd class="field-odd"><p>(Optionel) précise le type de séquence à télécharger. Le choix se limite aux protéines (protein) et/ou génomes (genomic). Par défaut, c’est le génome qui est téléchargé si cet argument n’est pas précisé.</p>
 </dd>
 <dt class="field-even">-path_output</dt>
-<dd class="field-even"><p>(Output) Le chemin du dossier de sortie des séquences de RefSeq.</p>
+<dd class="field-even"><p>(Output) le chemin du dossier de sortie des séquences de RefSeq.</p>
 </dd>
 </dl>
 </div>
@@ -619,7 +619,7 @@
 </div>
 <div class="section" id="la-pratique">
 <h3><span class="section-number">3.6.2. </span>La pratique<a class="headerlink" href="#la-pratique" title="Lien permanent vers ce titre">¶</a></h3>
-<p>La session qui suit, nous montre comment indexer la base de données avec l’algorithme de k-mer et l’outil Kraken 2.</p>
+<p>La session qui suit nous montre comment indexer la base de données avec l’algorithme de k-mer et l’outil Kraken 2.</p>
 </div>
 <div class="section" id="id19">
 <h3><span class="section-number">3.6.3. </span>Programme<a class="headerlink" href="#id19" title="Lien permanent vers ce titre">¶</a></h3>
@@ -632,7 +632,7 @@
 <h3><span class="section-number">3.6.4. </span>Localisation<a class="headerlink" href="#id20" title="Lien permanent vers ce titre">¶</a></h3>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>└── src
  ├── bash
- │   ├── create_kraken_database.sh
+ │   ├── create_kraken_database.sh
 </pre></div>
 </div>
 </div>
@@ -645,8 +645,8 @@
              -threads <span class="m">30</span>
 </pre></div>
 </div>
-<p>Dans cet exemple, nous créons une base de données indexée à partir d’une librairie de séquence. Ici, les séquences assemblées de la base de données FDA-ARGOS qui se trouvent dans data/raw_sequences/fda_argos_raw_genomes_assembly_06_06_2020/ est la librairie choisie (voir <a class="reference internal" href="#download-fda-argos"><span class="std std-ref">Le téléchargement de la base de données FDA-ARGOS</span></a>). Ensuite, avec le paramètre -path_db nous précisons le chemin de sortie pour notre base de données indexée ici le chemin sera data/databases/kraken_2/fda_argos_with_none_library_kraken_database_07_06_2020/.</p>
-<p>Le paramètres -type_db est le paramètre qui détermine le type de la base de données. Nous avons choisi de ne pas rajouter d’autre libraire à notre base de données notre type est donc « none ».</p>
+<p>Dans cet exemple, nous créons une base de données indexée à partir d’une librairie de séquence. Ici, les séquences assemblées de la base de données FDA-ARGOS qui se trouvent dans data/raw_sequences/fda_argos_raw_genomes_assembly_06_06_2020/ est la librairie choisie (voir <a class="reference internal" href="#download-fda-argos"><span class="std std-ref">le téléchargement de la base de données FDA-ARGOS</span></a>). Ensuite, avec le paramètre -path_db nous précisons le chemin de sortie pour notre base de données indexée ici le chemin sera data/databases/kraken_2/fda_argos_with_none_library_kraken_database_07_06_2020/.</p>
+<p>Le paramètre -type_db est le paramètre qui détermine le type de la base de données. Nous avons choisi de ne pas rajouter d’autre libraire à notre base de données notre type est donc « none ».</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Kraken 2 propose une multitude de librairies qui peuvent être rajoutées à notre base de données. La liste non exhaustive des possibilités :</p>
@@ -675,10 +675,10 @@
 <dd class="field-even"><p>(Output) Chemin du dossier de sortie pour créer et indexer notre base de données.</p>
 </dd>
 <dt class="field-odd">-type_db</dt>
-<dd class="field-odd"><p>(Input) Quel type de librairie ajouter à notre base de données (choix : none, viral, fungi …).</p>
+<dd class="field-odd"><p>(Input) quel type de librairie ajouter à notre base de données (choix : none, viral, fungi …).</p>
 </dd>
 <dt class="field-even">-threads</dt>
-<dd class="field-even"><p>(Input) Le nombre de threads pour indexer la base de données plus rapidement.</p>
+<dd class="field-even"><p>(Input) le nombre de threads pour indexer la base de données plus rapidement.</p>
 </dd>
 <dt class="field-odd">-taxonomy</dt>
 <dd class="field-odd"><p>(Optional) Dossier contenant la taxonomie du NCBI téléchargée par Kraken 2.</p>
@@ -696,18 +696,18 @@
 <div><ul class="simple">
 <li><p><strong>hash.k2d</strong> : Les mappages de taxons.</p></li>
 <li><p><strong>opts.k2d</strong> : Les options utilisées pour créer la base de données.</p></li>
-<li><p><strong>taxo.k2d</strong> : Les informations taxonomique utilisées pour créer la base de données.</p></li>
+<li><p><strong>taxo.k2d</strong> : Les informations taxonomiques utilisées pour créer la base de données.</p></li>
 </ul>
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Par défaut, le script supprime les fichiers intermédaires.</p>
+<p>Par défaut, le script supprime les fichiers intermédiaires.</p>
 </div>
 </div>
 </div>
 <div class="section" id="classification-des-reads-avec-kraken-2">
 <span id="classification-kraken2"></span><h2><a class="toc-backref" href="#id44"><span class="section-number">3.7. </span>Classification des reads avec Kraken 2</a><a class="headerlink" href="#classification-des-reads-avec-kraken-2" title="Lien permanent vers ce titre">¶</a></h2>
-<p>La session suivante, nous montre comment classifier un échantillon de reads avec le logiciel Kraken 2.</p>
+<p>La session suivante nous montre comment classifier un échantillon de reads avec le logiciel Kraken 2.</p>
 <div class="admonition warning">
 <p class="admonition-title">Avertissement</p>
 <p>La classification des reads ne peut se faire sans une base de données de référence indexée par le logiciel Kraken 2 (voir <a class="reference internal" href="#indexation-kraken2"><span class="std std-ref">L’indexation d’une base de données avec Kraken 2</span></a>).</p>
@@ -721,7 +721,7 @@
 </div>
 <div class="section" id="id25">
 <h3><span class="section-number">3.7.2. </span>La pratique<a class="headerlink" href="#id25" title="Lien permanent vers ce titre">¶</a></h3>
-<p>La session qui suit, nous montre comment classifier des reads avec Kraken 2.</p>
+<p>La session qui suit, nous montrent comment classifier des reads avec Kraken 2.</p>
 </div>
 <div class="section" id="id26">
 <h3><span class="section-number">3.7.3. </span>Programme<a class="headerlink" href="#id26" title="Lien permanent vers ce titre">¶</a></h3>
@@ -734,7 +734,7 @@
 <h3><span class="section-number">3.7.4. </span>Localisation<a class="headerlink" href="#id27" title="Lien permanent vers ce titre">¶</a></h3>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>└── src
  ├── bash
- │   ├── classify_set_reads_kraken.sh
+ │   ├── classify_set_reads_kraken.sh
 </pre></div>
 </div>
 </div>
@@ -750,12 +750,12 @@
 <p>Dans cet exemple, nous allons classifier les reads traités dans le contenus dans le dossier results/trimmed_reads/trimmed_PAIRED_SAMPLES_ADN_TEST_reads_01_07_2020/ .</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Une étape de pré-traitement (pre-processing) est appliqué sur les reads en amont de cette étape de classification voir <a class="reference internal" href="#pre-processing"><span class="std std-ref">Le pré-traitement des reads</span></a>.</p>
+<p>Une étape de prétraitement (pre-processing) est appliquée sur les reads en amont de cette étape de classification voir <a class="reference internal" href="#pre-processing"><span class="std std-ref">le prétraitement des reads</span></a>.</p>
 </div>
 <p>Nous indiquons quelle base de données de référence utiliser avec le paramètre -path_db qui se trouve être dans le dossier data/databases/kraken_2/fda_argos_with_none_library_kraken_database_07_06_2020/ .</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>L’indexation d’une base de données de référence est expliqué dans la session <a class="reference internal" href="#indexation-kraken2"><span class="std std-ref">L’indexation d’une base de données avec Kraken 2</span></a></p>
+<p>L’indexation d’une base de données de référence est expliquée dans la session <a class="reference internal" href="#indexation-kraken2"><span class="std std-ref">l’indexation d’une base de données avec Kraken 2</span></a></p>
 </div>
 <p>Nous précisons le dossier de sortie dans lequel les résultats de classification pourront être déposés, ici nous choisissons results/classify_reads/trimmed_classify_fda_argos_with_none_library_02_07_2020/ .</p>
 <p>Et enfin le nombre de threads pour accélérer le processus, ici le nombre de threads est à 27.</p>
@@ -767,13 +767,13 @@
 <dd class="field-odd"><p>(Input) Le chemin du dossier contenant les reads.</p>
 </dd>
 <dt class="field-even">-path_db</dt>
-<dd class="field-even"><p>(Input) Le chemin du dossier qui contient la base de donnée indexé par Kraken 2.</p>
+<dd class="field-even"><p>(Input) Le chemin du dossier qui contient la base de données indexée par Kraken 2.</p>
 </dd>
 <dt class="field-odd">-path_output</dt>
-<dd class="field-odd"><p>(Output) Le nom du dossier pour les sorties.</p>
+<dd class="field-odd"><p>(Output) le nom du dossier pour les sorties.</p>
 </dd>
 <dt class="field-even">-threads</dt>
-<dd class="field-even"><p>(Input) Le nombre de threads utilisé pour classifier les reads. Par défaut le nombre de threads est 8.</p>
+<dd class="field-even"><p>(Input) le nombre de threads utilisé pour classifier les reads. Par défaut le nombre de threads est 8.</p>
 </dd>
 </dl>
 </div>
@@ -783,7 +783,7 @@
 <blockquote>
 <div><ul class="simple">
 <li><p><strong>.clseqs.fastq</strong> : Les séquences classifiées.</p></li>
-<li><p><strong>.unclseqs.fastq</strong> : Les séquences non-classifiées.</p></li>
+<li><p><strong>.unclseqs.fastq</strong> : Les séquences non classifiées.</p></li>
 <li><p><strong>.report.txt</strong> : Format de rapport standard de Kraken 2 avec une ligne par taxon (délimité par des tabulations).</p></li>
 <li><p><strong>.output.txt</strong> : Format de sortie standard de Kraken 2. Chaque séquence classée par Kraken 2 entraîne une seule ligne de sortie. Les lignes de sortie de Kraken 2 contiennent cinq champs séparés par des tabulations.</p></li>
 </ul>
@@ -800,7 +800,7 @@
 </div>
 <div class="section" id="creation-d-une-base-de-donnees-avec-la-suite-blast">
 <span id="creation-database-blast"></span><h2><a class="toc-backref" href="#id45"><span class="section-number">3.8. </span>Création d’une base de données avec la suite BLAST+</a><a class="headerlink" href="#creation-d-une-base-de-donnees-avec-la-suite-blast" title="Lien permanent vers ce titre">¶</a></h2>
-<p>La session suivante, nous montre comment créer une base de données locale qui permettra d’utiliser en amont l’alignement de séquence par l’algorithme de BLAST.</p>
+<p>La session suivante nous montre comment créer une base de données locale qui permettra d’utiliser en amont l’alignement de séquence par l’algorithme de BLAST.</p>
 <div class="section" id="id31">
 <h3><span class="section-number">3.8.1. </span>Dépendances<a class="headerlink" href="#id31" title="Lien permanent vers ce titre">¶</a></h3>
 <p>Avec la suite BLAST + nous utilisons :</p>
@@ -812,15 +812,15 @@
 </div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Les séquences de faible complexité sont par exemple les séquences répétées « ACACACACACACACACACACACACACAC » connus pour se produire dans de nombreux organismes différents et moins instructifs dans les alignements. Enlever ces séquences aide à prévenir les faux positifs dans les résultats.</p>
+<p>Les séquences de faible complexité sont par exemple les séquences répétées « ACACACACACACACACACACACACACAC » connues pour se produire dans de nombreux organismes différents et moins instructifs dans les alignements. Enlever ces séquences aide à prévenir les faux positifs dans les résultats.</p>
 </div>
 <div class="admonition seealso">
 <p class="admonition-title">Voir aussi</p>
-<p>Pour comprendre rapidement l’utilisation de chaque application voir <a class="reference external" href="https://www.ncbi.nlm.nih.gov/books/NBK279681/">https://www.ncbi.nlm.nih.gov/books/NBK279681/</a> .</p>
+<p>Pour comprendre rapidement l’utilisation de chaque application, voir <a class="reference external" href="https://www.ncbi.nlm.nih.gov/books/NBK279681/">https://www.ncbi.nlm.nih.gov/books/NBK279681/</a> .</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Avertissement</p>
-<p>Pour l’instant, aucune implementation a été faite au niveau de la création d’une base de données concernant les séquences proteiques ainsi que la suppression des séquences à faible complexité des proteines (par exemple avec le logiciel segmasker).</p>
+<p>Pour l’instant, aucune implémentation n’a été faite au niveau de la création d’une base de données concernant les séquences protéiques ainsi que la suppression des séquences à faible complexité des protéines (par exemple avec le logiciel segmasker).</p>
 </div>
 </div>
 <div class="section" id="id32">
@@ -834,7 +834,7 @@
 <h3><span class="section-number">3.8.3. </span>Localisation<a class="headerlink" href="#id33" title="Lien permanent vers ce titre">¶</a></h3>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>└── src
  ├── bash
- │   ├── create_blast_database.sh
+ │   ├── create_blast_database.sh
 </pre></div>
 </div>
 </div>
@@ -845,7 +845,7 @@
              -output_db data/databases/blast/refseq/
 </pre></div>
 </div>
-<p>Dans cet exemple, nous créons une base de données adaptée à BLAST en indiquant les séquences que l’on veut ajouter à notre base de données. Ici les séquences à ajouter sont celles téléchargées avec la base de données RefSeq expliqué en détail dans la session <a class="reference internal" href="#download-refseq"><span class="std std-ref">Le téléchargement de la base de données RefSeq</span></a> du tutoriel. Ensuite, avec le paramètre -output_db nous précisons le chemin de sortie pour notre base de données.</p>
+<p>Dans cet exemple, nous créons une base de données adaptée à BLAST en indiquant les séquences que l’on veut ajouter à notre base de données. Ici les séquences à ajouter sont celles téléchargées avec la base de données RefSeq expliquée en détail dans la session <a class="reference internal" href="#download-refseq"><span class="std std-ref">le téléchargement de la base de données RefSeq</span></a> du tutoriel. Ensuite, avec le paramètre -output_db nous précisons le chemin de sortie pour notre base de données.</p>
 </div>
 <div class="section" id="id35">
 <h3><span class="section-number">3.8.5. </span>Les paramètres<a class="headerlink" href="#id35" title="Lien permanent vers ce titre">¶</a></h3>
@@ -866,10 +866,10 @@
              -dustmasker no
 </pre></div>
 </div>
-<p>Ici, nous créons un base de données refseq adapté à BLAST mais sans utiliser <em>dustmasker</em> et donc sans supprimer les séquences à faible complexité dans notre base de données.</p>
+<p>Ici, nous créons une base de données refseq adaptée à BLAST, mais sans utiliser <em>dustmasker</em> et donc sans supprimer les séquences à faible complexité dans notre base de données.</p>
 <dl class="field-list simple">
 <dt class="field-odd">-force_remove</dt>
-<dd class="field-odd"><p>(Optional) Paramètre optionnel qui permet de ne pas supprimer les fichiers intermédiaires. Par défaut, le paramètre est sur « yes » et supprime les fichiers intermédiares. Pour ne pas supprimer les fichiers intermédiaires changer le param_tre par « no » comme illustré ci-dessous.</p>
+<dd class="field-odd"><p>(Optional) Paramètre optionnel qui permet de ne pas supprimer les fichiers intermédiaires. Par défaut, le paramètre est sur « yes » et supprime les fichiers intermédiaires. Pour ne pas supprimer les fichiers intermédiaires, changez le param_tre par « no » comme illustré ci-dessous.</p>
 </dd>
 </dl>
 <div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>bash src/bash/create_blast_database.sh <span class="se">\</span>
@@ -879,7 +879,7 @@
              -force_remove no
 </pre></div>
 </div>
-<p>Ici, nous créons un base de données refseq adapté à BLAST mais sans utiliser <em>dustmasker</em> et sans supprimer les fichiers intermédiaires.</p>
+<p>Ici, nous créons une base de données refseq adaptée à BLAST, mais sans utiliser <em>dustmasker</em> et sans supprimer les fichiers intermédiaires.</p>
 </div>
 <div class="section" id="id36">
 <h3><span class="section-number">3.8.6. </span>Les fichiers de sorties<a class="headerlink" href="#id36" title="Lien permanent vers ce titre">¶</a></h3>
