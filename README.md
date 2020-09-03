@@ -1,6 +1,8 @@
 # CLINICAL METAGENOMICS
 [![Documentation Status](https://readthedocs.org/projects/clinical-metagenomics/badge/?version=latest)](https://clinical-metagenomics.readthedocs.io/fr/latest/?badge=latest)
 
+[![pdf](https://img.shields.io/website-up-down-green-red/http/shields.io.svg)](https://raw.githubusercontent.com/Zygnematophyce/CLINICAL_METAGENOMICS/master/docs/build/latex/clinicalmetagenomics.pdf)
+
 ## Introduction
 
 La métagénomique clinique permet la recherche large de pathogènes dans un échantillon clinique. Cette technique de diagnostic repose sur l’utilisation du séquençage haut-débit pour séquencer l’ensemble du matériel génétique présent dans un échantillon. Avec le grand nombre de données générées que ce soit au niveau de la création des bases de données de références ou de l'analyse des résultats, la métagénomique clinique nécessite le développement d'outils et de pipeline de bio-informatique adaptés à la détection des pathogènes.
