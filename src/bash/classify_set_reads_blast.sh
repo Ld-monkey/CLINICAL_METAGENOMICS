@@ -2,8 +2,6 @@
 
 # From a set of reads and depend of the database gived in argument allow to
 # align the sequences with the blast algorithms.
-# Warning : For moment doesn't take  into account compressed fasta files like
-# fasta.gz .
 # e.g bash src/bash/classify_set_reads_blast.sh \
 #          -path_seq results/classify_reads/trimmed_fda_argos/1-MAR-LBA-ADN_S1/convert_fastq_to_fasta/ \
 #          -path_db data/refseq_genomics_virus_blast_db_17_07_2020/ \    
