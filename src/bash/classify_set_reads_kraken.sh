@@ -197,7 +197,7 @@ function run_classification_kraken2 {
 
 		echo "Run kraken 2 classification reads."
 		
-		Run kraken 2 classification on no paired read.
+		# Run kraken 2 classification on no paired read.
 		kraken2 --db $DBNAME \
 			--threads $THREAD \
 			--gzip-compressed \
@@ -213,7 +213,7 @@ function run_classification_kraken2 {
 
 		echo "Run kraken 2 classification reads."
 		
-		Run kraken 2 classification on no paired read.
+		# Run kraken 2 classification on no paired read.
 		kraken2 --db $DBNAME \
 			--threads $THREAD \
 			--report $FOLDER_OUTPUT/${prefix}_taxon.report.txt \

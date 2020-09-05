@@ -17,8 +17,8 @@ def listOfSizeN(N):
 
 
 entFolder=sys.argv[1]
-entFile=sys.argv[2]
-entFile2=sys.argv[3]
+entFile=sys.argv[2] # conserved file.
+entFile2=sys.argv[3] # countbis file.
 sampleID=re.split('\\.conserved',entFile)[0]
 
 #===== For each taxonID, gets corresponding name of species + Creates first part of the output =====#
