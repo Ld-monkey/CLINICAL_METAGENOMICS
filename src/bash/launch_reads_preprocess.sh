@@ -139,7 +139,7 @@ function trimmed_sequences {
 	    count_total_reads
 
 	    # Multiply by 2 le number of R1 reads and create a info txt.
-	    echo $(($countReads * 2)) > $FOLDER_INPUT${R1_FASTQ_READ%%.*}_info.txt
+	    echo $(($countReads * 2)) > ${R1_FASTQ_READ%%.*}_info.txt
 
             echo "Run clumpify.sh with depude flag to remove duplicate reads."
 	    
@@ -190,7 +190,7 @@ function trimmed_sequences {
 	    count_total_reads
 
 	    total_reads=$(count_total_reads)
-	    echo "$total_reads" > $FOLDER_INPUT${R1_FASTQ_READ%%.*}_info.txt
+	    echo "$total_reads" > ${R1_FASTQ_READ%%.*}_info.txt
 
             echo "Run clumpify.sh to remove duplicate reads."
 	    
