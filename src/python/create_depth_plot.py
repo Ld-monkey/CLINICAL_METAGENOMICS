@@ -16,10 +16,12 @@ def listOfSizeN(N):
     return cover
 
 
-entFolder=sys.argv[1]
+# ./CreateDepthPlot.py ${folderInputV} ${conserved} ${counting}
+
+entFolder=sys.argv[1] # Input folder.
 entFile=sys.argv[2] # conserved file.
 entFile2=sys.argv[3] # countbis file.
-sampleID=re.split('\\.conserved',entFile)[0]
+sampleID=re.split('\\.conserved', entFile)[0]
 
 #===== For each taxonID, gets corresponding name of species + Creates first part of the output =====#
 lineToCopy=[] ## First part of count.txt output

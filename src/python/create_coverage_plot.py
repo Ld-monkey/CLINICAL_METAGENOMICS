@@ -104,7 +104,7 @@ def get_all_name_of_species(path_count_file):
     except FileNotFoundError as e:
         sys.exit("Error: {}".format(e))
 
-    return line_to_copy
+    return line_to_copy, dict_list_species
 
 
 def list_of_size_n(n):
@@ -114,7 +114,7 @@ def list_of_size_n(n):
     return cover
 
 
-def open_conserved_file(path_conserved):
+def open_conserved_file(path_conserved, dict_list_species, path_output):
     """ For each specie, create a list of all coordinates of alignment, 
     and draw the plot based on this list. """
 
@@ -185,14 +185,14 @@ def open_conserved_file(path_conserved):
                     coord_start.append(min(int(split_line[2]),
                                            int(split_line[3])))
 
-                    print("coord_start :", coord_start)
+                    #print("coord_start :", coord_start)
 
                     # Get send = end of alignment in subject
                     # in blast result.(see classify_set_reads_blast.sh)
                     coord_end.append(max(int(split_line[2]),
                                          int(split_line[3])))
 
-                    print("coord_end :", coord_end)
+                    #print("coord_end :", coord_end)
                     
                     line = conserved_file.readline()
                     print("line in 2nd while :", line)
@@ -237,31 +237,39 @@ def open_conserved_file(path_conserved):
 
                 # Draw the depth/coverage plot following the list.
                 if len(coord_start)>=5:
-                  x = np.range(len(cover_list))
+                    
+                    x = np.arange(len(cover_list))
 
-                  plt.plot(x, cover_list, color="#2d6a9f")
-                  plt.fill_between(x, 0 ,cover_list, facecolor="#609dd2")
-                  plt.xlim(left=0.0, right=len(cover_list))
-                  plt.ylim(bottom=0.0)
-                  plt.ylabel("Depth")
+                    plt.plot(x, cover_list, color="#2d6a9f")
+                    plt.fill_between(x, 0 ,cover_list, facecolor="#609dd2")
+                    plt.xlim(left=0.0, right=len(cover_list))
+                    plt.ylim(bottom=0.0)
+                    plt.ylabel("Depth")
 
-                  # WARNING : pass variable.
-                  species_name = dict_list_species[int(blast_staxids)]
-                  species_name = species_name.replace("/", "_")
+                    # WARNING : pass variable.
+                    species_name = dict_list_species[int(blast_staxids)]
+                    species_name = species_name.replace("/", "_")
 
-                  if genus != -1:
+                    if genus != -1:
+                        
+                        plt.xlabel(species_name+" (genus:"+taxid2name+")")
+                        
+                        # Save figure.
+                        plt.savefig(path_output+species_name+".png",
+                                    bbox_inches="tight")
 
-                      plt.xlabel(species_name+" (genus:"+taxid2name+")")
+                        print("create {}{}.png".format(path_output,
+                                                       species_name))
+                    else:
+                        plt.xlabel(species_name)
 
-                      # Save figure.
-                      plt.savefig(, bbox_inches="tight")
-                  else:
-                      plt.xlabel(species_name+" (genus:"+taxid2name+")")
+                        # Save figure.
+                        plt.savefig(path_output+species_name+".png",
+                                    bbox_inches="tight")
 
-                      # Save figure.
-                      plt.savefig(, bbox_inches="tight")
-                  plt.clf()
-                  print(species_name+".png generated")
+                        print("create {}{}.png".format(path_output,
+                                                       species_name))
+                    plt.clf()
 
     except FileNotFoundError as e:
         sys.exit("Error: {}".format(e))
@@ -276,11 +284,13 @@ if __name__ == "__main__":
     # list of all parameters.
     list_information = list()
 
+    dict_species = dict()
+
     #
-    list_information = get_all_name_of_species(COUNT_FILE)
+    list_information, dict_species = get_all_name_of_species(COUNT_FILE)
 
     # Create graph folder.
     create_output_graph_folder(PATH_PLOTS, list_information)
     
     # Open conserved file.
-    open_conserved_file(PATH_CONSERVED)
+    open_conserved_file(PATH_CONSERVED, dict_species, PATH_PLOTS)
