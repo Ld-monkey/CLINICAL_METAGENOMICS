@@ -6,7 +6,7 @@ July. 2020
 CLINICAL METAGENOMICS
 
 e.g : 
-python3 src/python/create_depth_plots.py 
+python3 src/python/create_coverage_plots.py 
 -path_counter results/30_08_2020_20h_56m_49s/same_taxonomics_id_kraken_blast/countbis.txt 
 -path_conserved results/30_08_2020_20h_56m_49s/same_taxonomics_id_kraken_blast/conserved_sorted.txt 
 -path_plot results/30_08_2020_20h_56m_49s/all_plots/
@@ -54,14 +54,23 @@ def arguments():
 def create_output_graph_folder(path_output, list_information):
     """ Creates graph folder if it doesn't exist. """
 
-    for taxonomic_id in list_information:
-        name_folder = taxonomic_id.split(",")[0]
-        if not os.path.exists(path_output+str(name_folder)):
-            try:
-                os.makedirs(path_output+str(name_folder))
-            except OSError as exc:
-                if exc.errno != errno.EEXIST:
-                    raise
+    if not os.path.exists(path_output):
+        try:
+            os.makedirs(path_output)
+            print("Create ", path_output)
+        except OSError as exc:
+            if exc.errno != errno.EEXIST:
+                print("Error : impossible to create folder.")
+                raise
+    
+    # for taxonomic_id in list_information:
+    #     name_folder = taxonomic_id.split(",")[0]
+    #     if not os.path.exists(path_output+str(name_folder)):
+    #         try:
+    #             os.makedirs(path_output+str(name_folder))
+    #         except OSError as exc:
+    #             if exc.errno != errno.EEXIST:
+    #                 raise
                 
 
 def get_all_name_of_species(path_count_file):
@@ -269,12 +278,25 @@ def open_conserved_file(path_conserved, dict_list_species, path_output):
 
                         print("create {}{}.png".format(path_output,
                                                        species_name))
-                    plt.clf()
-
+                    plt.clf()            
+        return dict_list_coverage, dict_list_size_genome, dict_list_genus
     except FileNotFoundError as e:
         sys.exit("Error: {}".format(e))
 
-                
+
+def create_summary_file(count_file, filtered_information, coverage, size_genome, genus):
+    """ Function to create a summary file. """
+
+    # Get the path folder of count file.
+    summary_dirname = os.path.dirname(count_file)
+
+    with open(summary_dirname+"/summary.txt", "w") as summary_file:
+        for line in filtered_information:
+            part_1 = re.split(",", line)[0]
+            summary_file.write(line+","+coverage[part_1]+","+size_genome[part_1]+","+genus[part_1]+"\n")
+
+    print("Summary file done !")
+        
 
 if __name__ == "__main__":
     print("Create all plots")
@@ -283,14 +305,27 @@ if __name__ == "__main__":
 
     # list of all parameters.
     list_information = list()
-
     dict_species = dict()
 
+    dict_coverage = dict()
+    dict_size_genome = dict()
+    dict_genus = dict()
+    
     #
     list_information, dict_species = get_all_name_of_species(COUNT_FILE)
 
     # Create graph folder.
     create_output_graph_folder(PATH_PLOTS, list_information)
-    
+
     # Open conserved file.
-    open_conserved_file(PATH_CONSERVED, dict_species, PATH_PLOTS)
+    dict_coverage, dict_size_genome, dict_genus = open_conserved_file(PATH_CONSERVED,
+                                                                      dict_species,
+                                                                      PATH_PLOTS)
+
+    # Generate the summary.txt, summary of all important informations.
+    # Useful for creating a report in html.
+    create_summary_file(COUNT_FILE,
+                        list_information,
+                        dict_coverage,
+                        dict_size_genome,
+                        dict_genus)
