@@ -1,6 +1,5 @@
-#!/usr/bin/env python3
+!/usr/bin/env python3
 #coding: utf-8
-
 import re
 import os
 import math
@@ -96,7 +95,16 @@ for sampleName in sampleList:
                 coverage=float(split[4])
                 rpkm=(int(split[2])/int(SampleInfoTable.Preprocess)*1000000)/int(split[5].strip("/n"))
                 score=np.log(rpmverified*coverage)
-                VirusToAdd=VirusTable(id,name,verified,kraken,rpmverified,rpmkraken,coverage,score,genus)
+                VirusToAdd=VirusTable(id,
+                                      name,
+                                      verified,
+                                      kraken,
+                                      rpmverified,
+                                      rpmkraken,
+                                      coverage,
+                                      score,
+                                      genus)
+                
                 SampleVirusTable.append(VirusToAdd)
                 if genus in GenusVirusTable:
                     GenusVirusTable[genus]+=int(verified)
@@ -144,7 +152,13 @@ for sampleName in sampleList:
     file_loader = FileSystemLoader('templates')
     env = Environment(loader=file_loader)
     template =env.get_template('page2.html')
-    output = template.render(sampleName=sampleName,listOfVirusesToShow=SampleVirusTable,listOfBacteriaToShow=SampleBacteriaTable,Table1Fill=SampleInfoTable,GenusTable=GenusTable,GenusTableVir=GenusTableVir)
+    output = template.render(sampleName=sampleName,
+                             listOfVirusesToShow=SampleVirusTable,
+                             listOfBacteriaToShow=SampleBacteriaTable,
+                             Table1Fill=SampleInfoTable,
+                             GenusTable=GenusTable,
+                             GenusTableVir=GenusTableVir)
+    
     Page2=open(os.path.join(inputFolder,sampleName)+"report.html","w")
     Page2.write(output)
     Page2.close()

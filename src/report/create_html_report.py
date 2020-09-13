@@ -206,33 +206,33 @@ class GenusTableSum:
 def arguments():
     """ Method that define all arguments ."""
 
-    parser = argparse.ArgumentParser(description="get_list_of_classified_organism.py")
+    parser = argparse.ArgumentParser(description="create_html_report.py")
+
+    parser.add_argument("-path_report",
+                    help="(Input) Path of text report file that contain information about classification with Kraken 2",
+                        type=str)
 
     parser.add_argument("-path_summary",
                         help="(Input) Path of summary file that contain *count.txt file",
-                        type=str)
+                        type=str)    
     
-    parser.add_argument("-path_report",
-                        help="(Input) Path of text report file that contain information about classification with Kraken 2",
+    parser.add_argument("-path_output",
+                        help="(Output) Path output folder",
                         type=str)
-    
-    # parser.add_argument("-path_description",
-    #                     help="(Input) Path of description file that contain description.txt file",
-    #                     type=str)
     
     args = parser.parse_args()
 
-    return args.path_summary, args.path_report
+    return args.path_report, args.path_summary, args.path_output
     
 
 if __name__ == "__main__":
-        
-    sample_list = []
 
-    NTC_identifier = "NEG"
-    NTC_name = ""
+    print("Create html report")
+   
+    # Get all arguments.
+    PATH_REPORT, PATH_SUMMARY, PATH_OUTPUT = arguments()
 
-    PATH_SUMMARY, PATH_REPORT = arguments()
+    # Get report.txt file from Kraken 2 classification.
 
     # If run_description exists cran create a summary html page.
     try:
