@@ -83,6 +83,18 @@ class OrganismTable:
                                          self.not_conserved_rpm,
                                          self.score,
                                          self.genus)
+
+
+class PreviewInformation:
+    """ Some preview information as total number of reads. """
+
+    def __init__(self, nb_total_reads):
+        self.nb_total_reads = nb_total_reads
+
+
+    def get_kraken_2_information(self, path_kraken_2_report):
+        print(path_kraken_2_report)
+        
                
 
 def arguments():
@@ -168,15 +180,13 @@ def create_organism_object(path_summary_file):
                             for rank in ncbi.get_lineage(taxonomic_id):
                                 if ncbi.get_rank([rank]).get(rank) == "kingdom":
                                     
-                                    # Get the name of kingdom (e.g Bacteria, Virus, Eukaryota).
+                                    # Get the name of kingdom (e.g Fungi ...).
                                     ncbi_kingdom = ncbi.get_taxid_translator([rank]).get(rank)
 
                                     ncbi_superkingdom = ncbi_superkingdom+"-"+ncbi_kingdom                                                            
 
                         # Check if superkingdom is not in list.
                         if ncbi_superkingdom not in list_superkingdom:
-
-                            print(ncbi_superkingdom)
 
                             # Add a superkingdom.
                             list_superkingdom.append(ncbi_superkingdom)
@@ -236,12 +246,12 @@ def create_html_report(path_output, path_template, name_object, organism_object)
     datatable_report.write(output)
     datatable_report.close()
 
-    print("datatable report done !")
+    print("Datatable report done !")
 
     
 if __name__ == "__main__":
 
-    print("Create html report")
+    print("Report creation")
    
     # Get all arguments.
     NAME_OBJECT, PATH_REPORT, PATH_SUMMARY, TEMPLATE, PATH_OUTPUT = arguments()

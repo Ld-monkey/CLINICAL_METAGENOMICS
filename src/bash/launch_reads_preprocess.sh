@@ -100,14 +100,22 @@ function is_gzip_format {
 }
 
 
-# Get the total number of reads.
-function count_total_reads {
+# Get the total number of reads before preprocess.
+function count_total_reads_before_preprocess {
     if [[ $FLAG_GZIP == "True" ]]; then
 	# Count number of reads (zcat of gzip format and cat for decompressed file )
 	countReads=$(zcat ${R1_FASTQ_READ} | grep '^+' | wc -l )
     else
 	countReads=$(cat ${R1_FASTQ_READ} | grep '^+' | wc -l )
     fi
+}
+
+
+# Get the total number of reads after preprocess.
+function count_total_reads_after_preprocess {
+    # Count number of reads (zcat of gzip format and cat for decompressed file )
+    echo ${R1_FASTQ_READ%%.*}_trimmed.fastq.gz
+    countReads=$(zcat ${R1_FASTQ_READ%%.*}_trimmed.fastq.gz | grep '^+' | wc -l )
 }
 
 
@@ -136,10 +144,11 @@ function trimmed_sequences {
             echo "Paired reads exists !"
 
 	    # Count all reads in R1 + R2 files and put number in output file.
-	    count_total_reads
+	    # Count all reads before preprocess.
+	    count_total_reads_before_preprocess
 
 	    # Multiply by 2 le number of R1 reads and create a info txt.
-	    echo $(($countReads * 2)) > ${R1_FASTQ_READ%%.*}_info.txt
+	    echo $(($countReads * 2)) > ${R1_FASTQ_READ%%.*}_before_preprocess_info.txt
 
             echo "Run clumpify.sh with depude flag to remove duplicate reads."
 	    
@@ -182,15 +191,19 @@ function trimmed_sequences {
 	    
             echo -e "Trimmomatic outputs are \n${R1_FASTQ_READ%%.*}_trimmed.fastq.gz\n${R1_FASTQ_READ%%.*}_unpair_trimmed.fastq.gz\n${R2_FASTQ_READ%%.*}_trimmed.fastq.gz\n${R2_FASTQ_READ%%.*}_unpair_trimmed.fastq.gz"
             echo "Trimomonatic done !"
+
+	    # Count all trimmed reads after preprocess.
+	    total_reads=$(count_total_reads_after_preprocess)
+
+	    # Multiply by 2 le number of R1 reads and create a info txt.
+	    echo $(($total_reads * 2)) > ${R1_FASTQ_READ%%.*}_post_preprocess_info.txt
 	else
 	    
             echo "Not paired reads."
 
 	    # Count all reads in R1 and put number in output file.
-	    count_total_reads
-
-	    total_reads=$(count_total_reads)
-	    echo "$total_reads" > ${R1_FASTQ_READ%%.*}_info.txt
+	    total_reads=$(count_total_reads_before_preprocess)
+	    echo "$total_reads" > ${R1_FASTQ_READ%%.*}_before_preprocess_info.txt
 
             echo "Run clumpify.sh to remove duplicate reads."
 	    
@@ -219,6 +232,10 @@ function trimmed_sequences {
 			MINLEN:50
 	    
             echo -e "Trimmomatic output is \n${R1_FASTQ_READ%%.*}_trimmed.fastq.gz"
+	    
+	    # Count all reads after preprocess.
+	    total_reads=$(count_total_reads_after_preprocess)
+	    echo "$total_reads" > ${R1_FASTQ_READ%%.*}_after_preprocess_info.txt
 	fi
     done    
 }
