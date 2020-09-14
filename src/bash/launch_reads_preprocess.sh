@@ -114,7 +114,6 @@ function count_total_reads_before_preprocess {
 # Get the total number of reads after preprocess.
 function count_total_reads_after_preprocess {
     # Count number of reads (zcat of gzip format and cat for decompressed file )
-    echo ${R1_FASTQ_READ%%.*}_trimmed.fastq.gz
     countReads=$(zcat ${R1_FASTQ_READ%%.*}_trimmed.fastq.gz | grep '^+' | wc -l )
 }
 
@@ -193,10 +192,10 @@ function trimmed_sequences {
             echo "Trimomonatic done !"
 
 	    # Count all trimmed reads after preprocess.
-	    total_reads=$(count_total_reads_after_preprocess)
+	    count_total_reads_after_preprocess
 
 	    # Multiply by 2 le number of R1 reads and create a info txt.
-	    echo $(($total_reads * 2)) > ${R1_FASTQ_READ%%.*}_post_preprocess_info.txt
+	    echo $(($countReads * 2)) > ${R1_FASTQ_READ%%.*}_post_preprocess_info.txt
 	else
 	    
             echo "Not paired reads."
@@ -234,8 +233,8 @@ function trimmed_sequences {
             echo -e "Trimmomatic output is \n${R1_FASTQ_READ%%.*}_trimmed.fastq.gz"
 	    
 	    # Count all reads after preprocess.
-	    total_reads=$(count_total_reads_after_preprocess)
-	    echo "$total_reads" > ${R1_FASTQ_READ%%.*}_after_preprocess_info.txt
+	    count_total_reads_after_preprocess
+	    echo "$countReads" > ${R1_FASTQ_READ%%.*}_after_preprocess_info.txt
 	fi
     done    
 }
