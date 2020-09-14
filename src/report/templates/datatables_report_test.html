@@ -30,6 +30,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/1.5.6/css/buttons.dataTables.min.css"/>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+    
     <script type="text/javascript">
       $(document).ready(function() {
 	  $('#speciesTable').DataTable(
@@ -78,18 +79,18 @@
 		       }},
 		      'copy']});
       })
+
+
+      // Create each datatable.
+      {% for genus_rank in organism_array %}
       $(document).ready(function() {
-          $('#genusTableVir').DataTable(
+          $('#genus_table_{{genus_rank}}').DataTable(
               {"order": [[ 1, "desc" ]],
                dom: 'frtip',
               });
       });
-      $(document).ready(function() {
-          $('#genusTable').DataTable(
-              {"order": [[ 1, "desc" ]],
-               dom: 'frtip',
-              });
-      });
+      {% endfor %}
+
     </script>
 
     {% for virusToShow in listOfVirusesToShow %}
@@ -156,9 +157,11 @@
       <h3>Number of reads</h3>
     </br>
       </br>
-      <h3>GENUS (ORGANISM)</h3>
       
-      <table id="genusTableVir" class="display">
+      {% for genus_rank in organism_array %}
+      <h3>{{genus_rank}}</h3>
+      
+      <table id="genus_table_{{genus_rank}}" class="display">
 	
         <thead>
           <tr>
@@ -168,62 +171,15 @@
         </thead>
 	
         <tbody>
-          {% for genus_information in organism_array %}
+          {% for genus_information in organism_array[genus_rank] %}
           <tr>
             <th><div id="toggle_{{genus_information.name_organism}}">{{genus_information.name_organism}}</div></th>
             <td style="border-left: 1px solid;">{{genus_information.conserved_reads}}</td>
           </tr>
           {% endfor %}
         </tbody>
-	
       </table>
-      
-      <div class="container" id="defaulthidden">
-	
-        <button style="position:relative;bottom:5px;" class="btn btn-primary" onClick="switchToRaw()" id="rpmbutton">Raw Count</button>
-        <button style="position:relative;bottom:5px;" class="btn btn-primary" onClick="switchToRpm()" id="rpmbutton">RPM</button>
-	
-        <table id="speciesTable" class="display" style="width:100%;">
-          <thead>
-            <tr>
-              <th></th>
-              <th colspan="3" style="text-align:center;border-left: 1px solid;">Sample</th>
-              <th style="display:none;"></th>
-              <th style="display:none;"></th>
-            </tr>
-            <tr>
-              <th></th>
-              <th class="rawcolumns" style="border-left: 1px solid;">Verified Reads</th>
-              <th class="rawcolumns">Kraken</th>
-              <th class="rpmcolumns" style="border-left: 1px solid;display:none;">Verified Reads</th>
-              <th class="rpmcolumns" style="display:none;">Kraken</th>
-              <th>Coverage %</th>
-              <th style="display:none;">Score</th>
-              <th style="display:none;">Genus</th>
-            </tr>
-          </thead>
-          <tbody>
-            {% for virusToShow in listOfVirusesToShow %}
-            <tr>
-              <th><div id="toggle_{{virusToShow.VirusID}}">{{virusToShow.VirusName}}</div></th>
-              <td class="rawcolumns" style="border-left: 1px solid;"><a href="Viruses/{{sampleName}}fasta/{{virusToShow.VirusID}}.fasta" download="{{virusToShow.VirusName}}.fasta">{{virusToShow.ConservedReads}}</a></td>
-              <td class="rawcolumns">{{virusToShow.NotConservedReads}}</td>
-              <td class="rpmcolumns" style="border-left: 1px solid;display:none;">{{virusToShow.ConservedRPM}}</td>
-              <td class="rpmcolumns" style="display:none;">{{virusToShow.NotConservedRPM}}</td>
-              <td>{{virusToShow.PercentCoverage}}</td>
-              <td style="display:none;">{{virusToShow.Score}}</td>
-              <td style="display:none;">{{virusToShow.Genus}}</td>
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-	
-      </div>
-      {% for virusToShow in listOfVirusesToShow %}
-      <div id="img_{{virusToShow.VirusID}}" style="display:none;position:absolute;top: 750px; left: 715px;z-index:2;"><img style="border:solid 5px black;" src="Viruses/Depth_Graphs{{sampleName}}/{{virusToShow.VirusName}}.png" alt=""></div>
       {% endfor %}
-      </br>
-      </br>
     </div>
     
   </body>

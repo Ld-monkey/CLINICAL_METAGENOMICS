@@ -5,6 +5,9 @@
 July. 2020
 CLINICAL METAGENOMICS
 
+python3 src/report/create_html_report_test.py -name_object 1-MAR-LBA -path_report results/30_08_2020_20h_56m_49s/kraken2_classification/1-MAR-LBA-ADN_S1/1-MAR-LBA-ADN_S1_taxon.report.txt -path_summary results/30_08_2020_20h_56m_49s/same_taxonomics_id_kraken_blast/summary.txt -path_template src/report/templates/datatables_report_test.html -path_output results/30_08_2020_20h_56m_49s/all_reports/
+
+
 (old name : run.py)
 """
 
@@ -18,6 +21,11 @@ import argparse
 import time
 import numpy as np
 from jinja2 import Environment, FileSystemLoader
+from ete3 import NCBITaxa
+
+
+# Init ete3 NCBITaxa package.
+ncbi = NCBITaxa()
 
 
 class OrganismTable:
@@ -107,10 +115,14 @@ def arguments():
     return args.name_object, args.path_report, args.path_summary, args.path_template, args.path_output
 
 
-def get_all_summary_information(path_summary_file):
+def create_organism_object(path_summary_file):
     """ Function to recover all sumary information from filtered blast classification . Summary file separed element by ',' . """
 
-    list_all_organism = list()
+    # Dictonnary of all superkingdom and their organism.
+    dict_superkingdom = dict()
+
+    # List of all superkingdom (e.g : Bacteria, Virus ...)
+    list_superkingdom = list()
 
     try:
         with open(path_summary_file) as summary_file:
@@ -118,21 +130,17 @@ def get_all_summary_information(path_summary_file):
 
             while line:
                 split_information = re.split(",", line)
-
+                
                 taxonomic_id = split_information[0]
-
                 organism_name = split_information[1]
-
+                
                 conserved_reads = split_information[2]
-
                 not_conserved_reads = split_information[3]
 
                 sequencing_coverage = float(split_information[4])
-
                 genus_name = split_information[6]
 
                 reads_per_million = round((int(conserved_reads) / int(1)*1000000), 3)
-
                 rpm_kraken = round((int(not_conserved_reads) / int(1)*1000000), 3)
 
                 score = np.log(reads_per_million*sequencing_coverage)
@@ -147,19 +155,44 @@ def get_all_summary_information(path_summary_file):
                     rpm_kraken,
                     score,
                     genus_name)
+                
+                # Get ncbi superkingdom status from ete3 package. 
+                for rank in ncbi.get_lineage(taxonomic_id):
+                    if ncbi.get_rank([rank]).get(rank) == "superkingdom":
 
-                # Print a summary of organism.
-                #print(organism)
+                        # Get the name of super kingdom (e.g Bacteria, Virus, Eukaryota).
+                        ncbi_superkingdom = ncbi.get_taxid_translator([rank]).get(rank)
 
-                # Add object to list.
-                list_all_organism.append(organism)
+                        # If super kingdom is eukaryota search kingdom (e.g Fungi).
+                        if ncbi_superkingdom == "Eukaryota":
+                            for rank in ncbi.get_lineage(taxonomic_id):
+                                if ncbi.get_rank([rank]).get(rank) == "kingdom":
+                                    
+                                    # Get the name of kingdom (e.g Bacteria, Virus, Eukaryota).
+                                    ncbi_kingdom = ncbi.get_taxid_translator([rank]).get(rank)
+
+                                    ncbi_superkingdom = ncbi_superkingdom+"-"+ncbi_kingdom                                                            
+
+                        # Check if superkingdom is not in list.
+                        if ncbi_superkingdom not in list_superkingdom:
+
+                            print(ncbi_superkingdom)
+
+                            # Add a superkingdom.
+                            list_superkingdom.append(ncbi_superkingdom)
+
+                            # Create a key with a list of value.
+                            dict_superkingdom[str(ncbi_superkingdom)] = []
+
+                        # Add the organism object in correct key of dictonnary.
+                        dict_superkingdom[str(ncbi_superkingdom)].append(organism)
 
                 line = summary_file.readline()
 
     except FileNotFoundError as err:
         print("Error : {} !".format(err))
-
-    return list_all_organism
+        
+    return dict_superkingdom
 
 
 def create_output_folder(filename):
@@ -175,11 +208,18 @@ def create_output_folder(filename):
     
 def create_html_report(path_output, path_template, name_object, organism_object):
     """ Create a html report. """
-    # Folder containt templates.
-    file_loader = FileSystemLoader("src/report/templates")
-    env = Environment(loader=file_loader)
     
-    template = env.get_template("datatables_report_test.html")
+    # Folder containt template.
+    path_folder_template = os.path.dirname(path_template)
+
+    # Basename of template.
+    basename_template = os.path.basename(path_template)
+
+    # According with jinja2 modele with ./templates folder.
+    loader_template = FileSystemLoader(path_folder_template)
+    env = Environment(loader=loader_template)
+    
+    template = env.get_template(basename_template)
     
     # output = template.render(name_object=name_object,
     #                          listOfVirusesToShow=SampleVirusTable,
@@ -206,13 +246,11 @@ if __name__ == "__main__":
     # Get all arguments.
     NAME_OBJECT, PATH_REPORT, PATH_SUMMARY, TEMPLATE, PATH_OUTPUT = arguments()
 
-    LIST_ORGANISM_OBJECTS = list()
+    # Store organism object in dictonnary.
+    DICT_ORGANISMS_OBJECTS = dict()
+    
     # Get count.txt (summary.txt) from filtered genus blast classification.
-    LIST_ORGANISM_OBJECTS = get_all_summary_information(PATH_SUMMARY)
-
-    # test 
-    for organism in LIST_ORGANISM_OBJECTS:
-        print("name : {} | number reads : {}".format(organism.name_organism, organism.conserved_reads))
+    DICT_ORGANISMS_OBJECTS = create_organism_object(PATH_SUMMARY)
 
     # Get report.txt file from Kraken 2 classification.
 
@@ -220,4 +258,4 @@ if __name__ == "__main__":
     create_output_folder(PATH_OUTPUT)
 
     # Create a html report from datatable template.
-    create_html_report(PATH_OUTPUT, TEMPLATE, NAME_OBJECT, LIST_ORGANISM_OBJECTS)
+    create_html_report(PATH_OUTPUT, TEMPLATE, NAME_OBJECT, DICT_ORGANISMS_OBJECTS)
