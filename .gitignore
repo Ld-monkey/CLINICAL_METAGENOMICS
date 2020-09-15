@@ -1,6 +1,3 @@
-# Ignore pipeline.sh is a test of all scripts.
-pipeline.sh
-
 # Ignore all databases, reads, sequences folder because it's too big.
 data/databases/*
 data/reads/*
