@@ -5,8 +5,7 @@
 July. 2020
 CLINICAL METAGENOMICS
 
-python3 src/report/create_html_report_test.py -name_object 1-MAR-LBA -path_report results/30_08_2020_20h_56m_49s/kraken2_classification/1-MAR-LBA-ADN_S1/1-MAR-LBA-ADN_S1_taxon.report.txt -path_summary results/30_08_2020_20h_56m_49s/same_taxonomics_id_kraken_blast/summary.txt -path_template src/report/templates/datatables_report_test.html -path_output results/30_08_2020_20h_56m_49s/all_reports/
-
+python3 src/report/create_html_report_test.py -name_object 1-MAR-LBA -before_preprocess results/30_08_2020_20h_56m_49s/trimmed_reads/info/1-MAR-LBA-ADN_S1_R1_paired_before_preprocess_info.txt -after_preprocess results/30_08_2020_20h_56m_49s/trimmed_reads/info/1-MAR-LBA-ADN_S1_R1_paired_post_preprocess_info.txt -path_report results/30_08_2020_20h_56m_49s/kraken2_classification/1-MAR-LBA-ADN_S1/1-MAR-LBA-ADN_S1_taxon.report.txt -path_summary results/30_08_2020_20h_56m_49s/same_taxonomics_id_kraken_blast/summary.txt -path_template src/report/templates/datatables_report_test.html -path_output results/30_08_2020_20h_56m_49s/all_reports/
 
 (old name : run.py)
 """
@@ -29,7 +28,7 @@ ncbi = NCBITaxa()
 
 
 class OrganismTable:
-    """ Super class for all organisms. """
+    """ Class for all organism. """
 
     # Miss percent_coverage_sequence.
     def __init__(self,
@@ -99,9 +98,13 @@ class PreviewInformation:
         # Private list of all report kraken2 informations.
         self.__all_kraken_report_information = self.__count_classified_kraken(path_kraken_report)
 
-        self.percent_kraken_unclassication = self.__all_kraken_report_information[0]
-        self.percent_kraken_classification = self.__all_kraken_report_information[1]
-        self.total_kraken_classified = self.__all_kraken_report_information[2]
+        self.percent_kraken_unclassification = self.__all_kraken_report_information[0]
+        self.total_kraken_unclassified = self.__all_kraken_report_information[1]
+        
+        self.percent_kraken_classification = self.__all_kraken_report_information[2]
+        self.total_kraken_classified = self.__all_kraken_report_information[3]
+
+        self.classified_superkingdom = self.__all_kraken_report_information[4]
 
         
     def __count_total_reads(self, path_file):
@@ -117,35 +120,63 @@ class PreviewInformation:
     
 
     def __count_classified_kraken(self, path_file):
-        """ Private function to return the total of classified by Kraken 2. """
+        """ 
+        Private function to return all the interesting informations
+        in the report classified by Kraken 2. 
+        """
+
+        list_superkingdom = list()
+        dict_superkingdom = dict()
+
         try:
             with open(path_file) as kraken_file:
                 report_line = kraken_file.readline().strip()
                 while report_line:
-                    split_report = report_line.split("\t")
+                    split_report = report_line.split()
 
+                    # U = unclassified in report file.
                     if split_report[3] == "U":
-                        print(report_line)
                         total_percentage_unclassified = float(split_report[0])
-                        print("total % unclassified : {} %".format(total_percentage_unclassified))
-                        
-                    if split_report[3] == "R":
-                        print(report_line)
-                        total_percentage_classified = float(split_report[0])
-                        print("total % classified : {} %".format(total_percentage_classified))
+                        total_unclassified_reads = int(split_report[1])
 
+                    if split_report[3] == "R":
+                        total_percentage_classified = float(split_report[0])
                         total_classified_reads = int(split_report[1])
-                        print("total classified reads :", total_classified_reads)
+
+                    if split_report[3] == "D":
+
+                        ncbi_superkingdom = split_report[5]
+                        
+                        # Check if superkingdom is not in list.
+                        if ncbi_superkingdom not in list_superkingdom:
+
+                            # Add a superkingdom.
+                            list_superkingdom.append(ncbi_superkingdom)
+
+                            # Create a key with a list of value.
+                            dict_superkingdom[str(ncbi_superkingdom)] = []
+
+                            percentage = split_report[0]
+                            raw_count = split_report[1]
+                            
+                        # Add the organism object in correct key of dictonnary.
+                        dict_superkingdom[str(ncbi_superkingdom)].append(raw_count)
+                        dict_superkingdom[str(ncbi_superkingdom)].append(percentage)
 
                     report_line = kraken_file.readline()
         except FileNotFoundError as er:
             print("Error : {}".format(er))
             total_percentage_unclassified = 0
             total_percentage_classified = 0
+            total_unclassified_reads = 0
             total_classified_reads = 0
 
-        return [total_percentage_unclassified, total_percentage_classified, total_classified_reads]
-                    
+        return [total_percentage_unclassified,
+                total_unclassified_reads,
+                total_percentage_classified,
+                total_classified_reads,
+                dict_superkingdom]
+    
                
 def arguments():
     """ Method that define all arguments ."""
@@ -289,13 +320,6 @@ def create_html_report(path_output, path_template, name_object, organism_object,
     
     template = env.get_template(basename_template)
     
-    # output = template.render(name_object=name_object,
-    #                          listOfVirusesToShow=SampleVirusTable,
-    #                          listOfBacteriaToShow=SampleBacteriaTable,
-    #                          Table1Fill=SampleInfoTable,
-    #                          GenusTable=GenusTable,
-    #                          GenusTableVir=GenusTableVir)
-
     output = template.render(name_object=name_object,
                              organism_array=organism_object,
                              preview_information=preview_object)    

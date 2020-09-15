@@ -95,6 +95,7 @@
 
     {% for virusToShow in listOfVirusesToShow %}
     <script>
+      // Find corresponding coverage sequencing image.
       $(document).ready(function() {
 	  $('#speciesTable').on('mouseenter','#toggle_{{virusToShow.VirusID}}',function() {
               $( "#img_{{virusToShow.VirusID}}" ).show();});
@@ -158,21 +159,41 @@
       
       <h3>Number of reads</h3>
 
+      <!-- Some preview information about number of reads and classified sequences. -->
       <table class="othertable">
         <tr>
-           <th>Total</th>
-           <th>After Preprocess</th>
-           <th>Kraken Classified</th>
+          <th>Total</th>
+          <th>After Preprocess</th>
+          <th>Kraken 2 Classified</th>
+	  <th>Kraken 2 Unclassified</th>
         </tr>
         <tr>
-           <td>{{preview_information.total_reads_before}}</td>
-           <td>{{preview_information.total_reads_after}}</td>
-           <td>{{preview_information.total_kraken_classified}}</td>
+          <td>{{preview_information.total_reads_before}}</td>
+          <td>{{preview_information.total_reads_after}}</td>
+          <td>{{preview_information.total_kraken_classified}}</td>
+	  <td>{{preview_information.total_kraken_unclassified}}</td>
         </tr>
       </table>
-      
       </br>
-      
+
+      <table class="othertable" style='width:40%;'>
+        <tr>
+          <th>Classified Reads</th>
+          <th>Raw count</th>
+          <th>Percentage</th>
+        </tr>
+        <tr>
+	  {% for genus_rank in preview_information.classified_superkingdom %}
+          <th>{{genus_rank}}</th>
+	  {% for genus_information in preview_information.classified_superkingdom[genus_rank] %}
+          <td>{{genus_information}}</td>
+	  {% endfor %}
+        </tr>
+	{% endfor %}
+      </table>
+      </br>
+
+      <!-- look at the classification in detail -->
       {% for genus_rank in organism_array %}
       <h3>{{genus_rank}}</h3>
       
