@@ -152,10 +152,25 @@
   </head>
 
   <body>
+    
     <div class="container">
       <h1>{{name_object}}</h1>
+      
       <h3>Number of reads</h3>
-    </br>
+
+      <table class="othertable">
+        <tr>
+           <th>Total</th>
+           <th>After Preprocess</th>
+           <th>Kraken Classified</th>
+        </tr>
+        <tr>
+           <td>{{preview_information.total_reads_before}}</td>
+           <td>{{preview_information.total_reads_after}}</td>
+           <td>{{preview_information.total_kraken_classified}}</td>
+        </tr>
+      </table>
+      
       </br>
       
       {% for genus_rank in organism_array %}

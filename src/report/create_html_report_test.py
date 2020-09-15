@@ -86,17 +86,67 @@ class OrganismTable:
 
 
 class PreviewInformation:
-    """ Some preview information as total number of reads. """
+    """
+    Some preview information as total number of reads. E.g get number of reads before 
+    and after the preprocess and report.txt file from Kraken 2 classification.
+    """
 
-    def __init__(self, nb_total_reads):
-        self.nb_total_reads = nb_total_reads
-
-
-    def get_kraken_2_information(self, path_kraken_2_report):
-        print(path_kraken_2_report)
+    def __init__(self, path_info_before_preprocess, path_info_after_preprocess, path_kraken_report):
         
-               
+        self.total_reads_before = self.__count_total_reads(path_info_before_preprocess)
+        self.total_reads_after = self.__count_total_reads(path_info_after_preprocess)
 
+        # Private list of all report kraken2 informations.
+        self.__all_kraken_report_information = self.__count_classified_kraken(path_kraken_report)
+
+        self.percent_kraken_unclassication = self.__all_kraken_report_information[0]
+        self.percent_kraken_classification = self.__all_kraken_report_information[1]
+        self.total_kraken_classified = self.__all_kraken_report_information[2]
+
+        
+    def __count_total_reads(self, path_file):
+        """ Private function to return the total of read stored in file. """
+        try:
+            with open(path_file) as file_preprocess:
+                total_reads = int(file_preprocess.readline())
+        except FileNotFoundError as er:
+            print("Error : {}".format(er))
+            total_reads = 0
+
+        return total_reads
+    
+
+    def __count_classified_kraken(self, path_file):
+        """ Private function to return the total of classified by Kraken 2. """
+        try:
+            with open(path_file) as kraken_file:
+                report_line = kraken_file.readline().strip()
+                while report_line:
+                    split_report = report_line.split("\t")
+
+                    if split_report[3] == "U":
+                        print(report_line)
+                        total_percentage_unclassified = float(split_report[0])
+                        print("total % unclassified : {} %".format(total_percentage_unclassified))
+                        
+                    if split_report[3] == "R":
+                        print(report_line)
+                        total_percentage_classified = float(split_report[0])
+                        print("total % classified : {} %".format(total_percentage_classified))
+
+                        total_classified_reads = int(split_report[1])
+                        print("total classified reads :", total_classified_reads)
+
+                    report_line = kraken_file.readline()
+        except FileNotFoundError as er:
+            print("Error : {}".format(er))
+            total_percentage_unclassified = 0
+            total_percentage_classified = 0
+            total_classified_reads = 0
+
+        return [total_percentage_unclassified, total_percentage_classified, total_classified_reads]
+                    
+               
 def arguments():
     """ Method that define all arguments ."""
 
@@ -104,6 +154,14 @@ def arguments():
 
     parser.add_argument("-name_object",
                         help="(Input) Name of the sequences object e.g : 1-MAR-LBA",
+                        type=str)
+
+    parser.add_argument("-before_preprocess",
+                        help="(Input) Path of file with the total of reads before preprocess",
+                        type=str)
+
+    parser.add_argument("-after_preprocess",
+                        help="(Input) Path of file with the total of reads after preprocess",
                         type=str)
 
     parser.add_argument("-path_report",
@@ -124,7 +182,7 @@ def arguments():
     
     args = parser.parse_args()
 
-    return args.name_object, args.path_report, args.path_summary, args.path_template, args.path_output
+    return args.name_object, args.before_preprocess, args.after_preprocess, args.path_report, args.path_summary, args.path_template, args.path_output
 
 
 def create_organism_object(path_summary_file):
@@ -216,8 +274,8 @@ def create_output_folder(filename):
                 raise
                 
     
-def create_html_report(path_output, path_template, name_object, organism_object):
-    """ Create a html report. """
+def create_html_report(path_output, path_template, name_object, organism_object, preview_object):
+    """ Create a report thank html template. """
     
     # Folder containt template.
     path_folder_template = os.path.dirname(path_template)
@@ -239,7 +297,8 @@ def create_html_report(path_output, path_template, name_object, organism_object)
     #                          GenusTableVir=GenusTableVir)
 
     output = template.render(name_object=name_object,
-                             organism_array=organism_object)    
+                             organism_array=organism_object,
+                             preview_information=preview_object)    
     
     datatable_report = open(PATH_OUTPUT+name_object+"_report.html","w")
     
@@ -254,7 +313,7 @@ if __name__ == "__main__":
     print("Report creation")
    
     # Get all arguments.
-    NAME_OBJECT, PATH_REPORT, PATH_SUMMARY, TEMPLATE, PATH_OUTPUT = arguments()
+    NAME_OBJECT, BEFORE_PREPROCESS, AFTER_PREPROCESS, PATH_REPORT, PATH_SUMMARY, TEMPLATE, PATH_OUTPUT = arguments()
 
     # Store organism object in dictonnary.
     DICT_ORGANISMS_OBJECTS = dict()
@@ -262,10 +321,13 @@ if __name__ == "__main__":
     # Get count.txt (summary.txt) from filtered genus blast classification.
     DICT_ORGANISMS_OBJECTS = create_organism_object(PATH_SUMMARY)
 
-    # Get report.txt file from Kraken 2 classification.
+    # Create a PreviewInformation object.
+    preview_information = PreviewInformation(BEFORE_PREPROCESS,
+                                             AFTER_PREPROCESS,
+                                             PATH_REPORT)
 
     # Create output folder is doesn't exists.
     create_output_folder(PATH_OUTPUT)
 
     # Create a html report from datatable template.
-    create_html_report(PATH_OUTPUT, TEMPLATE, NAME_OBJECT, DICT_ORGANISMS_OBJECTS)
+    create_html_report(PATH_OUTPUT, TEMPLATE, NAME_OBJECT, DICT_ORGANISMS_OBJECTS, preview_information)
