@@ -44,9 +44,9 @@ function run_preprocess_all_reads {
 # Classification with Kraken 2.
 function kraken2_classification {
     bash src/bash/classify_set_reads_kraken.sh \
-	 -path_reads $ROOT_RESULTS$PREPROCESS_FOLDER \
+	 -path_reads $ROOT_RESULTS$PREPROCESS_FOLDER${BASENAME_PROJECT}/trimmed/ \
 	 -path_db data/databases/kraken_2/fda_argos_database_none_library_25_08_2020/ \
-	 -path_output $ROOT_RESULTS$KRAKEN2_DIRECTORY \
+	 -path_output $ROOT_RESULTS$KRAKEN2_DIRECTORY${BASENAME_PROJECT}/ \
 	 -threads 8
 }
 
@@ -146,7 +146,7 @@ for NAME_READS in $ALL_BASENAME_READS; do
     FULL_PATH_READS+="$PATH_READS$NAME_READS "
 done
 
-# Check if paired.
+# Main loop.
 for READ in $FULL_PATH_READS; do
 
     # Create a basename of sub-project.
@@ -158,28 +158,29 @@ for READ in $FULL_PATH_READS; do
 
     # Check if read is paired.
     if [[ -f "$READ" ]] && [[ -f "$PAIRED_READS" ]]; then
-	echo "Paired sequences"
-	# Create a FLAG
-	FLAG_PAIRED_SEQUENCE="True"
-	echo "R1 : $READ"
-	echo "R2 : $PAIRED_READS"
+	      echo "Paired sequences"
+	      # Create a FLAG
+	      FLAG_PAIRED_SEQUENCE="True"
+	      echo "R1 : $READ"
+	      echo "R2 : $PAIRED_READS"
     else
-	echo "No paired sequences"
-	# Create a FLAG
-	FLAG_PAIRED_SEQUENCE="False"
-	echo "R1 : $READ"
+	      echo "No paired sequences"
+	      # Create a FLAG
+	      FLAG_PAIRED_SEQUENCE="False"
+	      echo "R1 : $READ"
     fi
 
-    # Run the preprocess on all reads.
+    # # Run the preprocess on all reads.
     PREPROCESS_FOLDER="trimmed_reads/"
-    run_preprocess_all_reads
+    # run_preprocess_all_reads
+
+    # Create Kraken 2 classification.
+    KRAKEN2_DIRECTORY="kraken2_classification/"
+    kraken2_classification
+
 
 done
     
-
-# # Create Kraken 2 classification.
-# KRAKEN2_DIRECTORY="kraken2_classification/"
-# #kraken2_classification
 
 # # Get fastq R1 and R2 paired reads of Kraken 2 classification.
 # READ_FOLDER=$(ls $ROOT_RESULTS${KRAKEN2_DIRECTORY})

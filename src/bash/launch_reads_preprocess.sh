@@ -12,7 +12,7 @@
 #          -threads 8
 #
 # REQUIREMENTS
-# clumpify.sh, trimmomatic
+# clumpify.sh, trimmomatic, dedupe
 #
 # HISTORY
 # 08.2020 : Zygnematophyce : launch_reads_preprocess.sh
@@ -306,8 +306,7 @@ BAD_OPTION ()
     echo "Unknown option "$1" found on command-line"
     echo "It may be a good idea to read the usage:"
     echo "white $PROGRAM -h to be helped :"
-    echo "example : bash src/bash/launch_reads_preprocess.sh -path_reads data/reads/PAIRED_SAMPLES_ADN_TEST/ -path_output results/trimmed_reads/trimmed_PAIRED_SAMPLES_ADN_TEST_reads_04_06_2020/ -threads 28"
-
+    echo "example : bash src/bash/launch_reads_preprocess.sh -path_fastq_1 data/reads/TEST/fileR1.fastq.gz -path_fastq_2 data/reads/TEST/fileR2.fastq.gz -path_output results/trimmed_reads/trimmed_PAIRED_SAMPLES_ADN_TEST_reads_04_06_2020/ -threads 28"
     echo -e $USAGE
 
     exit 1

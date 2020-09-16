@@ -1,12 +1,22 @@
 #!/bin/bash
 
+# DESCRIPTION
 # From a set of reads and depend of the database gived in argument allow to
 # classify the reads sequences. (Warning : paired sequence must named *R1*.fastq).
+#
+# EXAMPLE
 # e.g bash src/bash/classify_set_reads_kraken.sh \
 #          -path_reads results/trimmed_reads/trimmed_PAIRED_SAMPLES_READS/ \
-#          -path_db data/databases/kraken_2/fda_argos_with_none_library_kraken_database \
-#          -path_output results/classify_reads/trimmed_classify_fda_argos \
+#          -path_db data/databases/kraken_2/fda_argos_kraken_database \
+#          -path_output results/kraken2_classification \
 #          -threads 8
+#
+# REQUIREMENT
+# kraken2-build, kraken2
+#
+# HISTORY
+# 08.2020 : Zygnematophyce : classify_set_reads_kraken.sh
+# 08.2019 : AntoineL : launchKraken.sh and or launchKrakenOnly.sh
 
 
 # Check is Kraken 2 is load.
@@ -132,14 +142,18 @@ function run_classification_kraken2 {
 	prefix=$(basename "$R1_READ" | awk -F "_R1" '{print $1}')
 
 	# Create sub directory.
-	mkdir -p ${FOLDER_OUTPUT}${prefix}/
+	mkdir -p ${FOLDER_OUTPUT}
 
 	# Create classified and unclassified subfolders.
-	mkdir -p --verbose ${FOLDER_OUTPUT}${prefix}/classified/
-	mkdir -p --verbose ${FOLDER_OUTPUT}${prefix}/unclassified/
+	mkdir -p --verbose ${FOLDER_OUTPUT}classified/
+	mkdir -p --verbose ${FOLDER_OUTPUT}unclassified/
 
 	# Create a R2 read name file to check if paired read exists.
-	R2_PAIRED_READ=$(echo ${R1_READ} | sed 's/R1/R2/')
+	BASENAME_R1_READ=$(basename $R1_READ)
+	R2_PAIRED_READ=$(echo ${BASENAME_R1_READ} | sed 's/R1/R2/')
+
+	# Full path of R2 paired read.
+	R2_PAIRED_READ=$PATH_ALL_READS$R2_PAIRED_READ
 
 	# All info about parameters.
 	display_info_parameters
@@ -168,10 +182,10 @@ function run_classification_kraken2 {
 			--threads $THREAD \
 			--paired \
 			--gzip-compressed \
-			--report ${FOLDER_OUTPUT}${prefix}/${prefix}_taxon.report.txt \
-			--classified-out ${FOLDER_OUTPUT}${prefix}/classified/$prefix.clseqs#.fastq.gz \
-			--unclassified-out ${FOLDER_OUTPUT}${prefix}/unclassified/$prefix.unclseq#.fastq.gz \
-			--output ${FOLDER_OUTPUT}${prefix}/$prefix.output.txt \
+			--report ${FOLDER_OUTPUT}${prefix}_taxon.report.txt \
+			--classified-out ${FOLDER_OUTPUT}classified/$prefix.clseqs#.fastq.gz \
+			--unclassified-out ${FOLDER_OUTPUT}unclassified/$prefix.unclseq#.fastq.gz \
+			--output ${FOLDER_OUTPUT}$prefix.output.txt \
 			$R1_READ $R2_PAIRED_READ
 		
 		echo "Kraken 2 classification done !"
@@ -181,10 +195,10 @@ function run_classification_kraken2 {
 		kraken2 --db $DBNAME \
 			--threads $THREAD \
 			--paired \
-			--report ${FOLDER_OUTPUT}${prefix}/${prefix}_taxon.report.txt \
-			--classified-out ${FOLDER_OUTPUT}${prefix}/classified/$prefix.clseqs#.fastq \
-			--unclassified-out ${FOLDER_OUTPUT}${prefix}/unclassified/$prefix.unclseq#.fastq \
-			--output ${FOLDER_OUTPUT}${prefix}/$prefix.output.txt \
+			--report ${FOLDER_OUTPUT}${prefix}_taxon.report.txt \
+			--classified-out ${FOLDER_OUTPUT}classified/$prefix.clseqs#.fastq \
+			--unclassified-out ${FOLDER_OUTPUT}unclassified/$prefix.unclseq#.fastq \
+			--output ${FOLDER_OUTPUT}$prefix.output.txt \
 			$R1_READ $R2_PAIRED_READ
 		
 		echo "Kraken 2 classification done !"
@@ -197,14 +211,14 @@ function run_classification_kraken2 {
 
 		echo "Run kraken 2 classification reads."
 		
-		# Run kraken 2 classification on no paired read.
+		# Run Kraken 2 classification on no paired read.
 		kraken2 --db $DBNAME \
 			--threads $THREAD \
 			--gzip-compressed \
-			--report $FOLDER_OUTPUT${prefix}/${prefix}_taxon.report.txt \
-			--classified-out $FOLDER_OUTPUT${prefix}/classified/$prefix.clseqs#.fastq.gz \
-			--unclassified-out $FOLDER_OUTPUT${prefix}/unclassified/$prefix.unclseq#.fastq.gz \
-			--output $FOLDER_OUTPUT${prefix}/$prefix.output.txt \
+			--report ${FOLDER_OUTPUT}${prefix}_taxon.report.txt \
+			--classified-out ${FOLDER_OUTPUT}classified/$prefix.clseqs#.fastq.gz \
+			--unclassified-out ${FOLDER_OUTPUT}unclassified/$prefix.unclseq#.fastq.gz \
+			--output ${FOLDER_OUTPUT}$prefix.output.txt \
 			$R1_READ
 		
 		echo "Kraken 2 classification done !"
@@ -213,13 +227,13 @@ function run_classification_kraken2 {
 
 		echo "Run kraken 2 classification reads."
 		
-		# Run kraken 2 classification on no paired read.
+		# Run Kraken 2 classification on no paired read.
 		kraken2 --db $DBNAME \
 			--threads $THREAD \
-			--report $FOLDER_OUTPUT/${prefix}_taxon.report.txt \
-			--classified-out $FOLDER_OUTPUT${prefix}/classified/$prefix.clseqs#.fastq \
-			--unclassified-out $FOLDER_OUTPUT${prefix}/unclassified/$prefix.unclseq#.fastq \
-			--output $FOLDER_OUTPUT${prefix}/$prefix.output.txt \
+			--report ${FOLDER_OUTPUT}${prefix}_taxon.report.txt \
+			--classified-out ${FOLDER_OUTPUT}classified/$prefix.clseqs#.fastq \
+			--unclassified-out ${FOLDER_OUTPUT}unclassified/$prefix.unclseq#.fastq \
+			--output ${FOLDER_OUTPUT}$prefix.output.txt \
 			$R1_READ
 		
 		echo "Kraken 2 classification done !"
