@@ -1,48 +1,52 @@
 #!/bin/bash
 
-# |-24_08_2020
-#   |--trimmed_reads
-#      |--info
-#   |--kraken2_classification
-#   |--blast_classification
-#   |--convert_fastq_to_fasta
-#   |--same_taxonomics_id_kraken_blast
-#   |--report
+# project architecture :
+#
+# results/
+# ├── {DATE}/
+#     ├── all_plots
+#     ├── all_reports
+#     ├── post_blast_classification
+#     ├── convert_fastq_to_fasta
+#     ├── filtered_sequences
+#     ├── kraken2_classification
+#     ├── same_taxonomics_id_kraken_blast
+#     └── trimmed_reads
 
 
-# test remove.
-function test_remove {
-    rm -rf --verbose $RESULT_DIRECTORY
-}
-
-
-# Create results folder from specific date.
-function create_pipeline_project {
-    
-    # Create a date when start pipeline.
-    if [ -d "$RESULT_DIRECTORY" ]; then
-	echo "$RESULT_DIRECTORY already exists."
+# Create root architecture directory with specific name and date.
+function create_root_architecture {
+    if [ -d "$ROOT_RESULTS" ]; then
+	echo "$ROOT_RESULTS already exists."
     else
-	mkdir -p --verbose $RESULT_DIRECTORY
+	mkdir -p --verbose $ROOT_RESULTS
     fi
 }
 
 
-# Trimmed reads.
-function trimmed_read {
-    bash src/bash/launch_reads_preprocess.sh \
-	 -path_reads data/reads/GZIP_PAIRED_ADN/ \
-	 -path_output $RESULT_DIRECTORY$TRIMMED_DIRECTORY \
-	 -threads 8
+# Run the preprocess on all reads.
+function run_preprocess_all_reads {
+    if [[ $FLAG_PAIRED_SEQUENCE = "True" ]]; then
+	bash src/bash/launch_reads_preprocess.sh \
+	     -path_fastq_1 $READ \
+	     -path_fastq_2 $PAIRED_READS \
+	     -path_output  $ROOT_RESULTS$PREPROCESS_FOLDER${BASENAME_PROJECT}/ \
+	     -threads 8
+    else
+	bash src/bash/launch_reads_preprocess.sh \
+	     -path_fastq_1 $READ \
+	     -path_output  $ROOT_RESULTS$PREPROCESS_FOLDER${BASENAME_PROJECT}/ \
+	     -threads 8
+    fi
 }
 
 
 # Classification with Kraken 2.
 function kraken2_classification {
     bash src/bash/classify_set_reads_kraken.sh \
-	 -path_reads $RESULT_DIRECTORY$TRIMMED_DIRECTORY \
+	 -path_reads $ROOT_RESULTS$PREPROCESS_FOLDER \
 	 -path_db data/databases/kraken_2/fda_argos_database_none_library_25_08_2020/ \
-	 -path_output $RESULT_DIRECTORY$KRAKEN2_DIRECTORY \
+	 -path_output $ROOT_RESULTS$KRAKEN2_DIRECTORY \
 	 -threads 8
 }
 
@@ -50,18 +54,18 @@ function kraken2_classification {
 # Convert fastq to fasta for blast algorithm.
 function convert_fastq_to_fasta {
     bash src/bash/convert_fastq_to_fasta.sh \
-	 -path_fastq_1 $RESULT_DIRECTORY${KRAKEN2_DIRECTORY}/${READ_FOLDER}/classified/$FASTQ1_R1 \
-	 -path_fastq_2 $RESULT_DIRECTORY${KRAKEN2_DIRECTORY}/${READ_FOLDER}/classified/$FASTQ2_R2 \
-	 -output_fasta $RESULT_DIRECTORY$FASTQ_TO_FASTA$OUTPUT_FASTA
+	 -path_fastq_1 $ROOT_RESULTS${KRAKEN2_DIRECTORY}/${READ_FOLDER}/classified/$FASTQ1_R1 \
+	 -path_fastq_2 $ROOT_RESULTS${KRAKEN2_DIRECTORY}/${READ_FOLDER}/classified/$FASTQ2_R2 \
+	 -output_fasta $ROOT_RESULTS$FASTQ_TO_FASTA$OUTPUT_FASTA
 }
 
 
 # Classification with blast.
 function blast_classification {
     bash src/bash/classify_set_reads_blast.sh \
-	 -path_seq $RESULT_DIRECTORY$FASTQ_TO_FASTA \
+	 -path_seq $ROOT_RESULTS$FASTQ_TO_FASTA \
 	 -path_db data/databases/blast/fda_argos_blast_database_27_08_2020/ \
-	 -path_output $RESULT_DIRECTORY$BLAST_DIRECTORY \
+	 -path_output $ROOT_RESULTS$BLAST_DIRECTORY \
 	 -threads 8
 }
 
@@ -74,25 +78,113 @@ function find_same_taxonomics_id {
 }
 
 
+PROGRAM=pipeline.sh
+VERSION=1.0
+
+DESCRIPTION=$(cat << __DESCRIPTION__
+
+__DESCRIPTION__
+           )
+
+OPTIONS=$(cat << __OPTIONS__
+
+## OPTIONS ##
+    -path_reads (Input)  The path with the reads.                                  *DIR: data/reads/GZIP_PAIRED_ADN/
+__OPTIONS__
+       )
+
+# default options:
+NAME_PROJECT=""
+
+USAGE ()
+{
+    cat << __USAGE__
+$PROGRAM version $VERSION:
+$DESCRIPTION
+$OPTIONS
+
+__USAGE__
+}
+
+BAD_OPTION ()
+{
+    echo
+    echo "Unknown option "$1" found on command-line"
+    echo "It may be a good idea to read the usage:"
+    echo "white $PROGRAM -h to be helped :"
+    echo "e.g bash pipeline.sh -path_reads data/reads/GZIP_PAIRED_ADN/"
+    echo -e $USAGE
+
+    exit 1
+}
+
+# Check options
+while [ -n "$1" ]; do
+    case $1 in
+        -h)                    USAGE      ; exit 0 ;;
+        -path_reads)        PATH_READS=$2   ; shift 2; continue ;;
+	-name_project)      NAME_PROJECT=$2 ; shift 2; continue ;;
+        *)       BAD_OPTION $1;;
+    esac
+done
+
+
 #DATE=$(date +"%d_%m_%Y_%Hh_%Mm_%Ss")
-DATE="30_08_2020_20h_56m_49s"
-RESULT_DIRECTORY="results/${DATE}/"
+DATE="16_09_2020_14h_50m_00s"
+ROOT_RESULTS="results/${NAME_PROJECT}${DATE}/"
 
-# Create project folder.
-#create_pipeline_project
+echo "Results in $ROOT_RESULTS"
 
-# Trimmed read.
-TRIMMED_DIRECTORY="trimmed_reads/"
-trimmed_read
+# Create root architecture.
+create_root_architecture
+
+# List all 
+ALL_BASENAME_READS=$(ls $PATH_READS -1 | sort | grep "R1")
+
+# Concatenation to get full path of reads.
+for NAME_READS in $ALL_BASENAME_READS; do
+    FULL_PATH_READS+="$PATH_READS$NAME_READS "
+done
+
+# Check if paired.
+for READ in $FULL_PATH_READS; do
+
+    # Create a basename of sub-project.
+    BASENAME_PROJECT=$(basename $READ)
+    BASENAME_PROJECT=${BASENAME_PROJECT%%.*}
+
+    # Create a creation of a putative name file.
+    PAIRED_READS=$(echo ${READ} | sed 's/R1/R2/')
+
+    # Check if read is paired.
+    if [[ -f "$READ" ]] && [[ -f "$PAIRED_READS" ]]; then
+	echo "Paired sequences"
+	# Create a FLAG
+	FLAG_PAIRED_SEQUENCE="True"
+	echo "R1 : $READ"
+	echo "R2 : $PAIRED_READS"
+    else
+	echo "No paired sequences"
+	# Create a FLAG
+	FLAG_PAIRED_SEQUENCE="False"
+	echo "R1 : $READ"
+    fi
+
+    # Run the preprocess on all reads.
+    PREPROCESS_FOLDER="trimmed_reads/"
+    run_preprocess_all_reads
+
+done
+    
 
 # # Create Kraken 2 classification.
 # KRAKEN2_DIRECTORY="kraken2_classification/"
 # #kraken2_classification
 
 # # Get fastq R1 and R2 paired reads of Kraken 2 classification.
-# READ_FOLDER=$(ls $RESULT_DIRECTORY${KRAKEN2_DIRECTORY})
+# READ_FOLDER=$(ls $ROOT_RESULTS${KRAKEN2_DIRECTORY})
 
-# FASTQ1_R1=$(ls $RESULT_DIRECTORY${KRAKEN2_DIRECTORY}/${READ_FOLDER}/classified/ | grep "clseqs_1")
+# FASTQ1_R1=$(ls $ROOT_RESULTS${KRAKEN2_DIRECTORY}/${READ_FOLDER}/classified/ | grep "clseqs_1")
 
 # # Ajouter un condition pour savoir si FASTQ2_R2 existe ?.
 # FASTQ2_R2=$(echo ${FASTQ1_R1} | sed "s/clseqs_1/clseqs_2/" )
@@ -104,10 +196,10 @@ trimmed_read
 # # echo $FASTQ2_R2
 # # echo $OUTPUT_FASTA
 
-# # echo $RESULT_DIRECTORY${KRAKEN2_DIRECTORY}/${READ_FOLDER}/classified/$FASTQ1_R1
-# # ls $RESULT_DIRECTORY${KRAKEN2_DIRECTORY}/${READ_FOLDER}/classified/$FASTQ1_R1
-# # echo $RESULT_DIRECTORY${KRAKEN2_DIRECTORY}/${READ_FOLDER}/classified/$FASTQ2_R2
-# # ls $RESULT_DIRECTORY${KRAKEN2_DIRECTORY}/${READ_FOLDER}/classified/$FASTQ2_R2
+# # echo $ROOT_RESULTS${KRAKEN2_DIRECTORY}/${READ_FOLDER}/classified/$FASTQ1_R1
+# # ls $ROOT_RESULTS${KRAKEN2_DIRECTORY}/${READ_FOLDER}/classified/$FASTQ1_R1
+# # echo $ROOT_RESULTS${KRAKEN2_DIRECTORY}/${READ_FOLDER}/classified/$FASTQ2_R2
+# # ls $ROOT_RESULTS${KRAKEN2_DIRECTORY}/${READ_FOLDER}/classified/$FASTQ2_R2
 
 # # Convert fastq to fasta.
 # FASTQ_TO_FASTA="convert_fastq_to_fasta/"
