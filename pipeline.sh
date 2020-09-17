@@ -24,6 +24,23 @@ function create_root_architecture {
 }
 
 
+# Check if paired reads.
+function check_paired_reads {
+    if [[ -f "$READ" ]] && [[ -f "$PAIRED_READS" ]]; then
+	echo "Paired sequences"
+	# Create a FLAG
+	FLAG_PAIRED_SEQUENCE="True"
+	echo "R1 : $READ"
+	echo "R2 : $PAIRED_READS"
+    else
+	echo "No paired sequences"
+	# Create a FLAG
+	FLAG_PAIRED_SEQUENCE="False"
+	echo "R1 : $READ"
+    fi    
+}
+
+
 # Run the preprocess on all reads.
 function run_preprocess_all_reads {
     if [[ $FLAG_PAIRED_SEQUENCE = "True" ]]; then
@@ -54,12 +71,10 @@ function kraken2_classification {
 # Convert fastq to fasta for blast algorithm.
 function convert_fastq_to_fasta {
     FASTQ1_R1=$(ls $ROOT_RESULTS$KRAKEN2_DIRECTORY${BASENAME_PROJECT}/classified/ | grep "clseqs_1")
-
     OUTPUT_FASTA=$(echo ${FASTQ1_R1} | sed "s/.clseqs_1/_conversion/" )
     OUTPUT_FASTA=$(echo "${OUTPUT_FASTA%%.*}".fasta)
 
     if [[ $FLAG_PAIRED_SEQUENCE = "True" ]]; then
-
 	FASTQ2_R2=$(echo ${FASTQ1_R1} | sed "s/clseqs_1/clseqs_2/" )
 	
 	echo $FASTQ1_R1
@@ -150,7 +165,7 @@ OPTIONS=$(cat << __OPTIONS__
 
 ## OPTIONS ##
     -path_reads   (Input)     The path with the reads.                                  *DIR: data/reads/GZIP_PAIRED_ADN/
-    -name_project (Optional)  Defines a name for the project.                           *STR: patient_1	
+    -name_project (Optional)  Defines a name for the project.                           *STR: patient_1_
 __OPTIONS__
        )
 
@@ -191,9 +206,7 @@ while [ -n "$1" ]; do
     esac
 done
 
-
-#DATE=$(date +"%d_%m_%Y_%Hh_%Mm_%Ss")
-DATE="16_09_2020_14h_50m_00s"
+DATE=$(date +"%d_%m_%Y_%Hh_%Mm_%Ss")
 ROOT_RESULTS="results/${NAME_PROJECT}${DATE}/"
 
 echo "Results in $ROOT_RESULTS"
@@ -220,46 +233,35 @@ for READ in $FULL_PATH_READS; do
     PAIRED_READS=$(echo ${READ} | sed 's/R1/R2/')
 
     # Check if read is paired.
-    if [[ -f "$READ" ]] && [[ -f "$PAIRED_READS" ]]; then
-	      echo "Paired sequences"
-	      # Create a FLAG
-	      FLAG_PAIRED_SEQUENCE="True"
-	      echo "R1 : $READ"
-	      echo "R2 : $PAIRED_READS"
-    else
-	      echo "No paired sequences"
-	      # Create a FLAG
-	      FLAG_PAIRED_SEQUENCE="False"
-	      echo "R1 : $READ"
-    fi
-
+    check_paired_reads
+   
     # Run the preprocess on all reads.
     PREPROCESS_FOLDER="trimmed_reads/"
     run_preprocess_all_reads
 
     # Create Kraken 2 classification.
     KRAKEN2_DIRECTORY="kraken2_classification/"
-    #kraken2_classification
+    kraken2_classification
 
     # Convert fastq to fasta.
     FASTQ_TO_FASTA="convert_fastq_to_fasta/"
-    #convert_fastq_to_fasta
+    convert_fastq_to_fasta
 
     # Create blast classification.
     BLAST_DIRECTORY="post_blast_classification/"
-    #blast_classification
+    blast_classification
 
     # find same taxonomic ID from Kraken 2 and blast classifications.
     SAME_TAXONOMICS="same_taxonomics_id_kraken_blast/"
-    #find_same_taxonomics_id
+    find_same_taxonomics_id
 
     # Filter according to the sequences classified by Kraken 2.
     FILTERED_SEQUENCES="filtered_sequences/"
-    #fitered_sequences_same_rank
+    fitered_sequences_same_rank
 
     # Create a sequencing coverage of each reads.
     PLOT_COVERAGE="all_plots/"
-    #sequencing_coverage
+    sequencing_coverage
 
     # Create all html reports.
     ALL_REPORTS="all_reports/"
