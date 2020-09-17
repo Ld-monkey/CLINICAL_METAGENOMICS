@@ -3,7 +3,7 @@
 
 ## Introduction
 
-La métagénomique clinique permet la recherche large de pathogènes dans un échantillon clinique. Cette technique de diagnostic repose sur l’utilisation du séquençage haut-débit pour séquencer l’ensemble du matériel génétique présent dans un échantillon. Avec le grand nombre de données générées que ce soit au niveau de la création des bases de données de références ou de l'analyse des résultats, la métagénomique clinique nécessite le développement d'outils et de pipeline de bio-informatique adaptés à la détection des pathogènes.
+La métagénomique clinique permet la recherche à large spectre de pathogènes dans un échantillon. Cette technique de diagnostic repose sur le séquençage de l’ensemble du matériel génétique présent dans un échantillon grâce aux technologies de séquençage nouvelles génération (NGS) . Avec le grand nombre de données générées que ce soit au niveau de la création des bases de données de références ou de l'analyse des résultats, la métagénomique clinique nécessite la mise en relation d'outils de bio-informatique et d'un pipeline adaptés à la détection des pathogènes.
 
 ### Le point de départ
 
@@ -15,13 +15,13 @@ Dans ce cadre, le projet s'inspire du travail fourni à l'origine par Antoine. L
 
 ## Lancer le pipeline
 
-Pour lancer le pipeline activer l'environnment conda.
+Pour lancer le pipeline, activez l'environnement conda.
 
 ```bash
 conda activate metagenomic_env
 ```
 
-Ensuite lancer la commande suivante en indiquant le dossier contenant les reads.
+Ensuite, lancer la commande suivante en indiquant le dossier contenant les reads.
 ```bash
 bash pipeline.sh -path_reads data/reads/exemple/
 ```
@@ -39,21 +39,21 @@ L'architecture du projet est la suivante :
 ```bash
 .
 ├── data
-│   ├── assembly
-│   ├── databases
-│   ├── raw_sequences
-│   ├── reads
-│   └── taxonomy
+│   ├── assembly
+│   ├── databases
+│   ├── raw_sequences
+│   ├── reads
+│   └── taxonomy
 ├── docs
-│   ├── build
-│   ├── make.bat
-│   ├── Makefile
-│   └── source
+│   ├── build
+│   ├── make.bat
+│   ├── Makefile
+│   └── source
 ├── metagenomic_env.yml
 ├── README.md
 ├── results
-│   ├── 16_09_2020_14h_50m_00s
-│   ├── logs
+│   ├── 16_09_2020_14h_50m_00s
+│   ├── logs
 ├── Snakefile
 └── src
     ├── bash
@@ -64,7 +64,7 @@ L'architecture du projet est la suivante :
     └── report
 ```
 
-Cette architecture s'inpire de la méthode décrite dans l'article suivant :
+Cette architecture s'inspire de la méthode décrite dans l'article suivant :
 
    * Noble, W. S. A Quick Guide to Organizing Computational Biology Projects. PLOS Computational Biology 5, e1000424 (2009).
 
