@@ -31,12 +31,12 @@ function run_preprocess_all_reads {
 	     -path_fastq_1 $READ \
 	     -path_fastq_2 $PAIRED_READS \
 	     -path_output  $ROOT_RESULTS$PREPROCESS_FOLDER${BASENAME_PROJECT}/ \
-	     -threads 8
+	     -threads $THREADS
     else
 	bash src/bash/launch_reads_preprocess.sh \
 	     -path_fastq_1 $READ \
 	     -path_output  $ROOT_RESULTS$PREPROCESS_FOLDER${BASENAME_PROJECT}/ \
-	     -threads 8
+	     -threads $THREADS
     fi
 }
 
@@ -47,34 +47,94 @@ function kraken2_classification {
 	 -path_reads $ROOT_RESULTS$PREPROCESS_FOLDER${BASENAME_PROJECT}/trimmed/ \
 	 -path_db data/databases/kraken_2/fda_argos_database_none_library_25_08_2020/ \
 	 -path_output $ROOT_RESULTS$KRAKEN2_DIRECTORY${BASENAME_PROJECT}/ \
-	 -threads 8
+	 -threads $THREADS
 }
 
 
 # Convert fastq to fasta for blast algorithm.
 function convert_fastq_to_fasta {
-    bash src/bash/convert_fastq_to_fasta.sh \
-	 -path_fastq_1 $ROOT_RESULTS${KRAKEN2_DIRECTORY}/${READ_FOLDER}/classified/$FASTQ1_R1 \
-	 -path_fastq_2 $ROOT_RESULTS${KRAKEN2_DIRECTORY}/${READ_FOLDER}/classified/$FASTQ2_R2 \
-	 -output_fasta $ROOT_RESULTS$FASTQ_TO_FASTA$OUTPUT_FASTA
+    FASTQ1_R1=$(ls $ROOT_RESULTS$KRAKEN2_DIRECTORY${BASENAME_PROJECT}/classified/ | grep "clseqs_1")
+
+    OUTPUT_FASTA=$(echo ${FASTQ1_R1} | sed "s/.clseqs_1/_conversion/" )
+    OUTPUT_FASTA=$(echo "${OUTPUT_FASTA%%.*}".fasta)
+
+    if [[ $FLAG_PAIRED_SEQUENCE = "True" ]]; then
+
+	FASTQ2_R2=$(echo ${FASTQ1_R1} | sed "s/clseqs_1/clseqs_2/" )
+	
+	echo $FASTQ1_R1
+	echo $FASTQ2_R2
+	echo $OUTPUT_FASTA
+
+	bash src/bash/convert_fastq_to_fasta.sh \
+	     -path_fastq_1 $ROOT_RESULTS$KRAKEN2_DIRECTORY${BASENAME_PROJECT}/classified/$FASTQ1_R1 \
+	     -path_fastq_2 $ROOT_RESULTS$KRAKEN2_DIRECTORY${BASENAME_PROJECT}/classified/$FASTQ2_R2 \
+	     -output_fasta $ROOT_RESULTS$FASTQ_TO_FASTA${BASENAME_PROJECT}/$OUTPUT_FASTA
+    else
+	bash src/bash/convert_fastq_to_fasta.sh \
+	     -path_fastq_1 $ROOT_RESULTS$KRAKEN2_DIRECTORY${BASENAME_PROJECT}/classified/$FASTQ1_R1 \
+	     -output_fasta $ROOT_RESULTS$FASTQ_TO_FASTA${BASENAME_PROJECT}/$OUTPUT_FASTA
+    fi
 }
 
 
 # Classification with blast.
 function blast_classification {
     bash src/bash/classify_set_reads_blast.sh \
-	 -path_seq $ROOT_RESULTS$FASTQ_TO_FASTA \
+	 -path_seq $ROOT_RESULTS$FASTQ_TO_FASTA${BASENAME_PROJECT}/$OUTPUT_FASTA \
 	 -path_db data/databases/blast/fda_argos_blast_database_27_08_2020/ \
-	 -path_output $ROOT_RESULTS$BLAST_DIRECTORY \
-	 -threads 8
+	 -path_output $ROOT_RESULTS$BLAST_DIRECTORY${BASENAME_PROJECT}/ \
+	 -threads $THREADS
 }
 
 
 # Find same taxonomics ID.
 function find_same_taxonomics_id {
+    BLAST_FILE=$(ls $ROOT_RESULTS$BLAST_DIRECTORY${BASENAME_PROJECT}/)
     python3 src/python/get_all_taxonomic_ids_same_genus_blast_kraken.py \
-	    -path_blast results/30_08_2020_20h_56m_49s/blast_classification/1-MAR-LBA-ADN_S1_blast.txt \
-	    -output results/30_08_2020_20h_56m_49s/same_taxonomics_id_kraken_blast/conserved.txt    
+	    -path_blast $ROOT_RESULTS$BLAST_DIRECTORY${BASENAME_PROJECT}/$BLAST_FILE \
+	    -output $ROOT_RESULTS$SAME_TAXONOMICS${BASENAME_PROJECT}/conserved.txt    
+}
+
+
+# Filter according to the sequences classified by kraken.
+function fitered_sequences_same_rank {
+    bash src/bash/find_sequences_filtered_same_rank.sh \
+	 -path_classified $ROOT_RESULTS$KRAKEN2_DIRECTORY${BASENAME_PROJECT}/classified/ \
+	 -path_conserved $ROOT_RESULTS$SAME_TAXONOMICS${BASENAME_PROJECT}/conserved.txt \
+	 -path_output $ROOT_RESULTS$FILTERED_SEQUENCES${BASENAME_PROJECT}/
+}
+
+
+# Create a sequencing coverage of each reads.
+function sequencing_coverage {
+    python3 src/python/create_coverage_plot.py \
+	    -path_counter $ROOT_RESULTS$SAME_TAXONOMICS${BASENAME_PROJECT}/countbis.txt \
+	    -path_conserved $ROOT_RESULTS$SAME_TAXONOMICS${BASENAME_PROJECT}/conserved_sorted.txt \
+	    -path_plot $ROOT_RESULTS$PLOT_COVERAGE${BASENAME_PROJECT}/
+}
+
+
+# Create all html reports.
+function create_html_reports {
+    BEFORE_PREPROCESS=$(ls $ROOT_RESULTS$PREPROCESS_FOLDER${BASENAME_PROJECT}/total_reads/*before_preprocess_info.txt)
+    AFTER_PREPROCESS=$(ls $ROOT_RESULTS$PREPROCESS_FOLDER${BASENAME_PROJECT}/total_reads/*post_preprocess_info.txt)
+    REPORT_KRAKEN2=$(ls $ROOT_RESULTS$KRAKEN2_DIRECTORY${BASENAME_PROJECT}/*.report.txt)
+    SUMMARY_FILE=$(ls $ROOT_RESULTS$SAME_TAXONOMICS${BASENAME_PROJECT}/summary.txt)
+
+    echo "before preprocess $BEFORE_PREPROCESS"
+    echo "after preprocess  $AFTER_PREPROCESS"
+    echo "report.txt : $REPORT_KRAKEN2"
+    echo "summary : $SUMMARY_FILE"
+
+    python3 src/report/create_html_report_test.py \
+    	    -name_object ${BASENAME_PROJECT} \
+    	    -before_preprocess $BEFORE_PREPROCESS \
+    	    -after_preprocess $AFTER_PREPROCESS \
+    	    -path_report $REPORT_KRAKEN2 \
+    	    -path_summary $SUMMARY_FILE \
+    	    -path_template src/report/templates/datatables_report_test.html \
+    	    -path_output $ROOT_RESULTS$ALL_REPORTS${BASENAME_PROJECT}/
 }
 
 
@@ -89,12 +149,14 @@ __DESCRIPTION__
 OPTIONS=$(cat << __OPTIONS__
 
 ## OPTIONS ##
-    -path_reads (Input)  The path with the reads.                                  *DIR: data/reads/GZIP_PAIRED_ADN/
+    -path_reads   (Input)     The path with the reads.                                  *DIR: data/reads/GZIP_PAIRED_ADN/
+    -name_project (Optional)  Defines a name for the project.                           *STR: patient_1	
 __OPTIONS__
        )
 
 # default options:
 NAME_PROJECT=""
+THREADS=8
 
 USAGE ()
 {
@@ -124,6 +186,7 @@ while [ -n "$1" ]; do
         -h)                    USAGE      ; exit 0 ;;
         -path_reads)        PATH_READS=$2   ; shift 2; continue ;;
 	-name_project)      NAME_PROJECT=$2 ; shift 2; continue ;;
+	-threads)           THREADS=$2      ; shift 2; continue ;;
         *)       BAD_OPTION $1;;
     esac
 done
@@ -170,60 +233,35 @@ for READ in $FULL_PATH_READS; do
 	      echo "R1 : $READ"
     fi
 
-    # # Run the preprocess on all reads.
+    # Run the preprocess on all reads.
     PREPROCESS_FOLDER="trimmed_reads/"
-    # run_preprocess_all_reads
+    run_preprocess_all_reads
 
     # Create Kraken 2 classification.
     KRAKEN2_DIRECTORY="kraken2_classification/"
-    kraken2_classification
+    #kraken2_classification
 
+    # Convert fastq to fasta.
+    FASTQ_TO_FASTA="convert_fastq_to_fasta/"
+    #convert_fastq_to_fasta
 
+    # Create blast classification.
+    BLAST_DIRECTORY="post_blast_classification/"
+    #blast_classification
+
+    # find same taxonomic ID from Kraken 2 and blast classifications.
+    SAME_TAXONOMICS="same_taxonomics_id_kraken_blast/"
+    #find_same_taxonomics_id
+
+    # Filter according to the sequences classified by Kraken 2.
+    FILTERED_SEQUENCES="filtered_sequences/"
+    #fitered_sequences_same_rank
+
+    # Create a sequencing coverage of each reads.
+    PLOT_COVERAGE="all_plots/"
+    #sequencing_coverage
+
+    # Create all html reports.
+    ALL_REPORTS="all_reports/"
+    create_html_reports
 done
-    
-
-# # Get fastq R1 and R2 paired reads of Kraken 2 classification.
-# READ_FOLDER=$(ls $ROOT_RESULTS${KRAKEN2_DIRECTORY})
-
-# FASTQ1_R1=$(ls $ROOT_RESULTS${KRAKEN2_DIRECTORY}/${READ_FOLDER}/classified/ | grep "clseqs_1")
-
-# # Ajouter un condition pour savoir si FASTQ2_R2 existe ?.
-# FASTQ2_R2=$(echo ${FASTQ1_R1} | sed "s/clseqs_1/clseqs_2/" )
-
-# OUTPUT_FASTA=$(echo ${FASTQ1_R1} | sed "s/clseqs_1/conversion/" )
-# OUTPUT_FASTA=$(echo "${OUTPUT_FASTA%%.*}".fasta)
-
-# # echo $FASTQ1_R1
-# # echo $FASTQ2_R2
-# # echo $OUTPUT_FASTA
-
-# # echo $ROOT_RESULTS${KRAKEN2_DIRECTORY}/${READ_FOLDER}/classified/$FASTQ1_R1
-# # ls $ROOT_RESULTS${KRAKEN2_DIRECTORY}/${READ_FOLDER}/classified/$FASTQ1_R1
-# # echo $ROOT_RESULTS${KRAKEN2_DIRECTORY}/${READ_FOLDER}/classified/$FASTQ2_R2
-# # ls $ROOT_RESULTS${KRAKEN2_DIRECTORY}/${READ_FOLDER}/classified/$FASTQ2_R2
-
-# # Convert fastq to fasta.
-# FASTQ_TO_FASTA="convert_fastq_to_fasta/"
-# convert_fastq_to_fasta
-
-# # Create blast classification.
-# BLAST_DIRECTORY="blast_classification/"
-# blast_classification
-
-# # find same taxonomic ID from Kraken 2 and blast classifications.
-# find_same_taxonomics_id
-
-# bash src/bash/find_sequences_filtered_same_rank.sh \
-#      -path_classified results/30_08_2020_20h_56m_49s/kraken2_classification/1-MAR-LBA-ADN_S1/classified/ \
-#      -path_conserved results/30_08_2020_20h_56m_49s/same_taxonomics_id_kraken_blast/conserved.txt \
-#      -path_output results/30_08_2020_20h_56m_49s/filtered_sequences/
-
-
-# python3 src/python/create_depth_plots.py \
-# 	-path_counter results/30_08_2020_20h_56m_49s/same_taxonomics_id_kraken_blast/countbis.txt \
-# 	-path_conserved results/30_08_2020_20h_56m_49s/same_taxonomics_id_kraken_blast/conserved_sorted.txt \
-# 	-path_plot results/30_08_2020_20h_56m_49s/all_plots/
-
-
-# Test remove.
-#test_remove

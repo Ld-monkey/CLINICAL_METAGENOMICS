@@ -6,7 +6,7 @@ July. 2020
 CLINICAL METAGENOMICS
 
 e.g : 
-python3 src/python/create_coverage_plots.py 
+python3 src/python/create_coverage_plot.py 
 -path_counter results/30_08_2020_20h_56m_49s/same_taxonomics_id_kraken_blast/countbis.txt 
 -path_conserved results/30_08_2020_20h_56m_49s/same_taxonomics_id_kraken_blast/conserved_sorted.txt 
 -path_plot results/30_08_2020_20h_56m_49s/all_plots/
