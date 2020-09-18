@@ -16,7 +16,7 @@ function check_sequence_folder {
     then
         echo "-path_seq unset."
         echo "Error ! ."
-        exit
+        exit 1
     else
         if [ -d ${PATH_SEQUENCES} ]
         then
@@ -24,7 +24,7 @@ function check_sequence_folder {
         else
             echo "Error $PATH_SEQUENCES folder with all sequences doesn't exist."
             echo "No sequences for the blast algorithm."
-            exit
+            exit 1
         fi
     fi
 }

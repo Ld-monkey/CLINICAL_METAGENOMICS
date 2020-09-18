@@ -231,7 +231,6 @@ function run_preprocess {
 
 # Remove all intermediates files.
 function remove_intermediate_files {
-
     # By default delete intermediate (dedupe) file.
     if [[ $FORCE_REMOVE == "yes" ]]; then
 	echo "Remove dedupe files : dedupe file to save space limit."
@@ -347,10 +346,10 @@ run_preprocess
 if [[ $FORCE_REMOVE == "yes" ]]; then
     
     # Remove all intermediate files.
-    remove_intermediate_files&
+    remove_intermediate_files
 else
     echo "Intermediate files are not deleted."
 
     # Move dedupe files.
-    move_dedupe_files&
+    move_dedupe_files
 fi

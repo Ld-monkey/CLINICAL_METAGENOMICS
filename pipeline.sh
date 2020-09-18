@@ -1,5 +1,22 @@
 #!/bin/bash
 
+# DESCRIPTION
+# Run all the steps of the metagenomics pipeline for reads in pairs
+# or not in fastq.gz or fastq format.
+#
+# EXAMPLE
+# e.g bash pipeline.sh data/reads/example/
+# or
+# e.g qsub bash pipeline.sh data/reads/example/
+#
+# REQUIREMENT
+# environment conda
+#
+# HISTORY
+# 08.2020 : Zygnematophyce : pipeline.sh
+# 08.2019 : AntoineL : pipeline.sh
+#
+# NOTE
 # project architecture :
 #
 # results/
@@ -12,6 +29,47 @@
 #     ├── kraken2_classification
 #     ├── same_taxonomics_id_kraken_blast
 #     └── trimmed_reads
+
+
+# Verified is conda is activated
+function conda_env_verification {
+    if [ -z ${CONDA_DEFAULT_ENV+x} ]; then
+	echo "Try to set the default $CONDA_ENVIRONMENT environment"
+	conda activate $CONDA_ENVIRONMENT
+	if [[ $CONDA_DEFAULT_ENV = "$CONDA_ENVIRONMENT" ]]; then
+	    echo "$CONDA_DEFAULT_ENV activated"
+	else
+	    echo "Error : No conda environment is activated"
+	    exit 1
+	fi
+    else
+	echo "Conda environment $CONDA_DEFAULT_ENV is activated"
+    fi
+}
+
+
+# Function to check if the reads folder exists
+function check_reads_folder {
+    # Check if parameter is set.
+    if [ -z ${PATH_READS+x} ]
+    then
+        echo "-path_reads unset."
+        echo "The program cannot work if it has no sequences !"
+	BAD_OPTION
+	exit 1
+    else
+        if [ -d ${PATH_READS} ]
+        then
+            echo $PATH_READS
+            echo "$PATH_READS folder of sequence exist."
+        else
+            echo "Error : $PATH_READS folder doesn't exist."
+	    echo "The program cannot work if no folder exists with no sequences !"
+	    BAD_OPTION
+            exit 1
+        fi
+    fi
+}
 
 
 # Create root architecture directory with specific name and date.
@@ -44,6 +102,7 @@ function check_paired_reads {
 # Run the preprocess on all reads.
 function run_preprocess_all_reads {
     if [[ $FLAG_PAIRED_SEQUENCE = "True" ]]; then
+	echo "run preprocess"
 	bash src/bash/launch_reads_preprocess.sh \
 	     -path_fastq_1 $READ \
 	     -path_fastq_2 $PAIRED_READS \
@@ -60,11 +119,12 @@ function run_preprocess_all_reads {
 
 # Classification with Kraken 2.
 function kraken2_classification {
+    echo "run Kraken 2 classification"
     bash src/bash/classify_set_reads_kraken.sh \
-	 -path_reads $ROOT_RESULTS$PREPROCESS_FOLDER${BASENAME_PROJECT}/trimmed/ \
-	 -path_db data/databases/kraken_2/fda_argos_database_none_library_25_08_2020/ \
-	 -path_output $ROOT_RESULTS$KRAKEN2_DIRECTORY${BASENAME_PROJECT}/ \
-	 -threads $THREADS
+    	 -path_reads $ROOT_RESULTS$PREPROCESS_FOLDER${BASENAME_PROJECT}/trimmed/ \
+    	 -path_db data/databases/kraken_2/fda_argos_database_none_library_25_08_2020/ \
+    	 -path_output $ROOT_RESULTS$KRAKEN2_DIRECTORY${BASENAME_PROJECT}/ \
+    	 -threads $THREADS
 }
 
 
@@ -95,11 +155,15 @@ function convert_fastq_to_fasta {
 
 # Classification with blast.
 function blast_classification {
+    echo "output fasta = $OUTPUT_FASTA"
+    echo "path_seq = $ROOT_RESULTS$FASTQ_TO_FASTA${BASENAME_PROJECT}/"
+    echo "path_output = $ROOT_RESULTS$BLAST_DIRECTORY${BASENAME_PROJECT}/ "
+    
     bash src/bash/classify_set_reads_blast.sh \
-	 -path_seq $ROOT_RESULTS$FASTQ_TO_FASTA${BASENAME_PROJECT}/$OUTPUT_FASTA \
-	 -path_db data/databases/blast/fda_argos_blast_database_27_08_2020/ \
-	 -path_output $ROOT_RESULTS$BLAST_DIRECTORY${BASENAME_PROJECT}/ \
-	 -threads $THREADS
+    	 -path_seq $ROOT_RESULTS$FASTQ_TO_FASTA${BASENAME_PROJECT}/ \
+    	 -path_db data/databases/blast/fda_argos_blast_database_27_08_2020/ \
+    	 -path_output $ROOT_RESULTS$BLAST_DIRECTORY${BASENAME_PROJECT}/ \
+    	 -threads $THREADS
 }
 
 
@@ -164,14 +228,17 @@ __DESCRIPTION__
 OPTIONS=$(cat << __OPTIONS__
 
 ## OPTIONS ##
-    -path_reads   (Input)     The path with the reads.                                  *DIR: data/reads/GZIP_PAIRED_ADN/
-    -name_project (Optional)  Defines a name for the project.                           *STR: patient_1_
+    -path_reads   (Input)     The path with the reads.                                   *DIR: data/reads/GZIP_PAIRED_ADN/
+    -name_project (Optional)  Defines a name for the project.                            *STR: patient_1_
+    -conda_env    (Optional)  Defines another conda environment.                         *STR: environment_conda_2	
+    -threads      (Optional)  Sets the number of threads for the pipeline. Default is 8. *INT: 8
 __OPTIONS__
        )
 
 # default options:
 NAME_PROJECT=""
 THREADS=8
+CONDA_ENVIRONMENT="metagenomic_env"
 
 USAGE ()
 {
@@ -199,9 +266,10 @@ BAD_OPTION ()
 while [ -n "$1" ]; do
     case $1 in
         -h)                    USAGE      ; exit 0 ;;
-        -path_reads)        PATH_READS=$2   ; shift 2; continue ;;
-	-name_project)      NAME_PROJECT=$2 ; shift 2; continue ;;
-	-threads)           THREADS=$2      ; shift 2; continue ;;
+        -path_reads)        PATH_READS=$2        ; shift 2; continue ;;
+	-name_project)      NAME_PROJECT=$2      ; shift 2; continue ;;
+	-conda_env)         CONDA_ENVIRONMENT=$2 ; shift 2; continue ;;
+	-threads)           THREADS=$2           ; shift 2; continue ;;
         *)       BAD_OPTION $1;;
     esac
 done
@@ -211,10 +279,16 @@ ROOT_RESULTS="results/${NAME_PROJECT}${DATE}/"
 
 echo "Results in $ROOT_RESULTS"
 
+# Check the -path_reads parameter.
+check_reads_folder
+
+# Verified if conda environment is activated.
+conda_env_verification
+
 # Create root architecture.
 create_root_architecture
 
-# List all 
+# List all R1 reads.
 ALL_BASENAME_READS=$(ls $PATH_READS -1 | sort | grep "R1")
 
 # Concatenation to get full path of reads.
@@ -267,3 +341,6 @@ for READ in $FULL_PATH_READS; do
     ALL_REPORTS="all_reports/"
     create_html_reports
 done
+
+# Deactivate conda environment.
+conda deactivate
