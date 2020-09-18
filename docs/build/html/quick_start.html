@@ -1,6 +1,5 @@
 
 
-
 <!DOCTYPE html>
 <!--[if IE 8]><html class="no-js lt-ie9" lang="fr" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="fr" > <!--<![endif]-->
@@ -9,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Index &mdash; Documentation CLINICAL METAGENOMICS 1.0.0</title>
+  <title>3. Quick Start &mdash; Documentation CLINICAL METAGENOMICS 1.0.0</title>
   
 
   
@@ -35,8 +34,10 @@
   
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="index" title="Index" href="#" />
-    <link rel="search" title="Recherche" href="search.html" /> 
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Recherche" href="search.html" />
+    <link rel="next" title="4. Tutoriel" href="tutorial.html" />
+    <link rel="prev" title="2. Vue d’ensemble" href="overview.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -80,10 +81,13 @@
               
             
             
-              <ul>
+              <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="installation_conda_environnement.html">1. Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="overview.html">2. Vue d’ensemble</a></li>
-<li class="toctree-l1"><a class="reference internal" href="quick_start.html">3. Quick Start</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">3. Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#l-architecture-d-un-projet">3.1. L’architecture d’un projet</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">4. Tutoriel</a></li>
 </ul>
 
@@ -130,12 +134,14 @@
     
       <li><a href="index.html">Docs</a> &raquo;</li>
         
-      <li>Index</li>
+      <li><span class="section-number">3. </span>Quick Start</li>
     
     
       <li class="wy-breadcrumbs-aside">
         
             
+            <a href="_sources/quick_start.rst.txt" rel="nofollow"> View page source</a>
+          
         
       </li>
     
@@ -147,11 +153,29 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-
-<h1 id="index">Index</h1>
-
-<div class="genindex-jumpbox">
- 
+  <div class="section" id="quick-start">
+<h1><span class="section-number">3. </span>Quick Start<a class="headerlink" href="#quick-start" title="Lien permanent vers ce titre">¶</a></h1>
+<div class="section" id="l-architecture-d-un-projet">
+<h2><span class="section-number">3.1. </span>L’architecture d’un projet<a class="headerlink" href="#l-architecture-d-un-projet" title="Lien permanent vers ce titre">¶</a></h2>
+<p>Commençons par définir l’architecture que prendra une analyse de métagénomique avec le pipeline. Pour cela, nous voulons qu’à chaque étape importante du pipeline comprendre instinctivement l’analyse et les résultats qui se trouvent dans chaque dossier.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Les noms associés aux dossiers seront subjectifs et pourront toujours être changés par la suite.</p>
+</div>
+<p>L’architecture choisie est la suivante :</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>results/
+├── <span class="o">{</span>DATE<span class="o">}</span>/
+    ├── all_plots
+    ├── all_reports
+    ├── post_blast_classification
+    ├── convert_fastq_to_fasta
+    ├── filtered_sequences
+    ├── kraken2_classification
+    ├── same_taxonomics_id_kraken_blast
+    └── trimmed_reads
+</pre></div>
+</div>
+</div>
 </div>
 
 
@@ -159,6 +183,15 @@
            
           </div>
           <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="tutorial.html" class="btn btn-neutral float-right" title="4. Tutoriel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="overview.html" class="btn btn-neutral float-left" title="2. Vue d’ensemble" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
   
 
   <hr/>

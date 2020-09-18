@@ -54,7 +54,8 @@ Exemple d'utilisation
 .. code-block:: sh
 
    bash src/bash/launch_reads_preprocess.sh \
-                -path_reads data/reads/PAIRED_SAMPLES_ADN_TEST/ \
+		-path_fastq_1 data/reads/TEST/fileR1.fastq.gz \
+		-path_fastq_2 data/reads/TEST/fileR2.fastq.gz \
                 -path_output results/trimmed_reads/trimmed_PAIRED_SAMPLES_ADN_TEST_reads_04_06_2020/ \
                 -threads 28
 
@@ -63,8 +64,10 @@ Dans cet exemple, nous indiquons le dossier contenant les reads et nous préciso
 Les paramètres
 ~~~~~~~~~~~~~~
 
-:-path_reads: (Input) Le chemin du dossier avec l'ensemble des reads.
+:-path_fastq_1: (Input) Le chemin de la séquence ou du read au format fastq.
 
+:-path_fastq_2: (Optionel) Le chemin de la séquence ou read par paires au format fastq.
+   
 :-path_outputs: (Output) Le chemin du dossier de sortie des reads pré-traités. 
 
 :-threads: (Input) Le nombre de thread (par défaut configuré à 1 thread).
@@ -74,8 +77,9 @@ Les paramètres
 .. code-block:: sh
 
    bash src/bash/launch_reads_preprocess.sh \
-                -path_reads data/reads/PAIRED_SAMPLES_ADN_TEST/ \
-                -path_output results/trimmed_reads/trimmed_PAIRED_SAMPLES_ADN_TEST_reads_04_06_2020/ \
+   		-path_fastq_1 data/reads/TEST/fileR1.fastq.gz \
+		-path_fastq_2 data/reads/TEST/fileR2.fastq.gz \
+		-path_output results/trimmed_reads/trimmed_PAIRED_SAMPLES_ADN_TEST_reads_04_06_2020/ \
                 -force_remove no \
                 -threads 28
 

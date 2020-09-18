@@ -34,6 +34,7 @@ Guide d'utilisation et référence
 
    installation_conda_environnement.rst
    overview.rst
+   quick_start.rst
    tutorial.rst
 
 Indices and tables

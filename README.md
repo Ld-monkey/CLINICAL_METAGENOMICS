@@ -3,12 +3,28 @@
 
 ## Introduction
 
-La métagénomique clinique permet la recherche large de pathogènes dans un échantillon clinique. Cette technique de diagnostic repose sur l’utilisation du séquençage haut-débit pour séquencer l’ensemble du matériel génétique présent dans un échantillon. Avec le grand nombre de données générées que ce soit au niveau de la création des bases de données de références ou de l'analyse des résultats, la métagénomique clinique nécessite le développement d'outils et de pipeline de bio-informatique adaptés à la détection des pathogènes.
+La métagénomique clinique permet la recherche à large spectre de pathogènes dans un échantillon. Cette technique de diagnostic repose sur le séquençage de l’ensemble du matériel génétique présent dans un échantillon grâce aux technologies de séquençage nouvelles génération (NGS) . Avec le grand nombre de données générées que ce soit au niveau de la création des bases de données de références ou de l'analyse des résultats, la métagénomique clinique nécessite la mise en relation d'outils de bio-informatique et d'un pipeline adaptés à la détection des pathogènes.
 
 ### Le point de départ
 
 Dans ce cadre, le projet s'inspire du travail fourni à l'origine par Antoine. L disponible à l'adresse suivante [gitlab](https://gitlab.com/a_laine/metagenomic-pipeline).
 
+## Schéma des étapes du pipeline
+
+![pipeline](results/plots/pipeline_metagenomic.png)
+
+## Lancer le pipeline
+
+Pour lancer le pipeline, activez l'environnement conda.
+
+```bash
+conda activate metagenomic_env
+```
+
+Ensuite, lancer la commande suivante en indiquant le dossier contenant les reads.
+```bash
+bash pipeline.sh -path_reads data/reads/exemple/
+```
 
 ## Documentation :book:
 
@@ -16,36 +32,28 @@ Une documentation a été créée dans le but d'avoir une référence et un supp
 
    * https://clinical-metagenomics.readthedocs.io/fr/latest/
 
-### Configuration de la documentation
-
-La documentation utilise [sphinx](https://www.sphinx-doc.org/en/master/) et le thème ["sphinx-rtd-theme"](https://github.com/readthedocs/sphinx_rtd_theme).
-
-Le thème peut être facilement activé avec l'environnement conda.
-
 ## Architecture du projet 
 
-L'architecture du projet dans le cluster est la suivante :
+L'architecture du projet est la suivante :
 
 ```bash
 .
 ├── data
-│   ├── assembly
-│   ├── databases
-│   ├── raw_sequences
-│   ├── reads
-│   └── taxonomy
+│   ├── assembly
+│   ├── databases
+│   ├── raw_sequences
+│   ├── reads
+│   └── taxonomy
 ├── docs
-│   ├── build
-│   ├── make.bat
-│   ├── Makefile
-│   └── source
+│   ├── build
+│   ├── make.bat
+│   ├── Makefile
+│   └── source
 ├── metagenomic_env.yml
 ├── README.md
 ├── results
-│   ├── classify_reads
-│   ├── logs
-│   ├── plots
-│   └── trimmed_reads
+│   ├── 16_09_2020_14h_50m_00s
+│   ├── logs
 ├── Snakefile
 └── src
     ├── bash
@@ -56,53 +64,13 @@ L'architecture du projet dans le cluster est la suivante :
     └── report
 ```
 
-Cette architecture s'inpire de la méthode décrite dans l'article suivant :
+Cette architecture s'inspire de la méthode décrite dans l'article suivant :
 
    * Noble, W. S. A Quick Guide to Organizing Computational Biology Projects. PLOS Computational Biology 5, e1000424 (2009).
 
-
-## Configurations
-
-### Environnement conda :metal:
-Conda est un gestionnaire de paquets, il permet de créer son propre environnement
-virtuel contenant les logiciels informatiques nécessaires au fonctionnement du pipeline de métagénomique (exemple Kraken 2, la suite blast-plus etc...).
-Pour créer un environnement conda à partir du fichier yaml (metagenomic_env.yml) :
-
-```bash
-conda env create -f metagenomic_env.yml
-```
-
-Pour activer l'environnement conda :
-
-```bash
-conda active metagenomic_env
-```
-
-Pour désactiver l'environnement conda :
-
-```bash
-conda deactivate
-```
-
-Pour supprimer l'environnement conda :
-
-```bash
-conda env remove -n metagenomic_env
-```
-
-Pour actualiser les modifications dans l'environnement conda :
-
-```bash
-conda env update --name metagenomic_env --file metagenomic_env.yml 
-```
-
-### Plot du pipeline de métagénomique clinique
-
-![pipeline](results/plots/dag.svg)
-
 ## Objectifs
 
-- [ ] Inclure un quickstart guide.
+- [x] Inclure un quickstart guide.
 - [x] Inclure un fichier README.md
 - [x] Documenter mon code (avec Sphinx) (en cours).
 - [x] Inclure des exemples.
